@@ -1,0 +1,15 @@
+
+services:
+  flask:
+    build: .
+    container_name: planner_flask
+    ports:
+      - 5000:5000
+    environment:
+      - FLASK_ENV=development
+      - SECRET_KEY=${SECRET_KEY}
+    volumes:
+      - ./app:/app
+    restart: unless-stopped
+
+
