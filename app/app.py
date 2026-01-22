@@ -146,7 +146,7 @@ def get_db():
     raise
 
 #lower rate limit for commonly abused routes
-@limiter.limit("5 per minute")
+#@limiter.limit("5 per minute")
 @app.route("/register", methods=["GET", "POST"])
 def register():
     form = RegisterForm() #using register form
@@ -217,3 +217,5 @@ def index():
     return render_template("index.html")
 
 
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)

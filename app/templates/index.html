@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Room Booking{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <!-- Navbar -->
+  <nav class="navbar">
+        <div class="nav-left">
+            <a href="/" class="nav-logo">📝 Room Booking NavBar</a>
+        </div>
+        <div class="nav-right">
+            {% if session.get('user_id') %}
+                <form action="/logout" method="POST" class="logout-form">
+                    {{ g.logout_form.hidden_tag() }}
+                    {{ g.logout_form.submit(class_='btn btn-logout') }}
+                </form>
+            {% else %}
+                <a href="/login" class="btn btn-login">Login</a>
+                <a href="/register" class="btn btn-register">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; {{ 2025 }} Room Booking App - By Group 15</p>
+    </footer>
+</body>
+</html>

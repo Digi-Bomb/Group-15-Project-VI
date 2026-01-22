@@ -1,7 +1,7 @@
 flask==2.3.2
-flask-cors==latest
-mysql-connector-python==latest
-pandas==latest
+flask-cors
+mysql-connector-python
+pandas
 werkzeug==2.3.6
 Flask-WTF==1.1.1
 WTForms==3.0.1
