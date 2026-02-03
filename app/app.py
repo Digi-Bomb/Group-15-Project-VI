@@ -1,21 +1,29 @@
 from flask import Flask, render_template, request, redirect, session, g, flash
+
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError, EqualTo, Regexp
+
 from werkzeug.security import generate_password_hash, check_password_hash
+
+import mysql.connector
+
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+
 import logging
 from logging.handlers import RotatingFileHandler
+
 import os
 from datetime import timedelta
-import mysql.connector
 import time
 
-# i copy/pasted the imports that i used from the softsec project
-# wtforms helped manage user input validation and database storage stuff
-# limiter helped with rate limiting to prevent brute force / DoS (not sure if itll mess up our testing)
-# can remove or add any as needed
+# -- TODO --
+#import cors?
+#import json funct - pandas
+#create on/off switch for limiter 
+#transition from direct db insert to JSON handler
+#-- END TODO --
 
 # -- CONFIG -- 
 
