@@ -148,7 +148,7 @@ def get_db():
                 password=os.environ.get("MYSQL_PASSWORD"),
                 database=os.environ.get("MYSQL_DATABASE"),
             )
-        except mysql.connector.Error:
+        except mysql.connector.Error as exc:
             last_error = exc
             time.sleep(2)
     app.logger.error("Could not connect to MySQL after retries")
