@@ -203,7 +203,7 @@ def login():
             session.permanent = True
             session["user_id"] = user[0]
             return redirect("/notes")
-        
+
         flash("Invalid username or password.", "danger")
         app.logger.warning(
             f"Failed login attempt for username: {form.username.data}"
