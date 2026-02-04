@@ -21,11 +21,11 @@ import time
 # -- TODO --
 #import cors?
 #import json funct - pandas
-#create on/off switch for limiter 
+#create on/off switch for limiter
 #transition from direct db insert to JSON handler
 #-- END TODO --
 
-# -- CONFIG -- 
+# -- CONFIG --
 
 app = Flask(__name__)
 app.config["WTF_CSRF_ENABLED"] = True #CSRF defense
@@ -34,13 +34,13 @@ app.config["WTF_CSRF_ENABLED"] = True #CSRF defense
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True, #prevents JavaScript access to cookie data
     SESSION_COOKIE_SECURE=False,  #true if https, recommended for prod
-    SESSION_COOKIE_SAMESITE="Lax" 
+    SESSION_COOKIE_SAMESITE="Lax"
     # lax allows external links to use GET index of this site if clicked
     # but prevents some CSRF attacks by limiting how other sites can use session cookie
 )
 
 
-#secret key setup for session cookies 
+#secret key setup for session cookies
 secret = os.environ.get("SECRET_KEY")
 if secret:
     app.secret_key = secret
@@ -51,7 +51,7 @@ else:
 #rate limiter - global default
 limiter = Limiter(
     key_func=get_remote_address,     #client IP
-    app=app,                        
+    app=app,
     default_limits=["100 per hour"],  #global limit
 )
 
@@ -85,14 +85,14 @@ app.permanent_session_lifetime = timedelta(minutes=15)
 #refresh session timer with activity
 @app.before_request
 def make_session_permanent():
-    session.permanent = True 
+    session.permanent = True
 
 #load logout form
 @app.before_request
 def add_logout_form():
     g.logout_form = LogoutForm()
 
-# -- FORMS -- 
+# -- FORMS --
 
 #define forms for Flask-WTF - avoid CSRF, validate input
 
@@ -137,7 +137,7 @@ class NoteForm(FlaskForm):
 class LogoutForm(FlaskForm):
     submit = SubmitField("Logout")
 
-# -- ROUTES -- 
+# -- ROUTES --
 
 def get_db():
     for _ in range(5):

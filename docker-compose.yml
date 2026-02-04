@@ -11,5 +11,3 @@ services:
     volumes:
       - ./app:/app
     restart: unless-stopped
-
-
