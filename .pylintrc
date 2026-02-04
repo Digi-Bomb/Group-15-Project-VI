@@ -14,3 +14,6 @@ disable=
 
 [FORMAT]
 max-line-length=120
+
+[MESSAGES CONTROL]
+disable=W1203
