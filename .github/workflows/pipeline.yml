@@ -43,13 +43,20 @@ jobs:
           if [[ -n "$(git status --porcelain)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
+
+            # Stage everything EXCEPT workflows
             git add .
-            git commit -m "chore: apply pre-commit fixes"
-            git push
+            git reset .github/workflows/
+
+            if [[ -n "$(git diff --cached)" ]]; then
+              git commit -m "chore: apply pre-commit fixes [skip ci]"
+              git push
+            else
+              echo "Only workflow files changed; skipping commit"
+            fi
           else
             echo "No changes to commit"
           fi
-
       - name: Re-run pre-commit (verify clean)
         run: |
           pre-commit run --all-files
