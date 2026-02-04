@@ -149,9 +149,10 @@ def get_db():
                 database=os.environ.get("MYSQL_DATABASE"),
             )
         except mysql.connector.Error:
+            last_error = exc
             time.sleep(2)
     app.logger.error("Could not connect to MySQL after retries")
-    raise
+    raise last_error
 
 #lower rate limit for commonly abused routes
 #@limiter.limit("5 per minute")
