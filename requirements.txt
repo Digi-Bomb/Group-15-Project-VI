@@ -1,5 +1,0 @@
-flask
-flask-wtf
-wtforms
-mysql-connector-python
-flask-limiter
