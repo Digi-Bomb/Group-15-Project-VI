@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, g, flash
 
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextAreaField, SubmitField
-from wtforms.validators import DataRequired, Length, ValidationError, EqualTo, Regexp
+from app.forms import RegisterForm, LoginForm, NoteForm, LogoutForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -97,153 +95,17 @@ def make_session_permanent():
 def add_logout_form():
     g.logout_form = LogoutForm()
 
-# -- FORMS --
-
-#define forms for Flask-WTF - avoid CSRF, validate input
-
-class RegisterForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired(), Length(min=3, max=20), Regexp(r'^\w+$', message="Username must contain only letters, numbers, or underscores")])
-    password = PasswordField("Password", validators=[DataRequired(), Length(min=6)])
-    #confirm matching passwords
-    confirm_password = PasswordField("Confirm Password", validators=[
-        DataRequired(),
-        EqualTo("password", message="Passwords must match")
-    ])
-    submit = SubmitField("Register")
-
-    #check unique username before registering
-    #avoid sharing data between users that share username
-    def validate_username(self, field):
-        conn = get_db()
-        cursor = conn.cursor(dictionary=True)
-
-        cursor.execute(
-            "SELECT id FROM users WHERE username = %s",
-            (field.data,)
-        )
-        existing = cursor.fetchone()
-
-        cursor.close()
-        conn.close()
-
-        if existing:
-            raise ValidationError("Username already exists.")
-
-
-class LoginForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired()])
-    password = PasswordField("Password", validators=[DataRequired()])
-    submit = SubmitField("Login")
-
-class NoteForm(FlaskForm):
-    note = TextAreaField("Note", validators=[DataRequired(), Length(max=500)]) #max 500 characters for now
-    submit = SubmitField("Add Note")
-
-class LogoutForm(FlaskForm):
-    submit = SubmitField("Logout")
+# Forms are defined in app/forms.py and imported above
 
 # -- ROUTES --
+from app.account.routes import account_bp
+from app.booking.routes import booking_bp
+from app.notifications.routes import notifications_bp
 
-def get_db():
-    for _ in range(5):
-        try:
-            return mysql.connector.connect(
-                host=os.environ.get("MYSQL_HOST", "localhost"),
-                user=os.environ.get("MYSQL_USER"),
-                password=os.environ.get("MYSQL_PASSWORD"),
-                database=os.environ.get("MYSQL_DATABASE"),
-            )
-        except mysql.connector.Error as exc:
-            last_error = exc
-            time.sleep(2)
-    app.logger.error("Could not connect to MySQL after retries")
-    raise last_error
-
-#lower rate limit for commonly abused routes
-#@limiter.limit("5 per minute")
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    form = RegisterForm() #using register form
-    if form.validate_on_submit():
-        username = form.username.data
-        password = generate_password_hash(form.password.data) #generate password hash before transport
-        conn = get_db()
-        cursor = conn.cursor()
-
-        try:
-            cursor.execute( #adjust table name/attributes to the final db schema
-                "INSERT INTO users (username, password) VALUES (%s, %s)",
-                (username, password)
-            )
-            conn.commit()
-        except mysql.connector.Error as e:
-            app.logger.error(f"DB error: {e}")
-            flash("Registration failed.", "danger")
-        finally:
-            cursor.close()
-            conn.close()
-
-        return redirect("/login")
-
-    return render_template("register.html", form=form)
-
-@limiter.limit("5 per minute")
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    form = LoginForm() #using login form
-    if form.validate_on_submit():
-        conn = get_db()
-        cursor = conn.cursor()
-
-        cursor.execute( #adjust to db schema
-            "SELECT id, username, password FROM users WHERE username = %s",
-            (form.username.data,)
-        )
-        user = cursor.fetchone()
-
-        cursor.close()
-        conn.close()
-
-        if user and check_password_hash(user[2], form.password.data):
-            session.permanent = True
-            session["user_id"] = user[0]
-            return redirect("/notes")
-
-        flash("Invalid username or password.", "danger")
-        app.logger.warning(
-            f"Failed login attempt for username: {form.username.data}"
-        )
-
-    return render_template("login.html", form=form)
-
-@app.route("/logout", methods=["POST"])
-def logout():
-    form = g.logout_form
-    if form.validate_on_submit():
-        user_id = session.get("user_id")
-        session.clear()
-        flash("Logged out successfully.", "success")
-        app.logger.info(f"User {user_id} logged out")
-    return redirect("/")
-
-@app.route("/", methods=["GET"])
-def index():
-    return render_template("index.html")
-
-@app.route("/submit", methods=["POST"])
-def submit():
-    name = request.form.get("name")
-    subject = request.form.get("subject")
-    message = request.form.get("message")
-
-    msg = Message("Test Email", sender=os.environ.get("DEL_EMAIL"), recipients=[os.environ.get("REC_EMAIL")])
-    msg.body = f"Name: {name}\nSubject: {subject}\nMessage: {message}"
-
-    try:
-        mail.send(msg)
-        return "Email sent successfully!"
-    except Exception as e:
-        return str(e)
+# register blueprints
+app.register_blueprint(account_bp)
+app.register_blueprint(booking_bp)
+app.register_blueprint(notifications_bp)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

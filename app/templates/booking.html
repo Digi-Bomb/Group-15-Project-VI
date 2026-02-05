@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Booking Details{% endblock %}
+
+{% block content %}
+<h1>{{ booking.booking_name if booking is defined else 'Booking' }}</h1>
+
+{% if booking is defined %}
+    <ul>
+        <li>Owner ID: {{ booking.booking_owner_id }}</li>
+        <li>Room ID: {{ booking.room_id }}</li>
+        <li>Date: {{ booking.booking_date }}</li>
+        <li>Start: {{ booking.start_time }}</li>
+        <li>Duration (hrs): {{ booking.duration_hours }}</li>
+        <li>Capacity: {{ booking.meeting_capacity }}</li>
+        <li>Confirmed: {{ booking.num_confirmed }}</li>
+    </ul>
+
+    <p>Shareable link: <a href="{{ url_for('index') }}">(dynamic link placeholder)</a></p>
+{% else %}
+    <p>No booking data available.</p>
+{% endif %}
+
+{% endblock %}

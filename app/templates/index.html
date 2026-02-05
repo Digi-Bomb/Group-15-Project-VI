@@ -1,59 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Room Booking{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+{% extends 'base.html' %}
 
-</head>
-<body>
-    <!-- Navbar -->
-  <nav class="navbar">
-        <div class="nav-left">
-            <a href="/" class="nav-logo text-">📝 Room Booking NavBar</a>
-        </div>
-        <div class="nav-right">
-            {% if session.get('user_id') %}
-                <form action="/logout" method="POST" class="logout-form">
-                    {{ g.logout_form.hidden_tag() }}
-                    {{ g.logout_form.submit(class_='btn btn-logout') }}
-                </form>
-            {% else %}
-                <a href="/login" class="btn btn-login">Login</a>
-                <a href="/register" class="btn btn-register">Register</a>
-            {% endif %}
-        </div>
-    </nav>
+{% block title %}Home{% endblock %}
 
-    <main class="content">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for category, message in messages %}
-                        <div class="flash flash-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
+{% block content %}
+<h1>Welcome to the Room Booking App</h1>
 
-        {% block content %}{% endblock %}
-    </main>
+<p>Use the navigation to log in or register. You can create and view bookings once authenticated.</p>
 
-    <form action="/submit" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" required>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" required></textarea>
+<form action="/submit" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" name="subject" required>
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" required></textarea>
 
-        <button type="submit">Submit</button>
-    </form>
+    <button type="submit">Submit</button>
+</form>
 
-    <footer class="footer">
-        <p>&copy; {{ 2025 }} Room Booking App - By Group 15</p>
-    </footer>
-    <script src="{{ url_for('static', filename='../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-</body>
-</html>
+{% endblock %}
