@@ -11,7 +11,9 @@ disable=
     C0411,  # wrong-import-order (let isort handle this)
     W0611,  # unused-import
     R0903,   # too-few-public-methods
-    W1203
+    W1203,
+    W0613,
+    W0201
 
 [FORMAT]
 max-line-length=120
