@@ -3,23 +3,38 @@ from flask_mail import Message
 
 notifications_bp = Blueprint('notifications', __name__)
 
-
 @notifications_bp.route('/submit', methods=['POST'])
 def submit():
-    name = request.form.get('name')
-    subject = request.form.get('subject')
-    message = request.form.get('message')
+    #to avoid circular import, import mail here, when we need it
+    from app import mail 
+    
+    name = request.form.get('name', '').strip() #strip whitespace, default to empty string if not provided
+    subject = request.form.get('subject', 'No subject').strip()
+    message = request.form.get('message', '').strip()
 
-    mail = current_app.extensions.get('mail')
-    if mail:
-        try:
-            msg = Message(subject or 'Message from site', sender=current_app.config.get('MAIL_DEFAULT_SENDER'), recipients=[current_app.config.get('REC_EMAIL')])
-            msg.body = f"Name: {name}\nSubject: {subject}\nMessage: {message}"
-            mail.send(msg)
-            return 'Email sent successfully!'
-        except Exception as e:
-            current_app.logger.error(f"Mail send failed: {e}")
-            return str(e), 500
+    if not message:
+        flash("Message cannot be empty.", "warning")
+        return redirect("/")
 
-    flash('Mail subsystem not configured.', 'warning')
-    return redirect('/')
+    recipient_email = current_app.config.get('REC_EMAIL')
+    sender_email = current_app.config.get('MAIL_DEFAULT_SENDER')
+
+    if not recipient_email or not sender_email:
+        current_app.logger.error("Recipient or sender email not configured")
+        flash("Email configuration missing.", "error")
+        return redirect("/")
+
+    try:
+        msg = Message(
+            subject=subject,
+            sender=sender_email,
+            recipients=[recipient_email]
+        )
+        msg.body = f"Name: {name}\nSubject: {subject}\nMessage: {message}"
+        mail.send(msg)  # send using the instance imported from app.py
+        flash("Email sent successfully!", "success")
+        return redirect("/")
+    except Exception as e:
+        current_app.logger.error(f"Mail send failed: {e}", exc_info=True)
+        flash("Failed to send email.", "error")
+        return str(e), 500

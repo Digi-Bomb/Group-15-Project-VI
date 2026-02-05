@@ -19,7 +19,7 @@ from datetime import timedelta
 import time
 
 # -- CONFIG --
-
+mail = Mail()
 app = Flask(__name__)
 app.config["WTF_CSRF_ENABLED"] = True #CSRF defense
 
@@ -32,18 +32,21 @@ app.config.update(
     # but prevents some CSRF attacks by limiting how other sites can use session cookie
 )
 
+#mail setup - using Gmail SMTP for demo, change for prod 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = os.environ.get("DEL_EMAIL")
-app.config['MAIL_PASSWORD'] = os.environ.get("DEL_EMAIL_PASSWORD")
-app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("DEL_EMAIL")
 
-mail = Mail(app)
+app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("DEL_EMAIL")
+app.config["MAIL_USERNAME"] = os.environ.get("DEL_EMAIL")
+app.config["MAIL_PASSWORD"] = os.environ.get("DEL_EMAIL_PASSWORD")
+app.config["REC_EMAIL"] = os.environ.get("REC_EMAIL")
+
+
+
 
 #secret key setup for session cookies
-
 secret = os.environ.get("SECRET_KEY")
 if secret:
     app.secret_key = secret
@@ -96,6 +99,9 @@ def add_logout_form():
     g.logout_form = LogoutForm()
 
 # Forms are defined in app/forms.py and imported above
+
+#once config is loaded, initialize mail extension
+mail.init_app(app)
 
 # -- ROUTES --
 from account.routes import account_bp

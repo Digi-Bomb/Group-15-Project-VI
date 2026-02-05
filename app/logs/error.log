@@ -36,3 +36,81 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 98, in _get_source_fast
     raise TemplateNotFound(template)
 jinja2.exceptions.TemplateNotFound: login.html
+2026-02-05 21:27:42,229 ERROR: Mail send failed: cannot unpack non-iterable NoneType object [in /app/notifications/routes.py:21]
+2026-02-05 21:38:14,275 ERROR: Mail send failed: cannot unpack non-iterable NoneType object [in /app/notifications/routes.py:21]
+2026-02-05 21:39:09,682 ERROR: Exception in /submit: Traceback (most recent call last):
+  File "/app/notifications/routes.py", line 26, in submit
+    mail.send(msg)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
+    list(sanitize_addresses(message.send_to)),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
+    return map(lambda e: sanitize_address(e, encoding), addresses)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
+    nm, addr = addr
+    ^^^^^^^^
+TypeError: cannot unpack non-iterable NoneType object
+ [in /app/notifications/routes.py:29]
+2026-02-05 21:39:22,523 ERROR: Exception in /submit: Traceback (most recent call last):
+  File "/app/notifications/routes.py", line 26, in submit
+    mail.send(msg)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
+    list(sanitize_addresses(message.send_to)),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
+    return map(lambda e: sanitize_address(e, encoding), addresses)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
+    nm, addr = addr
+    ^^^^^^^^
+TypeError: cannot unpack non-iterable NoneType object
+ [in /app/notifications/routes.py:29]
+2026-02-05 21:51:04,020 ERROR: Exception in /submit: Traceback (most recent call last):
+  File "/app/notifications/routes.py", line 26, in submit
+    try:
+        ^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
+    list(sanitize_addresses(message.send_to)),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
+    return map(lambda e: sanitize_address(e, encoding), addresses)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
+    nm, addr = addr
+    ^^^^^^^^
+TypeError: cannot unpack non-iterable NoneType object
+ [in /app/notifications/routes.py:29]
+2026-02-05 21:51:07,897 ERROR: Exception in /submit: Traceback (most recent call last):
+  File "/app/notifications/routes.py", line 26, in submit
+    try:
+        ^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
+    list(sanitize_addresses(message.send_to)),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
+    return map(lambda e: sanitize_address(e, encoding), addresses)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
+    nm, addr = addr
+    ^^^^^^^^
+TypeError: cannot unpack non-iterable NoneType object
+ [in /app/notifications/routes.py:29]
+2026-02-05 21:58:29,332 ERROR: Recipient or sender email not configured [in /app/notifications/routes.py:23]
+2026-02-05 21:58:29,332 ERROR: Recipient or sender email not configured [in /app/notifications/routes.py:23]
