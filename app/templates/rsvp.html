@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}RSVP{% endblock %}
+
+{% block content %}
+<h1>RSVP</h1>
+
+{% if booking is defined %}
+    <p>You're responding to: <strong>{{ booking.booking_name }}</strong></p>
+    <form method="post">
+        <label for="name">Your name</label><br>
+        <input id="name" name="name" required>
+        <div>
+            <button type="submit" class="btn">Confirm</button>
+        </div>
+    </form>
+{% else %}
+    <p>Invalid or expired RSVP link.</p>
+{% endif %}
+
+{% endblock %}

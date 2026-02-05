@@ -1,5 +1,5 @@
-from database_connection import DatabaseConnection
+from app.database_connection import DatabaseConnection
 
-class EmailNotificationService:
+class RoomService:
     def __init__(self, database: DatabaseConnection):
         self.database = database

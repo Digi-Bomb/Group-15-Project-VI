@@ -1,5 +1,5 @@
 from typing import List
-from booking import Bookings
+from app.booking import Booking
 
 
 class RegisteredUser:
@@ -14,5 +14,5 @@ class RegisteredUser:
     def validate_credentials(self, password: str) -> bool:
         return False
 
-    def get_bookings(self) -> List[Bookings]:
+    def get_bookings(self) -> List[Booking]:
         return []
