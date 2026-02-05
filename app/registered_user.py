@@ -22,5 +22,5 @@ class RegisteredUser:
     def validate_credentials(self, password: str) -> bool:
         return False
 
-    def get_bookings(self) -> List[Booking]:
+    def get_bookings(self) -> List[Bookings]:
         return []

@@ -44,7 +44,7 @@ app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("DEL_EMAIL")
 
 mail = Mail(app)
 
-#secret key setup for session cookies 
+#secret key setup for session cookies
 
 secret = os.environ.get("SECRET_KEY")
 if secret:
@@ -238,7 +238,7 @@ def submit():
 
     msg = Message("Test Email", sender=os.environ.get("DEL_EMAIL"), recipients=[os.environ.get("REC_EMAIL")])
     msg.body = f"Name: {name}\nSubject: {subject}\nMessage: {message}"
-    
+
     try:
         mail.send(msg)
         return "Email sent successfully!"
