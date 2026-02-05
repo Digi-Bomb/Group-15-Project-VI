@@ -10,11 +10,9 @@ class RegisteredUser:
         self.password = password
         self.first_name = first_name
         self.last_name = last_name
-           
+
     def validate_credentials(self, password: str) -> bool:
         return False
-    
+
     def get_bookings(self) -> List[Bookings]:
         return []
-    
-    
