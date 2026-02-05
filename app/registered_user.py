@@ -1,9 +1,17 @@
 from typing import List
-from booking import Bookings
+from booking import Booking
 
 
 class RegisteredUser:
-    def __init__(self, user_id: int, username: str, email: str, password: str, first_name: str, last_name: str):
+    def __init__(
+        self,
+        user_id: int,
+        username: str,
+        email: str,
+        password: str,
+        first_name: str,
+        last_name: str,
+    ):
         self.user_id = user_id
         self.username = username
         self.email = email
