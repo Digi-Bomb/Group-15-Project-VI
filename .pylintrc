@@ -17,3 +17,8 @@ disable=
 
 [FORMAT]
 max-line-length=120
+
+[DESIGN]
+max-attributes=12
+max-args=12
+max-positional-arguments=12
