@@ -1,25 +1,26 @@
 from flask import Flask, render_template, request, redirect, session, g, flash
+
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError, EqualTo, Regexp
+
 from werkzeug.security import generate_password_hash, check_password_hash
+
+import mysql.connector
+
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+
 import logging
 from logging.handlers import RotatingFileHandler
+
 from flask_mail import Mail, Message
+
 import os
 from datetime import timedelta
-import mysql.connector
 import time
 
-
-# i copy/pasted the imports that i used from the softsec project
-# wtforms helped manage user input validation and database storage stuff
-# limiter helped with rate limiting to prevent brute force / DoS (not sure if itll mess up our testing)
-# can remove or add any as needed
-
-# -- CONFIG -- 
+# -- CONFIG --
 
 app = Flask(__name__)
 app.config["WTF_CSRF_ENABLED"] = True #CSRF defense
@@ -28,11 +29,10 @@ app.config["WTF_CSRF_ENABLED"] = True #CSRF defense
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True, #prevents JavaScript access to cookie data
     SESSION_COOKIE_SECURE=False,  #true if https, recommended for prod
-    SESSION_COOKIE_SAMESITE="Lax" 
+    SESSION_COOKIE_SAMESITE="Lax"
     # lax allows external links to use GET index of this site if clicked
     # but prevents some CSRF attacks by limiting how other sites can use session cookie
 )
-
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
@@ -45,6 +45,7 @@ app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("DEL_EMAIL")
 mail = Mail(app)
 
 #secret key setup for session cookies 
+
 secret = os.environ.get("SECRET_KEY")
 if secret:
     app.secret_key = secret
@@ -55,7 +56,7 @@ else:
 #rate limiter - global default
 limiter = Limiter(
     key_func=get_remote_address,     #client IP
-    app=app,                        
+    app=app,
     default_limits=["100 per hour"],  #global limit
 )
 
@@ -89,14 +90,14 @@ app.permanent_session_lifetime = timedelta(minutes=15)
 #refresh session timer with activity
 @app.before_request
 def make_session_permanent():
-    session.permanent = True 
+    session.permanent = True
 
 #load logout form
 @app.before_request
 def add_logout_form():
     g.logout_form = LogoutForm()
 
-# -- FORMS -- 
+# -- FORMS --
 
 #define forms for Flask-WTF - avoid CSRF, validate input
 
@@ -141,7 +142,7 @@ class NoteForm(FlaskForm):
 class LogoutForm(FlaskForm):
     submit = SubmitField("Logout")
 
-# -- ROUTES -- 
+# -- ROUTES --
 
 def get_db():
     for _ in range(5):
@@ -152,10 +153,11 @@ def get_db():
                 password=os.environ.get("MYSQL_PASSWORD"),
                 database=os.environ.get("MYSQL_DATABASE"),
             )
-        except mysql.connector.Error:
+        except mysql.connector.Error as exc:
+            last_error = exc
             time.sleep(2)
     app.logger.error("Could not connect to MySQL after retries")
-    raise
+    raise last_error
 
 #lower rate limit for commonly abused routes
 #@limiter.limit("5 per minute")
@@ -206,11 +208,11 @@ def login():
             session.permanent = True
             session["user_id"] = user[0]
             return redirect("/notes")
-        else:
-            flash("Invalid username or password.", "danger")
-            app.logger.warning(
-                f"Failed login attempt for username: {form.username.data}"
-            )
+
+        flash("Invalid username or password.", "danger")
+        app.logger.warning(
+            f"Failed login attempt for username: {form.username.data}"
+        )
 
     return render_template("login.html", form=form)
 

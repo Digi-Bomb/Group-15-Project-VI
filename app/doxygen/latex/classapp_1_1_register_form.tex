@@ -1,0 +1,52 @@
+\doxysection{app.\+Register\+Form Class Reference}
+\hypertarget{classapp_1_1_register_form}{}\label{classapp_1_1_register_form}\index{app.RegisterForm@{app.RegisterForm}}
+Inheritance diagram for app.\+Register\+Form:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classapp_1_1_register_form}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item
+\Hypertarget{classapp_1_1_register_form_ae4cd8e2132f7f65915e20e88609119dd}\label{classapp_1_1_register_form_ae4cd8e2132f7f65915e20e88609119dd}
+{\bfseries validate\+\_\+username} (self, field)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item
+\Hypertarget{classapp_1_1_register_form_a03cc57798e790f7ec82abcb359991ec3}\label{classapp_1_1_register_form_a03cc57798e790f7ec82abcb359991ec3}
+{\bfseries username} = String\+Field("{}Username"{}, validators=\+[Data\+Required(), Length(min=3, max=20), Regexp(r\textquotesingle{}\texorpdfstring{$^\wedge$}{\string^}\textbackslash{}w+\$\textquotesingle{}, message="{}Username must contain only letters, numbers, or underscores"{})]\+)
+\item
+\Hypertarget{classapp_1_1_register_form_ac9b6e624c7b8fc919ac8963a58b62556}\label{classapp_1_1_register_form_ac9b6e624c7b8fc919ac8963a58b62556}
+{\bfseries password} = Password\+Field("{}Password"{}, validators=\+[Data\+Required(), Length(min=6)]\+)
+\item
+\doxymbox{\hyperlink{classapp_1_1_register_form_a06752c1c0a3b76138353adb67aa427f7}{confirm\+\_\+password}}
+\item
+\Hypertarget{classapp_1_1_register_form_aa789e32517c8188e3ee0b6f53c10f87e}\label{classapp_1_1_register_form_aa789e32517c8188e3ee0b6f53c10f87e}
+{\bfseries submit} = Submit\+Field("{}Register"{})
+\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{classapp_1_1_register_form_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classapp_1_1_register_form_a06752c1c0a3b76138353adb67aa427f7}\index{app.RegisterForm@{app.RegisterForm}!confirm\_password@{confirm\_password}}
+\index{confirm\_password@{confirm\_password}!app.RegisterForm@{app.RegisterForm}}
+\doxysubsubsection{\texorpdfstring{confirm\_password}{confirm\_password}}
+{\footnotesize\ttfamily \label{classapp_1_1_register_form_a06752c1c0a3b76138353adb67aa427f7}
+app.\+Register\+Form.\+confirm\+\_\+password\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ PasswordField(\textcolor{stringliteral}{"{}Confirm\ Password"{}},\ validators=[}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ DataRequired(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EqualTo(\textcolor{stringliteral}{"{}password"{}},\ message=\textcolor{stringliteral}{"{}Passwords\ must\ match"{}})}
+\DoxyCodeLine{\ \ \ \ ])}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item
+app/\+app.\+py\end{DoxyCompactItemize}
