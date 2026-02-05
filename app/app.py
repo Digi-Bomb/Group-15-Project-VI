@@ -98,14 +98,18 @@ def add_logout_form():
 # Forms are defined in app/forms.py and imported above
 
 # -- ROUTES --
-from app.account.routes import account_bp
-from app.booking.routes import booking_bp
-from app.notifications.routes import notifications_bp
+from account.routes import account_bp
+from booking.routes import booking_bp
+from notifications.routes import notifications_bp
 
 # register blueprints
 app.register_blueprint(account_bp)
 app.register_blueprint(booking_bp)
 app.register_blueprint(notifications_bp)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

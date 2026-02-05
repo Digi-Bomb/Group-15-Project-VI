@@ -1,80 +1,43 @@
-2026-02-03 16:17:32,566 ERROR: Exception on /login [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/app.py", line 215, in login
-    return render_template("login.html", form=form)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 150, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 1087, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 1016, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 975, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/jinja2/loaders.py", line 126, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 64, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 98, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: login.html
-2026-02-04 19:18:25,923 INFO: Flask app startup [in /app/app.py:84]
-2026-02-04 19:18:58,582 ERROR: Exception on /login [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/app.py", line 215, in login
-    return render_template("login.html", form=form)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 150, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 1087, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 1016, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 975, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/jinja2/loaders.py", line 126, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 64, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 98, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: login.html
-2026-02-05 01:17:40,950 INFO: Flask app startup [in /app/app.py:84]
-2026-02-05 01:19:34,350 INFO: Flask app startup [in /app/app.py:84]
-2026-02-05 01:19:48,866 INFO: Flask app startup [in /app/app.py:84]
+2026-02-05 20:20:39,439 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:20:43,380 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:20:43,412 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:20:43,412 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:20:50,670 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:20:50,680 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:20:50,680 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:04,245 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:04,265 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:04,265 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:22,196 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:22,598 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:22,598 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:23,776 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:23,846 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:23,846 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:24,889 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:25,018 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:25,018 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:26,171 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:26,248 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:26,248 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:27,834 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:27,896 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:27,896 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:30,332 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:30,412 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:30,412 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:34,361 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:34,517 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:34,517 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:41,647 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:41,742 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:41,742 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:55,413 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:55,478 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:21:55,478 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:22:21,777 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:22:22,125 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:22:22,125 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:23:14,123 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:26:55,564 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 20:27:44,990 ERROR: Mail send failed: cannot unpack non-iterable NoneType object [in /app/notifications/routes.py:21]

@@ -2,9 +2,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError, EqualTo, Regexp
 
-from app.database_connection import get_db
-
-
 class RegisterForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(), Length(min=3, max=20), Regexp(r'^\w+$', message="Username must contain only letters, numbers, or underscores")])
     password = PasswordField("Password", validators=[DataRequired(), Length(min=6)])
@@ -18,6 +15,7 @@ class RegisterForm(FlaskForm):
     #check unique username before registering
     #avoid sharing data between users that share username
     def validate_username(self, field):
+        from app.database_connection import get_db
         conn = get_db()
         cursor = conn.cursor(dictionary=True)
 
