@@ -1,0 +1,360 @@
+classDiagram
+    class RegisteredUser {
+        -userId : int
+        -username : string
+        -email : string
+        -password : string
+        -firstName : string
+        -lastName : string
+        +RegisteredUser(userId : int, username : string, email : string, password : string, firstName : string, lastName : string)
+        +getUserId() : int
+        +setUserId(userId : int) : void
+        +getUsername() : string
+        +setUsername(username : string) : void
+        +getEmail() : string
+        +setEmail(email : string) : void
+        +getPassword() : string
+        +setPassword(password : string) : void
+        +getFirstName() : string
+        +setFirstName(firstName : string) : void
+        +getLastName() : string
+        +setLastName(lastName : string) : void
+        +validateCredentials(password) : bool
+        +getBookings() : List~Booking~
+        +getFullName() : string
+    }
+
+    class UnregisteredUser {
+        -unregisteredUserId : int
+        -nickname : string
+        -email : string
+        +UnregisteredUser(unregisteredUserId : int, nickname : string, email : string)
+        +getUnregisteredUserId() : int
+        +setUnregisteredUserId(unregisteredUserId : int) : void
+        +getNickname() : string
+        +setNickname(nickname : string) : void
+        +getEmail() : string
+        +setEmail(email : string) : void
+    }
+
+    class Room {
+        -roomId : int
+        -roomName : string
+        -wingNumber : int
+        -maxCapacity : int
+        -hasWheelchairAccess : bool
+        -hasProjector : bool
+        -hasWhiteboard : bool
+        +Room(roomId : int, roomName : string, wingNumber : int, maxCapacity : int, hasWheelchairAccess : bool, hasProjector : bool, hasWhiteboard : bool)
+        +getRoomId() : int
+        +setRoomId(roomId : int) : void
+        +getRoomName() : string
+        +setRoomName(roomName : string) : void
+        +getWingNumber() : int
+        +setWingNumber(wingNumber : int) : void
+        +getMaxCapacity() : int
+        +setMaxCapacity(maxCapacity : int) : void
+        +getHasWheelchairAccess() : bool
+        +setHasWheelchairAccess(hasWheelchairAccess : bool) : void
+        +getHasProjector() : bool
+        +setHasProjector(hasProjector : bool) : void
+        +getHasWhiteboard() : bool
+        +setHasWhiteboard(hasWhiteboard : bool) : void
+        +getAvailability(date : Date, time : Time) : bool
+        +isAvailable(date : Date, startTime : Time, duration : double) : bool
+        +getRoomDetails() : string
+    }
+
+    class Booking {
+        -bookingId : int
+        -bookingName : string
+        -bookingOwnerId : int
+        -roomId : int
+        -bookingDate : Date
+        -startTime : Time
+        -durationHours : double
+        -meetingCapacity : int
+        -numConfirmed : int
+        -confirmedAttendees : List~Attendee~
+        -status : string
+        +Booking(bookingId : int, bookingName : string, bookingOwnerId : int, roomId : int, bookingDate : Date, startTime : Time, durationHours : double, meetingCapacity : int, numConfirmed : int, confirmedAttendees : List~Attendee~, status : string)
+        +getBookingId() : int
+        +setBookingId(bookingId : int) : void
+        +getBookingName() : string
+        +setBookingName(bookingName : string) : void
+        +getBookingOwnerId() : int
+        +setBookingOwnerId(bookingOwnerId : int) : void
+        +getRoomId() : int
+        +setRoomId(roomId : int) : void
+        +getBookingDate() : Date
+        +setBookingDate(bookingDate : Date) : void
+        +getStartTime() : Time
+        +setStartTime(startTime : Time) : void
+        +getDurationHours() : int
+        +setDurationHours(durationHours : int) : void
+        +getMeetingCapacity() : int
+        +setMeetingCapacity(meetingCapacity : int) : void
+        +getNumConfirmed() : int
+        +setNumConfirmed(numConfirmed : int) : void
+        +getConfirmedAttendees() : List~Attendee~
+        +setConfirmedAttendees(confirmedAttendees : List~Attendee~) : void
+        +getStatus() : string
+        +setStatus(status : string) : void
+        +addAttendee(attendee : Attendee) : void
+        +removeAttendee(attendeeId : int) : bool
+        +updateTime(newDate : Date, newStartTime : Time, newDurationHours : double) : bool
+        +updateCapacity(newCapacity : int) : bool
+        +isAtMeetingCapacity() : bool
+        +generateShareableLink() : ShareableLink
+        +calculateEndTime() : Time
+        +resetAllRsvps() : bool
+    }
+
+    class Attendee {
+        -attendeeId : int
+        -bookingId : int
+        -attendeeId : int
+        -attendeeType : string
+        -rsvpStatus : string
+        +Attendee(attendeeId : int, bookingId : int, attendeeId : int, attendeeType : string, rsvpStatus : string)
+        +getAttendeeId() : int
+        +setAttendeeId(attendeeId : int) : void
+        +getBookingId() : int
+        +setBookingId(bookingId : int) : void
+        +getAttendeeId() : int
+        +setAttendeeId(attendeeId : int) : void
+        +getAttendeeType() : string
+        +setAttendeeType(attendeeType : string) : void
+        +getRsvpStatus() : string
+        +setRsvpStatus(rsvpStatus : string) : void
+        +updateRsvpStatus(newStatus : string) : bool
+        +confirmAttendance() : bool
+        +rejectAttendance() : bool
+    }
+
+    class ShareableLink {
+        -linkId : string
+        -bookingId : int
+        +ShareableLink(linkId : string, bookingId : int)
+        +getBookingId() : int
+        +setBookingId(bookingId : int) : void
+        +getLinkId() : string
+        +setLinkId(linkId : string) : void
+        +generateId() : string
+    }
+
+    class AccountService {
+        -database : DatabaseConnection
+        +AccountService(database : DatabaseConnection)
+        +register(username : string, email : string, password : string, firstName : string, lastName : string) : RegisteredUser
+        +login(username : string, password : string) : RegisteredUser | null
+        +updateProfile(userId : int, updatedData : Dict) : bool
+        +deleteAccount(userId : int) : bool
+        +validateEmail(email : string) : bool
+        +hashPassword(password : string) : string
+        +verifyPassword(password : string, hashStr : string) : bool
+        +getUserById(userId : int) : RegisteredUser | null
+        +getUserByUsername(username : string) : RegisteredUser | null
+    }
+
+    class BookingService {
+        -database : DatabaseConnection
+        -validator : DataValidator
+        -timeManager : TimeManager
+        +BookingService(database : DatabaseConnection, validator : DataValidator, timeManager : TimeManager)
+        +createBooking(ownerId : int, roomId : int, date : Date, startTime : Time, duration : int, capacity : int, bookingName : string) : Booking
+        +updateBooking(bookingId : int, updatedData : Dict) : bool
+        +deleteBooking(bookingId : int) : bool
+        +getAllBookings() : List~Booking~
+        +getBookingsByOwner(ownerId : int) : List~Booking~
+        +getBookingById(bookingId : int) : Booking | null
+        +checkConflicts(roomId : int, date : Date, startTime : Time, duration : int) : List~Booking~
+        +getBookingsByDate(date : Date) : List~Booking~
+        +getBookingsByRoom(roomId : int) : List~Booking~
+    }
+
+    class RsvpService {
+        -database : DatabaseConnection
+        -notificationService : EmailNotificationService
+        +RsvpService(database : DatabaseConnection, notificationService : EmailNotificationService)
+        +addAttendee(bookingId : int, attendeeData : Dict, attendeeType : string) : Attendee
+        +confirmRsvp(attendeeId : int) : bool
+        +rejectRsvp(attendeeId : int) : bool
+        +getAttendeesByBooking(bookingId : int) : List~Attendee~
+        +updateAttendeeStatus(attendeeId : int, status : string) : bool
+        +isBookingFull(bookingId : int) : bool
+        +getConfirmationCount(bookingId : int) : int
+        +getUnconfirmedAttendees(bookingId : int) : List~Attendee~
+        +getConfirmedAttendees(bookingId : int) : List~Attendee~
+    }
+
+    class RoomService {
+        -database : DatabaseConnection
+        +RoomService(database : DatabaseConnection)
+        +getAllRooms() : List~Room~
+        +getRoomById(roomId : int) : Room | null
+        +checkRoomAvailability(roomId : int, date : Date, startTime : Time, duration : int) : bool
+        +updateRoom(roomId : int, updatedData : Dict) : bool
+        +deleteRoom(roomId : int) : bool
+        +findByWing(wingNumber : int) : List~Room~
+        +findByCapacity(minCapacity : int) : List~Room~
+    }
+
+    class EmailNotificationService {
+        -database : DatabaseConnection
+        +EmailNotificationService(database : DatabaseConnection)
+        +sendEmailNotification(recipientEmail : string, subject : string, body : string) : bool
+        +sendRsvpConfirmationEmail(bookingOwnerId : int, attendeeName : string, bookingId : int) : bool
+        +sendBookingChangeEmail(bookingId : int, changeType : string, attendeeIds : List~int~) : bool
+        +sendCapacityRequestEmail(bookingOwnerId : int, attendeeName : string, bookingId : int) : bool
+        +notifyBookingOwner(bookingId : int, notificationType : string, data : Dict) : bool
+        +sendRejectionEmail(bookingOwnerId : int, attendeeName : string) : bool
+    }
+
+    class InAppNotificationService {
+        -database : DatabaseConnection
+        +InAppNotificationService(database : DatabaseConnection)
+        +createNotification(userId : int, message : string, notificationType : string) : Dict
+        +getNotifications(userId : int) : List~Dict~
+        +markAsRead(notificationId : int) : bool
+        +deleteNotification(notificationId : int) : bool
+        +getUnreadNotifications(userId : int) : List~Dict~
+        +clearNotifications(userId : int) : bool
+    }
+
+    class AuditLogger {
+        -longTermFilePath : string
+        -shortTermFilePath : string
+        +AuditLogger(longTermFilePath : string, shortTermFilePath : string)
+        +logLongTerm(shareableLink : string, booking : Booking, timestamp : DateTime) : bool
+        +logShortTerm(shareableLink : string, booking : Booking, timestamp : DateTime) : bool
+    }
+
+    class DatabaseConnection {
+        -host : string
+        -port : int
+        -user : string
+        -password : string
+        -database : string
+        -Object connection
+        +DatabaseConnection(host : string, port : int, user : string, password : string, database : string)
+        +connect() : bool
+        +disconnect() : bool
+        +executeQuery(query : string, params : Dict) : List~Dict~
+        +executeUpdate(query : string, params : Dict) : bool
+        +getConnection() : Object
+        +isConnected() : bool
+        +executeBatch(queries : List~string~) : bool
+    }
+
+    class DataValidator {
+        +DataValidator()
+        +validateEmail(email : string) : bool
+        +validatePassword(password : string) : bool
+        +validateUsername(username : string) : bool
+        +validateDateTime(date : Date, time : Time) : bool
+        +validateCapacity(capacity : int, maxCapacity : int) : bool
+        +validateBookingData(data : Dict) : Tuple~bool, Dict~
+        +validateName(name : string) : bool
+        +validateDuration(duration : int) : bool
+    }
+
+    class TimeManager {
+        +TimeManager()
+        +isTimeValid(startTime : Time, duration : int) : bool
+        +checkOverlap(startTime1 : Time, duration1 : int, startTime2 : Time, duration2 : int) : bool
+        +calculateEndTime(startTime : Time, duration : int) : Time
+        +getCurrentDateTime() : DateTime
+        +isTimestampValid(timestamp : Time) : bool
+        +calculateDuration(startTime : Time, endTime : Time) : int
+    }
+
+    class JSONPayloadHandler {
+        +JSONPayloadHandler()
+        +parseJsonPayload(jsonData : string) : Dict
+        +validatePayloadStructure(data : Dict) : bool
+        +serializeToJson(data : Dict) : string
+        +validateJsonSchema(data : Dict, schema : Dict) : bool
+        +extractData(data : Dict, keys : List~string~) : Dict
+    }
+
+    class AuthController {
+        -accountService : AccountService
+        +AuthController(accountService : AccountService)
+        +register(request : Dict) : Tuple~Dict, int~
+        +login(request : Dict) : Tuple~Dict, int~
+        +logout(request : Dict) : Tuple~Dict, int~
+        +getProfile(userId : int) : Tuple~Dict, int~
+    }
+
+    class BookingController {
+        -bookingService : BookingService
+        +BookingController(bookingService : BookingService)
+        +createBooking(userId : int, request : Dict) : Tuple~Dict, int~
+        +getBookings(userId : int) : Tuple~Dict, int~
+        +getBookingById(bookingId : int) : Tuple~Dict, int~
+        +updateBooking(bookingId : int, userId : int, request : Dict) : Tuple~Dict, int~
+        +deleteBooking(bookingId : int, userId : int) : Tuple~Dict, int~
+    }
+
+    class RoomController {
+        -roomService : RoomService
+        +RoomController(roomService : RoomService)
+        +getAllRooms() : Tuple~Dict, int~
+        +getAvailableRooms(request : Dict) : Tuple~Dict, int~
+        +getRoomById(roomId : int) : Tuple~Dict, int~
+    }
+
+    class RsvpController {
+        -rsvpService : RsvpService
+        -notificationService : EmailNotificationService
+        +RsvpController(rsvpService : RsvpService, notificationService : EmailNotificationService)
+        +addAttendee(linkToken : string, request : Dict) : Tuple~Dict, int~
+        +confirmRsvp(attendeeId : int, request : Dict) : Tuple~Dict, int~
+        +rejectRsvp(attendeeId : int, request : Dict) : Tuple~Dict, int~
+        +getAttendees(bookingId : int) : Tuple~Dict, int~
+        +getBookingByLink(linkToken : string) : Tuple~Dict, int~
+    }
+
+    class NotificationController {
+        -inAppNotificationService : InAppNotificationService
+        +NotificationController(inAppNotificationService : InAppNotificationService)
+        +getNotifications(userId : int) : Tuple~Dict, int~
+        +markAsRead(notificationId : int, userId : int) : Tuple~Dict, int~
+        +deleteNotification(notificationId : int, userId : int) : Tuple~Dict, int~
+    }
+
+    %% Domain Model Relationships
+    RegisteredUser "1" *-- "*" Booking : owns
+    Booking "1" *-- "*" Attendee : has
+    Booking "1" *-- "1" ShareableLink : generates
+    Booking "1" --> "1" Room : uses
+    Attendee "1" --> "1" RegisteredUser : references
+    Attendee "1" --> "1" UnregisteredUser : references
+
+    %% Service to Database
+    AccountService ..> DatabaseConnection : uses
+    BookingService ..> DatabaseConnection : uses
+    RsvpService ..> DatabaseConnection : uses
+    RoomService ..> DatabaseConnection : uses
+    InAppNotificationService ..> DatabaseConnection : uses
+
+    %% Service to Utility
+    BookingService ..> DataValidator : uses
+    BookingService ..> TimeManager : uses
+    BookingService ..> JSONPayloadHandler : uses
+    EmailNotificationService ..> JSONPayloadHandler : uses
+
+    %% Service Interactions
+    RsvpService ..> EmailNotificationService : uses
+
+    %% Controller to Service
+    AuthController ..> AccountService : uses
+    BookingController ..> BookingService : uses
+    RoomController ..> RoomService : uses
+    RsvpController ..> RsvpService : uses
+    RsvpController ..> EmailNotificationService : uses
+    NotificationController ..> InAppNotificationService : uses
+
+    %% Logger Dependencies
+    AuditLogger ..> BookingService : logs
