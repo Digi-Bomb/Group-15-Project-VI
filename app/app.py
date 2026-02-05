@@ -7,6 +7,7 @@ from wtforms.validators import DataRequired, Length, ValidationError, EqualTo, R
 from werkzeug.security import generate_password_hash, check_password_hash
 
 import mysql.connector
+import databaseConnection as db
 
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -19,103 +20,123 @@ from datetime import timedelta
 import time
 
 # -- TODO --
-#import cors?
-#import json funct - pandas
-#create on/off switch for limiter
-#transition from direct db insert to JSON handler
-#-- END TODO --
+# import cors?
+# import json funct - pandas
+# create on/off switch for limiter
+# transition from direct db insert to JSON handler
+# -- END TODO --
 
 # -- CONFIG --
 
 app = Flask(__name__)
-app.config["WTF_CSRF_ENABLED"] = True #CSRF defense
+app.config["WTF_CSRF_ENABLED"] = True  # CSRF defense
 
-#session cookie setup - change for prod
+# session cookie setup - change for prod
 app.config.update(
-    SESSION_COOKIE_HTTPONLY=True, #prevents JavaScript access to cookie data
-    SESSION_COOKIE_SECURE=False,  #true if https, recommended for prod
-    SESSION_COOKIE_SAMESITE="Lax"
+    SESSION_COOKIE_HTTPONLY=True,  # prevents JavaScript access to cookie data
+    SESSION_COOKIE_SECURE=False,  # true if https, recommended for prod
+    SESSION_COOKIE_SAMESITE="Lax",
     # lax allows external links to use GET index of this site if clicked
     # but prevents some CSRF attacks by limiting how other sites can use session cookie
 )
 
 
-#secret key setup for session cookies
+# secret key setup for session cookies
 secret = os.environ.get("SECRET_KEY")
 if secret:
     app.secret_key = secret
 else:
     app.secret_key = os.urandom(24)
-    #only use if env var fails, non persistent sessions if app restarts
+    # only use if env var fails, non persistent sessions if app restarts
 
-#rate limiter - global default
+# rate limiter - global default
 limiter = Limiter(
-    key_func=get_remote_address,     #client IP
+    key_func=get_remote_address,  # client IP
     app=app,
-    default_limits=["100 per hour"],  #global limit
+    default_limits=["100 per hour"],  # global limit
 )
 
-#logging setup
-if not os.path.exists('logs'):
-    os.mkdir('logs')
+# logging setup
+if not os.path.exists("logs"):
+    os.mkdir("logs")
 
-#general log
-file_handler = RotatingFileHandler('logs/app.log', maxBytes=10240, backupCount=3) #keep 3 latest logs
-file_handler.setFormatter(logging.Formatter(
-    '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
-))
+# general log
+file_handler = RotatingFileHandler(
+    "logs/app.log", maxBytes=10240, backupCount=3
+)  # keep 3 latest logs
+file_handler.setFormatter(
+    logging.Formatter(
+        "%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]"
+    )
+)
 file_handler.setLevel(logging.INFO)
 
-#error log
-error_handler = RotatingFileHandler('logs/error.log', maxBytes=10240, backupCount=3)
-error_handler.setFormatter(logging.Formatter(
-    '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
-))
+# error log
+error_handler = RotatingFileHandler("logs/error.log", maxBytes=10240, backupCount=3)
+error_handler.setFormatter(
+    logging.Formatter(
+        "%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]"
+    )
+)
 
 error_handler.setLevel(logging.WARNING)
 app.logger.addHandler(file_handler)
 app.logger.addHandler(error_handler)
 app.logger.setLevel(logging.INFO)
 
-app.logger.info('Flask app startup')
+app.logger.info("Flask app startup")
 
-#session timeout set up - end session after 15 minutes without activity
+# session timeout set up - end session after 15 minutes without activity
 app.permanent_session_lifetime = timedelta(minutes=15)
 
-#refresh session timer with activity
+
+# refresh session timer with activity
 @app.before_request
 def make_session_permanent():
     session.permanent = True
 
-#load logout form
+
+# load logout form
 @app.before_request
 def add_logout_form():
     g.logout_form = LogoutForm()
 
+
 # -- FORMS --
 
-#define forms for Flask-WTF - avoid CSRF, validate input
+# define forms for Flask-WTF - avoid CSRF, validate input
+
 
 class RegisterForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired(), Length(min=3, max=20), Regexp(r'^\w+$', message="Username must contain only letters, numbers, or underscores")])
+    username = StringField(
+        "Username",
+        validators=[
+            DataRequired(),
+            Length(min=3, max=20),
+            Regexp(
+                r"^\w+$",
+                message="Username must contain only letters, numbers, or underscores",
+            ),
+        ],
+    )
     password = PasswordField("Password", validators=[DataRequired(), Length(min=6)])
-    #confirm matching passwords
-    confirm_password = PasswordField("Confirm Password", validators=[
-        DataRequired(),
-        EqualTo("password", message="Passwords must match")
-    ])
+    # confirm matching passwords
+    confirm_password = PasswordField(
+        "Confirm Password",
+        validators=[
+            DataRequired(),
+            EqualTo("password", message="Passwords must match"),
+        ],
+    )
     submit = SubmitField("Register")
 
-    #check unique username before registering
-    #avoid sharing data between users that share username
+    # check unique username before registering
+    # avoid sharing data between users that share username
     def validate_username(self, field):
         conn = get_db()
         cursor = conn.cursor(dictionary=True)
 
-        cursor.execute(
-            "SELECT id FROM users WHERE username = %s",
-            (field.data,)
-        )
+        cursor.execute("SELECT id FROM users WHERE username = %s", (field.data,))
         existing = cursor.fetchone()
 
         cursor.close()
@@ -130,14 +151,20 @@ class LoginForm(FlaskForm):
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Login")
 
+
 class NoteForm(FlaskForm):
-    note = TextAreaField("Note", validators=[DataRequired(), Length(max=500)]) #max 500 characters for now
+    note = TextAreaField(
+        "Note", validators=[DataRequired(), Length(max=500)]
+    )  # max 500 characters for now
     submit = SubmitField("Add Note")
+
 
 class LogoutForm(FlaskForm):
     submit = SubmitField("Logout")
 
+
 # -- ROUTES --
+
 
 def get_db():
     for _ in range(5):
@@ -154,23 +181,37 @@ def get_db():
     app.logger.error("Could not connect to MySQL after retries")
     raise last_error
 
-#lower rate limit for commonly abused routes
-#@limiter.limit("5 per minute")
+
+# lower rate limit for commonly abused routes
+# @limiter.limit("5 per minute")
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    form = RegisterForm() #using register form
+
+    print("Register route hit")
+
+    db.databaseConnection.connect()
+
+    form = RegisterForm()
+
+    return render_template("index.html", form=form)
+    form = RegisterForm()  # using register form
     if form.validate_on_submit():
         username = form.username.data
-        password = generate_password_hash(form.password.data) #generate password hash before transport
+        password = generate_password_hash(
+            form.password.data
+        )  # generate password hash before transport
         conn = get_db()
         cursor = conn.cursor()
 
         try:
-            cursor.execute( #adjust table name/attributes to the final db schema
-                "INSERT INTO users (username, password) VALUES (%s, %s)",
-                (username, password)
-            )
-            conn.commit()
+            databaseConnection.connect()
+            flash("Connection Established.", "success")
+            print("Connection Established.")
+            # cursor.execute( #adjust table name/attributes to the final db schema
+            #     "INSERT INTO users (username, password) VALUES (%s, %s)",
+            #     (username, password)
+            # )
+            # conn.commit()
         except mysql.connector.Error as e:
             app.logger.error(f"DB error: {e}")
             flash("Registration failed.", "danger")
@@ -180,19 +221,20 @@ def register():
 
         return redirect("/login")
 
-    return render_template("register.html", form=form)
+    return render_template("index.html", form=form)
+
 
 @limiter.limit("5 per minute")
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    form = LoginForm() #using login form
+    form = LoginForm()  # using login form
     if form.validate_on_submit():
         conn = get_db()
         cursor = conn.cursor()
 
-        cursor.execute( #adjust to db schema
+        cursor.execute(  # adjust to db schema
             "SELECT id, username, password FROM users WHERE username = %s",
-            (form.username.data,)
+            (form.username.data,),
         )
         user = cursor.fetchone()
 
@@ -205,11 +247,10 @@ def login():
             return redirect("/notes")
 
         flash("Invalid username or password.", "danger")
-        app.logger.warning(
-            f"Failed login attempt for username: {form.username.data}"
-        )
+        app.logger.warning(f"Failed login attempt for username: {form.username.data}")
 
     return render_template("login.html", form=form)
+
 
 @app.route("/logout", methods=["POST"])
 def logout():
@@ -220,6 +261,7 @@ def logout():
         flash("Logged out successfully.", "success")
         app.logger.info(f"User {user_id} logged out")
     return redirect("/")
+
 
 @app.route("/", methods=["GET"])
 def index():

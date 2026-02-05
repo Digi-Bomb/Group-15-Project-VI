@@ -4,8 +4,9 @@ FROM python:3.11
 
 WORKDIR /app
 
-COPY app/requirements.txt requirements.txt
+COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
+RUN pip install --upgrade mysql-connector-python
 
 COPY app/ .
 

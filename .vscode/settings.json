@@ -1,0 +1,20 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "xprotocol",
+                "enableSsl": "Disabled"
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 33060,
+            "driver": "MySQL",
+            "name": "BookEZ Local Connection",
+            "username": "root",
+            "database": "BookEZDatabase",
+            "connectionTimeout": 30,
+            "password": "BookEZAppConfig1987"
+        }
+    ]
+}
