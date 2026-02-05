@@ -8,6 +8,9 @@ services:
     environment:
       - FLASK_ENV=development
       - SECRET_KEY=${SECRET_KEY}
+      - DEL_EMAIL=${DEL_EMAIL}
+      - DEL_EMAIL_PASSWORD=${DEL_EMAIL_PASSWORD}
+      - REC_EMAIL=${REC_EMAIL}
     volumes:
       - ./app:/app
     restart: unless-stopped

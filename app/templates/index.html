@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Room Booking{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
 
 </head>
 <body>
     <!-- Navbar -->
   <nav class="navbar">
         <div class="nav-left">
-            <a href="/" class="nav-logo">📝 Room Booking NavBar</a>
+            <a href="/" class="nav-logo text-">📝 Room Booking NavBar</a>
         </div>
         <div class="nav-right">
             {% if session.get('user_id') %}
@@ -40,8 +40,20 @@
         {% block content %}{% endblock %}
     </main>
 
+    <form action="/submit" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
     <footer class="footer">
         <p>&copy; {{ 2025 }} Room Booking App - By Group 15</p>
     </footer>
+    <script src="{{ url_for('static', filename='../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

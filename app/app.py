@@ -14,16 +14,11 @@ from flask_limiter.util import get_remote_address
 import logging
 from logging.handlers import RotatingFileHandler
 
+from flask_mail import Mail, Message
+
 import os
 from datetime import timedelta
 import time
-
-# -- TODO --
-#import cors?
-#import json funct - pandas
-#create on/off switch for limiter
-#transition from direct db insert to JSON handler
-#-- END TODO --
 
 # -- CONFIG --
 
@@ -39,8 +34,18 @@ app.config.update(
     # but prevents some CSRF attacks by limiting how other sites can use session cookie
 )
 
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USERNAME'] = os.environ.get("DEL_EMAIL")
+app.config['MAIL_PASSWORD'] = os.environ.get("DEL_EMAIL_PASSWORD")
+app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("DEL_EMAIL")
 
-#secret key setup for session cookies
+mail = Mail(app)
+
+#secret key setup for session cookies 
+
 secret = os.environ.get("SECRET_KEY")
 if secret:
     app.secret_key = secret
@@ -225,6 +230,20 @@ def logout():
 def index():
     return render_template("index.html")
 
+@app.route("/submit", methods=["POST"])
+def submit():
+    name = request.form.get("name")
+    subject = request.form.get("subject")
+    message = request.form.get("message")
+
+    msg = Message("Test Email", sender=os.environ.get("DEL_EMAIL"), recipients=[os.environ.get("REC_EMAIL")])
+    msg.body = f"Name: {name}\nSubject: {subject}\nMessage: {message}"
+    
+    try:
+        mail.send(msg)
+        return "Email sent successfully!"
+    except Exception as e:
+        return str(e)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

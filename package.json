@@ -1,0 +1,30 @@
+{
+  "name": "group-15-project-vi",
+  "version": "1.0.0",
+  "description": "- The app currently runs on port 5000 (subject to change)\r - To run the app using the provided Dockerfile, first open a terminal inside the directory of the project on your local machine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Digi-Bomb/Group-15-Project-VI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Digi-Bomb/Group-15-Project-VI/issues"
+  },
+  "homepage": "https://github.com/Digi-Bomb/Group-15-Project-VI#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.8"
+  },
+  "devDependencies": {
+    "gulp": "^5.0.1",
+    "gulp-sass": "^6.0.1",
+    "gulp-sourcemaps": "^3.0.0",
+    "sass": "^1.97.3"
+  }
+}
