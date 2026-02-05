@@ -15,4 +15,3 @@ var indexSectionLabels =
   0: "All",
   1: "Classes"
 };
-
