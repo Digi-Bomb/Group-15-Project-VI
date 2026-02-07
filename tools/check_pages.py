@@ -1,4 +1,5 @@
-import urllib.request, urllib.error
+import urllib.request
+import urllib.error
 urls = ['http://127.0.0.1:5000/','http://127.0.0.1:5000/register','http://127.0.0.1:5000/login','http://127.0.0.1:5000/notes','http://127.0.0.1:5000/booking','http://127.0.0.1:5000/rsvp']
 for u in urls:
     try:

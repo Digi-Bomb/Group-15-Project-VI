@@ -2,3 +2,30 @@
 2026-02-05 22:02:27,879 INFO: Flask app startup [in /app/app.py:86]
 2026-02-05 22:03:01,589 INFO: Flask app startup [in /app/app.py:86]
 2026-02-05 22:03:01,589 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:26:06,361 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:26:26,801 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:26:26,801 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:45:58,510 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:45:59,920 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:46:01,188 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:46:02,382 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:46:04,148 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:46:06,726 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:51:17,904 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:51:33,219 ERROR: Exception on /submit [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/notifications/routes.py", line 9, in submit
+    from ..app import mail
+ImportError: attempted relative import beyond top-level package
