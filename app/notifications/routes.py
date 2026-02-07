@@ -34,7 +34,7 @@ def submit():
         mail.send(msg)  # send using the instance imported from app.py
         flash("Email sent successfully!", "success")
         return redirect("/")
-    except Exception as e:
+    except (ConnectionError, TimeoutError, OSError) as e:
         current_app.logger.error(f"Mail send failed: {e}", exc_info=True)
         flash("Failed to send email.", "error")
         return str(e), 500

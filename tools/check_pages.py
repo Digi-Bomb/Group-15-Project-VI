@@ -8,5 +8,5 @@ for u in urls:
             print(f"URL: {u} -> {r.status}\n{body.splitlines()[:12]}\n---\n")
     except urllib.error.HTTPError as e:
         print(f"URL: {u} -> HTTP {e.code}\n{e.reason}\n---\n")
-    except Exception as ex:
+    except (urllib.error.URLError, TimeoutError) as ex:
         print(f"URL: {u} -> ERROR: {ex}\n---\n")
