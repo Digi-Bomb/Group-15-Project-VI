@@ -13,4 +13,3 @@ class Booking:
         self.num_confirmed = num_confirmed
         self.confirmed_attendees = confirmed_attendees
         self.status = status
-
