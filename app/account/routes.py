@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, request, redirect, session, g, fla
 from werkzeug.security import generate_password_hash, check_password_hash
 import mysql.connector
 
-from app.forms import RegisterForm, LoginForm, LogoutForm
-from app.database_connection import get_db
+from forms import RegisterForm, LoginForm, LogoutForm
+from database_connection import get_db
 
 account_bp = Blueprint('account', __name__)
 

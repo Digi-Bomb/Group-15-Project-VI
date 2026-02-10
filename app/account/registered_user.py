@@ -1,5 +1,5 @@
 from typing import List
-from app.booking import Booking
+from booking import Booking
 
 
 class RegisteredUser:

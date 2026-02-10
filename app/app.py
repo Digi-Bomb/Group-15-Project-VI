@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, g, flash
 
-from app.forms import RegisterForm, LoginForm, NoteForm, LogoutForm
+from forms import RegisterForm, LoginForm, NoteForm, LogoutForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -19,7 +19,7 @@ from datetime import timedelta
 import time
 
 # -- CONFIG --
-
+mail = Mail()
 app = Flask(__name__)
 app.config["WTF_CSRF_ENABLED"] = True #CSRF defense
 
@@ -32,18 +32,21 @@ app.config.update(
     # but prevents some CSRF attacks by limiting how other sites can use session cookie
 )
 
+#mail setup - using Gmail SMTP for demo, change for prod 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = os.environ.get("DEL_EMAIL")
-app.config['MAIL_PASSWORD'] = os.environ.get("DEL_EMAIL_PASSWORD")
-app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("DEL_EMAIL")
 
-mail = Mail(app)
+app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("DEL_EMAIL")
+app.config["MAIL_USERNAME"] = os.environ.get("DEL_EMAIL")
+app.config["MAIL_PASSWORD"] = os.environ.get("DEL_EMAIL_PASSWORD")
+app.config["REC_EMAIL"] = os.environ.get("REC_EMAIL")
+
+
+
 
 #secret key setup for session cookies
-
 secret = os.environ.get("SECRET_KEY")
 if secret:
     app.secret_key = secret
@@ -97,15 +100,22 @@ def add_logout_form():
 
 # Forms are defined in app/forms.py and imported above
 
+#once config is loaded, initialize mail extension
+mail.init_app(app)
+
 # -- ROUTES --
-from app.account.routes import account_bp
-from app.booking.routes import booking_bp
-from app.notifications.routes import notifications_bp
+from account.routes import account_bp
+from booking.routes import booking_bp
+from notifications.routes import notifications_bp
 
 # register blueprints
 app.register_blueprint(account_bp)
 app.register_blueprint(booking_bp)
 app.register_blueprint(notifications_bp)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

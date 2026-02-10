@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Room Booking{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
 
 </head>
 <body>
@@ -43,5 +43,6 @@
     <footer class="footer">
         <p>&copy; {{ 2025 }} Room Booking App - By Group 15</p>
     </footer>
+    <script src="{{ url_for('static', filename='../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>
