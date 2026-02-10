@@ -13,7 +13,8 @@ disable=
     R0903,   # too-few-public-methods
     W1203,
     W0613,
-    W0201
+    W0201,
+    E0401
 
 [FORMAT]
 max-line-length=120
