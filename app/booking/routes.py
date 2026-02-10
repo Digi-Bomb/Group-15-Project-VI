@@ -3,7 +3,7 @@ from database_connection import get_db
 
 booking_bp = Blueprint('booking', __name__)
 
-# 
+#
 @booking_bp.route('/booking', methods=['GET'])
 def booking():
     booking_id = request.args.get('id')
