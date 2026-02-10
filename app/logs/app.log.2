@@ -1,163 +1,136 @@
-2026-02-05 20:20:39,439 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:20:43,380 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:20:43,412 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:20:43,412 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:20:50,670 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:20:50,680 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:20:50,680 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:04,245 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:04,265 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:04,265 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:22,196 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:22,598 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:22,598 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:23,776 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:23,846 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:23,846 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:24,889 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:25,018 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:25,018 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:26,171 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:26,248 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:26,248 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:27,834 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:27,896 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:27,896 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:30,332 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:30,412 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:30,412 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:34,361 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:34,517 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:34,517 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:41,647 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:41,742 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:41,742 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:55,413 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:55,478 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:21:55,478 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:22:21,777 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:22:22,125 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:22:22,125 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:23:14,123 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:26:55,564 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 20:27:44,990 ERROR: Mail send failed: cannot unpack non-iterable NoneType object [in /app/notifications/routes.py:21]
-2026-02-05 21:27:03,201 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:27:42,229 ERROR: Mail send failed: cannot unpack non-iterable NoneType object [in /app/notifications/routes.py:21]
-2026-02-05 21:38:14,275 ERROR: Mail send failed: cannot unpack non-iterable NoneType object [in /app/notifications/routes.py:21]
-2026-02-05 21:38:53,188 INFO: Flask app startup [in /app/app.py:82]
-2026-02-05 21:39:09,682 ERROR: Exception in /submit: Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 26, in submit
-    mail.send(msg)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
-    message.send(connection)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
-    connection.send(self)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
-    list(sanitize_addresses(message.send_to)),
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
-    return map(lambda e: sanitize_address(e, encoding), addresses)
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
-    nm, addr = addr
-    ^^^^^^^^
-TypeError: cannot unpack non-iterable NoneType object
- [in /app/notifications/routes.py:29]
-2026-02-05 21:39:22,523 ERROR: Exception in /submit: Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 26, in submit
-    mail.send(msg)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
-    message.send(connection)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
-    connection.send(self)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
-    list(sanitize_addresses(message.send_to)),
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
-    return map(lambda e: sanitize_address(e, encoding), addresses)
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
-    nm, addr = addr
-    ^^^^^^^^
-TypeError: cannot unpack non-iterable NoneType object
- [in /app/notifications/routes.py:29]
-2026-02-05 21:51:04,020 ERROR: Exception in /submit: Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 26, in submit
-    try:
-        ^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
-    message.send(connection)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
-    connection.send(self)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
-    list(sanitize_addresses(message.send_to)),
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
-    return map(lambda e: sanitize_address(e, encoding), addresses)
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
-    nm, addr = addr
-    ^^^^^^^^
-TypeError: cannot unpack non-iterable NoneType object
- [in /app/notifications/routes.py:29]
-2026-02-05 21:51:07,897 ERROR: Exception in /submit: Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 26, in submit
-    try:
-        ^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
-    message.send(connection)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
-    connection.send(self)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
-    list(sanitize_addresses(message.send_to)),
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
-    return map(lambda e: sanitize_address(e, encoding), addresses)
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
-    nm, addr = addr
-    ^^^^^^^^
-TypeError: cannot unpack non-iterable NoneType object
- [in /app/notifications/routes.py:29]
-2026-02-05 21:51:26,860 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:26,969 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:26,969 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:27,773 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:27,883 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:27,883 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:28,736 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:28,840 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:28,840 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:29,744 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:29,841 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:29,841 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:31,093 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:31,193 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:31,193 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:33,291 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:33,392 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:33,392 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:37,045 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:37,148 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:37,148 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:44,029 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:44,136 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:44,136 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:57,384 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:57,487 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:51:57,487 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:52:24,063 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:52:24,165 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:52:24,165 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:53:15,925 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:53:16,036 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:53:16,036 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:54:16,500 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:54:16,600 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:54:16,600 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:55:17,129 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:55:17,227 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:55:17,227 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:56:17,692 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:58:21,094 INFO: Flask app startup [in /app/app.py:83]
-2026-02-05 21:58:29,322 INFO: Flask app startup [in /app/app.py:83]
+2026-02-05 21:58:29,332 ERROR: Recipient or sender email not configured [in /app/notifications/routes.py:23]
+2026-02-05 22:02:27,879 INFO: Flask app startup [in /app/app.py:86]
+2026-02-05 22:03:01,589 INFO: Flask app startup [in /app/app.py:86]
+2026-02-05 22:03:01,589 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:26:06,361 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:26:26,801 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:26:26,801 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:45:58,510 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:45:59,920 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:46:01,188 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:46:02,382 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:46:04,148 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:46:06,726 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:51:17,904 INFO: Flask app startup [in /app/app.py:86]
+2026-02-07 02:51:33,219 ERROR: Exception on /submit [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/notifications/routes.py", line 9, in submit
+    from ..app import mail
+ImportError: attempted relative import beyond top-level package
+2026-02-10 18:02:03,710 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:04,181 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:04,181 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:05,543 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:05,946 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:05,946 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:07,246 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:07,671 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:07,671 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:08,992 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:09,200 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:09,200 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:10,803 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:11,111 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:11,111 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:13,438 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:13,652 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:13,652 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:17,558 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:17,768 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:02:17,768 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:04:56,342 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:04:56,810 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:04:56,810 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:04:57,949 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:04:58,175 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:04:58,175 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:04:59,453 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:04:59,741 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:04:59,741 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:00,872 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:01,180 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:01,180 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:02,781 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:03,043 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:03,043 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:05,332 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:05,528 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:05,528 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:09,512 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:09,735 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:09,735 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:17,062 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:17,240 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:17,240 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:30,943 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:31,374 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:05:31,374 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:07:26,997 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:08:25,217 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:08:25,217 INFO: Flask app startup [in /app/app.py:86]
+2026-02-10 18:08:46,313 ERROR: Mail send failed: [Errno 111] Connection refused [in /app/notifications/routes.py:38]
+Traceback (most recent call last):
+  File "/app/notifications/routes.py", line 34, in submit
+    mail.send(msg)  # send using the instance imported from app.py
+    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 491, in send
+    with self.connect() as connection:
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 144, in __enter__
+    self.host = self.configure_host()
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 158, in configure_host
+    host = smtplib.SMTP(self.mail.server, self.mail.port)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/socket.py", line 863, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.11/socket.py", line 848, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+2026-02-10 18:08:46,313 ERROR: Mail send failed: [Errno 111] Connection refused [in /app/notifications/routes.py:38]
+Traceback (most recent call last):
+  File "/app/notifications/routes.py", line 34, in submit
+    mail.send(msg)  # send using the instance imported from app.py
+    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 491, in send
+    with self.connect() as connection:
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 144, in __enter__
+    self.host = self.configure_host()
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 158, in configure_host
+    host = smtplib.SMTP(self.mail.server, self.mail.port)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/socket.py", line 863, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.11/socket.py", line 848, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
