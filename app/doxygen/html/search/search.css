@@ -276,7 +276,7 @@ iframe#MSearchResults {
 
 
 #SRIndex {
-    clear:both; 
+    clear:both;
 }
 
 .SREntry {
@@ -294,7 +294,7 @@ div.SRPage {
 }
 
 .SRChildren {
-    padding-left: 3ex; padding-bottom: .5em 
+    padding-left: 3ex; padding-bottom: .5em
 }
 
 .SRPage .SRChildren {
@@ -374,4 +374,3 @@ div.searchresults {
 .searchpages {
     margin-top: 10px;
 }
-
