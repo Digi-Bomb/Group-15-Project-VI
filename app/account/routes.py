@@ -7,6 +7,9 @@ from database_connection import get_db
 
 account_bp = Blueprint('account', __name__)
 
+#TODO:
+#create account info display page
+
 
 @account_bp.route('/register', methods=['GET', 'POST'])
 def register():
