@@ -44,7 +44,7 @@ def manage_booking(booking_id):
         # Process form data to update the booking
         flash('Booking updated successfully!', 'success')
         return redirect('/booking?id=' + str(booking_id))
-    
+
     # For GET request, fetch booking details and render the management page
     booking = None
     try:
@@ -61,7 +61,7 @@ def manage_booking(booking_id):
             conn.close()
         except Exception:
             pass
-    
+
     return render_template('manage_booking.html', booking=booking)
 
 @booking_bp.route('/rsvp/<link_id>', methods=['GET', 'POST'])
