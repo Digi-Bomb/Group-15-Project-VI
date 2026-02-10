@@ -32,7 +32,7 @@ app.config.update(
     # but prevents some CSRF attacks by limiting how other sites can use session cookie
 )
 
-#mail setup - using Gmail SMTP for demo, change for prod 
+#mail setup - using Gmail SMTP for demo, change for prod
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
