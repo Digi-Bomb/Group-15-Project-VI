@@ -1,12 +1,7 @@
 
 from flask import Blueprint, render_template, request, redirect, flash, current_app
 from app.database_connection import get_db
-
-booking_bp = Blueprint('booking', __name__)
-
-from flask import Blueprint, render_template, request, redirect, flash, current_app, session
-from database_connection import get_db
-
+# from database_connection import get_db idk which one
 booking_bp = Blueprint('booking', __name__)
 
 #TODO
