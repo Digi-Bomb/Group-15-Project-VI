@@ -10,7 +10,7 @@ booking_bp = Blueprint('booking', __name__)
 
 #refactor to create new booking page
 # will room or any other info be passed in the URL or will it all be selected during create?
-@booking_bp.route('/booking', methods=['POST'])
+@booking_bp.route('/booking', methods=['GET', 'POST'])
 def create_booking():
     db = DatabaseConnection()
     conn = db.connect()
