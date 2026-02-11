@@ -26,7 +26,8 @@ def register():
     if form.validate_on_submit():
         username = form.username.data
         password = generate_password_hash(form.password.data)
-        conn = DatabaseConnection.connect()
+        db = DatabaseConnection()
+        conn = db.connect()
         cursor = conn.cursor()
         try:
             cursor.execute(
@@ -48,7 +49,9 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        conn = DatabaseConnection.connect()
+        db = DatabaseConnection()
+        conn = db.connect()
+        
         cursor = conn.cursor()
         cursor.execute(
             "SELECT id, username, password FROM users WHERE username = %s",

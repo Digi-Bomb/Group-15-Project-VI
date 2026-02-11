@@ -1,94 +1,4 @@
-2026-01-26 20:58:55,784 ERROR: Exception on /submit [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/app.py", line 239, in submit
-    mail.send(msg)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 491, in send
-    with self.connect() as connection:
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 144, in __enter__
-    self.host = self.configure_host()
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 156, in configure_host
-    host = smtplib.SMTP_SSL(self.mail.server, self.mail.port)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 1050, in __init__
-    SMTP.__init__(self, host, port, local_hostname, timeout,
-  File "/usr/local/lib/python3.11/smtplib.py", line 255, in __init__
-    (code, msg) = self.connect(host, port)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 341, in connect
-    self.sock = self._get_socket(host, port, self.timeout)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 1056, in _get_socket
-    new_socket = super()._get_socket(host, port, timeout)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 312, in _get_socket
-    return socket.create_connection((host, port), timeout,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/socket.py", line 839, in create_connection
-    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/socket.py", line 974, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-socket.gaierror: [Errno -2] Name or service not known
-2026-01-26 21:03:49,016 ERROR: Exception on /submit [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/app.py", line 239, in submit
-    mail.send(msg)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 491, in send
-    with self.connect() as connection:
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 144, in __enter__
-    self.host = self.configure_host()
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 156, in configure_host
-    host = smtplib.SMTP_SSL(self.mail.server, self.mail.port)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 1050, in __init__
-    SMTP.__init__(self, host, port, local_hostname, timeout,
-  File "/usr/local/lib/python3.11/smtplib.py", line 255, in __init__
-    (code, msg) = self.connect(host, port)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 341, in connect
-    self.sock = self._get_socket(host, port, self.timeout)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 1056, in _get_socket
-    new_socket = super()._get_socket(host, port, timeout)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 312, in _get_socket
-    return socket.create_connection((host, port), timeout,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/socket.py", line 839, in create_connection
-    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/socket.py", line 974, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-socket.gaierror: [Errno -2] Name or service not known
-2026-02-03 16:17:32,566 ERROR: Exception on /login [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+2026-02-04 19:18:58,582 ERROR: Exception on /login [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
@@ -126,3 +36,125 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 98, in _get_source_fast
     raise TemplateNotFound(template)
 jinja2.exceptions.TemplateNotFound: login.html
+2026-02-05 21:27:42,229 ERROR: Mail send failed: cannot unpack non-iterable NoneType object [in /app/notifications/routes.py:21]
+2026-02-05 21:38:14,275 ERROR: Mail send failed: cannot unpack non-iterable NoneType object [in /app/notifications/routes.py:21]
+2026-02-05 21:39:09,682 ERROR: Exception in /submit: Traceback (most recent call last):
+  File "/app/notifications/routes.py", line 26, in submit
+    mail.send(msg)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
+    list(sanitize_addresses(message.send_to)),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
+    return map(lambda e: sanitize_address(e, encoding), addresses)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
+    nm, addr = addr
+    ^^^^^^^^
+TypeError: cannot unpack non-iterable NoneType object
+ [in /app/notifications/routes.py:29]
+2026-02-05 21:39:22,523 ERROR: Exception in /submit: Traceback (most recent call last):
+  File "/app/notifications/routes.py", line 26, in submit
+    mail.send(msg)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
+    list(sanitize_addresses(message.send_to)),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
+    return map(lambda e: sanitize_address(e, encoding), addresses)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
+    nm, addr = addr
+    ^^^^^^^^
+TypeError: cannot unpack non-iterable NoneType object
+ [in /app/notifications/routes.py:29]
+2026-02-05 21:51:04,020 ERROR: Exception in /submit: Traceback (most recent call last):
+  File "/app/notifications/routes.py", line 26, in submit
+    try:
+        ^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
+    list(sanitize_addresses(message.send_to)),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
+    return map(lambda e: sanitize_address(e, encoding), addresses)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
+    nm, addr = addr
+    ^^^^^^^^
+TypeError: cannot unpack non-iterable NoneType object
+ [in /app/notifications/routes.py:29]
+2026-02-05 21:51:07,897 ERROR: Exception in /submit: Traceback (most recent call last):
+  File "/app/notifications/routes.py", line 26, in submit
+    try:
+        ^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
+    list(sanitize_addresses(message.send_to)),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
+    return map(lambda e: sanitize_address(e, encoding), addresses)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
+    nm, addr = addr
+    ^^^^^^^^
+TypeError: cannot unpack non-iterable NoneType object
+ [in /app/notifications/routes.py:29]
+2026-02-05 21:58:29,332 ERROR: Recipient or sender email not configured [in /app/notifications/routes.py:23]
+2026-02-05 21:58:29,332 ERROR: Recipient or sender email not configured [in /app/notifications/routes.py:23]
+2026-02-07 02:51:33,219 ERROR: Exception on /submit [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/notifications/routes.py", line 9, in submit
+    from ..app import mail
+ImportError: attempted relative import beyond top-level package
+2026-02-10 18:08:46,313 ERROR: Mail send failed: [Errno 111] Connection refused [in /app/notifications/routes.py:38]
+Traceback (most recent call last):
+  File "/app/notifications/routes.py", line 34, in submit
+    mail.send(msg)  # send using the instance imported from app.py
+    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 491, in send
+    with self.connect() as connection:
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 144, in __enter__
+    self.host = self.configure_host()
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 158, in configure_host
+    host = smtplib.SMTP(self.mail.server, self.mail.port)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/socket.py", line 863, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.11/socket.py", line 848, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
