@@ -20,7 +20,7 @@ def create_booking():
     # Process form data to create a new booking
     flash('Booking created successfully!', 'success')
     return redirect('/')
- 
+
 #pull a booking by ID and allow viewing / editing of it (1 page or 2?)
 @booking_bp.route('/booking/<int:booking_id>', methods=['GET', 'POST'])
 def manage_booking(booking_id):
