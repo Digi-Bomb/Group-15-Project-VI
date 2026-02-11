@@ -15,3 +15,56 @@ class DatabaseReadingServices:
             return self.cursor.fetchall()
         else:
             return "No user found with that username."
+
+    def get_meetings_owned_by_registered_user(self, RUID: int):
+        result = self.cursor.execute("SELECT BID FROM Booking WHERE RUID = %s", (RUID,))
+        if result:
+            return self.cursor.fetchall()
+        else:
+            return "No meetings found for that registered user ID."
+
+    def get_registered_users_associated_with_booking_ID(self, BUID: int):
+        result = self.cursor.execute(
+            "SELECT RegisteredAttendee FROM RegisteredBookingAttendees WHERE booking_ID = %s",
+            (BUID,),
+        )
+        if result:
+            return self.cursor.fetchall()
+        else:
+            return "No registered users found for that booking ID."
+
+    def get_unregistered_users_associated_with_booking_ID(self, BUID: int):
+        result = self.cursor.execute(
+            "SELECT unregisteredAttendee FROM UnregisteredBookingAttendees WHERE booking_ID = %s",
+            (BUID,),
+        )
+        if result:
+            return self.cursor.fetchall()
+        else:
+            return "No unregistered users found for that booking ID."
+
+    def check_if_user_is_registered_already(self, username: str, email: str):
+        result = self.cursor.execute(
+            "SELECT RUID FROM RegisteredUser WHERE username = %s OR email = %s",
+            (username, email),
+        )
+        if result:
+            return True
+        else:
+            return False
+
+    def get_capacity_of_room(self, room_number: int):
+        result = self.cursor.execute(
+            "SELECT maximumCapacity FROM Room WHERE roomNumber = %s", (room_number,)
+        )
+        if result:
+            return self.cursor.fetchone()[0]
+        else:
+            return "No room found with that ID."
+
+    def get_branch_location_of_room_associated_with_room_number(self, room_number: int):
+        result = self.cursor.execute(
+            "SELECT companyBuilding FROM Room WHERE roomNumber = %s", (room_number,)
+        )
+        if result:
+            return self.cursor.fetchone()[0]
