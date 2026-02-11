@@ -51,7 +51,7 @@ def login():
     if form.validate_on_submit():
         db = DatabaseConnection()
         conn = db.connect()
-        
+
         cursor = conn.cursor()
         cursor.execute(
             "SELECT id, username, password FROM users WHERE username = %s",
