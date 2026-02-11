@@ -5,6 +5,8 @@ from wtforms.validators import DataRequired, Length, ValidationError, EqualTo, R
 class RegisterForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(), Length(min=3, max=20), Regexp(r'^\w+$', message="Username must contain only letters, numbers, or underscores")])
     password = PasswordField("Password", validators=[DataRequired(), Length(min=6)])
+    firstName = StringField("First Name", validators=[DataRequired(), Length(max=50)])
+    lastName = StringField("Last Name", validators=[DataRequired(), Length(max=50)])
     #confirm matching passwords
     confirm_password = PasswordField("Confirm Password", validators=[
         DataRequired(),

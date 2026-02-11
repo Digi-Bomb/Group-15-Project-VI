@@ -25,14 +25,17 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         username = form.username.data
+        # confirm this works
         password = generate_password_hash(form.password.data)
+        firstName = form.firstName.data
+        lastName = form.lastName.data
         db = DatabaseConnection()
         conn = db.connect()
         cursor = conn.cursor()
         try:
             cursor.execute(
-                "INSERT INTO users (username, password) VALUES (%s, %s)",
-                (username, password),
+                "INSERT INTO RegisteredUser (username, pass, firstName, lastName) VALUES (%s, %s, %s, %s)",
+                (username, password, firstName, lastName),
             )
             conn.commit()
         except mysql.connector.Error as e:
@@ -44,17 +47,15 @@ def register():
         return redirect("/login")
     return render_template("register.html", form=form)
 
-
 @account_bp.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         db = DatabaseConnection()
         conn = db.connect()
-
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT id, username, password FROM users WHERE username = %s",
+            "SELECT id, username, pass FROM RegisteredUser WHERE username = %s",
             (form.username.data,),
         )
         user = cursor.fetchone()

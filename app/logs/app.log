@@ -60,3 +60,5 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
     raise get_mysql_exception(
 mysql.connector.errors.ProgrammingError: 1146 (42S02): Table 'BookEZDatabase.users' doesn't exist
+2026-02-11 19:55:30,606 INFO: Flask app startup [in /app/app.py:92]
+2026-02-11 19:55:49,512 INFO: Flask app startup [in /app/app.py:92]
