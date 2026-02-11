@@ -2,8 +2,33 @@
 
 $primary: #d62828;
 $secondary: #f77f00;
-$light: #eae2b7;
-$dark: #003049;
+$tertiary: #646369;
+$light: #e8e7e5;
+$body-color: #003049;
+
+
+$link-color: $body-color;
+$navbar-light-color: $body-color;
+$navbar-light-hover-color: $primary;
+$link-hover-color: $primary;
+
+/** font **/
+@font-face {
+    font-family: 'glacial-indifference';
+    src: url('../fonts/glacial-indifference.regular.otf') format('opentype');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'glacial-indifference';
+    src: url('../fonts/glacial-indifference.bold.otf') format('opentype');
+    font-weight: bold;
+    font-display: swap;
+}
+
+$font-family-base: 'glacial-indifference';
 
 
 @import "bootstrap/scss/bootstrap";
+

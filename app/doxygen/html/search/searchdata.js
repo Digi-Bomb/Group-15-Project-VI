@@ -1,7 +1,7 @@
 var indexSectionsWithContent =
 {
-  0: "lnr",
-  1: "lnr"
+  0: "dlnrt",
+  1: "dlnrt"
 };
 
 var indexSectionNames =
@@ -15,3 +15,4 @@ var indexSectionLabels =
   0: "All",
   1: "Classes"
 };
+

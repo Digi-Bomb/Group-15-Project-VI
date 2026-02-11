@@ -4,21 +4,16 @@
 
 {% block content %}
 <h1>{{ booking.booking_name if booking is defined else 'Booking' }}</h1>
-
-{% if booking is defined %}
-    <ul>
-        <li>Owner ID: {{ booking.booking_owner_id }}</li>
-        <li>Room ID: {{ booking.room_id }}</li>
-        <li>Date: {{ booking.booking_date }}</li>
-        <li>Start: {{ booking.start_time }}</li>
-        <li>Duration (hrs): {{ booking.duration_hours }}</li>
-        <li>Capacity: {{ booking.meeting_capacity }}</li>
-        <li>Confirmed: {{ booking.num_confirmed }}</li>
-    </ul>
-
-    <p>Shareable link: <a href="{{ url_for('index') }}">(dynamic link placeholder)</a></p>
-{% else %}
-    <p>No booking data available.</p>
-{% endif %}
+<div class="container-fluid px-5 d-flex flex-wrap">
+        <p class="text-dark fw-bold fs-6 mb-2 w-100 ms-4">Book a room</p>
+        <a class="text-dark fs-6 text-decoration-underline ms-3">
+            <i class="bi bi-geo-alt-fill me-1"></i>
+            Conestoga College, Waterloo
+        </a>
+        <a class="text-dark fs-6 text-decoration-underline ms-auto">
+            <i class="bi bi-calendar-week me-1"></i>
+            January 1st, 2026 <!-- note: needs functionality with backend to fetch/send a date... dropdown? calendar widget? idk -->
+        </a>
+    </div>
 
 {% endblock %}
