@@ -3,6 +3,10 @@ from flask_mail import Message
 
 import datetime
 
+from notifications.email_notification_service import EmailNotificationService
+from database_connection import DatabaseConnection
+from database_reading import DatabaseReadingServices
+
 notifications_bp = Blueprint('notifications', __name__)
 
 @notifications_bp.route('/submit', methods=['POST'])
@@ -41,6 +45,11 @@ def submit():
         flash("Failed to send email.", "error")
         return str(e), 500
 
-def send_booking_notification_emails():
-    # connect to database and get all bookings
-    pass
+def send_booking_notification_emails(self):
+    all_bookings = DatabaseReadingServices(DatabaseConnection()).get_all_bookings()
+    
+    for booking in all_bookings:
+        if not booking.reminder_sent:
+            if booking.start_time - datetime.now() <= datetime.timedelta(minutes=30):
+                EmailNotificationService(DatabaseConnection()).send_new_rsvp_notification_email(booking.booking_owner_id, "Reminder: Upcoming Booking", f"Your booking '{booking.booking_name}' is scheduled for {booking.start_time}.")
+                

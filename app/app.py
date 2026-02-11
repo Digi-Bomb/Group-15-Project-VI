@@ -6,6 +6,8 @@ from forms import RegisterForm, LoginForm, NoteForm, LogoutForm
 from werkzeug.security import generate_password_hash, check_password_hash
 
 import mysql.connector
+import database_connection
+import database_reading
 
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -25,22 +27,22 @@ import time
 # -- CONFIG --
 mail = Mail()
 app = Flask(__name__)
-app.config["WTF_CSRF_ENABLED"] = True #CSRF defense
+app.config["WTF_CSRF_ENABLED"] = True  # CSRF defense
 
-#session cookie setup - change for prod
+# session cookie setup - change for prod
 app.config.update(
-    SESSION_COOKIE_HTTPONLY=True, #prevents JavaScript access to cookie data
-    SESSION_COOKIE_SECURE=False,  #true if https, recommended for prod
-    SESSION_COOKIE_SAMESITE="Lax"
+    SESSION_COOKIE_HTTPONLY=True,  # prevents JavaScript access to cookie data
+    SESSION_COOKIE_SECURE=False,  # true if https, recommended for prod
+    SESSION_COOKIE_SAMESITE="Lax",
     # lax allows external links to use GET index of this site if clicked
     # but prevents some CSRF attacks by limiting how other sites can use session cookie
 )
 
-#mail setup - using Gmail SMTP for demo, change for prod
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
+# mail setup - using Gmail SMTP for demo, change for prod
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USE_SSL"] = False
 
 app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("DEL_EMAIL")
 app.config["MAIL_USERNAME"] = os.environ.get("DEL_EMAIL")
@@ -48,65 +50,80 @@ app.config["MAIL_PASSWORD"] = os.environ.get("DEL_EMAIL_PASSWORD")
 app.config["REC_EMAIL"] = os.environ.get("REC_EMAIL")
 
 
-
-
-#secret key setup for session cookies
+# secret key setup for session cookies
 secret = os.environ.get("SECRET_KEY")
 if secret:
     app.secret_key = secret
 else:
     app.secret_key = os.urandom(24)
-    #only use if env var fails, non persistent sessions if app restarts
+    # only use if env var fails, non persistent sessions if app restarts
 
-#rate limiter - global default
+# rate limiter - global default
 limiter = Limiter(
-    key_func=get_remote_address,     #client IP
+    key_func=get_remote_address,  # client IP
     app=app,
-    default_limits=["100 per hour"],  #global limit
+    default_limits=["100 per hour"],  # global limit
 )
 
-#logging setup
-if not os.path.exists('logs'):
-    os.mkdir('logs')
+# logging setup
+if not os.path.exists("logs"):
+    os.mkdir("logs")
 
-#general log
-file_handler = RotatingFileHandler('logs/app.log', maxBytes=10240, backupCount=3) #keep 3 latest logs
-file_handler.setFormatter(logging.Formatter(
-    '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
-))
+# general log
+file_handler = RotatingFileHandler(
+    "logs/app.log", maxBytes=10240, backupCount=3
+)  # keep 3 latest logs
+file_handler.setFormatter(
+    logging.Formatter(
+        "%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]"
+    )
+)
 file_handler.setLevel(logging.INFO)
 
-#error log
-error_handler = RotatingFileHandler('logs/error.log', maxBytes=10240, backupCount=3)
-error_handler.setFormatter(logging.Formatter(
-    '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
-))
+# error log
+error_handler = RotatingFileHandler("logs/error.log", maxBytes=10240, backupCount=3)
+error_handler.setFormatter(
+    logging.Formatter(
+        "%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]"
+    )
+)
 
 error_handler.setLevel(logging.WARNING)
 app.logger.addHandler(file_handler)
 app.logger.addHandler(error_handler)
 app.logger.setLevel(logging.INFO)
 
-app.logger.info('Flask app startup')
+app.logger.info("Flask app startup")
 
-#session timeout set up - end session after 15 minutes without activity
+# session timeout set up - end session after 15 minutes without activity
 app.permanent_session_lifetime = timedelta(minutes=15)
 
-#refresh session timer with activity
+
+# refresh session timer with activity
 @app.before_request
 def make_session_permanent():
     session.permanent = True
 
-#load logout form
+
+# load logout form
 @app.before_request
 def add_logout_form():
     g.logout_form = LogoutForm()
 
+
 # Forms are defined in app/forms.py and imported above
 
-#once config is loaded, initialize mail extension
+# once config is loaded, initialize mail extension
 mail.init_app(app)
 
+database_read_servicer = database_reading.DatabaseReadingServices(
+    database_connection.DatabaseConnection()
+)
+check_for_user = database_reading.DatabaseReadingServices(
+    database_connection.DatabaseConnection()
+).get_specific_registered_user("testuser")
+
+print(check_for_user)
 # -- ROUTES --
 from account.routes import account_bp
 from booking.routes import booking_bp
@@ -117,9 +134,11 @@ app.register_blueprint(account_bp)
 app.register_blueprint(booking_bp)
 app.register_blueprint(notifications_bp)
 
-@app.route('/')
+
+@app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
+
 
 if __name__ == "__main__":
     scheduler = APScheduler()
