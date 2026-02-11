@@ -115,11 +115,13 @@ mail.init_app(app)
 database_read_servicer = database_reading.DatabaseReadingServices(
     database_connection.DatabaseConnection()
 )
-check_for_user = database_reading.DatabaseReadingServices(
-    database_connection.DatabaseConnection()
-).get_specific_registered_user("testuser")
 
-print(check_for_user)
+test = database_reading.DatabaseReadingServices(
+    database_connection.DatabaseConnection()
+).get_username_via_RUID("1000")
+
+print("Checking For room branch... ", test)
+
 # -- ROUTES --
 from account.routes import account_bp
 from booking.routes import booking_bp
