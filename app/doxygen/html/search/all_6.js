@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['feature_20requests_0',['Bugs and feature requests',['../dir_52c1ecde2898cd53e8ad4ec2e67d6c1a.html#autotoc_md5',1,'']]],
-  ['for_20previous_20releases_1',['Documentation for previous releases',['../dir_52c1ecde2898cd53e8ad4ec2e67d6c1a.html#autotoc_md8',1,'']]]
+  ['emailnotificationservice_0',['EmailNotificationService',['../classapp_1_1notifications_1_1email__notification__service_1_1EmailNotificationService.html',1,'app::notifications::email_notification_service']]]
 ];

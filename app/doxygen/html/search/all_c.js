@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quick_20start_0',['Quick start',['../dir_52c1ecde2898cd53e8ad4ec2e67d6c1a.html#autotoc_md2',1,'']]]
+  ['of_20contents_0',['Table of contents',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md1',1,'']]]
 ];

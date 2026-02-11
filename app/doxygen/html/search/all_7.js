@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['inappnotificationservice_0',['InAppNotificationService',['../classapp_1_1notifications_1_1in__app__notification__service_1_1_in_app_notification_service.html',1,'app::notifications::in_app_notification_service']]],
-  ['included_1',['What’s included',['../dir_52c1ecde2898cd53e8ad4ec2e67d6c1a.html#autotoc_md4',1,'']]]
+  ['feature_20requests_0',['Bugs and feature requests',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md5',1,'']]],
+  ['for_20previous_20releases_1',['Documentation for previous releases',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md8',1,'']]]
 ];

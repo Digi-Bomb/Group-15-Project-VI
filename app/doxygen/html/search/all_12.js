@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['what’s_20included_0',['What’s included',['../dir_52c1ecde2898cd53e8ad4ec2e67d6c1a.html#autotoc_md4',1,'']]]
+  ['unregistereduser_0',['UnregisteredUser',['../classapp_1_1account_1_1unregistered__user_1_1UnregisteredUser.html',1,'app::account::unregistered_user']]]
 ];

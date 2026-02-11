@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['previous_20releases_0',['Documentation for previous releases',['../dir_52c1ecde2898cd53e8ad4ec2e67d6c1a.html#autotoc_md8',1,'']]]
+  ['noteform_0',['NoteForm',['../classapp_1_1forms_1_1NoteForm.html',1,'app::forms']]]
 ];
