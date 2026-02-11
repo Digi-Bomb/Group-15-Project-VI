@@ -1,6 +1,8 @@
 from flask import Blueprint, request, redirect, flash, current_app
 from flask_mail import Message
 
+import datetime
+
 notifications_bp = Blueprint('notifications', __name__)
 
 @notifications_bp.route('/submit', methods=['POST'])
@@ -38,3 +40,7 @@ def submit():
         current_app.logger.error(f"Mail send failed: {e}", exc_info=True)
         flash("Failed to send email.", "error")
         return str(e), 500
+
+def send_booking_notification_emails():
+    # connect to database and get all bookings
+    pass

@@ -8,10 +8,14 @@
 {% if booking is defined %}
     <p>You're responding to: <strong>{{ booking.booking_name }}</strong></p>
     <form method="post">
-        <label for="name">Your name</label><br>
+        <label for="name">Enter your name</label><br>
         <input id="name" name="name" required>
+        <br>
+        <label for="email">Add your email (optional)</label><br>
+        <input id="email" name="email" type="email">
         <div>
-            <button type="submit" class="btn">Confirm</button>
+            <button type="submit" class="btn btn-primary">Confirm</button>
+            <a href="/login" class="btn btn-primary-outline">Already have an account?</a>
         </div>
     </form>
 {% else %}

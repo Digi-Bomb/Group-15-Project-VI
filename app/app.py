@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, g, flash
 
+# from app import notifications
 from forms import RegisterForm, LoginForm, NoteForm, LogoutForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -13,6 +14,9 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 from flask_mail import Mail, Message
+
+from flask_apscheduler import APScheduler
+
 
 import os
 from datetime import timedelta
@@ -106,7 +110,7 @@ mail.init_app(app)
 # -- ROUTES --
 from account.routes import account_bp
 from booking.routes import booking_bp
-from notifications.routes import notifications_bp
+from notifications.routes import notifications_bp, send_booking_notification_emails
 
 # register blueprints
 app.register_blueprint(account_bp)
@@ -118,4 +122,7 @@ def index():
     return render_template('index.html')
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    scheduler = APScheduler()
+    scheduler.add_job(func=send_booking_notification_emails, trigger='interval', id='job', seconds=5)
+    scheduler.start()
+    app.run(debug=True, host="0.0.0.0", port=5000)
