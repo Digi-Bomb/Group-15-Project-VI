@@ -1,12 +1,12 @@
 ## @package app.account.unregistered_user
 # @brief Unregistered user module
-# 
+#
 # This module contains the UnregisteredUser class which represents
 # a guest or unregistered user in the system.
 
 ## @class UnregisteredUser
 # @brief Represents an unregistered (guest) user in the system
-# 
+#
 # Contains basic guest user information without authentication credentials.
 class UnregisteredUser:
     ## @brief Initialize an UnregisteredUser instance

@@ -1,6 +1,6 @@
 ## @package app.account.routes
 # @brief Account authentication routes module
-# 
+#
 # This module defines Flask routes for account management including
 # user registration, login, and logout functionality.
 

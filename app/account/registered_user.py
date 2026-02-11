@@ -1,6 +1,6 @@
 ## @package app.account.registered_user
 # @brief Registered user module
-# 
+#
 # This module contains the RegisteredUser class which represents
 # a registered user in the system with authentication and booking capabilities.
 
@@ -10,7 +10,7 @@ from booking import Booking
 
 ## @class RegisteredUser
 # @brief Represents a registered user in the system
-# 
+#
 # Contains user profile information, credentials, and methods for
 # credential validation and booking management.
 class RegisteredUser:
