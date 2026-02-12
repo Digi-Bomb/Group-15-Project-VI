@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['get_5fbookings_0',['get_bookings',['../classapp_1_1account_1_1registered__user_1_1RegisteredUser.html#a4abfaa7565e36120101ac39a6127dc11',1,'app::account::registered_user::RegisteredUser']]],
-  ['get_5fbranch_5flocation_5fof_5froom_5fassociated_5fwith_5froom_5fnumber_1',['get_branch_location_of_room_associated_with_room_number',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#aff18d627668e9dd7f3c95c2f60b7f60f',1,'app::database_reading::DatabaseReadingServices']]],
-  ['get_5fcapacity_5fof_5froom_2',['get_capacity_of_room',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#ac11ab2bdb659a0a9cbc4c9b089422130',1,'app::database_reading::DatabaseReadingServices']]],
-  ['get_5fmeetings_5fowned_5fby_5fregistered_5fuser_3',['get_meetings_owned_by_registered_user',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a190c669a8be836fcb47f38fc30ec280c',1,'app::database_reading::DatabaseReadingServices']]],
-  ['get_5fregistered_5fusers_5fassociated_5fwith_5fbooking_5fid_4',['get_registered_users_associated_with_booking_ID',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a5a1450b6866380aff480b94bb33811d2',1,'app::database_reading::DatabaseReadingServices']]],
-  ['get_5fspecific_5fmeeting_5fowner_5ffor_5fbooking_5',['get_specific_meeting_owner_for_booking',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#afa2a57fdb78244e9a9d374bcec020724',1,'app::database_reading::DatabaseReadingServices']]],
-  ['get_5fspecific_5fregistered_5fuser_5femail_5fgiven_5fusername_6',['get_specific_registered_user_email_given_username',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a01c481eed92c951bb93521d26fd1121d',1,'app::database_reading::DatabaseReadingServices']]],
-  ['get_5funregistered_5fusers_5fassociated_5fwith_5fbooking_5fid_7',['get_unregistered_users_associated_with_booking_ID',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a8a6871ded069bb8bd4a83a83b5b5169c',1,'app::database_reading::DatabaseReadingServices']]],
-  ['get_5fusername_5fvia_5fruid_8',['get_username_via_RUID',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a93886d90163a7fa1cdda7c005d863490',1,'app::database_reading::DatabaseReadingServices']]]
+  ['check_5ffor_5froom_5favailability_0',['check_for_room_availability',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a6cfd814ded17e29e2f7cdbe4e40c14d3',1,'app::database_reading::DatabaseReadingServices']]],
+  ['check_5fif_5funregistered_5fuser_5fnickname_5fis_5ftaken_5ffor_5fspecific_5fmeeting_1',['check_if_unregistered_user_nickname_is_taken_for_specific_meeting',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a1b132aadf3db0b7db428c3dbcb9da2b8',1,'app::database_reading::DatabaseReadingServices']]],
+  ['check_5fif_5fuser_5fis_5fregistered_5falready_2',['check_if_user_is_registered_already',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a2e3cce9f4c44d974ee5a437fb9cac666',1,'app::database_reading::DatabaseReadingServices']]],
+  ['connect_3',['connect',['../classapp_1_1database__connection_1_1DatabaseConnection.html#a58e7bb46d0b5559d0969f95a48e939ae',1,'app::database_connection::DatabaseConnection']]],
+  ['create_5fnew_5fbooking_4',['create_new_booking',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a7cf42899022d0268bdb6797d3f7b2cd6',1,'app::database_writing::DatabaseWritingServices']]],
+  ['create_5fnew_5fuser_5',['create_new_user',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a417cccd1d46d2dde082f3ce6d5da8eaa',1,'app::database_writing::DatabaseWritingServices']]]
 ];

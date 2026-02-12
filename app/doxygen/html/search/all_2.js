@@ -10,5 +10,6 @@ var searchData=
   ['app_3a_3aaccount_3a_3aroutes_7',['routes',['../namespaceapp_1_1account_1_1routes.html',1,'app::account']]],
   ['app_3a_3aaccount_3a_3aunregistered_5fuser_8',['unregistered_user',['../namespaceapp_1_1account_1_1unregistered__user.html',1,'app::account']]],
   ['associate_5fregistered_5fuser_5fwith_5fbooking_9',['associate_registered_user_with_booking',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a4fcfd3e321e4cb68157e01b57a6dc92a',1,'app::database_writing::DatabaseWritingServices']]],
-  ['auditlogger_10',['AuditLogger',['../classapp_1_1audit__logging_1_1audit__logger_1_1AuditLogger.html',1,'app::audit_logging::audit_logger']]]
+  ['associate_5funregistered_5fuser_5fwith_5fbooking_10',['associate_unregistered_user_with_booking',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#ab9ea92d941ed3f77a3fc14e600afc167',1,'app::database_writing::DatabaseWritingServices']]],
+  ['auditlogger_11',['AuditLogger',['../classapp_1_1audit__logging_1_1audit__logger_1_1AuditLogger.html',1,'app::audit_logging::audit_logger']]]
 ];

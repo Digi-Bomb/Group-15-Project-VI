@@ -9,6 +9,6 @@ var searchData=
   ['contributing_6',['Contributing',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md9',1,'']]],
   ['copyright_20and_20license_7',['Copyright and license',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md16',1,'']]],
   ['create_5fnew_5fbooking_8',['create_new_booking',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a7cf42899022d0268bdb6797d3f7b2cd6',1,'app::database_writing::DatabaseWritingServices']]],
-  ['create_5fnew_5fuser_9',['create_new_user',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#aa5221f73882115b92de756b0d5c3ae16',1,'app::database_writing::DatabaseWritingServices']]],
+  ['create_5fnew_5fuser_9',['create_new_user',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a417cccd1d46d2dde082f3ce6d5da8eaa',1,'app::database_writing::DatabaseWritingServices']]],
   ['creators_10',['Creators',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md12',1,'']]]
 ];
