@@ -22,7 +22,8 @@ class DatabaseConnection:
                     user=self.user,
                     password=self.password,
                     database=self.database,
-                    ssl_disabled=True,
+                    ssl_verify_cert=False,  # fine for now
+                    ssl_disabled=False,
                 )
                 print("OOOOOOO WE ARE CONNECTED BABY!!!!")
                 return test
