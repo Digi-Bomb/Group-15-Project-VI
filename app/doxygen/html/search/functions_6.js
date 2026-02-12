@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['login_0',['login',['../namespaceapp_1_1account_1_1routes.html#acd6c1b7023be24b04df309a8cffd5d88',1,'app::account::routes']]],
-  ['logout_1',['logout',['../namespaceapp_1_1account_1_1routes.html#a71ecde56487f717c1b3f3beca9073070',1,'app::account::routes']]]
+  ['update_5froom_5fas_5favailable_0',['update_room_as_available',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a63ace435424a7eb611ba97496fcb5d2c',1,'app::database_writing::DatabaseWritingServices']]]
 ];
