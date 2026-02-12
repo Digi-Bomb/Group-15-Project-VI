@@ -1,61 +1,55 @@
-
 from flask import Blueprint, render_template, request, redirect, flash, current_app
+from app.booking.booking_service import BookingService
+from forms import BookingForm
 from database_connection import DatabaseConnection
+from database_reading import DatabaseReadingServices
+from database_writing import DatabaseWritingServices
 booking_bp = Blueprint('booking', __name__)
 
 #TODO
 #booking creation
 #ID specific booking edit
 #include response codes to all response packages
+#start writing functions for booking service to handle booking creation / editing
 
-#refactor to create new booking page
-# will room or any other info be passed in the URL or will it all be selected during create?
+
 @booking_bp.route('/booking', methods=['GET', 'POST'])
 def create_booking():
-    db = DatabaseConnection()
-    conn = db.connect()
-    cursor = conn.cursor()
+    #renders booking creation form on GET, processes form data and creates new booking on POST
+    form = BookingForm()
+    if form.validate_on_submit():
+        #process form data and create new booking
+        newBooking = BookingService.create_booking(
+            meeting_date=form.meeting_date.data,
+            start_time=form.start_time.data,
+            duration=form.duration.data,
+            meeting_owner=form.meeting_owner.data,
+            meeting_room=form.meeting_room.data,
+            meeting_capacity=form.meeting_capacity.data
+        )
 
-    # Placeholder for booking creation logic
-    # Process form data to create a new booking
-    flash('Booking created successfully!', 'success')
+        if newBooking:
+            flash("Booking created successfully!", "success")
+        else:
+            flash("Failed to create booking.", "danger")
+
     return redirect('/')
 
 #pull a booking by ID and allow viewing / editing of it (1 page or 2?)
 @booking_bp.route('/booking/<int:booking_id>', methods=['GET', 'POST'])
 def manage_booking(booking_id):
-    db = DatabaseConnection()
-    conn = db.connect()
-    cursor = conn.cursor()
+    form = BookingForm() 
+    if form.validate_on_submit():
+        # Process form data and update booking
+        
 
-    # Placeholder for booking management logic
-    if request.method == 'POST':
-        # Process form data to update the booking
-        flash('Booking updated successfully!', 'success')
-        return redirect('/booking?id=' + str(booking_id))
-
-    # For GET request, fetch booking details and render the management page
-    booking = None
-    try:
-        db = DatabaseConnection()
-        conn = db.connect()
-        cursor = conn.cursor()
-
-        cursor.execute('SELECT * FROM bookings WHERE id = %s', (booking_id,))
-        booking = cursor.fetchone()
-    except Exception as e:
-        current_app.logger.debug(f"booking lookup failed: {e}")
-        booking = None
-    finally:
-        try:
-            cursor.close()
-            conn.close()
-        except Exception:
-            pass
+        flash("Booking updated successfully!", "success")
+        return redirect('/')
 
     return render_template('manage_booking.html', booking=booking)
 
 
+@booking_bp.route('/rsvp', methods=['GET', 'POST'])
 @booking_bp.route('/rsvp/<link_id>', methods=['GET', 'POST'])
 def rsvp(link_id=None):
     link = link_id or request.args.get('link')
