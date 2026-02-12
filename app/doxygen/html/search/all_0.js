@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['5_0',['Bootstrap 5',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md0',1,'']]]
+  ['databaseconnection_0',['DatabaseConnection',['../classapp_1_1database__connection_1_1_database_connection.html',1,'app::database_connection']]],
+  ['datavalidator_1',['DataValidator',['../classapp_1_1data__validator_1_1_data_validator.html',1,'app::data_validator']]]
 ];
