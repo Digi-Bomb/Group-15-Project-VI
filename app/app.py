@@ -120,15 +120,21 @@ database_read_servicer = database_reading.DatabaseReadingServices(
 databaseConn = database_connection.DatabaseConnection()
 database_reader = database_reading.DatabaseReadingServices(databaseConn)
 
-test2 = database_writing.DatabaseWritingServices(
+createUser = database_writing.DatabaseWritingServices(
     databaseConn, database_reader
-).create_new_booking("2026-11-11", "10:30:00", "03:00:00", "1000", "1G11", 15)
+).delete_booking(1046)
 
-test = database_reading.DatabaseReadingServices(
-    database_connection.DatabaseConnection()
-).get_username_via_RUID("1000")
+# testAddBID = testAddBID[1]
+# if testAddBID == 0:
+#     test2 = database_writing.DatabaseWritingServices(
+#         databaseConn, database_reader
+#     ).associate_unregistered_user_with_booking(testAddBID, 1000)
 
-print("Checking For insertion... ", test2)
+# test = database_reading.DatabaseReadingServices(
+#     database_connection.DatabaseConnection()
+# ).get_username_via_RUID("1000")
+
+print("Checking For create user... ", createUser)
 
 # -- ROUTES --
 from account.routes import account_bp

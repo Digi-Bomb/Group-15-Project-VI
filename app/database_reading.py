@@ -200,7 +200,7 @@ class DatabaseReadingServices:
             "SELECT BID FROM Room WHERE roomNumber = %s", (room_number,)
         )
 
-        result = self.cursor.fetchall()[0][0]
+        result = self.cursor.fetchone()[0]
 
         if result:
             return False
