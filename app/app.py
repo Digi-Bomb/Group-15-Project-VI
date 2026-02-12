@@ -7,6 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import mysql.connector
 import database_connection
 import database_reading
+import database_writing
 
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -116,11 +117,18 @@ database_read_servicer = database_reading.DatabaseReadingServices(
     database_connection.DatabaseConnection()
 )
 
+databaseConn = database_connection.DatabaseConnection()
+database_reader = database_reading.DatabaseReadingServices(databaseConn)
+
+test2 = database_writing.DatabaseWritingServices(
+    databaseConn, database_reader
+).create_new_booking("2026-11-11", "10:30:00", "03:00:00", "1000", "1G11", 15)
+
 test = database_reading.DatabaseReadingServices(
     database_connection.DatabaseConnection()
 ).get_username_via_RUID("1000")
 
-print("Checking For room branch... ", test)
+print("Checking For insertion... ", test2)
 
 # -- ROUTES --
 from account.routes import account_bp

@@ -7,6 +7,13 @@ class DatabaseReadingServices:
         self.conn = self.database.connect()
         self.cursor = self.conn.cursor()
 
+    # def generic_registered_user_reads_gets_associated_fields(
+    #     self, field_to_find, search_field
+    # ):
+    #     """Function that acts as a generic method to find a field (ex. 'email'), given another field"""
+
+    #     self.cursor.execute()
+
     def get_specific_registered_user_email_given_username(self, username: str):
         """Function that returns the username associated with an email (for users who forget)"""
         self.cursor.execute(
@@ -125,7 +132,9 @@ class DatabaseReadingServices:
 
     def check_if_user_is_registered_already(self, username: str, email: str):
         """Function that ensures double registry for a user isn't possible; \n
-        REQUIRES USERNAME AND EMAIL"""
+        REQUIRES USERNAME AND EMAIL \n
+        TRUE == REGISTERED \n
+        FALSE == UNREGISTERED"""
         self.cursor.execute(
             "SELECT RUID FROM RegisteredUser WHERE username = %s OR email = %s",
             (username, email),
@@ -165,6 +174,39 @@ class DatabaseReadingServices:
 
         self.cursor.close()  # Empty Cursor
         return True, "Nickname available"
+
+    # def check_booking_still_active(self, BID: int):
+    #     """Function that validates that a booking exists within the database \n
+    #     RETURNS BOOLEAN VALUE \n
+    #     TRUE == BOOKING EXISTS \n
+    #     FALSE == BOOKING ISNT REAL OR EXPIRED"""
+
+    #     self.cursor.execute("SELECT * FROM Booking WHERE BID = %s LIMIT 1", (BID,))
+
+    #     result = self.cursor.fetchall()
+    #     if result[0][0]:
+
+    #         return True
+    #     else:
+    #         return False
+
+    def check_for_room_availability(self, room_number: str):
+        """Function that validates that a room is available for use \n
+        RETURNS BOOLEAN VALUE \n
+        TRUE == ROOM IS AVAILABLE \n
+        FALSE == ROOM TAKEN"""
+
+        self.cursor.execute(
+            "SELECT BID FROM Room WHERE roomNumber = %s", (room_number,)
+        )
+
+        result = self.cursor.fetchall()[0][0]
+
+        if result:
+            return False
+
+        else:
+            return True
 
     def get_capacity_of_room(self, room_number: int):
         """Function that returns the INTEGER Capacity of the room (specified by room number)"""
