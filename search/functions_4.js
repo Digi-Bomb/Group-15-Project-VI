@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['login_0',['login',['../namespaceapp_1_1account_1_1routes.html#acd6c1b7023be24b04df309a8cffd5d88',1,'app::account::routes']]],
-  ['logout_1',['logout',['../namespaceapp_1_1account_1_1routes.html#a71ecde56487f717c1b3f3beca9073070',1,'app::account::routes']]]
+  ['delete_5fassociation_0',['delete_association',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#ad84c87211995ba8e4989507ff5939270',1,'app::database_writing::DatabaseWritingServices']]],
+  ['delete_5fbooking_1',['delete_booking',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a3b04c1e88494c4938bf4606fffff3412',1,'app::database_writing::DatabaseWritingServices']]]
 ];
