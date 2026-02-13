@@ -1,16 +1,20 @@
 /******* Customized Bootstrap ********/
 
-$primary: #d62828;
-$secondary: #f77f00;
+$primary: #f77f00;
+$secondary: #d62828;
 $tertiary: #646369;
 $light: #e8e7e5;
 $body-color: #003049;
+$text-muted: #4e636f;
 
+$dark: $body-color;
 
 $link-color: $body-color;
 $navbar-light-color: $body-color;
 $navbar-light-hover-color: $primary;
 $link-hover-color: $primary;
+
+$icon-link-icon-transform: translate3d(-0.25em, 0, 0);
 
 /** font **/
 @font-face {
