@@ -1,4 +1,5 @@
 from database_connection import DatabaseConnection
+from datetime import time, datetime, timedelta
 
 
 class DatabaseReadingServices:
@@ -190,23 +191,68 @@ class DatabaseReadingServices:
     #     else:
     #         return False
 
-    def check_for_room_availability(self, room_number: str):
+    def check_for_room_availability(
+        self, room_number: str, meeting_date: str, start_time: str, duration: str
+    ):
         """Function that validates that a room is available for use \n
         RETURNS BOOLEAN VALUE \n
         TRUE == ROOM IS AVAILABLE \n
         FALSE == ROOM TAKEN"""
 
+        start_dt = datetime.strptime(start_time, "%H:%M:%S")
+        start_time_obj = start_dt.time()
+        h, m, s = map(int, duration.split(":"))
+        duration_td = timedelta(hours=h, minutes=m, seconds=s)
+
+        combined_dt = datetime.combine(datetime.today(), start_time_obj) + duration_td
+        end_time_obj = combined_dt.time()
+        # First check room id from associated table
+        # Second check given time is not taken
+
         self.cursor.execute(
-            "SELECT BID FROM Room WHERE roomNumber = %s", (room_number,)
+            "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s",
+            (room_number,),  # Returns ALL bookings for a Room
         )
 
-        result = self.cursor.fetchone()[0]
+        bookings = self.cursor.fetchall()
 
-        if result:
-            return False
+        # Check the Booking times of each
+        for (booking_id,) in bookings:
+            self.cursor.execute(
+                "SELECT meetingDate, startTime, duration, ADDTIME(startTime, duration) AS endTime FROM Booking WHERE BID = %s",
+                (booking_id,),
+            )
+            row = self.cursor.fetchone()
 
-        else:
-            return True
+            curmeetingDate_db = row[0]
+            curstartTime_db = row[1]
+            # curduration_db = row[2]
+            curendTime_db = row[3]
+
+            if isinstance(curstartTime_db, str):
+                curstartTime_db = datetime.strptime(curstartTime_db, "%H:%M:%S").time()
+            if isinstance(curendTime_db, str):
+                curendTime_db = datetime.strptime(curendTime_db, "%H:%M:%S").time()
+
+            # Case 1, start time and date of proposed booking is equal to existing booking
+            if meeting_date == curmeetingDate_db and start_time_obj == curstartTime_db:
+                return False, "Booking start time already taken for this Room"
+
+            # Case 2, an existing booking leaks into proposed booking start time
+            elif meeting_date == curmeetingDate_db and curendTime_db >= start_time_obj:
+                return False, "An existing booking will exceed the specified start time"
+
+            elif meeting_date == curmeetingDate_db and end_time_obj == curstartTime_db:
+                return (
+                    False,
+                    "The proposed booking's duration will exceed start time of another meeting",
+                )
+
+            # if result:
+            #     return False
+
+            # else:
+        return True
 
     def get_capacity_of_room(self, room_number: int):
         """Function that returns the INTEGER Capacity of the room (specified by room number)"""
