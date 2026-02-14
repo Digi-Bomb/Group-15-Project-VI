@@ -1,0 +1,54 @@
+2026-02-10 18:08:46,313 ERROR: Mail send failed: [Errno 111] Connection refused [in /app/notifications/routes.py:38]
+Traceback (most recent call last):
+  File "/app/notifications/routes.py", line 34, in submit
+    mail.send(msg)  # send using the instance imported from app.py
+    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 491, in send
+    with self.connect() as connection:
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 144, in __enter__
+    self.host = self.configure_host()
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 158, in configure_host
+    host = smtplib.SMTP(self.mail.server, self.mail.port)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/socket.py", line 863, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.11/socket.py", line 848, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+2026-02-10 18:09:28,690 ERROR: Mail send failed: [Errno 111] Connection refused [in /app/notifications/routes.py:38]
+Traceback (most recent call last):
+  File "/app/notifications/routes.py", line 34, in submit
+    mail.send(msg)  # send using the instance imported from app.py
+    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 491, in send
+    with self.connect() as connection:
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 144, in __enter__
+    self.host = self.configure_host()
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 158, in configure_host
+    host = smtplib.SMTP(self.mail.server, self.mail.port)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/socket.py", line 863, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.11/socket.py", line 848, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
