@@ -150,6 +150,22 @@ app.register_blueprint(notifications_bp)
 def index():
     return render_template("index.html")
 
+# debug routes for didi (me)
+@app.route("/booking")
+def booking():
+    return render_template("booking.html")
+
+@app.route("/meeting")
+def meeting():
+    return render_template("meeting.html")
+
+@app.route("/rsvp")
+def rsvp():
+    return render_template("rsvp.html")
+
+@app.route("/profile")
+def profile():
+    return render_template("profile.html")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
