@@ -70,7 +70,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>app</b></li><li class="navelem"><b>database_writing</b></li><li class="navelem"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html">DatabaseWritingServices</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceapp.html">app</a></li><li class="navelem"><a class="el" href="namespaceapp_1_1database__writing.html">database_writing</a></li><li class="navelem"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html">DatabaseWritingServices</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -84,41 +84,100 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8de7d1776f6aa4d106b504218b6cd00e" id="r_a8de7d1776f6aa4d106b504218b6cd00e"><td class="memItemLeft" align="right" valign="top"><a id="a8de7d1776f6aa4d106b504218b6cd00e" name="a8de7d1776f6aa4d106b504218b6cd00e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>__init__</b> (self, <a class="el" href="classapp_1_1database__connection_1_1DatabaseConnection.html">DatabaseConnection</a> database, <a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html">DatabaseReadingServices</a> reader)</td></tr>
+<tr class="memitem:a8de7d1776f6aa4d106b504218b6cd00e" id="r_a8de7d1776f6aa4d106b504218b6cd00e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a8de7d1776f6aa4d106b504218b6cd00e">__init__</a> (self, <a class="el" href="classapp_1_1database__connection_1_1DatabaseConnection.html">DatabaseConnection</a> <a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a4c7f3ff33c0bdec9c9fa71b2adb885a2">database</a>, <a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html">DatabaseReadingServices</a> <a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a68703b04aa26c9a24bff0e3f6c6269d1">reader</a>)</td></tr>
 <tr class="separator:a8de7d1776f6aa4d106b504218b6cd00e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a417cccd1d46d2dde082f3ce6d5da8eaa" id="r_a417cccd1d46d2dde082f3ce6d5da8eaa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a417cccd1d46d2dde082f3ce6d5da8eaa">create_new_user</a> (self, str username, str email, str first_name, str last_name, str password)</td></tr>
+<tr class="memdesc:a417cccd1d46d2dde082f3ce6d5da8eaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function for adding a user to the Database <br  />
+NOTE: CHECKS FOR EXISTING USERS, NEEDS EMAIL VALIDATION(?) <br  />
+TRUE == USER ADDED <br  />
+FALSE == USER ALREADY EXISTED.  <br /></td></tr>
 <tr class="separator:a417cccd1d46d2dde082f3ce6d5da8eaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cf42899022d0268bdb6797d3f7b2cd6" id="r_a7cf42899022d0268bdb6797d3f7b2cd6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a7cf42899022d0268bdb6797d3f7b2cd6">create_new_booking</a> (self, str meeting_date, str start_time, str duration, str meeting_owner, str meeting_room, int meeting_capacity)</td></tr>
+<tr class="memdesc:a7cf42899022d0268bdb6797d3f7b2cd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function for adding a booking to the Database <br  />
+NOTE: CHECKS FOR EXISTING BOOKED ROOMS AND ROOM CAPACITY <br  />
+TRUE == BOOKING ADDED, AND RETURNS GENERATED BID <br  />
+FALSE == BOOKING DETAILS FAILED; ROOM TAKEN OR MEETING SIZE TOO LARGE.  <br /></td></tr>
 <tr class="separator:a7cf42899022d0268bdb6797d3f7b2cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedad2741355fc0139d00c08a59646338" id="r_aedad2741355fc0139d00c08a59646338"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#aedad2741355fc0139d00c08a59646338">book_a_room_after_booking</a> (self, int BID, meeting_room)</td></tr>
+<tr class="memdesc:aedad2741355fc0139d00c08a59646338"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function for assignment of a room to a particular booking <br  />
+TRUE == ABLE TO BOOK ROOM <br  />
+FALSE == ROOM ALREADY BOOKED.  <br /></td></tr>
 <tr class="separator:aedad2741355fc0139d00c08a59646338"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fcfd3e321e4cb68157e01b57a6dc92a" id="r_a4fcfd3e321e4cb68157e01b57a6dc92a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a4fcfd3e321e4cb68157e01b57a6dc92a">associate_registered_user_with_booking</a> (self, int BID, str RUID)</td></tr>
+<tr class="memdesc:a4fcfd3e321e4cb68157e01b57a6dc92a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function for associating a booking to Registered Users <br  />
+NOTE: CALLED AUTOMATICALLY WHEN A BOOKING IS CREATED, ATTACHES MEETING OWNER TO BOOKING IN THIS TABLE <br  />
+TRUE == ASSOCIATION RECORD ADDED <br  />
+FALSE == ASSOCIATION RECORD FAILED.  <br /></td></tr>
 <tr class="separator:a4fcfd3e321e4cb68157e01b57a6dc92a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9ea92d941ed3f77a3fc14e600afc167" id="r_ab9ea92d941ed3f77a3fc14e600afc167"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#ab9ea92d941ed3f77a3fc14e600afc167">associate_unregistered_user_with_booking</a> (self, int BID, str URUID)</td></tr>
+<tr class="memdesc:ab9ea92d941ed3f77a3fc14e600afc167"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function for associating a booking to Registered Users <br  />
+TRUE == ASSOCIATION RECORD ADDED <br  />
+FALSE == ASSOCIATION RECORD FAILED.  <br /></td></tr>
 <tr class="separator:ab9ea92d941ed3f77a3fc14e600afc167"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b04c1e88494c4938bf4606fffff3412" id="r_a3b04c1e88494c4938bf4606fffff3412"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a3b04c1e88494c4938bf4606fffff3412">delete_booking</a> (self, int BID)</td></tr>
+<tr class="memdesc:a3b04c1e88494c4938bf4606fffff3412"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to delete a booking from the Database <br  />
+NOTE: REMOVES MEETING OWNER AND ATTENDEES ASSOCIATED WITH BOOKING FROM THE RELATION TABLE <br  />
+TRUE == BOOKING DELETED <br  />
+FALSE == BOOKING DIDNT EXIST OR OTHER FAILURE.  <br /></td></tr>
 <tr class="separator:a3b04c1e88494c4938bf4606fffff3412"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad84c87211995ba8e4989507ff5939270" id="r_ad84c87211995ba8e4989507ff5939270"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#ad84c87211995ba8e4989507ff5939270">delete_association</a> (self, int BID)</td></tr>
+<tr class="memdesc:ad84c87211995ba8e4989507ff5939270"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to remove an association between a Booking and an Attendee <br  />
+NOTE: ASSOCIATION BETWEEN BOOKING AND ALL RELATED ATTENDEES MUST BE DELETED BEFORE A BOOKING IS DELETED TRUE == ASSOCIATION DELETED <br  />
+FALSE == ASSOCIATION DELETION ERROR + ERROR MSG.  <br /></td></tr>
 <tr class="separator:ad84c87211995ba8e4989507ff5939270"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63ace435424a7eb611ba97496fcb5d2c" id="r_a63ace435424a7eb611ba97496fcb5d2c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a63ace435424a7eb611ba97496fcb5d2c">update_room_as_available</a> (self, int BID)</td></tr>
+<tr class="memdesc:a63ace435424a7eb611ba97496fcb5d2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to update the database that a room is now available when deleting a booking <br  />
+NOTE: CALLED WHEN DELETING A BOOKING <br  />
+TRUE == ROOM UPDATED AS AVAILABLE <br  />
+FALSE == ROOM NOT UPDATED.  <br /></td></tr>
 <tr class="separator:a63ace435424a7eb611ba97496fcb5d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a4c7f3ff33c0bdec9c9fa71b2adb885a2" id="r_a4c7f3ff33c0bdec9c9fa71b2adb885a2"><td class="memItemLeft" align="right" valign="top"><a id="a4c7f3ff33c0bdec9c9fa71b2adb885a2" name="a4c7f3ff33c0bdec9c9fa71b2adb885a2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>database</b></td></tr>
+<tr class="memitem:a4c7f3ff33c0bdec9c9fa71b2adb885a2" id="r_a4c7f3ff33c0bdec9c9fa71b2adb885a2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a4c7f3ff33c0bdec9c9fa71b2adb885a2">database</a></td></tr>
 <tr class="separator:a4c7f3ff33c0bdec9c9fa71b2adb885a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afeaeb49e7f31a172ff0c8d897284f6f3" id="r_afeaeb49e7f31a172ff0c8d897284f6f3"><td class="memItemLeft" align="right" valign="top"><a id="afeaeb49e7f31a172ff0c8d897284f6f3" name="afeaeb49e7f31a172ff0c8d897284f6f3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>conn</b></td></tr>
+<tr class="memitem:afeaeb49e7f31a172ff0c8d897284f6f3" id="r_afeaeb49e7f31a172ff0c8d897284f6f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#afeaeb49e7f31a172ff0c8d897284f6f3">conn</a></td></tr>
 <tr class="separator:afeaeb49e7f31a172ff0c8d897284f6f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ccf8e74b4e00cd989be50575226bf02" id="r_a1ccf8e74b4e00cd989be50575226bf02"><td class="memItemLeft" align="right" valign="top"><a id="a1ccf8e74b4e00cd989be50575226bf02" name="a1ccf8e74b4e00cd989be50575226bf02"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>cursor</b></td></tr>
+<tr class="memitem:a1ccf8e74b4e00cd989be50575226bf02" id="r_a1ccf8e74b4e00cd989be50575226bf02"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a1ccf8e74b4e00cd989be50575226bf02">cursor</a></td></tr>
 <tr class="separator:a1ccf8e74b4e00cd989be50575226bf02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68703b04aa26c9a24bff0e3f6c6269d1" id="r_a68703b04aa26c9a24bff0e3f6c6269d1"><td class="memItemLeft" align="right" valign="top"><a id="a68703b04aa26c9a24bff0e3f6c6269d1" name="a68703b04aa26c9a24bff0e3f6c6269d1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>reader</b></td></tr>
+<tr class="memitem:a68703b04aa26c9a24bff0e3f6c6269d1" id="r_a68703b04aa26c9a24bff0e3f6c6269d1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a68703b04aa26c9a24bff0e3f6c6269d1">reader</a></td></tr>
 <tr class="separator:a68703b04aa26c9a24bff0e3f6c6269d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a8de7d1776f6aa4d106b504218b6cd00e" name="a8de7d1776f6aa4d106b504218b6cd00e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8de7d1776f6aa4d106b504218b6cd00e">&#9670;&#160;</a></span>__init__()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.__init__ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classapp_1_1database__connection_1_1DatabaseConnection.html">DatabaseConnection</a>&#160;</td>
+          <td class="paramname"><em>database</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html">DatabaseReadingServices</a>&#160;</td>
+          <td class="paramname"><em>reader</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4fcfd3e321e4cb68157e01b57a6dc92a" name="a4fcfd3e321e4cb68157e01b57a6dc92a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4fcfd3e321e4cb68157e01b57a6dc92a">&#9670;&#160;</a></span>associate_registered_user_with_booking()</h2>
@@ -151,10 +210,12 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Generic function for associating a booking to Registered Users \n
-NOTE: CALLED AUTOMATICALLY WHEN A BOOKING IS CREATED, ATTACHES MEETING OWNER TO BOOKING IN THIS TABLE \n
-TRUE == ASSOCIATION RECORD ADDED \n
-FALSE == ASSOCIATION RECORD FAILED</pre> 
+
+<p>Generic function for associating a booking to Registered Users <br  />
+NOTE: CALLED AUTOMATICALLY WHEN A BOOKING IS CREATED, ATTACHES MEETING OWNER TO BOOKING IN THIS TABLE <br  />
+TRUE == ASSOCIATION RECORD ADDED <br  />
+FALSE == ASSOCIATION RECORD FAILED. </p>
+
 </div>
 </div>
 <a id="ab9ea92d941ed3f77a3fc14e600afc167" name="ab9ea92d941ed3f77a3fc14e600afc167"></a>
@@ -188,9 +249,11 @@ FALSE == ASSOCIATION RECORD FAILED</pre>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Generic function for associating a booking to Registered Users \n
-TRUE == ASSOCIATION RECORD ADDED \n
-FALSE == ASSOCIATION RECORD FAILED</pre> 
+
+<p>Generic function for associating a booking to Registered Users <br  />
+TRUE == ASSOCIATION RECORD ADDED <br  />
+FALSE == ASSOCIATION RECORD FAILED. </p>
+
 </div>
 </div>
 <a id="aedad2741355fc0139d00c08a59646338" name="aedad2741355fc0139d00c08a59646338"></a>
@@ -224,9 +287,11 @@ FALSE == ASSOCIATION RECORD FAILED</pre>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Generic function for assignment of a room to a particular booking \n
-TRUE == ABLE TO BOOK ROOM \n
-FALSE == ROOM ALREADY BOOKED</pre> 
+
+<p>Generic function for assignment of a room to a particular booking <br  />
+TRUE == ABLE TO BOOK ROOM <br  />
+FALSE == ROOM ALREADY BOOKED. </p>
+
 </div>
 </div>
 <a id="a7cf42899022d0268bdb6797d3f7b2cd6" name="a7cf42899022d0268bdb6797d3f7b2cd6"></a>
@@ -284,10 +349,12 @@ FALSE == ROOM ALREADY BOOKED</pre>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Generic function for adding a booking to the Database \n
-NOTE: CHECKS FOR EXISTING BOOKED ROOMS AND ROOM CAPACITY \n
-TRUE == BOOKING ADDED, AND RETURNS GENERATED BID \n
-FALSE == BOOKING DETAILS FAILED; ROOM TAKEN OR MEETING SIZE TOO LARGE</pre> 
+
+<p>Generic function for adding a booking to the Database <br  />
+NOTE: CHECKS FOR EXISTING BOOKED ROOMS AND ROOM CAPACITY <br  />
+TRUE == BOOKING ADDED, AND RETURNS GENERATED BID <br  />
+FALSE == BOOKING DETAILS FAILED; ROOM TAKEN OR MEETING SIZE TOO LARGE. </p>
+
 </div>
 </div>
 <a id="a417cccd1d46d2dde082f3ce6d5da8eaa" name="a417cccd1d46d2dde082f3ce6d5da8eaa"></a>
@@ -339,10 +406,12 @@ FALSE == BOOKING DETAILS FAILED; ROOM TAKEN OR MEETING SIZE TOO LARGE</pre>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Generic function for adding a user to the Database \n
-NOTE: CHECKS FOR EXISTING USERS, NEEDS EMAIL VALIDATION(?) \n
-TRUE == USER ADDED \n
-FALSE == USER ALREADY EXISTED</pre> 
+
+<p>Generic function for adding a user to the Database <br  />
+NOTE: CHECKS FOR EXISTING USERS, NEEDS EMAIL VALIDATION(?) <br  />
+TRUE == USER ADDED <br  />
+FALSE == USER ALREADY EXISTED. </p>
+
 </div>
 </div>
 <a id="ad84c87211995ba8e4989507ff5939270" name="ad84c87211995ba8e4989507ff5939270"></a>
@@ -370,10 +439,11 @@ FALSE == USER ALREADY EXISTED</pre>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Generic function to remove an association between a Booking and an Attendee \n
-NOTE: ASSOCIATION BETWEEN BOOKING AND ALL RELATED ATTENDEES MUST BE DELETED BEFORE A BOOKING IS DELETED
-TRUE == ASSOCIATION DELETED \n
-FALSE == ASSOCIATION DELETION ERROR + ERROR MSG</pre> 
+
+<p>Generic function to remove an association between a Booking and an Attendee <br  />
+NOTE: ASSOCIATION BETWEEN BOOKING AND ALL RELATED ATTENDEES MUST BE DELETED BEFORE A BOOKING IS DELETED TRUE == ASSOCIATION DELETED <br  />
+FALSE == ASSOCIATION DELETION ERROR + ERROR MSG. </p>
+
 </div>
 </div>
 <a id="a3b04c1e88494c4938bf4606fffff3412" name="a3b04c1e88494c4938bf4606fffff3412"></a>
@@ -401,10 +471,12 @@ FALSE == ASSOCIATION DELETION ERROR + ERROR MSG</pre>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Generic function to delete a booking from the Database \n
-NOTE: REMOVES MEETING OWNER AND ATTENDEES ASSOCIATED WITH BOOKING FROM THE RELATION TABLE \n
-TRUE == BOOKING DELETED \n
-FALSE == BOOKING DIDNT EXIST OR OTHER FAILURE</pre> 
+
+<p>Generic function to delete a booking from the Database <br  />
+NOTE: REMOVES MEETING OWNER AND ATTENDEES ASSOCIATED WITH BOOKING FROM THE RELATION TABLE <br  />
+TRUE == BOOKING DELETED <br  />
+FALSE == BOOKING DIDNT EXIST OR OTHER FAILURE. </p>
+
 </div>
 </div>
 <a id="a63ace435424a7eb611ba97496fcb5d2c" name="a63ace435424a7eb611ba97496fcb5d2c"></a>
@@ -432,14 +504,73 @@ FALSE == BOOKING DIDNT EXIST OR OTHER FAILURE</pre>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Generic function to update the database that a room is now available when deleting a booking \n
-NOTE: CALLED WHEN DELETING A BOOKING \n
-TRUE == ROOM UPDATED AS AVAILABLE \n
-FALSE == ROOM NOT UPDATED</pre> 
+
+<p>Generic function to update the database that a room is now available when deleting a booking <br  />
+NOTE: CALLED WHEN DELETING A BOOKING <br  />
+TRUE == ROOM UPDATED AS AVAILABLE <br  />
+FALSE == ROOM NOT UPDATED. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="afeaeb49e7f31a172ff0c8d897284f6f3" name="afeaeb49e7f31a172ff0c8d897284f6f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeaeb49e7f31a172ff0c8d897284f6f3">&#9670;&#160;</a></span>conn</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.conn</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1ccf8e74b4e00cd989be50575226bf02" name="a1ccf8e74b4e00cd989be50575226bf02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ccf8e74b4e00cd989be50575226bf02">&#9670;&#160;</a></span>cursor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.cursor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4c7f3ff33c0bdec9c9fa71b2adb885a2" name="a4c7f3ff33c0bdec9c9fa71b2adb885a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c7f3ff33c0bdec9c9fa71b2adb885a2">&#9670;&#160;</a></span>database</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.database</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a68703b04aa26c9a24bff0e3f6c6269d1" name="a68703b04aa26c9a24bff0e3f6c6269d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68703b04aa26c9a24bff0e3f6c6269d1">&#9670;&#160;</a></span>reader</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.reader</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>app/<b>database_writing.py</b></li>
+<li>app/<a class="el" href="database__writing_8py.html">database_writing.py</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
