@@ -117,14 +117,5 @@ app.register_blueprint(notifications_bp)
 def index():
     return render_template('index.html')
 
-# IMPORTANT: PLEASE DELETE! DEBUG ROUTE
-@app.route('/booking')
-def booking():
-    return render_template('booking.html')
-
-@app.route('/meetingdebug')
-def meeting():
-    return render_template('meeting.html')
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
