@@ -3,113 +3,113 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
- <!-- Booking info -->
-    <div class="container-fluid px-5 d-flex flex-wrap">
-        <p class="text-dark fw-bold fs-6 mb-2 w-100 ms-4">Book a room</p>
-        <a class="text-dark fs-6 text-decoration-underline ms-3">
-            <i class="bi bi-geo-alt-fill me-1"></i>
-            Conestoga College, Waterloo <!-- {{Building.bookingName}} , {{Building.location}}-->
-        </a>
-        <a class="text-dark fs-6 text-decoration-underline ms-auto">
-            <i class="bi bi-calendar-week me-1"></i>
+<!-- Booking info -->
+<div class="container-fluid px-5 d-flex flex-wrap">
+    <p class="text-dark fw-bold fs-6 mb-2 w-100 ms-4">Book a room</p>
+    <a class="text-dark fs-6 text-decoration-underline ms-3 icon-link icon-link-hover" id="buildingLocation">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill"
+            viewBox="0 0 16 16">
+            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+        </svg>
+        Conestoga College, Waterloo
+        <a class="text-dark fs-6 text-decoration-underline ms-auto icon-link icon-link-hover" id="calendarDate" name="calendarDate">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-calendar-week" viewBox="0 0 16 16">
+                <path
+                    d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
+                <path
+                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+            </svg>
             January 1st, 2026 <!-- vanilla datepicker bullshit -->
         </a>
-    </div>
+</div>
 
-    <!-- room bookings -->
-     <div class="container-fluid text-center px-4 gap-5 mt-5">
-        <div class="row row-cols-3">
-            <div class="col">
-                <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
-                    <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg" class="rounded float-auto mb-3 shadow" width="400" height="auto"> <!-- note: pull a different image? idk-->
-                    <p class="text-muted fs-6 me-3 mb-0">
-                        <i class="bi bi-people-fill text-muted"></i>
-                        4 <!-- {{Room.maximumCapacity}}-->
-                    </p>
-                    <p class="text-dark fs-6 me-auto text-decoration-underline mb-0">
-                        Placeholder room name <!-- {{Room.roomNumber}} , {{Room.wing}}-->
-                    </p>
-                    <p class="text-dark fs-6 ms-auto mb-0">
-                        09:00-19:00 <!-- available time, i think we agreed 8am to 8pm hard coded but have to double check -->
-                    </p>
-                    <p class="text-muted fs-6 me-auto">
-                        Elevator, wheelchair accessible <!-- if wheelchair then text, if projector then text S-->
-                    </p>
-                </div id="roomcontainer">
-            </div>
-            <div class="col">
-                <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
-                    <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg" class="rounded float-auto mb-3 shadow" width="400" height="auto"> <!-- note: pull a different image? idk-->
-                    <p class="text-muted fs-6 me-3 mb-0">
-                        <i class="bi bi-people-fill text-muted"></i>
-                        4 <!-- note: needs to talk to backend-->
-                    </p>
-                    <p class="text-dark fs-6 me-auto text-decoration-underline mb-0">
-                        Placeholder room name <!-- note: needs to talk to backend-->
-                    </p>
-                    <p class="text-dark fs-6 ms-auto mb-0">
-                        09:00-19:00 <!-- note: needs to talk to backend -->
-                    </p>
-                    <p class="text-muted fs-6 me-auto">
-                        Elevator, wheelchair accessible <!-- note: needs to talk to backend-->
-                    </p>
-                </div id="roomcontainer">
-            </div>
-            <div class="col">
-                <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
-                    <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg" class="rounded float-auto mb-3 shadow" width="400" height="auto"> <!-- note: pull a different image? idk-->
-                    <p class="text-muted fs-6 me-3 mb-0">
-                        <i class="bi bi-people-fill text-muted"></i>
-                        4 <!-- note: needs to talk to backend-->
-                    </p>
-                    <p class="text-dark fs-6 me-auto text-decoration-underline mb-0">
-                        Placeholder room name <!-- note: needs to talk to backend-->
-                    </p>
-                    <p class="text-dark fs-6 ms-auto mb-0">
-                        09:00-19:00 <!-- note: needs to talk to backend -->
-                    </p>
-                    <p class="text-muted fs-6 me-auto">
-                        Elevator, wheelchair accessible <!-- note: needs to talk to backend-->
-                    </p>
-                </div id="roomcontainer">
-            </div>
-            <div class="col">
-                <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
-                    <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg" class="rounded float-auto mb-3 shadow-sm" width="400" height="auto"> <!-- note: pull a different image? idk-->
-                    <p class="text-muted fs-6 me-3 mb-0">
-                        <i class="bi bi-people-fill text-muted"></i>
-                        4 <!-- note: needs to talk to backend-->
-                    </p>
-                    <p class="text-dark fs-6 me-auto text-decoration-underline mb-0">
-                        Placeholder room name <!-- note: needs to talk to backend-->
-                    </p>
-                    <p class="text-dark fs-6 ms-auto mb-0">
-                        09:00-19:00 <!-- note: needs to talk to backend -->
-                    </p>
-                    <p class="text-muted fs-6 me-auto">
-                        Elevator, wheelchair accessible <!-- note: needs to talk to backend-->
-                    </p>
-                </div id="roomcontainer">
-            </div>
-            <div class="col">
-                <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
-                    <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg" class="rounded float-auto mb-3 shadow-sm" width="400" height="auto"> <!-- note: pull a different image? idk-->
-                    <p class="text-muted fs-6 me-3 mb-0">
-                        <i class="bi bi-people-fill text-muted"></i>
-                        4 <!-- note: needs to talk to backend-->
-                    </p>
-                    <p class="text-dark fs-6 me-auto text-decoration-underline mb-0">
-                        Placeholder room name <!-- note: needs to talk to backend-->
-                    </p>
-                    <p class="text-dark fs-6 ms-auto mb-0">
-                        09:00-19:00 <!-- note: needs to talk to backend -->
-                    </p>
-                    <p class="text-muted fs-6 me-auto">
-                        Elevator, wheelchair accessible <!-- note: needs to talk to backend-->
-                    </p>
-                </div id="roomcontainer">
-            </div>
+<!-- room bookings -->
+<div class="container-fluid px-4 gap-5 mt-5">
+    <div class="row row-cols-3">
+        <div class="col">
+            <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
+                <a href="./booking"> <!-- note: needs to be properly jinja'd with booking params, talk to colin -->
+                    <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg"
+                        class="rounded float-auto mb-3 shadow border" width="400" height="auto">
+                    <!-- note: pull a different image? idk-->
+                </a>
+                <p class="text-muted fs-6 me-3 mb-0">
+                    <i class="bi bi-people-fill text-muted"></i>
+                    4
+                </p>
+                <p class="text-dark fs-6 me-auto text-decoration-underline mb-0">
+                    Placeholder room name
+                </p>
+                <p class="text-dark fs-6 ms-auto mb-0">
+                    08:00-20:00
+                    <!-- available time, i think we agreed 8am to 8pm hard coded but have to double check -->
+                </p>
+                <p class="text-muted fs-6 me-auto">
+                    Elevator, wheelchair accessible <!-- if wheelchair then text, if projector then text S-->
+                </p>
+            </div id="roomcontainer">
         </div>
-     </div>
+        <div class="col">
+            <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
+                <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg"
+                    class="rounded float-auto mb-3 shadow" width="400" height="auto">
+                <!-- note: pull a different image? idk-->
+                <p class="text-muted fs-6 me-3 mb-0">
+                    <i class="bi bi-people-fill text-muted"></i>
+                    4 <!-- note: needs to talk to backend-->
+                </p>
+                <p class="text-dark fs-6 me-auto text-decoration-underline mb-0">
+                    Placeholder room name <!-- note: needs to talk to backend-->
+                </p>
+                <p class="text-dark fs-6 ms-auto mb-0">
+                    09:00-19:00 <!-- note: needs to talk to backend -->
+                </p>
+                <p class="text-muted fs-6 me-auto">
+                    Elevator, wheelchair accessible <!-- note: needs to talk to backend-->
+                </p>
+            </div id="roomcontainer">
+        </div>
+        <div class="col">
+            <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
+                <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg"
+                    class="rounded float-auto mb-3 shadow-sm" width="400" height="auto">
+                <!-- note: pull a different image? idk-->
+                <p class="text-muted fs-6 me-3 mb-0">
+                    <i class="bi bi-people-fill text-muted"></i>
+                    4 <!-- note: needs to talk to backend-->
+                </p>
+                <p class="text-dark fs-6 me-auto text-decoration-underline mb-0">
+                    Placeholder room name <!-- note: needs to talk to backend-->
+                </p>
+                <p class="text-dark fs-6 ms-auto mb-0">
+                    09:00-19:00 <!-- note: needs to talk to backend -->
+                </p>
+                <p class="text-muted fs-6 me-auto">
+                    Elevator, wheelchair accessible <!-- note: needs to talk to backend-->
+                </p>
+            </div id="roomcontainer">
+        </div>
+        <div class="col">
+            <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
+                <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg"
+                    class="rounded float-auto mb-3 shadow-sm" width="400" height="auto">
+                <!-- note: pull a different image? idk-->
+                <p class="text-muted fs-6 me-3 mb-0">
+                    <i class="bi bi-people-fill text-muted"></i>
+                    4 <!-- note: needs to talk to backend-->
+                </p>
+                <p class="text-dark fs-6 me-auto text-decoration-underline mb-0">
+                    Placeholder room name <!-- note: needs to talk to backend-->
+                </p>
+                <p class="text-dark fs-6 ms-auto mb-0">
+                    09:00-19:00 <!-- note: needs to talk to backend -->
+                </p>
+                <p class="text-muted fs-6 me-auto">
+                    Elevator, wheelchair accessible <!-- note: needs to talk to backend-->
+                </p>
+            </div id="roomcontainer">
+        </div>
+    </div>
+</div>
 {% endblock %}
-

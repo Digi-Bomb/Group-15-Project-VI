@@ -3,17 +3,70 @@
 {% block title %}Booking Details{% endblock %}
 
 {% block content %}
-<h1>{{ booking.booking_name if booking is defined else 'Booking' }}</h1>
 <div class="container-fluid px-5 d-flex flex-wrap">
-        <p class="text-dark fw-bold fs-6 mb-2 w-100 ms-4">Book a room</p>
-        <a class="text-dark fs-6 text-decoration-underline ms-3">
-            <i class="bi bi-geo-alt-fill me-1"></i>
-            Conestoga College, Waterloo <!-- {{Building.bookingName}} , {{Building.location}}-->
-        </a>
-        <a class="text-dark fs-6 text-decoration-underline ms-auto">
-            <i class="bi bi-calendar-week me-1"></i>
-            January 1st, 2026 <!-- vanilla datepicker bullshit -->
-        </a>
+    <p class="text-dark fw-bold fs-6 mb-2 w-100 ms-4">Book a room</p>
+    <a class="text-dark fs-6 text-decoration-underline ms-3">
+        <i class="bi bi-geo-alt-fill me-1"></i>
+        Conestoga College, Waterloo
+    </a>
+    <a class="text-dark fs-6 text-decoration-underline ms-auto">
+        <i class="bi bi-calendar-week me-1"></i>
+        January 1st, 2026 <!-- vanilla datepicker bullshit -->
+    </a>
+</div>
+
+<div class="container-fluid px-5 d-flex flex-wrap mt-5">
+    <p class="text-dark fw-bold fs-5 mb-2 ms-4">3G15 - West Wing</p> <!-- passed param, hard coded for now -->
+    <p class="text-muted fs-5 me-3 ms-3 mb-0">
+        <i class="bi bi-people-fill text-muted"></i>
+        4
+    </p>
+    <p class="text-dark fw-bold fs-5 mb-2 ms-4 ms-auto w-50">
+        08:00 - 20:00
+    </p> <!-- passed param, hard coded for now -->
+</div>
+
+<div class="container-fluid px-5 d-flex flex-wrap">
+    <p class="text-muted fs-6 mb-2 ms-4">Wheelchair accessible, projector available</p>
+    <!-- passed param, hard coded for now -->
+</div>
+
+<div class="container-fluid px-5 d-flex flex-wrap">
+    <div class="card px-3 mt-3" style="width: 53rem;">
+        <div class="card-body">
+            <label for="meetingName" class="form-label">Name your meeting</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="My Meeting..." aria-label="Meeting name"
+                    aria-describedby="basic-addon1" id="meetingName" name="meeting_name">
+            </div>
+            <div class="mb-3 w-10">
+                <label for="numParticipants" class="form-label">How many people are participating?</label>
+                <select class="form-select" id="numParticipants" name="meeting_capacity">
+                    <!-- need jinja loop for actual max participants -->
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="row d-flex">
+                <div class="col mt-2">
+                    <label for="startTime" class="form-label">Start Time</label>
+                    <input type="time" id="startTime" min="08:00" max="20:00" required name="start_time">
+                    <label for="startTime" class="form-label ms-5">End Time</label>
+                    <input type="time" id="endTime" min="08:00" max="20:00" required name="end_time">
+                </div>
+            </div>
+            <!-- HREF MUST BE FIXED W PARAMS-->
+            <button type="submit" href="/meetingdebug" class="btn btn-primary ms-auto mt-3" name="submit">
+                Create meeting
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
     </div>
+</div>
+
+
+
 
 {% endblock %}
