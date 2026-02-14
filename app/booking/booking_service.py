@@ -20,7 +20,7 @@ class BookingService:
         meeting_capacity: int,
     ):
         create_booking = DatabaseWritingServices.create_new_booking(
-            meeting_date=meeting_date, 
+            meeting_date=meeting_date,
             start_time=start_time,
             duration=duration,
             meeting_owner=meeting_owner,

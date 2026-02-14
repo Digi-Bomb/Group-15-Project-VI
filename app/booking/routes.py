@@ -40,10 +40,10 @@ def create_booking():
 #pull a booking by ID and allow viewing / editing of it (1 page or 2?)
 @booking_bp.route('/booking/<int:booking_id>', methods=['GET', 'POST'])
 def manage_booking(booking_id):
-    form = BookingForm() 
+    form = BookingForm()
     if form.validate_on_submit():
         # Process form data and update booking
-        
+
 
         flash("Booking updated successfully!", "success")
         return redirect('/')
