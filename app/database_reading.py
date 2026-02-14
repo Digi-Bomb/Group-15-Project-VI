@@ -5,7 +5,7 @@ class DatabaseReadingServices:
     def __init__(self, database: DatabaseConnection):
         self.database = database
         self.conn = self.database.connect()
-        self.cursor = self.conn.cursor()
+        self.cursor = self.conn.cursor(dictionary=True)
 
     # def generic_registered_user_reads_gets_associated_fields(
     #     self, field_to_find, search_field
@@ -231,3 +231,35 @@ class DatabaseReadingServices:
 
         if result:
             return result
+        
+    def get_rooms(self, building: str | None = None):
+        """
+        Returns a list of rooms.
+        If building is provided, filters by companyBuilding.
+        """
+        sql = """
+            SELECT
+                roomNumber,
+                BID,
+                companyBuilding,
+                wing,
+                wheelchairAccessible,
+                projectorAccess,
+                whiteboardAccess,
+                maximumCapacity
+            FROM Room
+        """
+        params = []
+
+        if building:
+            sql += " WHERE companyBuilding = %s"
+            params.append(building)
+
+        sql += " ORDER BY companyBuilding, wing, roomNumber"
+        try:
+            self.cursor.execute(sql, tuple(params))
+            rooms = self.cursor.fetchall()  # list[dict]
+            return rooms
+        finally:
+            self.cursor.close()  # Empty Cursor
+

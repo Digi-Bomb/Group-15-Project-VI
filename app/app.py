@@ -18,8 +18,7 @@ from logging.handlers import RotatingFileHandler
 from flask_mail import Mail, Message
 
 import os
-from datetime import timedelta
-import time
+from datetime import timedelta, date, time 
 
 # -- CONFIG --
 mail = Mail()
@@ -147,9 +146,19 @@ app.register_blueprint(booking_bp)
 app.register_blueprint(notifications_bp)
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    selected_date = request.args.get("date")
+    if not selected_date:
+        selected_date = date.today().isoformat()
+
+    rooms = database_reader.get_rooms()
+
+    return render_template(
+        "index.html",
+        rooms=rooms,
+        selected_date=selected_date
+    )
 
 
 # IMPORTANT: PLEASE DELETE! DEBUG ROUTE

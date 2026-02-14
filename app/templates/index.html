@@ -27,89 +27,40 @@
 <!-- room bookings -->
 <div class="container-fluid px-4 gap-5 mt-5">
     <div class="row row-cols-3">
-        <div class="col">
-            <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
-                <a href="./booking"> <!-- note: needs to be properly jinja'd with booking params, talk to colin -->
+        {% for room in rooms %}
+            <div class="col mb-4">
+                <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
+
+                <a href="/booking?room={{ room.roomNumber }}&date={{ selected_date }}" title="Book Room {{ room.roomNumber }}">
                     <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg"
-                        class="rounded float-auto mb-3 shadow border" width="400" height="auto">
-                    <!-- note: pull a different image? idk-->
+                        class="rounded float-auto mb-3 shadow border"
+                        width="400" height="auto">
                 </a>
+
                 <p class="text-muted fs-6 me-3 mb-0">
                     <i class="bi bi-people-fill text-muted"></i>
-                    4
+                    {{ room.maximumCapacity }}
                 </p>
+
                 <p class="text-dark fs-6 me-auto text-decoration-underline mb-0">
-                    Placeholder room name
+                    Room {{ room.roomNumber }} ({{ room.companyBuilding }} {{ room.wing }})
                 </p>
+
                 <p class="text-dark fs-6 ms-auto mb-0">
-                    08:00-20:00
-                    <!-- available time, i think we agreed 8am to 8pm hard coded but have to double check -->
+                    08:00–20:00
                 </p>
+
                 <p class="text-muted fs-6 me-auto">
-                    Elevator, wheelchair accessible <!-- if wheelchair then text, if projector then text S-->
+                    {% set features = [] %}
+                    {% if room.wheelchairAccessible %}{% set _ = features.append("Wheelchair accessible") %}{% endif %}
+                    {% if room.projectorAccess %}{% set _ = features.append("Projector") %}{% endif %}
+                    {% if room.whiteboardAccess %}{% set _ = features.append("Whiteboard") %}{% endif %}
+                    {{ features|join(", ") if features else "No listed features" }}
                 </p>
-            </div id="roomcontainer">
-        </div>
-        <div class="col">
-            <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
-                <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg"
-                    class="rounded float-auto mb-3 shadow" width="400" height="auto">
-                <!-- note: pull a different image? idk-->
-                <p class="text-muted fs-6 me-3 mb-0">
-                    <i class="bi bi-people-fill text-muted"></i>
-                    4 <!-- note: needs to talk to backend-->
-                </p>
-                <p class="text-dark fs-6 me-auto text-decoration-underline mb-0">
-                    Placeholder room name <!-- note: needs to talk to backend-->
-                </p>
-                <p class="text-dark fs-6 ms-auto mb-0">
-                    09:00-19:00 <!-- note: needs to talk to backend -->
-                </p>
-                <p class="text-muted fs-6 me-auto">
-                    Elevator, wheelchair accessible <!-- note: needs to talk to backend-->
-                </p>
-            </div id="roomcontainer">
-        </div>
-        <div class="col">
-            <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
-                <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg"
-                    class="rounded float-auto mb-3 shadow-sm" width="400" height="auto">
-                <!-- note: pull a different image? idk-->
-                <p class="text-muted fs-6 me-3 mb-0">
-                    <i class="bi bi-people-fill text-muted"></i>
-                    4 <!-- note: needs to talk to backend-->
-                </p>
-                <p class="text-dark fs-6 me-auto text-decoration-underline mb-0">
-                    Placeholder room name <!-- note: needs to talk to backend-->
-                </p>
-                <p class="text-dark fs-6 ms-auto mb-0">
-                    09:00-19:00 <!-- note: needs to talk to backend -->
-                </p>
-                <p class="text-muted fs-6 me-auto">
-                    Elevator, wheelchair accessible <!-- note: needs to talk to backend-->
-                </p>
-            </div id="roomcontainer">
-        </div>
-        <div class="col">
-            <div class="container-fluid px-5 d-flex flex-wrap gap-0" id="roomcontainer">
-                <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg"
-                    class="rounded float-auto mb-3 shadow-sm" width="400" height="auto">
-                <!-- note: pull a different image? idk-->
-                <p class="text-muted fs-6 me-3 mb-0">
-                    <i class="bi bi-people-fill text-muted"></i>
-                    4 <!-- note: needs to talk to backend-->
-                </p>
-                <p class="text-dark fs-6 me-auto text-decoration-underline mb-0">
-                    Placeholder room name <!-- note: needs to talk to backend-->
-                </p>
-                <p class="text-dark fs-6 ms-auto mb-0">
-                    09:00-19:00 <!-- note: needs to talk to backend -->
-                </p>
-                <p class="text-muted fs-6 me-auto">
-                    Elevator, wheelchair accessible <!-- note: needs to talk to backend-->
-                </p>
-            </div id="roomcontainer">
-        </div>
+
+                </div>
+            </div>
+            {% endfor %}
     </div>
 </div>
 {% endblock %}
