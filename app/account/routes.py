@@ -36,17 +36,18 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-
-        #user submits plaintext password, we hash it and compare to the hash in the database
         user = form.username.data
-        #ISSUE - change this to pull the hash from the database and compare with check_password_hash, currently just hashing the input and comparing to the hash in the database which is not correct
-        password = generate_password_hash(form.password.data)
+        password = form.password.data #
+        #validate_user_information returns a tuple (boolean, message) where boolean indicates success of login and message provides additional context
+        try:
+            ok, user_id = DatabaseReadingServices.validate_user_information(username=user, password=form.password.data)
+        except RuntimeError:
+            flash("Login temporarily unavailable (database offline).", "danger")
+            return render_template("login.html", form=form)
 
-        loginUser = DatabaseReadingServices.validate_user_information(username=user, password=password)
-
-        if loginUser[0]:  # loginUser returns a tuple (boolean, message)
+        if ok:  # loginUser returns a tuple (boolean, message)
             session.permanent = True
-            session["user_id"] = loginUser[1]  # Assuming loginUser[1] contains the user_id
+            session["user_id"] = user_id# Assuming loginUser[1] contains the user_id
             return redirect("/")
 
         flash('Invalid username or password.', 'danger')

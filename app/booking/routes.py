@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template, request, redirect, flash, current_app
+from flask import Blueprint, render_template, request, redirect, flash, current_app, session, abort
 from .booking_service import BookingService
 from forms import BookingForm
 from database_connection import DatabaseConnection
 from database_reading import DatabaseReadingServices
 from database_writing import DatabaseWritingServices
+
 booking_bp = Blueprint('booking', __name__)
 
 #TODO
@@ -12,43 +13,31 @@ booking_bp = Blueprint('booking', __name__)
 #include response codes to all response packages
 #start writing functions for booking service to handle booking creation / editing
 
-
 @booking_bp.route('/booking', methods=['GET', 'POST'])
 def create_booking():
-    #renders booking creation form on GET, processes form data and creates new booking on POST
+    user_id = session.get("user_id")
+    if not user_id:
+        flash("Please log in to create a booking.", "warning")
+        return redirect("/login")
+
     form = BookingForm()
+
+    if request.method == 'GET':
+        date_str = request.args.get('date', '').strip()
+        if date_str:
+            form.meeting_date.data = date_str  # Pre-fill the date field if provided in query parameters
+
     if form.validate_on_submit():
-        #process form data and create new booking
-        newBooking = BookingService.create_booking(
-            meeting_date=form.meeting_date.data,
-            start_time=form.start_time.data,
+        BookingService.create_booking(
+            meetingDate=form.meeting_date.data,
+            startTime=form.start_time.data,
             duration=form.duration.data,
-            meeting_owner=form.meeting_owner.data,
-            meeting_room=form.meeting_room.data,
-            meeting_capacity=form.meeting_capacity.data
+            meetingOwner=user_id
         )
-
-        if newBooking:
-            flash("Booking created successfully!", "success")
-            return redirect('/')
-        else:
-            flash("Failed to create booking.", "danger")
-    #if no form, or form validation fails, render the booking creation form again
-    return render_template('create_booking.html', form=form)
-
-
-#pull a booking by ID and allow viewing / editing of it (1 page or 2?)
-@booking_bp.route('/booking/<int:booking_id>', methods=['GET', 'POST'])
-def manage_booking(booking_id):
-    form = BookingForm() 
-    if form.validate_on_submit():
-        # Process form data and update booking
-        
-
-        flash("Booking updated successfully!", "success")
+        flash("Booking created", "success")
         return redirect('/')
 
-    return render_template('manage_booking.html', booking=booking)
+    return render_template("booking.html", form=form, mode="create")
 
 
 @booking_bp.route('/rsvp', methods=['GET', 'POST'])
