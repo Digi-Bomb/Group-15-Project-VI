@@ -256,10 +256,12 @@ class DatabaseReadingServices:
             params.append(building)
 
         sql += " ORDER BY companyBuilding, wing, roomNumber"
+
+        cursor = self.conn.cursor(dictionary=True)
         try:
-            self.cursor.execute(sql, tuple(params))
-            rooms = self.cursor.fetchall()  # list[dict]
+            cursor.execute(sql, tuple(params))
+            rooms = cursor.fetchall()  # list[dict]
             return rooms
         finally:
-            self.cursor.close()  # Empty Cursor
+            cursor.close()  # Empty Cursor
 

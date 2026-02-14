@@ -1,10 +1,9 @@
 from flask import Flask, render_template, request, redirect, session, g, flash
 
-from forms import RegisterForm, LoginForm, NoteForm, LogoutForm
+from forms import LogoutForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
-import mysql.connector
 import database_connection
 import database_reading
 import database_writing
@@ -160,15 +159,6 @@ def index():
         selected_date=selected_date
     )
 
-
-# IMPORTANT: PLEASE DELETE! DEBUG ROUTE
-@app.route('/booking')
-def booking():
-    return render_template('booking.html')
-
-@app.route('/meetingdebug')
-def meeting():
-    return render_template('meeting.html')
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
