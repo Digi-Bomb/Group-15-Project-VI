@@ -30,10 +30,12 @@ def create_booking():
 
         if newBooking:
             flash("Booking created successfully!", "success")
+            return redirect('/')
         else:
             flash("Failed to create booking.", "danger")
+    #if no form, or form validation fails, render the booking creation form again
+    return render_template('create_booking.html', form=form)
 
-    return redirect('/')
 
 #pull a booking by ID and allow viewing / editing of it (1 page or 2?)
 @booking_bp.route('/booking/<int:booking_id>', methods=['GET', 'POST'])
