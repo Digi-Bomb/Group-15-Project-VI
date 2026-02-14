@@ -4,7 +4,6 @@ from forms import RegisterForm, LoginForm, NoteForm, LogoutForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
-import mysql.connector
 import database_connection
 import database_reading
 import database_writing
