@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, g, flash
 
-from forms import RegisterForm, LoginForm, NoteForm, LogoutForm
+from forms import LogoutForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
 

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, flash, current_app
-from app.booking.booking_service import BookingService
+from .booking_service import BookingService
 from forms import BookingForm
 from database_connection import DatabaseConnection
 from database_reading import DatabaseReadingServices
