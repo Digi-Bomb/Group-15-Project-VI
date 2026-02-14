@@ -1,14 +1,19 @@
 var searchData=
 [
-  ['check_5ffor_5froom_5favailability_0',['check_for_room_availability',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a6cfd814ded17e29e2f7cdbe4e40c14d3',1,'app::database_reading::DatabaseReadingServices']]],
-  ['check_5fif_5funregistered_5fuser_5fnickname_5fis_5ftaken_5ffor_5fspecific_5fmeeting_1',['check_if_unregistered_user_nickname_is_taken_for_specific_meeting',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a1b132aadf3db0b7db428c3dbcb9da2b8',1,'app::database_reading::DatabaseReadingServices']]],
-  ['check_5fif_5fuser_5fis_5fregistered_5falready_2',['check_if_user_is_registered_already',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a2e3cce9f4c44d974ee5a437fb9cac666',1,'app::database_reading::DatabaseReadingServices']]],
-  ['community_3',['Community',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md10',1,'']]],
-  ['connect_4',['connect',['../classapp_1_1database__connection_1_1DatabaseConnection.html#a58e7bb46d0b5559d0969f95a48e939ae',1,'app::database_connection::DatabaseConnection']]],
-  ['contents_5',['Table of contents',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md1',1,'']]],
-  ['contributing_6',['Contributing',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md9',1,'']]],
-  ['copyright_20and_20license_7',['Copyright and license',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md16',1,'']]],
-  ['create_5fnew_5fbooking_8',['create_new_booking',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a7cf42899022d0268bdb6797d3f7b2cd6',1,'app::database_writing::DatabaseWritingServices']]],
-  ['create_5fnew_5fuser_9',['create_new_user',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a417cccd1d46d2dde082f3ce6d5da8eaa',1,'app::database_writing::DatabaseWritingServices']]],
-  ['creators_10',['Creators',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md12',1,'']]]
+  ['data_5fvalidator_2epy_0',['data_validator.py',['../data__validator_8py.html',1,'']]],
+  ['database_1',['database',['../classapp_1_1notifications_1_1in__app__notification__service_1_1InAppNotificationService.html#a9cef837450ada31727f622ca87b0e928',1,'app.notifications.in_app_notification_service.InAppNotificationService.database'],['../classapp_1_1account_1_1account__service_1_1AccountService.html#a3d978de80dd68937f06b2d26e950abde',1,'app.account.account_service.AccountService.database'],['../classapp_1_1booking_1_1booking__service_1_1BookingService.html#ae05408d570ac0b3d1c5d8bf5503c826a',1,'app.booking.booking_service.BookingService.database'],['../classapp_1_1booking_1_1room__service_1_1RoomService.html#a84203394635634998169c3d5fe525243',1,'app.booking.room_service.RoomService.database'],['../classapp_1_1booking_1_1rsvp__service_1_1AccountService.html#aac9177eecdc54b8524f8b26253213169',1,'app.booking.rsvp_service.AccountService.database'],['../classapp_1_1database__connection_1_1DatabaseConnection.html#a6756fd5ba85d4aa389bed5a4e68a057f',1,'app.database_connection.DatabaseConnection.database'],['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#abd56ca8736d6e19056ee3041fa110828',1,'app.database_reading.DatabaseReadingServices.database'],['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a4c7f3ff33c0bdec9c9fa71b2adb885a2',1,'app.database_writing.DatabaseWritingServices.database'],['../classapp_1_1notifications_1_1email__notification__service_1_1EmailNotificationService.html#a2d4223d12340151564e4fccc0fd151d7',1,'app.notifications.email_notification_service.EmailNotificationService.database']]],
+  ['database_5fconnection_2epy_2',['database_connection.py',['../database__connection_8py.html',1,'']]],
+  ['database_5fread_5fservicer_3',['database_read_servicer',['../namespaceapp_1_1app.html#a2234f2dcd1b4ea3f5d84fd838e0a7591',1,'app::app']]],
+  ['database_5freader_4',['database_reader',['../namespaceapp_1_1app.html#a732be3227d00d82d62ede11c155f386c',1,'app::app']]],
+  ['database_5freading_2epy_5',['database_reading.py',['../database__reading_8py.html',1,'']]],
+  ['database_5fwriting_2epy_6',['database_writing.py',['../database__writing_8py.html',1,'']]],
+  ['databaseconn_7',['databaseConn',['../namespaceapp_1_1app.html#ac306d926ddb23731be54706d17174a7b',1,'app::app']]],
+  ['databaseconnection_8',['DatabaseConnection',['../classapp_1_1database__connection_1_1DatabaseConnection.html',1,'app::database_connection']]],
+  ['databasereadingservices_9',['DatabaseReadingServices',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html',1,'app::database_reading']]],
+  ['databasewritingservices_10',['DatabaseWritingServices',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html',1,'app::database_writing']]],
+  ['datavalidator_11',['DataValidator',['../classapp_1_1data__validator_1_1DataValidator.html',1,'app::data_validator']]],
+  ['delete_5fassociation_12',['delete_association',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#ad84c87211995ba8e4989507ff5939270',1,'app::database_writing::DatabaseWritingServices']]],
+  ['delete_5fbooking_13',['delete_booking',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a3b04c1e88494c4938bf4606fffff3412',1,'app::database_writing::DatabaseWritingServices']]],
+  ['duration_14',['duration',['../classapp_1_1forms_1_1BookingForm.html#af8de191404b32d32ed5f2b35ba9caef7',1,'app::forms::BookingForm']]],
+  ['duration_5fhours_15',['duration_hours',['../classapp_1_1booking_1_1booking_1_1Booking.html#a22e897b98131694703d94f69243cb1aa',1,'app::booking::booking::Booking']]]
 ];

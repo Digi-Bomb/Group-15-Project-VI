@@ -70,7 +70,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>app</b></li><li class="navelem"><a class="el" href="namespaceapp_1_1account.html">account</a></li><li class="navelem"><a class="el" href="namespaceapp_1_1account_1_1routes.html">routes</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceapp.html">app</a></li><li class="navelem"><a class="el" href="namespaceapp_1_1account.html">account</a></li><li class="navelem"><a class="el" href="namespaceapp_1_1account_1_1routes.html">routes</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -80,33 +80,23 @@ $(function() {
   <div class="headertitle"><div class="title">app.account.routes Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Account authentication routes module.  
-<a href="namespaceapp_1_1account_1_1routes.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a5cb70dcccb72c3f8e2ef59cfcd37cdab" id="r_a5cb70dcccb72c3f8e2ef59cfcd37cdab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1account_1_1routes.html#a5cb70dcccb72c3f8e2ef59cfcd37cdab">register</a> ()</td></tr>
-<tr class="memdesc:a5cb70dcccb72c3f8e2ef59cfcd37cdab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle user registration.  <br /></td></tr>
 <tr class="separator:a5cb70dcccb72c3f8e2ef59cfcd37cdab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd6c1b7023be24b04df309a8cffd5d88" id="r_acd6c1b7023be24b04df309a8cffd5d88"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1account_1_1routes.html#acd6c1b7023be24b04df309a8cffd5d88">login</a> ()</td></tr>
-<tr class="memdesc:acd6c1b7023be24b04df309a8cffd5d88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle user login authentication.  <br /></td></tr>
 <tr class="separator:acd6c1b7023be24b04df309a8cffd5d88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71ecde56487f717c1b3f3beca9073070" id="r_a71ecde56487f717c1b3f3beca9073070"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1account_1_1routes.html#a71ecde56487f717c1b3f3beca9073070">logout</a> ()</td></tr>
-<tr class="memdesc:a71ecde56487f717c1b3f3beca9073070"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle user logout.  <br /></td></tr>
 <tr class="separator:a71ecde56487f717c1b3f3beca9073070"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ace7654fd92328c46011ee87c6794c591" id="r_ace7654fd92328c46011ee87c6794c591"><td class="memItemLeft" align="right" valign="top"><a id="ace7654fd92328c46011ee87c6794c591" name="ace7654fd92328c46011ee87c6794c591"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>account_bp</b> = Blueprint(&quot;account&quot;, __name__)</td></tr>
-<tr class="memdesc:ace7654fd92328c46011ee87c6794c591"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blueprint for account-related routes. <br /></td></tr>
+<tr class="memitem:ace7654fd92328c46011ee87c6794c591" id="r_ace7654fd92328c46011ee87c6794c591"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1account_1_1routes.html#ace7654fd92328c46011ee87c6794c591">account_bp</a> = Blueprint(&quot;account&quot;, __name__)</td></tr>
+<tr class="memdesc:ace7654fd92328c46011ee87c6794c591"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blueprint for account-related routes.  <br /></td></tr>
 <tr class="separator:ace7654fd92328c46011ee87c6794c591"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Account authentication routes module. </p>
-<p>This module defines Flask routes for account management including user registration, login, and logout functionality. </p>
-</div><h2 class="groupheader">Function Documentation</h2>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="acd6c1b7023be24b04df309a8cffd5d88" name="acd6c1b7023be24b04df309a8cffd5d88"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acd6c1b7023be24b04df309a8cffd5d88">&#9670;&#160;</a></span>login()</h2>
 
@@ -121,9 +111,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Handle user login authentication. </p>
-<p>Handles both GET requests to display the login form and POST requests to authenticate user credentials. Verifies username and password against the database and establishes a session if credentials are valid. </p><dl class="section return"><dt>Returns</dt><dd>Rendered login template on GET or home redirect on successful POST </dd></dl>
 
 </div>
 </div>
@@ -142,9 +129,6 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Handle user logout. </p>
-<p>Clears the user session and logs out the current user. Requires a valid logout form submission. </p><dl class="section return"><dt>Returns</dt><dd>Redirect to home page after logout </dd></dl>
-
 </div>
 </div>
 <a id="a5cb70dcccb72c3f8e2ef59cfcd37cdab" name="a5cb70dcccb72c3f8e2ef59cfcd37cdab"></a>
@@ -162,8 +146,22 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Handle user registration. </p>
-<p>Handles both GET requests to display the registration form and POST requests to process new user registration. Validates form data and inserts new user into the RegisteredUser table in the database. </p><dl class="section return"><dt>Returns</dt><dd>Rendered registration template on GET or login redirect on successful POST </dd></dl>
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ace7654fd92328c46011ee87c6794c591" name="ace7654fd92328c46011ee87c6794c591"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace7654fd92328c46011ee87c6794c591">&#9670;&#160;</a></span>account_bp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.account.routes.account_bp = Blueprint(&quot;account&quot;, __name__)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Blueprint for account-related routes. </p>
 
 </div>
 </div>
