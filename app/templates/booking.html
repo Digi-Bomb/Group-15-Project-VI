@@ -32,41 +32,39 @@
 </div>
 
 <div class="container-fluid px-5 d-flex flex-wrap">
-    <form method="POST" action="meeting/debug"> <!-- TODO: BROKEN-->
-        <div class="card px-3 mt-3" style="width: 53rem;">
-            <form method="POST" action="/meeting"> <!-- TODO: fix link to post with generated link(??) -->
-                <div class="card-body">
-                    <label for="meetingName" class="form-label">Name your meeting</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="My Meeting..." aria-label="Meeting name"
-                            aria-describedby="basic-addon1" id="meetingName" name="meeting_name">
+    <div class="card px-3 mt-3" style="width: 53rem;">
+        <form method="POST" action="/meeting"> <!-- TODO: fix link to post with generated link(??) -->
+            <div class="card-body">
+                <label for="meetingName" class="form-label">Name your meeting</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="My Meeting..." aria-label="Meeting name"
+                        aria-describedby="basic-addon1" id="meetingName" name="meeting_name">
+                </div>
+                <div class="mb-3 w-10">
+                    <label for="numParticipants" class="form-label">How many people are participating?</label>
+                    <select class="form-select" id="numParticipants" name="meeting_capacity">
+                        <!-- need jinja loop for actual max participants -->
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <div class="row d-flex">
+                    <div class="col mt-2">
+                        <label for="startTime" class="form-label">Start Time</label>
+                        <input type="time" id="startTime" min="08:00" max="20:00" required name="start_time">
+                        <label for="startTime" class="form-label ms-5">End Time</label>
+                        <input type="time" id="endTime" min="08:00" max="20:00" required name="end_time">
                     </div>
-                    <div class="mb-3 w-10">
-                        <label for="numParticipants" class="form-label">How many people are participating?</label>
-                        <select class="form-select" id="numParticipants" name="meeting_capacity">
-                            <!-- need jinja loop for actual max participants -->
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    </div>
-                    <div class="row d-flex">
-                        <div class="col mt-2">
-                            <label for="startTime" class="form-label">Start Time</label>
-                            <input type="time" id="startTime" min="08:00" max="20:00" required name="start_time">
-                            <label for="startTime" class="form-label ms-5">End Time</label>
-                            <input type="time" id="endTime" min="08:00" max="20:00" required name="end_time">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary ms-auto mt-3" name="submit">
-                        Create meeting
-                        <i class="bi bi-arrow-right"></i>
-                    </button>
-            </form>
-        </div>
+                </div>
+                <button type="submit" class="btn btn-primary ms-auto mt-3" name="submit">
+                    Create meeting
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+        </form>
+    </div>
 </div>
-</form>
 </div>
 
 
