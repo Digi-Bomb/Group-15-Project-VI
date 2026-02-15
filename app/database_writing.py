@@ -64,13 +64,15 @@ class DatabaseWritingServices:
         FALSE == BOOKING DETAILS FAILED; ROOM TAKEN OR MEETING SIZE TOO LARGE"""
 
         checkAvailable = self.reader.check_for_room_availability(
-            room_number=meeting_room
+            room_number=meeting_room, meeting_date=meeting_date, start_time=start_time,duration=duration
         )
+
+        #print("chck available: ", checkAvailable)
 
         roomCapacity = self.reader.get_capacity_of_room(room_number=meeting_room)
 
         if checkAvailable:
-
+        
             if meeting_capacity <= roomCapacity:
                 query = """
                     INSERT INTO Booking
@@ -121,10 +123,8 @@ class DatabaseWritingServices:
 
         try:
             query = """
-                UPDATE Room
-                SET BID = (%s)
-                WHERE roomNumber = (%s)
-                AND BID IS NULL
+                INSERT INTO RoomsAssociatedWithBookings(BID, RID)
+                VALUES (%s, %s)
             """
 
             values = (BID, meeting_room)
@@ -187,6 +187,9 @@ class DatabaseWritingServices:
             attempt_delete_association = self.delete_association(BID=BID)
             attempt_free_room = self.update_room_as_available(BID=BID)
 
+            print(attempt_delete_association)
+            print(attempt_free_room)
+            
             if attempt_delete_association and attempt_free_room:
                 self.cursor.execute("DELETE FROM Booking WHERE BID = %s", (BID,))
                 self.conn.commit()
@@ -229,7 +232,7 @@ class DatabaseWritingServices:
         FALSE == ROOM NOT UPDATED"""
 
         try:
-            self.cursor.execute("UPDATE Room SET BID = NULL WHERE BID = %s", (BID,))
+            self.cursor.execute("DELETE FROM RoomsAssociatedWithBookings WHERE BID = %s", (BID,))
             self.conn.commit()
 
             return True
