@@ -16,7 +16,10 @@
 </div>
 
 <div class="container-fluid px-5 d-flex flex-wrap mt-5">
-    <p class="text-dark fw-bold fs-5 mb-2 ms-4">3G15 - West Wing</p> <!-- passed param, hard coded for now -->
+    <p class="text-dark fw-bold fs-5 mb-2 ms-4">
+        {% if booking is defined %}
+        3G15 - West Wing</p> <!-- passed param, hard coded for now -->
+    {% endif %}
     <p class="text-muted fs-5 me-3 ms-3 mb-0">
         <i class="bi bi-people-fill text-muted"></i>
         4
@@ -33,7 +36,8 @@
 
 <div class="container-fluid px-5 d-flex flex-wrap">
     <div class="card px-3 mt-3" style="width: 53rem;">
-        <form method="POST" action="/meeting"> <!-- TODO: fix link to post with generated link(??) -->
+        <form method="POST" action="{{ url_for('booking', booking_id=booking_id) }}"> <!-- TODO: i think this link should work? -->
+             {{ form.hidden_tag() }}
             <div class="card-body">
                 <label for="meetingName" class="form-label">Name your meeting</label>
                 <div class="input-group mb-3">

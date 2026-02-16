@@ -34,7 +34,7 @@ def create_booking():
         else:
             flash("Failed to create booking.", "danger")
     #if no form, or form validation fails, render the booking creation form again
-    return render_template('create_booking.html', form=form)
+    return render_template('booking.html', form=form)
 
 
 #pull a booking by ID and allow viewing / editing of it (1 page or 2?)
@@ -48,7 +48,7 @@ def manage_booking(booking_id):
         flash("Booking updated successfully!", "success")
         return redirect('/')
 
-    return render_template('manage_booking.html', booking=booking)
+    return render_template('meeting.html', booking=booking)
 
 
 @booking_bp.route('/rsvp', methods=['GET', 'POST'])
