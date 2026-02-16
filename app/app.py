@@ -119,9 +119,10 @@ database_read_servicer = database_reading.DatabaseReadingServices(
 databaseConn = database_connection.DatabaseConnection()
 database_reader = database_reading.DatabaseReadingServices(databaseConn)
 
-createUser = database_writing.DatabaseWritingServices(
+createBooking= database_writing.DatabaseWritingServices(
     databaseConn, database_reader
-).delete_booking(1046)
+).delete_booking(1078)
+
 
 # testAddBID = testAddBID[1]
 # if testAddBID == 0:
@@ -133,7 +134,7 @@ createUser = database_writing.DatabaseWritingServices(
 #     database_connection.DatabaseConnection()
 # ).get_username_via_RUID("1000")
 
-print("Checking For create user... ", createUser)
+print("Checking For create user... ",createBooking )
 
 # -- ROUTES --
 from account.routes import account_bp

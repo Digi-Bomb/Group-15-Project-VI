@@ -120,12 +120,12 @@ REQUIRES BOOKING ID AND NICKNAME TO CHECK; RETURNS TUPLE OF BOOLEAN AND RESP MES
 TRUE == Nickname Available <br  />
 FALSE == Nickname Taken.  <br /></td></tr>
 <tr class="separator:a1b132aadf3db0b7db428c3dbcb9da2b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cfd814ded17e29e2f7cdbe4e40c14d3" id="r_a6cfd814ded17e29e2f7cdbe4e40c14d3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a6cfd814ded17e29e2f7cdbe4e40c14d3">check_for_room_availability</a> (self, str room_number)</td></tr>
-<tr class="memdesc:a6cfd814ded17e29e2f7cdbe4e40c14d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that validates that a room is available for use <br  />
+<tr class="memitem:a9b1da0045a5d7cf63c3b90eddacdd1c4" id="r_a9b1da0045a5d7cf63c3b90eddacdd1c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a9b1da0045a5d7cf63c3b90eddacdd1c4">check_for_room_availability</a> (self, str room_number, str meeting_date, str start_time, str duration)</td></tr>
+<tr class="memdesc:a9b1da0045a5d7cf63c3b90eddacdd1c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that validates that a room is available for use <br  />
 RETURNS BOOLEAN VALUE <br  />
 TRUE == ROOM IS AVAILABLE <br  />
 FALSE == ROOM TAKEN.  <br /></td></tr>
-<tr class="separator:a6cfd814ded17e29e2f7cdbe4e40c14d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a9b1da0045a5d7cf63c3b90eddacdd1c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac11ab2bdb659a0a9cbc4c9b089422130" id="r_ac11ab2bdb659a0a9cbc4c9b089422130"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#ac11ab2bdb659a0a9cbc4c9b089422130">get_capacity_of_room</a> (self, int room_number)</td></tr>
 <tr class="memdesc:ac11ab2bdb659a0a9cbc4c9b089422130"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the INTEGER Capacity of the room (specified by room number)  <br /></td></tr>
 <tr class="separator:ac11ab2bdb659a0a9cbc4c9b089422130"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,8 +172,8 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6cfd814ded17e29e2f7cdbe4e40c14d3" name="a6cfd814ded17e29e2f7cdbe4e40c14d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6cfd814ded17e29e2f7cdbe4e40c14d3">&#9670;&#160;</a></span>check_for_room_availability()</h2>
+<a id="a9b1da0045a5d7cf63c3b90eddacdd1c4" name="a9b1da0045a5d7cf63c3b90eddacdd1c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b1da0045a5d7cf63c3b90eddacdd1c4">&#9670;&#160;</a></span>check_for_room_availability()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -188,7 +188,26 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">str&#160;</td>
-          <td class="paramname"><em>room_number</em>&#160;</td>
+          <td class="paramname"><em>room_number</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str&#160;</td>
+          <td class="paramname"><em>meeting_date</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str&#160;</td>
+          <td class="paramname"><em>start_time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str
+    &#160;</td>
+          <td class="paramname"><em>duration</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
