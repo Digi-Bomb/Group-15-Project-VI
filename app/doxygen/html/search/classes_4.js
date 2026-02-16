@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['timemanager_0',['TimeManager',['../classapp_1_1time__manager_1_1_time_manager.html',1,'app::time_manager']]]
+  ['inappnotificationservice_0',['InAppNotificationService',['../classapp_1_1notifications_1_1in__app__notification__service_1_1InAppNotificationService.html',1,'app::notifications::in_app_notification_service']]]
 ];

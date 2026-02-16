@@ -3,27 +3,41 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<h1>Register</h1>
+<div class=" d-flex px-5 flex-wrap align-middle gap-5">
+    <div class="card p-5 mx-auto gap-2 d-flex" style="width: 35rem;">
+        <h4 class="fw-bold">Register for BookEZ</h4>
+        <form method="POST" action="/register">
+            <label for="username" class="form-label">Username</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control border border-primary" placeholder="username"
+                    aria-label="Enter your username" aria-describedby="basic-addon1" id="username" name="username">
+            </div>
+            <label for="email" class="form-label">E-Mail</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control border border-primary" placeholder="email@email.com"
+                    aria-label="Enter your e-mail" aria-describedby="basic-addon1" id="email" name="email">
+            </div>
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control border border-primary" placeholder="password"
+                    aria-label="Enter your password" aria-describedby="basic-addon1" id="password" name="password">
+            </div>
+            <p>Already have an account? <a href="/login">Login</a></p>
+            <div class="row d-flex">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary me-auto mt-3 d-flex"
+                        style="width: 10rem; display: flex;" name="submit">
+                        Register
+                        <i class="bi bi-arrow-right ms-auto"></i>
+                    </button>
+                </div>
+        </form>
+        </div>
+    </div>
+</div>
+</div>
 
-<form method="post">
-    {{ form.hidden_tag() }}
-    <div>
-        {{ form.username.label }}<br>
-        {{ form.username(size=32) }}
-    </div>
-    <div>
-        {{ form.password.label }}<br>
-        {{ form.password(size=32) }}
-    </div>
-    <div>
-        {{ form.confirm_password.label }}<br>
-        {{ form.confirm_password(size=32) }}
-    </div>
-    <div>
-        {{ form.submit(class_='btn') }}
-    </div>
-</form>
 
-<p>Already have an account? <a href="/login">Login</a></p>
+
 
 {% endblock %}

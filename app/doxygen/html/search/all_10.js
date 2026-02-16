@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['shareablelink_0',['ShareableLink',['../classapp_1_1booking_1_1shareable__link_1_1ShareableLink.html',1,'app::booking::shareable_link']]],
-  ['sponsors_1',['Sponsors',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md14',1,'']]],
-  ['start_2',['Quick start',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md2',1,'']]],
-  ['status_3',['Status',['../md_app_2static_2scss_2bootstrap_2README.html#autotoc_md3',1,'']]]
+  ['time_5fmanager_0',['time_manager',['../classapp_1_1booking_1_1booking__service_1_1BookingService.html#a4308d53b4c6e9f944be0d768e2ae2c50',1,'app::booking::booking_service::BookingService']]],
+  ['time_5fmanager_2epy_1',['time_manager.py',['../time__manager_8py.html',1,'']]],
+  ['timemanager_2',['TimeManager',['../classapp_1_1time__manager_1_1TimeManager.html',1,'app::time_manager']]]
 ];

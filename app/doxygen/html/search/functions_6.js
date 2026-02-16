@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['login_0',['login',['../namespaceapp_1_1account_1_1routes.html#acd6c1b7023be24b04df309a8cffd5d88',1,'app::account::routes']]],
-  ['logout_1',['logout',['../namespaceapp_1_1account_1_1routes.html#a71ecde56487f717c1b3f3beca9073070',1,'app::account::routes']]]
+  ['index_0',['index',['../namespaceapp_1_1app.html#a54c93b9697673e5749bb5fcc0bd8f9c8',1,'app::app']]]
 ];
