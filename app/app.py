@@ -17,8 +17,7 @@ from logging.handlers import RotatingFileHandler
 from flask_mail import Mail, Message
 
 import os
-from datetime import timedelta
-import time
+from datetime import timedelta, date, time 
 
 # -- CONFIG --
 mail = Mail()
@@ -147,19 +146,20 @@ app.register_blueprint(booking_bp)
 app.register_blueprint(notifications_bp)
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    selected_date = request.args.get("date")
+    if not selected_date:
+        selected_date = date.today().isoformat()
 
-# debug routes for didi (me)
+    rooms = database_reader.get_rooms()
 
-@app.route("/meeting")
-def meeting():
-    return render_template("meeting.html")
+    return render_template(
+        "index.html",
+        rooms=rooms,
+        selected_date=selected_date
+    )
 
-@app.route("/profile")
-def profile():
-    return render_template("profile.html")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

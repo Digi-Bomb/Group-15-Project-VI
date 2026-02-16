@@ -1,3 +1,4 @@
+from werkzeug.security import check_password_hash
 from database_connection import DatabaseConnection
 from datetime import time, datetime, timedelta, date
 
@@ -5,8 +6,21 @@ from datetime import time, datetime, timedelta, date
 class DatabaseReadingServices:
     def __init__(self, database: DatabaseConnection):
         self.database = database
-        self.conn = self.database.connect()
-        self.cursor = self.conn.cursor()
+        self.conn = None
+        self.cursor = None
+
+        try:
+            self.conn = self.database.connect()
+            self.cursor = self.conn.cursor(dictionary=True)
+        except Exception as e:
+            # Don't crash Flask startup; just record the failure.
+            self.conn = None
+            self.cursor = None
+            print(f"[DB WARNING] Database connection failed: {e}")
+
+    def _require_db(self):
+        if not self.conn or not self.cursor:
+            raise RuntimeError("Database unavailable")
 
     # def generic_registered_user_reads_gets_associated_fields(
     #     self, field_to_find, search_field
@@ -53,15 +67,15 @@ class DatabaseReadingServices:
         self.cursor.close()  # Empty Cursor
 
         if result:
-
-            if result == password:
+            #moved comparison of password hash to here since we need to pull the hash from the database first before we can compare it to the plaintext password input by the user
+            if check_password_hash(result, password):
                 return True, "Successful Login"
 
             else:
                 return False, "Incorrect Login Information"
 
         else:
-            False, "Unable to find the account registered under this email or username"
+            return False, "Unable to find the account registered under this email or username"
 
     def get_specific_meeting_owner_for_booking(self, BID: int):
         """Function that returns the sole meeting owner (via RID) of a particular booking (specified by BID)"""
@@ -270,3 +284,37 @@ class DatabaseReadingServices:
 
         if result:
             return result
+        
+    def get_rooms(self, building: str | None = None):
+        """
+        Returns a list of rooms.
+        If building is provided, filters by companyBuilding.
+        """
+        sql = """
+            SELECT
+                roomNumber,
+                BID,
+                companyBuilding,
+                wing,
+                wheelchairAccessible,
+                projectorAccess,
+                whiteboardAccess,
+                maximumCapacity
+            FROM Room
+        """
+        params = []
+
+        if building:
+            sql += " WHERE companyBuilding = %s"
+            params.append(building)
+
+        sql += " ORDER BY companyBuilding, wing, roomNumber"
+
+        cursor = self.conn.cursor(dictionary=True)
+        try:
+            cursor.execute(sql, tuple(params))
+            rooms = cursor.fetchall()  # list[dict]
+            return rooms
+        finally:
+            cursor.close()  # Empty Cursor
+
