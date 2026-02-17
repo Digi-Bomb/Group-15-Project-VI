@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextAreaField, SubmitField, TimeField, DateField
+from wtforms import StringField, PasswordField, TextAreaField, SubmitField, TimeField, DateField, SelectField
 from wtforms.validators import DataRequired, Length, ValidationError, EqualTo, Regexp
 
 
@@ -36,4 +36,5 @@ class BookingForm(FlaskForm):
     meeting_date = DateField("Meeting Date", validators=[DataRequired()])
     start_time = TimeField("Start Time", validators=[DataRequired()])
     duration = TimeField("Duration", validators=[DataRequired()])
+    meeting_capacity = SelectField("Capacity", coerce=int)
     submit = SubmitField()
