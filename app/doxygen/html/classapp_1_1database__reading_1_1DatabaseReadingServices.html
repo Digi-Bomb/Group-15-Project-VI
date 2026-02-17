@@ -135,6 +135,9 @@ FALSE == ROOM TAKEN.  <br /></td></tr>
 <tr class="memitem:a04d93c5a73ffea3df29d39cda5cd968e" id="r_a04d93c5a73ffea3df29d39cda5cd968e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a04d93c5a73ffea3df29d39cda5cd968e">get_booking_information_of_specific_booking</a> (self, int BID)</td></tr>
 <tr class="memdesc:a04d93c5a73ffea3df29d39cda5cd968e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the meeting date, time, duration, and room of a particular booking.  <br /></td></tr>
 <tr class="separator:a04d93c5a73ffea3df29d39cda5cd968e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5091584715bb0504a6f0afabf754e11b" id="r_a5091584715bb0504a6f0afabf754e11b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a5091584715bb0504a6f0afabf754e11b">get_rooms</a> (self, str|None building=None)</td></tr>
+<tr class="memdesc:a5091584715bb0504a6f0afabf754e11b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of rooms.  <br /></td></tr>
+<tr class="separator:a5091584715bb0504a6f0afabf754e11b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab682f55c14913e48f7736e6297be6acd" id="r_ab682f55c14913e48f7736e6297be6acd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#ab682f55c14913e48f7736e6297be6acd">get_booking_start_and_end_times_for_specific_room</a> (self, str room_number)</td></tr>
 <tr class="memdesc:ab682f55c14913e48f7736e6297be6acd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns a list of start times, end times, and dates for all bookings under a particular room.  <br /></td></tr>
 <tr class="separator:ab682f55c14913e48f7736e6297be6acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -578,6 +581,37 @@ FALSE == UNREGISTERED. </p>
 </div><div class="memdoc">
 
 <p>Function that returns a TUPLE (list) of all registered attendees for a specific meeting. </p>
+
+</div>
+</div>
+<a id="a5091584715bb0504a6f0afabf754e11b" name="a5091584715bb0504a6f0afabf754e11b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5091584715bb0504a6f0afabf754e11b">&#9670;&#160;</a></span>get_rooms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_reading.DatabaseReadingServices.get_rooms </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str | None &#160;</td>
+          <td class="paramname"><em>building</em> = <code>None</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a list of rooms. </p>
+<p>If building is provided, filters by companyBuilding. </p>
 
 </div>
 </div>
