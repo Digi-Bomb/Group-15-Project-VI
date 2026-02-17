@@ -10,8 +10,8 @@
         Conestoga College, Waterloo
     </a>
     <a class="text-dark fs-6 text-decoration-underline ms-auto">
-        <i class="bi bi-calendar-week me-1"></i>
-        {{selected_date}}6 <!-- vanilla datepicker bullshit -->
+        <i class="bi bi-calendar-week me-1" name="calendarDate"></i>
+        {{selected_date}} <!-- vanilla datepicker bullshit -->
     </a>
 </div>
 
@@ -36,14 +36,14 @@
         {% if room.projectorAccess %}{% set _ = features.append("Projector") %}{% endif %}
         {% if room.whiteboardAccess %}{% set _ = features.append("Whiteboard") %}{% endif %}
         {{ features|join(", ") if features else "No listed features" }}</p>
-    <!-- passed param, hard coded for now -->
+
 </div>
 
 <div class="container-fluid px-5 d-flex flex-wrap">
     <div class="card px-3 mt-3" style="width: 53rem;">
-        <form method="POST" action="{{ url_for('booking.create_booking', room_number=room.roomNumber, date=form.meeting_date.data) }}">
+        <form method="POST"
+            action="{{ url_for('booking.create_booking', room_number=room.roomNumber, date=form.meeting_date.data) }}">
 
-            <!-- TODO: i think this link should work? -->
             {{ form.hidden_tag() }}
             <div class="card-body">
                 <label for="meetingName" class="form-label">Name your meeting</label>
@@ -54,11 +54,11 @@
                 <div class="mb-3 w-10">
                     <label for="numParticipants" class="form-label">How many people are participating?</label>
                     <select class="form-select" id="numParticipants" name="meeting_capacity">
-                        <!-- need jinja loop for actual max participants -->
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                        {% for i in range(1, room.maximumCapacity + 1) %}
+                        <option value="{{ i }}" {% if form.participants.data==i %}selected{% endif %}>
+                            {{ i }}
+                        </option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="row d-flex">
