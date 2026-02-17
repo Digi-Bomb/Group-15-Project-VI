@@ -13,9 +13,11 @@ booking_bp = Blueprint('booking', __name__)
 #include response codes to all response packages
 #start writing functions for booking service to handle booking creation / editing
 
+#needs to take room number and date ?room={{ room.roomNumber }}&date={{ selected_date }}
 @booking_bp.route('/booking', methods=['GET', 'POST'])
 def create_booking():
     user_id = session.get("user_id")
+    room = request.args.get('room', '').strip()
     # TEMP COMMENT
     # if not user_id:
     #   flash("Please log in to create a booking.", "warning")
@@ -40,7 +42,7 @@ def create_booking():
         flash("Booking created", "success")
         return redirect('/meeting.html') # TODO: FIX
 
-    return render_template("booking.html", form=form, mode="create")
+    return render_template("booking.html", form=form, mode="create", room=room)
     
 
 
