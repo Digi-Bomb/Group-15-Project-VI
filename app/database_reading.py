@@ -480,7 +480,7 @@ class DatabaseReadingServices:
             return result
         else:
             return "No unregistered user found for that RUID."
-        
+
     def get_rooms(self, building: str | None = None):
             """
             Returns a list of rooms.

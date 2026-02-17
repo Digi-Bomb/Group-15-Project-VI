@@ -48,7 +48,7 @@ def create_booking():
             meetingDate=form.meeting_date.data,
             startTime=form.start_time.data,
             duration="02:00",
-            meetingOwner=user_id, 
+            meetingOwner=user_id,
             meetingRoom=room_number,
             meetingCapacity=form.meeting_capacity.data
         )
@@ -83,7 +83,7 @@ def view_booking(booking_id):
 
 #write patch route for booking editing - only allow owner of booking to edit - add delete?
 @booking_bp.route('/booking/<int:booking_id>/edit', methods=['GET','PATCH', 'DELETE'])
-def edit_booking(booking_id): 
+def edit_booking(booking_id):
     db = DatabaseConnection()
     reader = DatabaseReadingServices(db)
     writer = DatabaseWritingServices(db, reader)
@@ -102,7 +102,7 @@ def edit_booking(booking_id):
 
     # Extract updated data from request (this is just an example, you would need to implement the actual update logic)
     updated_data = request.get_json()
-    
+
     # Call the booking service to update the booking (you would need to implement this method in your BookingService)
     update_result = BookingService.update_booking(booking_id, updated_data)
 
