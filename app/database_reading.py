@@ -435,10 +435,10 @@ class DatabaseReadingServices:
 
         result = self.cursor.fetchone()
 
-        # result [0] is roomNumber, result[1] is company building, [2] is wing, at [3] is wheelchairAccessible, at [4] is projectorAccess, at [5] is whiteboardAccess, at [6] is maximumCapacity 
+        # result [0] is roomNumber, result[1] is company building, [2] is wing, at [3] is wheelchairAccessible, at [4] is projectorAccess, at [5] is whiteboardAccess, at [6] is maximumCapacity
         if result:
             self.cursor.close()
             return result
-    
+
         else:
             return False, "Unable to find the room specified"
