@@ -55,17 +55,16 @@ class DatabaseReadingServices:
                 "SELECT pass FROM RegisteredUser WHERE username = %s", (username,)
             )
 
-        result = self.cursor.fetchone()[0]
-        self.cursor.close()  # Empty Cursor
+        row = self.cursor.fetchone()
 
-        if result:
-            #moved comparison of password hash to here since we need to pull the hash from the database first before we can compare it to the plaintext password input by the user
-            if check_password_hash(result, password):
-                return True, "Successful Login"
+        if not row:
+            return False, "Unable to find account"
 
-            else:
-                return False, "Incorrect Login Information"
+        result = row[0]
+        self.cursor.close()
 
+        if check_password_hash(result, password):
+            return True, username
         else:
             return False, "Unable to find the account registered under this email or username"
 
