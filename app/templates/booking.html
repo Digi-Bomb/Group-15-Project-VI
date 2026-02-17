@@ -11,15 +11,15 @@
     </a>
     <a class="text-dark fs-6 text-decoration-underline ms-auto">
         <i class="bi bi-calendar-week me-1"></i>
-        January 1st, 2026 <!-- vanilla datepicker bullshit -->
+        {{selected_date}}6 <!-- vanilla datepicker bullshit -->
     </a>
 </div>
 
 <div class="container-fluid px-5 d-flex flex-wrap mt-5">
     <p class="text-dark fw-bold fs-5 mb-2 ms-4">
         {% if booking is defined %}
-        3G15 - West Wing</p> <!-- passed param, hard coded for now -->
-    {% endif %}
+        {{ room.roomNumber}} - Meeting Room/p> <!-- passed param, hard coded for now -->
+        {% endif %}
     <p class="text-muted fs-5 me-3 ms-3 mb-0">
         <i class="bi bi-people-fill text-muted"></i>
         4
@@ -30,7 +30,12 @@
 </div>
 
 <div class="container-fluid px-5 d-flex flex-wrap">
-    <p class="text-muted fs-6 mb-2 ms-4">Wheelchair accessible, projector available</p>
+    <p class="text-muted fs-6 mb-2 ms-4">{% set features = [] %}
+        {% if room.wheelchairAccessible %}{% set _ = features.append("Wheelchair accessible") %}{% endif
+        %}
+        {% if room.projectorAccess %}{% set _ = features.append("Projector") %}{% endif %}
+        {% if room.whiteboardAccess %}{% set _ = features.append("Whiteboard") %}{% endif %}
+        {{ features|join(", ") if features else "No listed features" }}</p>
     <!-- passed param, hard coded for now -->
 </div>
 
@@ -63,7 +68,7 @@
                         <input type="time" id="endTime" min="08:00" max="20:00" required name="end_time">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary ms-auto mt-3" name="submit">
+                <button type="submit" class="btn btn-primary ms-auto mt-3" name="{{ form.submit.name }}">
                     Create meeting
                     <i class="bi bi-arrow-right"></i>
                 </button>

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, g, flash
+from flask import request
 
 from forms import LogoutForm
 
@@ -18,6 +19,7 @@ from flask_mail import Mail, Message
 
 import os
 from datetime import timedelta, date, time 
+
 
 # -- CONFIG --
 mail = Mail()
@@ -105,6 +107,13 @@ def make_session_permanent():
 def add_logout_form():
     g.logout_form = LogoutForm()
 
+# context processor for navbar
+@app.context_processor
+def inject_user():
+    return dict(
+        user_id=session.get("user_id"),
+        is_logged_in=("user_id" in session)
+    )
 
 # Forms are defined in app/forms.py and imported above
 

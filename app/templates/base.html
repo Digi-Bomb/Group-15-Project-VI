@@ -37,7 +37,20 @@
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#">Notifications</a>
                     </li>
-                    {{ nav_link('profile', '/profile') }}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if not is_logged_in %}
+                            <li><a class="dropdown-item" href="/login">Login</a></li>
+                            <li><a class="dropdown-item" href="/register">Register</a></li>
+                            {% else %}
+                            <li><a class="dropdown-item" href="/profile">View Profile</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
 
                 </ul>
             </div>
