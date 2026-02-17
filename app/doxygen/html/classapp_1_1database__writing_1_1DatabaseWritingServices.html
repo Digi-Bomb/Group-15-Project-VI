@@ -132,6 +132,50 @@ NOTE: CALLED WHEN DELETING A BOOKING <br  />
 TRUE == ROOM UPDATED AS AVAILABLE <br  />
 FALSE == ROOM NOT UPDATED.  <br /></td></tr>
 <tr class="separator:a63ace435424a7eb611ba97496fcb5d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a7518e2e2342c801ef470a008b9ac1f" id="r_a7a7518e2e2342c801ef470a008b9ac1f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a7a7518e2e2342c801ef470a008b9ac1f">update_meeting_time</a> (self, int BID, str new_start_time)</td></tr>
+<tr class="memdesc:a7a7518e2e2342c801ef470a008b9ac1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to update a booking's meeting time, given a Booking ID, and a new meeting time <br  />
+TRUE == BOOKING UPDATED AS AVAILABLE <br  />
+FALSE == BOOKING NOT UPDATED.  <br /></td></tr>
+<tr class="separator:a7a7518e2e2342c801ef470a008b9ac1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa53a41c379cadc4615defc5d15284a8" id="r_afa53a41c379cadc4615defc5d15284a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#afa53a41c379cadc4615defc5d15284a8">update_meeting_date</a> (self, int BID, str new_date)</td></tr>
+<tr class="memdesc:afa53a41c379cadc4615defc5d15284a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to update a booking's meeting date, given a Booking ID, and a new meeting date<br  />
+NOTE: CHECKS FOR OVERLAP WHEN UPDATING <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED.  <br /></td></tr>
+<tr class="separator:afa53a41c379cadc4615defc5d15284a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78f083b45b64a19861e9b70abc56154c" id="r_a78f083b45b64a19861e9b70abc56154c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a78f083b45b64a19861e9b70abc56154c">update_meeting_duration</a> (self, int BID, str new_duration)</td></tr>
+<tr class="memdesc:a78f083b45b64a19861e9b70abc56154c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to update a booking's duration, given a Booking ID, and a new duration<br  />
+NOTE: CHECKS FOR OVERLAP WHEN UPDATING <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED.  <br /></td></tr>
+<tr class="separator:a78f083b45b64a19861e9b70abc56154c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6bc142df9ec62a8d820bc10e8d6cf41" id="r_aa6bc142df9ec62a8d820bc10e8d6cf41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#aa6bc142df9ec62a8d820bc10e8d6cf41">update_meeting_room</a> (self, int BID, str new_room)</td></tr>
+<tr class="memdesc:aa6bc142df9ec62a8d820bc10e8d6cf41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to update a booking's room, given a Booking ID, and a new room<br  />
+NOTE: CHECKS FOR OVERLAP WHEN UPDATING <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED.  <br /></td></tr>
+<tr class="separator:aa6bc142df9ec62a8d820bc10e8d6cf41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40d1ada8ba97ef7d83127b04a0657224" id="r_a40d1ada8ba97ef7d83127b04a0657224"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a40d1ada8ba97ef7d83127b04a0657224">update_meeting_capacity</a> (self, int BID, int new_capacity)</td></tr>
+<tr class="memdesc:a40d1ada8ba97ef7d83127b04a0657224"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to update a booking's capacity, given a Booking ID, and a new capacity <br  />
+NOTE: CHECKS FOR VALID CAPACITY SPECIFIED WHEN UPDATING <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED.  <br /></td></tr>
+<tr class="separator:a40d1ada8ba97ef7d83127b04a0657224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf2a91dabeb83b99a5d4184325f6fd36" id="r_abf2a91dabeb83b99a5d4184325f6fd36"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#abf2a91dabeb83b99a5d4184325f6fd36">update_number_of_confirmations</a> (self, int BID)</td></tr>
+<tr class="memdesc:abf2a91dabeb83b99a5d4184325f6fd36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to update a booking's number of confirmed attendees by 1 <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED.  <br /></td></tr>
+<tr class="separator:abf2a91dabeb83b99a5d4184325f6fd36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4edb83f0391cb15ef38b081ff062736" id="r_ab4edb83f0391cb15ef38b081ff062736"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#ab4edb83f0391cb15ef38b081ff062736">update_number_of_registeredUser</a> (self, int BID)</td></tr>
+<tr class="memdesc:ab4edb83f0391cb15ef38b081ff062736"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to update a booking's number of confirmed attendees by 1 <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED.  <br /></td></tr>
+<tr class="separator:ab4edb83f0391cb15ef38b081ff062736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34abc8660ebf84e70e4f74e02d9646a5" id="r_a34abc8660ebf84e70e4f74e02d9646a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a34abc8660ebf84e70e4f74e02d9646a5">update_bookings_shareable_link</a> (self, str shareable_link, int BID)</td></tr>
+<tr class="memdesc:a34abc8660ebf84e70e4f74e02d9646a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to update a booking's shareable link <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED.  <br /></td></tr>
+<tr class="separator:a34abc8660ebf84e70e4f74e02d9646a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -477,6 +521,302 @@ FALSE == ASSOCIATION DELETION ERROR + ERROR MSG. </p>
 NOTE: REMOVES MEETING OWNER AND ATTENDEES ASSOCIATED WITH BOOKING FROM THE RELATION TABLE <br  />
 TRUE == BOOKING DELETED <br  />
 FALSE == BOOKING DIDNT EXIST OR OTHER FAILURE. </p>
+
+</div>
+</div>
+<a id="a34abc8660ebf84e70e4f74e02d9646a5" name="a34abc8660ebf84e70e4f74e02d9646a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34abc8660ebf84e70e4f74e02d9646a5">&#9670;&#160;</a></span>update_bookings_shareable_link()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.update_bookings_shareable_link </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str&#160;</td>
+          <td class="paramname"><em>shareable_link</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>BID</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic function to update a booking's shareable link <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED. </p>
+
+</div>
+</div>
+<a id="a40d1ada8ba97ef7d83127b04a0657224" name="a40d1ada8ba97ef7d83127b04a0657224"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40d1ada8ba97ef7d83127b04a0657224">&#9670;&#160;</a></span>update_meeting_capacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.update_meeting_capacity </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>BID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>new_capacity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic function to update a booking's capacity, given a Booking ID, and a new capacity <br  />
+NOTE: CHECKS FOR VALID CAPACITY SPECIFIED WHEN UPDATING <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED. </p>
+
+</div>
+</div>
+<a id="afa53a41c379cadc4615defc5d15284a8" name="afa53a41c379cadc4615defc5d15284a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa53a41c379cadc4615defc5d15284a8">&#9670;&#160;</a></span>update_meeting_date()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.update_meeting_date </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>BID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str&#160;</td>
+          <td class="paramname"><em>new_date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic function to update a booking's meeting date, given a Booking ID, and a new meeting date<br  />
+NOTE: CHECKS FOR OVERLAP WHEN UPDATING <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED. </p>
+
+</div>
+</div>
+<a id="a78f083b45b64a19861e9b70abc56154c" name="a78f083b45b64a19861e9b70abc56154c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78f083b45b64a19861e9b70abc56154c">&#9670;&#160;</a></span>update_meeting_duration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.update_meeting_duration </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>BID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str&#160;</td>
+          <td class="paramname"><em>new_duration</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic function to update a booking's duration, given a Booking ID, and a new duration<br  />
+NOTE: CHECKS FOR OVERLAP WHEN UPDATING <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED. </p>
+
+</div>
+</div>
+<a id="aa6bc142df9ec62a8d820bc10e8d6cf41" name="aa6bc142df9ec62a8d820bc10e8d6cf41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6bc142df9ec62a8d820bc10e8d6cf41">&#9670;&#160;</a></span>update_meeting_room()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.update_meeting_room </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>BID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str&#160;</td>
+          <td class="paramname"><em>new_room</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic function to update a booking's room, given a Booking ID, and a new room<br  />
+NOTE: CHECKS FOR OVERLAP WHEN UPDATING <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED. </p>
+
+</div>
+</div>
+<a id="a7a7518e2e2342c801ef470a008b9ac1f" name="a7a7518e2e2342c801ef470a008b9ac1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a7518e2e2342c801ef470a008b9ac1f">&#9670;&#160;</a></span>update_meeting_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.update_meeting_time </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>BID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str&#160;</td>
+          <td class="paramname"><em>new_start_time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic function to update a booking's meeting time, given a Booking ID, and a new meeting time <br  />
+TRUE == BOOKING UPDATED AS AVAILABLE <br  />
+FALSE == BOOKING NOT UPDATED. </p>
+
+</div>
+</div>
+<a id="abf2a91dabeb83b99a5d4184325f6fd36" name="abf2a91dabeb83b99a5d4184325f6fd36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf2a91dabeb83b99a5d4184325f6fd36">&#9670;&#160;</a></span>update_number_of_confirmations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.update_number_of_confirmations </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>BID</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic function to update a booking's number of confirmed attendees by 1 <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED. </p>
+
+</div>
+</div>
+<a id="ab4edb83f0391cb15ef38b081ff062736" name="ab4edb83f0391cb15ef38b081ff062736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4edb83f0391cb15ef38b081ff062736">&#9670;&#160;</a></span>update_number_of_registeredUser()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.update_number_of_registeredUser </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>BID</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic function to update a booking's number of confirmed attendees by 1 <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED. </p>
 
 </div>
 </div>
