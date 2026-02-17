@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, flash, current_app, session
+from flask import Blueprint, render_template, request, redirect, flash, current_app, session, abort
 
 from booking.booking import Booking
 from notifications.email_notification_service import EmailNotificationService
@@ -20,7 +20,7 @@ booking_bp = Blueprint('booking', __name__)
 @booking_bp.route('/booking', methods=['GET', 'POST'])
 def create_booking():
     user_id = session.get("user_id")
-    room = request.args.get('room', '').strip()
+    room_number = request.args.get('room_number', '').strip()
     # TEMP COMMENT
     # if not user_id:
     #   flash("Please log in to create a booking.", "warning")
@@ -31,9 +31,12 @@ def create_booking():
 
     if request.method == 'GET':
         date_str = request.args.get('date', '').strip()
+        # get room object based on room number
+        room = DatabaseReadingServices(DatabaseConnection()).get_room_by_number(room_number)
+        room_capacity = DatabaseReadingServices(DatabaseConnection()).get_room_capacity(room)
         if date_str:
             form.meeting_date.data = date_str  # Pre-fill the date field if provided in query parameters
-            return render_template("booking.html", form=form, room=room, mode="create")
+            return render_template("booking.html", form=form, mode="create", room_capacity=room_capacity) #edit once dina is done with room capacity
 
     if form.validate_on_submit():
         BookingService.create_booking(
