@@ -120,37 +120,18 @@ REQUIRES BOOKING ID AND NICKNAME TO CHECK; RETURNS TUPLE OF BOOLEAN AND RESP MES
 TRUE == Nickname Available <br  />
 FALSE == Nickname Taken.  <br /></td></tr>
 <tr class="separator:a1b132aadf3db0b7db428c3dbcb9da2b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c9d5a725a7bcb45db3ea62be084fb6c" id="r_a8c9d5a725a7bcb45db3ea62be084fb6c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a8c9d5a725a7bcb45db3ea62be084fb6c">check_for_room_availability</a> (self, str room_number, str meeting_date, str start_time, str duration, int BID=None)</td></tr>
-<tr class="memdesc:a8c9d5a725a7bcb45db3ea62be084fb6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that validates that a room is available for use <br  />
-NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPATE AN EXISTING BOOKING <br  />
+<tr class="memitem:a9b1da0045a5d7cf63c3b90eddacdd1c4" id="r_a9b1da0045a5d7cf63c3b90eddacdd1c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a9b1da0045a5d7cf63c3b90eddacdd1c4">check_for_room_availability</a> (self, str room_number, str meeting_date, str start_time, str duration)</td></tr>
+<tr class="memdesc:a9b1da0045a5d7cf63c3b90eddacdd1c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that validates that a room is available for use <br  />
+RETURNS BOOLEAN VALUE <br  />
 TRUE == ROOM IS AVAILABLE <br  />
 FALSE == ROOM TAKEN.  <br /></td></tr>
-<tr class="separator:a8c9d5a725a7bcb45db3ea62be084fb6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a9b1da0045a5d7cf63c3b90eddacdd1c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac11ab2bdb659a0a9cbc4c9b089422130" id="r_ac11ab2bdb659a0a9cbc4c9b089422130"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#ac11ab2bdb659a0a9cbc4c9b089422130">get_capacity_of_room</a> (self, int room_number)</td></tr>
 <tr class="memdesc:ac11ab2bdb659a0a9cbc4c9b089422130"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the INTEGER Capacity of the room (specified by room number)  <br /></td></tr>
 <tr class="separator:ac11ab2bdb659a0a9cbc4c9b089422130"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff18d627668e9dd7f3c95c2f60b7f60f" id="r_aff18d627668e9dd7f3c95c2f60b7f60f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#aff18d627668e9dd7f3c95c2f60b7f60f">get_branch_location_of_room_associated_with_room_number</a> (self, int room_number)</td></tr>
 <tr class="memdesc:aff18d627668e9dd7f3c95c2f60b7f60f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the building for which the room exists within (specified by room number)  <br /></td></tr>
 <tr class="separator:aff18d627668e9dd7f3c95c2f60b7f60f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04d93c5a73ffea3df29d39cda5cd968e" id="r_a04d93c5a73ffea3df29d39cda5cd968e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a04d93c5a73ffea3df29d39cda5cd968e">get_booking_information_of_specific_booking</a> (self, int BID)</td></tr>
-<tr class="memdesc:a04d93c5a73ffea3df29d39cda5cd968e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the meeting date, time, duration, and room of a particular booking.  <br /></td></tr>
-<tr class="separator:a04d93c5a73ffea3df29d39cda5cd968e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab682f55c14913e48f7736e6297be6acd" id="r_ab682f55c14913e48f7736e6297be6acd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#ab682f55c14913e48f7736e6297be6acd">get_booking_start_and_end_times_for_specific_room</a> (self, str room_number)</td></tr>
-<tr class="memdesc:ab682f55c14913e48f7736e6297be6acd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns a list of start times, end times, and dates for all bookings under a particular room.  <br /></td></tr>
-<tr class="separator:ab682f55c14913e48f7736e6297be6acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb80b698a73c7d4fb39d3fc179c0b600" id="r_adb80b698a73c7d4fb39d3fc179c0b600"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#adb80b698a73c7d4fb39d3fc179c0b600">return_all_bookings_for_a_user</a> (self, int RUID)</td></tr>
-<tr class="memdesc:adb80b698a73c7d4fb39d3fc179c0b600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Function for returning all Bookings that a Registered User owns <br  />
-NOTE RETURNS A LIST OF BOOKINGS OWNED BY A USER <br  />
-RETURNS FALSE IF NO BOOKINGS OWNED.  <br /></td></tr>
-<tr class="separator:adb80b698a73c7d4fb39d3fc179c0b600"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f2cfa15461454019b669a80459df87c" id="r_a7f2cfa15461454019b669a80459df87c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a7f2cfa15461454019b669a80459df87c">get_registered_user_email_from_RUID</a> (self, int RUID)</td></tr>
-<tr class="separator:a7f2cfa15461454019b669a80459df87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad034f8db16d96c8623c4354a77c6384a" id="r_ad034f8db16d96c8623c4354a77c6384a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#ad034f8db16d96c8623c4354a77c6384a">get_booking_by_link_id</a> (self, str link_id)</td></tr>
-<tr class="separator:ad034f8db16d96c8623c4354a77c6384a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9005974b3edbb95a687839f34f119a1c" id="r_a9005974b3edbb95a687839f34f119a1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a9005974b3edbb95a687839f34f119a1c">get_all_bookings</a> (self)</td></tr>
-<tr class="separator:a9005974b3edbb95a687839f34f119a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10df726a660b2d7eab6666aff0ebc5f3" id="r_a10df726a660b2d7eab6666aff0ebc5f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a10df726a660b2d7eab6666aff0ebc5f3">get_unregistered_user_email_from_URUID</a> (self, int URUID)</td></tr>
-<tr class="separator:a10df726a660b2d7eab6666aff0ebc5f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -191,8 +172,8 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a8c9d5a725a7bcb45db3ea62be084fb6c" name="a8c9d5a725a7bcb45db3ea62be084fb6c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c9d5a725a7bcb45db3ea62be084fb6c">&#9670;&#160;</a></span>check_for_room_availability()</h2>
+<a id="a9b1da0045a5d7cf63c3b90eddacdd1c4" name="a9b1da0045a5d7cf63c3b90eddacdd1c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b1da0045a5d7cf63c3b90eddacdd1c4">&#9670;&#160;</a></span>check_for_room_availability()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -224,14 +205,9 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">str&#160;</td>
-          <td class="paramname"><em>duration</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &#160;</td>
-          <td class="paramname"><em>BID</em> = <code>None</code>&#160;</td>
+          <td class="paramtype">str
+    &#160;</td>
+          <td class="paramname"><em>duration</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -242,7 +218,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Function that validates that a room is available for use <br  />
-NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPATE AN EXISTING BOOKING <br  />
+RETURNS BOOLEAN VALUE <br  />
 TRUE == ROOM IS AVAILABLE <br  />
 FALSE == ROOM TAKEN. </p>
 
@@ -324,112 +300,6 @@ FALSE == Nickname Taken. </p>
 REQUIRES USERNAME AND EMAIL <br  />
 TRUE == REGISTERED <br  />
 FALSE == UNREGISTERED. </p>
-
-</div>
-</div>
-<a id="a9005974b3edbb95a687839f34f119a1c" name="a9005974b3edbb95a687839f34f119a1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9005974b3edbb95a687839f34f119a1c">&#9670;&#160;</a></span>get_all_bookings()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">app.database_reading.DatabaseReadingServices.get_all_bookings </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad034f8db16d96c8623c4354a77c6384a" name="ad034f8db16d96c8623c4354a77c6384a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad034f8db16d96c8623c4354a77c6384a">&#9670;&#160;</a></span>get_booking_by_link_id()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">app.database_reading.DatabaseReadingServices.get_booking_by_link_id </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">str&#160;</td>
-          <td class="paramname"><em>link_id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a04d93c5a73ffea3df29d39cda5cd968e" name="a04d93c5a73ffea3df29d39cda5cd968e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04d93c5a73ffea3df29d39cda5cd968e">&#9670;&#160;</a></span>get_booking_information_of_specific_booking()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">app.database_reading.DatabaseReadingServices.get_booking_information_of_specific_booking </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>BID</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the meeting date, time, duration, and room of a particular booking. </p>
-
-</div>
-</div>
-<a id="ab682f55c14913e48f7736e6297be6acd" name="ab682f55c14913e48f7736e6297be6acd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab682f55c14913e48f7736e6297be6acd">&#9670;&#160;</a></span>get_booking_start_and_end_times_for_specific_room()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">app.database_reading.DatabaseReadingServices.get_booking_start_and_end_times_for_specific_room </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">str&#160;</td>
-          <td class="paramname"><em>room_number</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Function that returns a list of start times, end times, and dates for all bookings under a particular room. </p>
 
 </div>
 </div>
@@ -523,34 +393,6 @@ FALSE == UNREGISTERED. </p>
 
 </div>
 </div>
-<a id="a7f2cfa15461454019b669a80459df87c" name="a7f2cfa15461454019b669a80459df87c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f2cfa15461454019b669a80459df87c">&#9670;&#160;</a></span>get_registered_user_email_from_RUID()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">app.database_reading.DatabaseReadingServices.get_registered_user_email_from_RUID </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>RUID</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a5a1450b6866380aff480b94bb33811d2" name="a5a1450b6866380aff480b94bb33811d2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5a1450b6866380aff480b94bb33811d2">&#9670;&#160;</a></span>get_registered_users_associated_with_booking_ID()</h2>
 
@@ -641,34 +483,6 @@ FALSE == UNREGISTERED. </p>
 
 </div>
 </div>
-<a id="a10df726a660b2d7eab6666aff0ebc5f3" name="a10df726a660b2d7eab6666aff0ebc5f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10df726a660b2d7eab6666aff0ebc5f3">&#9670;&#160;</a></span>get_unregistered_user_email_from_URUID()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">app.database_reading.DatabaseReadingServices.get_unregistered_user_email_from_URUID </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>URUID</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a8a6871ded069bb8bd4a83a83b5b5169c" name="a8a6871ded069bb8bd4a83a83b5b5169c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8a6871ded069bb8bd4a83a83b5b5169c">&#9670;&#160;</a></span>get_unregistered_users_associated_with_booking_ID()</h2>
 
@@ -726,38 +540,6 @@ FALSE == UNREGISTERED. </p>
 </div><div class="memdoc">
 
 <p>Function that returns the username of a registered user given a RUID (Registered User ID) </p>
-
-</div>
-</div>
-<a id="adb80b698a73c7d4fb39d3fc179c0b600" name="adb80b698a73c7d4fb39d3fc179c0b600"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb80b698a73c7d4fb39d3fc179c0b600">&#9670;&#160;</a></span>return_all_bookings_for_a_user()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">app.database_reading.DatabaseReadingServices.return_all_bookings_for_a_user </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>RUID</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Generic Function for returning all Bookings that a Registered User owns <br  />
-NOTE RETURNS A LIST OF BOOKINGS OWNED BY A USER <br  />
-RETURNS FALSE IF NO BOOKINGS OWNED. </p>
 
 </div>
 </div>
