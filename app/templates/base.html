@@ -1,48 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
+{% macro nav_link(name, href) %}
+<li class="nav-item">
+    <a class="nav-link {% if current_page == name %}active{% endif %}" href="{{ href }}">{{ name.title() }}</a>
+</li>
+{% endmacro %}
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Room Booking{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    <link rel="icon" type="image/svg" href="{{ url_for('static', filename='images/logo_icon.svg') }}">
+
 
 </head>
+
 <body>
-    <!-- Navbar -->
-  <nav class="navbar">
-        <div class="nav-left">
-            <a href="/" class="nav-logo">📝 Room Booking NavBar</a>
-        </div>
-        <div class="nav-right">
-            {% if session.get('user_id') %}
-                <form action="/logout" method="POST" class="logout-form">
-                    {{ g.logout_form.hidden_tag() }}
-                    {{ g.logout_form.submit(class_='btn btn-logout') }}
-                </form>
-            {% else %}
-                <a href="/login" class="btn btn-login">Login</a>
-                <a href="/register" class="btn btn-register">Register</a>
-            {% endif %}
+    <nav class="navbar navbar-expand-md">
+        <div class="container-fluid d-flex px-5">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" width="150" height="100" alt=""
+                    class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto fs-5 gap-5">
+                    {{ nav_link('home', '/') }}
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Notifications</a>
+                    </li>
+                    {{ nav_link('profile', '/profile') }}
+
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <main class="content">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for category, message in messages %}
-                        <div class="flash flash-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
-
+    <main>
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="footer">
-        <p>&copy; {{ 2025 }} Room Booking App - By Group 15</p>
-    </footer>
-    <script src="{{ url_for('static', filename='../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='scss/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </body>
+
 </html>

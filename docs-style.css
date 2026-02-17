@@ -1,0 +1,504 @@
+/* docs-style.css
+   Modern dark theme override for Doxygen HTML
+   Usage:
+     HTML_EXTRA_STYLESHEET = docs-style.css
+*/
+
+/* -----------------------------
+   Base + typography
+------------------------------ */
+:root {
+  --bg: #0b1220;
+  --panel: #0f1a2e;
+  --panel2: #0c1628;
+  --border: #1d2a44;
+
+  --text: #e6edf7;
+  --muted: #a8b3c7;
+
+  --link: #69d2ff;
+  --linkHover: #a6ecff;
+
+  --accent: #7c5cff;
+  --accent2: #34d399;
+
+  --codeBg: #071022;
+  --codeBorder: #1a2a4a;
+
+  --warnBg: #2a1f0a;
+  --warnBorder: #6b4e16;
+
+  --radius: 12px;
+  --radiusSm: 10px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  --mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --sans:
+    ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+html,
+body {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  font-family: var(--sans) !important;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  line-height: 1.55;
+}
+
+/* Doxygen sometimes puts fixed widths */
+#top,
+#doc-content,
+#content,
+#nav-path,
+#nav-tree,
+#side-nav,
+#main-nav {
+  box-sizing: border-box;
+}
+
+/* Make the main content feel centered & airy */
+#doc-content {
+  padding: 18px 18px 36px 18px !important;
+}
+
+/* -----------------------------
+   Links
+------------------------------ */
+a {
+  color: var(--link) !important;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--linkHover) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* External link icon (subtle) */
+a.el {
+  color: var(--link) !important;
+}
+
+/* -----------------------------
+   Top header + project title area
+------------------------------ */
+#top {
+  background: linear-gradient(
+    180deg,
+    rgba(124, 92, 255, 0.2),
+    rgba(124, 92, 255, 0)
+  ) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+#titlearea {
+  background: transparent !important;
+  border: none !important;
+}
+
+#projectname {
+  color: var(--text) !important;
+  font-weight: 760;
+  letter-spacing: 0.2px;
+}
+
+#projectbrief {
+  color: var(--muted) !important;
+  font-weight: 500;
+}
+
+#projectnumber {
+  color: var(--muted) !important;
+}
+
+/* -----------------------------
+   Tabs / main navigation
+------------------------------ */
+.tabs,
+.tablist,
+.tablist li,
+.tablist a {
+  background: transparent !important;
+}
+
+.tabs,
+.tabs2,
+.tabs3 {
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.tabs2,
+.tabs3 {
+  background: rgba(15, 26, 46, 0.55) !important;
+  backdrop-filter: blur(6px);
+}
+
+.tablist li a {
+  color: var(--muted) !important;
+  border-radius: 999px !important;
+  padding: 8px 12px !important;
+  margin: 6px 4px !important;
+  border: 1px solid transparent !important;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.tablist li a:hover {
+  background: rgba(105, 210, 255, 0.1) !important;
+  border-color: rgba(105, 210, 255, 0.25) !important;
+  color: var(--text) !important;
+}
+
+.tablist li.current a {
+  background: rgba(124, 92, 255, 0.18) !important;
+  border-color: rgba(124, 92, 255, 0.35) !important;
+  color: var(--text) !important;
+}
+
+/* -----------------------------
+   Side navigation tree
+------------------------------ */
+#side-nav {
+  background: rgba(15, 26, 46, 0.55) !important;
+  border-right: 1px solid var(--border) !important;
+}
+
+#nav-tree {
+  background: transparent !important;
+}
+
+#nav-tree .label {
+  color: var(--muted) !important;
+}
+
+#nav-tree a {
+  color: var(--muted) !important;
+}
+
+#nav-tree a:hover {
+  color: var(--text) !important;
+}
+
+#nav-tree .selected {
+  background: rgba(124, 92, 255, 0.18) !important;
+  border-left: 3px solid rgba(124, 92, 255, 0.65) !important;
+}
+
+#nav-tree .selected a {
+  color: var(--text) !important;
+}
+
+/* Make the tree items feel less cramped */
+#nav-tree .item {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+/* -----------------------------
+   Search box
+------------------------------ */
+#MSearchBox {
+  border-radius: 999px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(7, 16, 34, 0.75) !important;
+  box-shadow: none !important;
+}
+
+#MSearchField {
+  color: var(--text) !important;
+}
+
+#MSearchSelectWindow,
+#MSearchResultsWindow {
+  border-radius: var(--radius) !important;
+  border: 1px solid var(--border) !important;
+  background: var(--panel) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+/* -----------------------------
+   Content panels / headings
+------------------------------ */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--text) !important;
+  letter-spacing: 0.2px;
+}
+
+h1 {
+  font-size: 1.85rem;
+  font-weight: 820;
+}
+h2 {
+  font-size: 1.35rem;
+  font-weight: 760;
+  margin-top: 1.4em;
+  padding-top: 0.6em;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+h3 {
+  font-size: 1.1rem;
+  font-weight: 720;
+}
+
+.contents {
+  background: transparent !important;
+}
+
+/* Doxygen “memitem” blocks (functions, members) */
+.memitem {
+  background: rgba(15, 26, 46, 0.55) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: none !important;
+  overflow: hidden;
+  margin: 14px 0 !important;
+}
+
+.memproto {
+  background: rgba(12, 22, 40, 0.75) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.memtitle {
+  color: var(--text) !important;
+  font-weight: 700;
+}
+
+.memdoc {
+  background: transparent !important;
+  color: var(--text) !important;
+}
+
+/* Parameter lists / fields */
+.params,
+.retval,
+.exception {
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: var(--radiusSm) !important;
+  background: rgba(7, 16, 34, 0.55) !important;
+}
+
+/* -----------------------------
+   Tables
+------------------------------ */
+table {
+  border-collapse: separate !important;
+  border-spacing: 0;
+}
+
+table.memberdecls,
+table.directory,
+table.classindex,
+table.doxtable,
+table.markdownTable {
+  width: 100%;
+  background: rgba(15, 26, 46, 0.55) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  overflow: hidden;
+}
+
+table.memberdecls td,
+table.memberdecls th,
+table.directory td,
+table.directory th,
+table.doxtable td,
+table.doxtable th,
+table.markdownTable td,
+table.markdownTable th {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  padding: 10px 12px !important;
+}
+
+table.memberdecls tr:last-child td,
+table.directory tr:last-child td,
+table.doxtable tr:last-child td,
+table.markdownTable tr:last-child td {
+  border-bottom: none !important;
+}
+
+table.memberdecls th,
+table.directory th,
+table.doxtable th,
+table.markdownTable th {
+  background: rgba(12, 22, 40, 0.85) !important;
+  color: var(--text) !important;
+  font-weight: 700 !important;
+}
+
+/* Zebra rows for readability */
+table.memberdecls tr:nth-child(even) td,
+table.directory tr:nth-child(even) td,
+table.doxtable tr:nth-child(even) td,
+table.markdownTable tr:nth-child(even) td {
+  background: rgba(7, 16, 34, 0.35) !important;
+}
+
+/* -----------------------------
+   Code blocks / inline code
+------------------------------ */
+div.fragment {
+  background: var(--codeBg) !important;
+  border: 1px solid var(--codeBorder) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: none !important;
+}
+
+div.fragment pre {
+  font-family: var(--mono) !important;
+  font-size: 0.92rem !important;
+  line-height: 1.45 !important;
+  color: var(--text) !important;
+}
+
+/* Inline code from markdown */
+code,
+tt {
+  font-family: var(--mono) !important;
+  background: rgba(105, 210, 255, 0.1) !important;
+  border: 1px solid rgba(105, 210, 255, 0.18) !important;
+  padding: 0.15em 0.35em !important;
+  border-radius: 8px !important;
+  color: var(--text) !important;
+}
+
+/* Syntax highlighting tweaks (best-effort across doxygen versions) */
+span.keyword {
+  color: #c792ea !important;
+}
+span.keywordtype {
+  color: #82aaff !important;
+}
+span.keywordflow {
+  color: #c792ea !important;
+}
+span.comment {
+  color: #7aa2f7 !important;
+  opacity: 0.75;
+}
+span.stringliteral {
+  color: #a6e3a1 !important;
+}
+span.charliteral {
+  color: #a6e3a1 !important;
+}
+span.preprocessor {
+  color: #f9e2af !important;
+}
+span.linenumber {
+  color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* -----------------------------
+   “Note / Warning / Attention” style blocks
+------------------------------ */
+div.note,
+div.warning,
+div.attention,
+div.todo,
+div.deprecated {
+  border-radius: var(--radius) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(15, 26, 46, 0.55) !important;
+  padding: 10px 12px !important;
+}
+
+div.warning,
+div.attention {
+  background: rgba(107, 78, 22, 0.2) !important;
+  border-color: rgba(249, 226, 175, 0.25) !important;
+}
+
+div.deprecated {
+  background: rgba(124, 92, 255, 0.1) !important;
+  border-color: rgba(124, 92, 255, 0.25) !important;
+}
+
+div.todo {
+  background: rgba(52, 211, 153, 0.1) !important;
+  border-color: rgba(52, 211, 153, 0.22) !important;
+}
+
+/* -----------------------------
+   Breadcrumb/nav-path
+------------------------------ */
+#nav-path {
+  background: rgba(15, 26, 46, 0.55) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+#nav-path ul {
+  background: transparent !important;
+}
+
+#nav-path li {
+  color: var(--muted) !important;
+}
+
+/* -----------------------------
+   Footer
+------------------------------ */
+#nav-path,
+#footer {
+  box-sizing: border-box;
+}
+
+#footer {
+  color: rgba(255, 255, 255, 0.35) !important;
+  background: transparent !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* -----------------------------
+   Small polish: selection + scrollbars (Chromium/Edge)
+------------------------------ */
+::selection {
+  background: rgba(124, 92, 255, 0.35);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  border: 2px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border: 2px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* -----------------------------
+   Responsive: if side-nav is narrow, keep things readable
+------------------------------ */
+@media (max-width: 900px) {
+  #side-nav {
+    border-right: none !important;
+  }
+  .memitem {
+    border-radius: 10px !important;
+  }
+  div.fragment {
+    border-radius: 10px !important;
+  }
+}

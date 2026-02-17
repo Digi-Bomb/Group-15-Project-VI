@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['5_0',['Bootstrap 5',['../dir_52c1ecde2898cd53e8ad4ec2e67d6c1a.html#autotoc_md0',1,'']]]
+  ['readme_0',['README',['../md_app_2static_2scss_2bootstrap_2README.html',1,'']]]
 ];

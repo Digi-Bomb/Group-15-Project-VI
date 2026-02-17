@@ -1,13 +1,11 @@
 from flask import Flask, render_template, request, redirect, session, g, flash
 
-# from app import notifications
 from forms import RegisterForm, LoginForm, NoteForm, LogoutForm
-
 from werkzeug.security import generate_password_hash, check_password_hash
 
-import mysql.connector
 import database_connection
 import database_reading
+import database_writing
 
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -119,11 +117,27 @@ mail.init_app(app)
 database_read_servicer = database_reading.DatabaseReadingServices(
     database_connection.DatabaseConnection()
 )
-check_for_user = database_reading.DatabaseReadingServices(
-    database_connection.DatabaseConnection()
-).get_specific_registered_user("testuser")
 
-print(check_for_user)
+databaseConn = database_connection.DatabaseConnection()
+database_reader = database_reading.DatabaseReadingServices(databaseConn)
+
+createBooking= database_writing.DatabaseWritingServices(
+    databaseConn, database_reader
+).delete_booking(1078)
+
+
+# testAddBID = testAddBID[1]
+# if testAddBID == 0:
+#     test2 = database_writing.DatabaseWritingServices(
+#         databaseConn, database_reader
+#     ).associate_unregistered_user_with_booking(testAddBID, 1000)
+
+# test = database_reading.DatabaseReadingServices(
+#     database_connection.DatabaseConnection()
+# ).get_username_via_RUID("1000")
+
+print("Checking For create user... ",createBooking )
+
 # -- ROUTES --
 from account.routes import account_bp
 from booking.routes import booking_bp

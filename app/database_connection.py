@@ -22,7 +22,8 @@ class DatabaseConnection:
                     user=self.user,
                     password=self.password,
                     database=self.database,
-                    ssl_disabled=True,
+                    ssl_verify_cert=False,  # fine for now
+                    ssl_disabled=False,
                 )
                 print("OOOOOOO WE ARE CONNECTED BABY!!!!")
                 return test
@@ -31,6 +32,10 @@ class DatabaseConnection:
                 time.sleep(2)
         raise last_error
 
+# # can we make a function that is jsut this:
+#     db = DatabaseConnection()
+#     conn = db.connect()
+#     cursor = conn.cursor()
 
 # def get_db():
 #     """Return a MySQL connection. Retries a few times before raising the last error."""
