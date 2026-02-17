@@ -92,11 +92,11 @@ Inheritance diagram for app.forms.BookingForm:</div>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a40fb8c2d6a0ee18e63aa2a22c9a31c5a" id="r_a40fb8c2d6a0ee18e63aa2a22c9a31c5a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1forms_1_1BookingForm.html#a40fb8c2d6a0ee18e63aa2a22c9a31c5a">meeting_date</a> = DateField(&quot;Meeting Date&quot;, validators=[DataRequired()])</td></tr>
 <tr class="separator:a40fb8c2d6a0ee18e63aa2a22c9a31c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa552a0fd96b21f9cd0ee900b91a8757d" id="r_aa552a0fd96b21f9cd0ee900b91a8757d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1forms_1_1BookingForm.html#aa552a0fd96b21f9cd0ee900b91a8757d">start_time</a> = TimeField(&quot;Start Time&quot;, format=&quot;%H:%M&quot;, validators=[DataRequired()])</td></tr>
+<tr class="memitem:aa552a0fd96b21f9cd0ee900b91a8757d" id="r_aa552a0fd96b21f9cd0ee900b91a8757d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1forms_1_1BookingForm.html#aa552a0fd96b21f9cd0ee900b91a8757d">start_time</a></td></tr>
 <tr class="separator:aa552a0fd96b21f9cd0ee900b91a8757d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0b321d76b775d574a89e63eab86f93b" id="r_ac0b321d76b775d574a89e63eab86f93b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1forms_1_1BookingForm.html#ac0b321d76b775d574a89e63eab86f93b">end_time</a> = TimeField(&quot;End Time&quot;, format=&quot;%H:%M&quot;, validators=[DataRequired()])</td></tr>
+<tr class="memitem:ac0b321d76b775d574a89e63eab86f93b" id="r_ac0b321d76b775d574a89e63eab86f93b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1forms_1_1BookingForm.html#ac0b321d76b775d574a89e63eab86f93b">end_time</a></td></tr>
 <tr class="separator:ac0b321d76b775d574a89e63eab86f93b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9ec57aaafbb0b73baa079aa45eab0a5" id="r_ab9ec57aaafbb0b73baa079aa45eab0a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1forms_1_1BookingForm.html#ab9ec57aaafbb0b73baa079aa45eab0a5">meeting_capacity</a> = SelectField(&quot;Capacity&quot;, coerce=int)</td></tr>
+<tr class="memitem:ab9ec57aaafbb0b73baa079aa45eab0a5" id="r_ab9ec57aaafbb0b73baa079aa45eab0a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1forms_1_1BookingForm.html#ab9ec57aaafbb0b73baa079aa45eab0a5">meeting_capacity</a> = SelectField(&quot;Capacity&quot;, choices=range(1, 100), coerce=int)</td></tr>
 <tr class="separator:ab9ec57aaafbb0b73baa079aa45eab0a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bef317362555a9948f0afe0af07c1b0" id="r_a3bef317362555a9948f0afe0af07c1b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1forms_1_1BookingForm.html#a3bef317362555a9948f0afe0af07c1b0">submit</a> = SubmitField()</td></tr>
 <tr class="separator:a3bef317362555a9948f0afe0af07c1b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,7 +112,7 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">app.forms.BookingForm.end_time = TimeField(&quot;End Time&quot;, format=&quot;%H:%M&quot;, validators=[DataRequired()])</td>
+          <td class="memname">app.forms.BookingForm.end_time</td>
         </tr>
       </table>
   </td>
@@ -121,7 +121,11 @@ Static Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
+<b>Initial value:</b><div class="fragment"><div class="line">=  TimeField(<span class="stringliteral">&quot;End Time&quot;</span>, format=<span class="stringliteral">&quot;%H:%M&quot;</span>, render_kw={</div>
+<div class="line">            <span class="stringliteral">&quot;min&quot;</span>: <span class="stringliteral">&quot;08:00&quot;</span>,</div>
+<div class="line">            <span class="stringliteral">&quot;max&quot;</span>: <span class="stringliteral">&quot;20:00&quot;</span></div>
+<div class="line">        }, validators=[DataRequired()])</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="ab9ec57aaafbb0b73baa079aa45eab0a5" name="ab9ec57aaafbb0b73baa079aa45eab0a5"></a>
@@ -134,7 +138,7 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">app.forms.BookingForm.meeting_capacity = SelectField(&quot;Capacity&quot;, coerce=int)</td>
+          <td class="memname">app.forms.BookingForm.meeting_capacity = SelectField(&quot;Capacity&quot;, choices=range(1, 100), coerce=int)</td>
         </tr>
       </table>
   </td>
@@ -178,7 +182,7 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">app.forms.BookingForm.start_time = TimeField(&quot;Start Time&quot;, format=&quot;%H:%M&quot;, validators=[DataRequired()])</td>
+          <td class="memname">app.forms.BookingForm.start_time</td>
         </tr>
       </table>
   </td>
@@ -187,7 +191,11 @@ Static Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
+<b>Initial value:</b><div class="fragment"><div class="line">=  TimeField(<span class="stringliteral">&quot;Start Time&quot;</span>, format=<span class="stringliteral">&quot;%H:%M&quot;</span>, render_kw={</div>
+<div class="line">            <span class="stringliteral">&quot;min&quot;</span>: <span class="stringliteral">&quot;08:00&quot;</span>,</div>
+<div class="line">            <span class="stringliteral">&quot;max&quot;</span>: <span class="stringliteral">&quot;20:00&quot;</span></div>
+<div class="line">        }, validators=[DataRequired()])</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a3bef317362555a9948f0afe0af07c1b0" name="a3bef317362555a9948f0afe0af07c1b0"></a>

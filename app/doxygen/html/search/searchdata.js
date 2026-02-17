@@ -4,7 +4,7 @@ var indexSectionsWithContent =
   1: "abdeilnrstu",
   2: "a",
   3: "_abdefirstu",
-  4: "_abcdgilmprsuv",
+  4: "_abcdegilmprsuv",
   5: "abcdefhlmnprstuvw"
 };
 
@@ -27,3 +27,4 @@ var indexSectionLabels =
   4: "Functions",
   5: "Variables"
 };
+
