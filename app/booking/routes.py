@@ -37,7 +37,7 @@ def create_booking():
         meeting_id = BookingService.create_booking(
             meetingDate=form.meeting_date.data,
             startTime=form.start_time.data,
-            duration=form.duration.data,
+            duration="02:00",
             meetingOwner=user_id
         )
         if not meeting_id[0]:
@@ -45,7 +45,7 @@ def create_booking():
                 flash("The selected time slot is already booked. Please choose a different time.", "error")
             flash("Failed to create booking.", "error")
             return redirect("/booking")
-        flash("Booking created", "success")
+        flash("Booking created!", "success")
         return redirect(f'/booking/{meeting_id[1]}') # TODO: test this redirect
 
     #refactor to use datepicker js to auto submit date and prefill date field on booking form
