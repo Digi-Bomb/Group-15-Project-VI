@@ -50,8 +50,16 @@
             <div class="input-group mb-3">
                 {{ form.password(
                 class="form-control border border-primary",
-                placeholder="password",
+                placeholder="Password",
                 id="password"
+                ) }}
+            </div>
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <div class="input-group mb-3">
+                {{ form.confirm_password(
+                class="form-control border border-primary",
+                placeholder="Confirm your password",
+                id="confirmPassword"
                 ) }}
             </div>
             <p>Already have an account? <a href="/login">Login</a></p>
