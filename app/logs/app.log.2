@@ -1,126 +1,4 @@
-2026-02-10 18:09:28,690 ERROR: Mail send failed: [Errno 111] Connection refused [in /app/notifications/routes.py:38]
-Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 34, in submit
-    mail.send(msg)  # send using the instance imported from app.py
-    ^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 491, in send
-    with self.connect() as connection:
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 144, in __enter__
-    self.host = self.configure_host()
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 158, in configure_host
-    host = smtplib.SMTP(self.mail.server, self.mail.port)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 255, in __init__
-    (code, msg) = self.connect(host, port)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 341, in connect
-    self.sock = self._get_socket(host, port, self.timeout)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 312, in _get_socket
-    return socket.create_connection((host, port), timeout,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/socket.py", line 863, in create_connection
-    raise exceptions[0]
-  File "/usr/local/lib/python3.11/socket.py", line 848, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 111] Connection refused
-2026-02-10 18:14:00,966 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:14:04,816 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:14:04,816 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:14:25,954 ERROR: Mail send failed: [Errno 111] Connection refused [in /app/notifications/routes.py:38]
-Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 34, in submit
-    mail.send(msg)  # send using the instance imported from app.py
-    ^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 491, in send
-    with self.connect() as connection:
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 144, in __enter__
-    self.host = self.configure_host()
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 158, in configure_host
-    host = smtplib.SMTP(self.mail.server, self.mail.port)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 255, in __init__
-    (code, msg) = self.connect(host, port)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 341, in connect
-    self.sock = self._get_socket(host, port, self.timeout)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 312, in _get_socket
-    return socket.create_connection((host, port), timeout,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/socket.py", line 863, in create_connection
-    raise exceptions[0]
-  File "/usr/local/lib/python3.11/socket.py", line 848, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 111] Connection refused
-2026-02-10 18:14:25,954 ERROR: Mail send failed: [Errno 111] Connection refused [in /app/notifications/routes.py:38]
-Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 34, in submit
-    mail.send(msg)  # send using the instance imported from app.py
-    ^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 491, in send
-    with self.connect() as connection:
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 144, in __enter__
-    self.host = self.configure_host()
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 158, in configure_host
-    host = smtplib.SMTP(self.mail.server, self.mail.port)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 255, in __init__
-    (code, msg) = self.connect(host, port)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 341, in connect
-    self.sock = self._get_socket(host, port, self.timeout)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 312, in _get_socket
-    return socket.create_connection((host, port), timeout,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/socket.py", line 863, in create_connection
-    raise exceptions[0]
-  File "/usr/local/lib/python3.11/socket.py", line 848, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 111] Connection refused
-2026-02-11 00:12:25,714 INFO: Flask app startup [in /app/app.py:92]
-2026-02-11 00:18:32,268 ERROR: Exception on /login [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/account/routes.py", line 51, in login
-    conn = DatabaseConnection.connect()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: DatabaseConnection.connect() missing 1 required positional argument: 'self'
-2026-02-11 00:18:40,722 ERROR: Exception on /login [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/account/routes.py", line 51, in login
-    conn = DatabaseConnection.connect()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: DatabaseConnection.connect() missing 1 required positional argument: 'self'
-2026-02-11 00:32:25,667 INFO: Flask app startup [in /app/app.py:92]
-2026-02-11 00:33:04,261 ERROR: Exception on /login [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+2026-02-11 00:33:09,663 ERROR: Exception on /login [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
     self._cmysql.query(
@@ -151,3 +29,122 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
     raise get_mysql_exception(
 mysql.connector.errors.ProgrammingError: 1146 (42S02): Table 'BookEZDatabase.users' doesn't exist
+2026-02-11 00:33:38,154 ERROR: Exception on /login [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Table 'BookEZDatabase.users' doesn't exist
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/account/routes.py", line 56, in login
+    cursor.execute(
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 353, in execute
+    self._connection.cmd_query(
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1146 (42S02): Table 'BookEZDatabase.users' doesn't exist
+2026-02-11 19:55:30,606 INFO: Flask app startup [in /app/app.py:92]
+2026-02-11 19:55:49,512 INFO: Flask app startup [in /app/app.py:92]
+2026-02-14 04:22:01,158 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:02,438 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:02,438 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:04,686 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:05,985 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:05,985 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:08,034 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:09,289 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:09,289 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:11,382 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:12,655 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:12,655 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:15,196 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:16,495 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:16,495 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:19,876 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:21,148 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:21,148 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:26,099 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:27,376 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:27,376 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:35,440 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:36,794 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:36,794 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:51,257 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:52,500 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:22:52,500 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:23:20,332 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:23:21,677 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:23:21,677 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:24:14,639 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:24:15,941 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:24:15,941 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:25:17,606 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:36:41,618 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 04:59:29,435 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:01:25,524 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:03:21,503 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:05:17,728 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:06:38,549 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:07:43,761 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:13:30,463 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:19:16,881 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:25:03,590 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:30:50,092 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:36:36,626 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:42:23,156 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:48:09,653 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:53:56,193 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 05:59:42,649 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 06:05:29,013 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 06:11:15,362 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 06:17:01,752 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 06:22:48,223 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 06:28:34,593 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 06:34:20,930 INFO: Flask app startup [in /app/app.py:91]
+2026-02-14 06:40:07,355 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:14:48,932 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:15:05,853 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:21:34,954 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:22:01,692 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:22:02,628 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:28:13,218 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:28:40,358 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:28:45,818 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:31:26,350 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:31:33,126 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:31:41,833 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:31:55,779 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:32:03,305 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:33:45,782 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:33:46,952 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:38:26,366 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:38:43,654 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:38:45,248 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:43:09,779 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:43:25,149 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:46:13,281 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:46:36,889 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:46:41,473 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:46:52,450 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:46:58,196 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:47:15,006 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:47:35,646 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:47:49,209 INFO: Flask app startup [in /app/app.py:91]
+2026-02-17 16:50:11,647 INFO: Flask app startup [in /app/app.py:91]
