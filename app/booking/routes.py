@@ -19,7 +19,6 @@ booking_bp = Blueprint('booking', __name__)
 #needs to take room number and date ?room={{ room.roomNumber }}&date={{ selected_date }}
 @booking_bp.route('/booking', methods=['GET', 'POST'])
 def create_booking():
-
     db = DatabaseConnection()
     reader = DatabaseReadingServices(db)
     writer = DatabaseWritingServices(db, reader)
@@ -34,24 +33,37 @@ def create_booking():
     form = BookingForm()
 
     if form.validate_on_submit():
-        BookingService.create_booking(
+        meeting_id = BookingService.create_booking(
             meetingDate=form.meeting_date.data,
             startTime=form.start_time.data,
             duration=form.duration.data,
             meetingOwner=user_id
         )
         flash("Booking created", "success")
-        return redirect('/meeting.html') # TODO: FIX
+        return redirect(f'/booking/{meeting_id[1]}') # TODO: test this redirect
 
-
+    #refactor to use datepicker js to auto submit date and prefill date field on booking form
     date_str = request.args.get('date', '').strip()
-     # get room object based on room number
-    room = reader.get_room_by_number(room_number)
-    #room_capacity = reader.get_room_capacity(room_number)
+
+    # get room object based on room number
+    room = reader.get_room_data_given_room_number(room_number)
+
     if date_str:
         form.meeting_date.data = date_str  # Pre-fill the date field if provided in query parameters
 
     return render_template("booking.html", form=form, mode="create", room=room)
+
+
+@booking_bp.route('/booking/<int:booking_id>', methods=['GET'])
+def view_booking(booking_id):
+    db = DatabaseConnection()
+    reader = DatabaseReadingServices(db)
+
+    booking = reader.get_booking_information_of_specific_booking(booking_id)
+    if not booking[0]:
+        abort(404, description="Booking not found")
+
+    return render_template("booking_details.html", booking=booking)
 
 
 
