@@ -54,7 +54,7 @@ def create_booking():
         return redirect('/meeting.html') # TODO: FIX
 
     return render_template("booking.html", form=form, mode="create", room=room)
-    
+
 
 
 @booking_bp.route('/rsvp', methods=['GET', 'POST'])

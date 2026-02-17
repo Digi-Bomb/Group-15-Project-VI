@@ -335,7 +335,7 @@ class DatabaseReadingServices:
             )
 
         return False
-    
+
     def get_rooms(self, building: str | None = None):
             """
             Returns a list of rooms.
@@ -363,7 +363,7 @@ class DatabaseReadingServices:
             cursor.execute(sql, params)          # <-- execute the query
             results = cursor.fetchall()          # <-- fetch all rows as a list of dicts
             cursor.close()
-            return results 
+            return results
 
     def get_booking_start_and_end_times_for_specific_room(self, room_number: str):
         """Function that returns a list of start times, end times, and dates for all bookings under a particular room"""
@@ -413,7 +413,7 @@ class DatabaseReadingServices:
             booked_times.append(tupleOfInfo)
 
         return booked_times
-    
+
     def get_room_by_number(self, room_number: str):
         """Function that returns the room object associated with a particular room number"""
         self.cursor.execute(
@@ -428,7 +428,7 @@ class DatabaseReadingServices:
             return result
         else:
             return "No room found with that number."
-        
+
     def get_room_capacity(self, room_number: str):
         """Function that returns the capacity of a particular room given its room number"""
         self.cursor.execute(
@@ -443,5 +443,3 @@ class DatabaseReadingServices:
             return result[0]
         else:
             return "No room found with that number."
-    
-    

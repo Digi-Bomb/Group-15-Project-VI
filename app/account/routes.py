@@ -33,7 +33,7 @@ def register():
             flash("Registration successful! Please log in.", "success")
         else:
             flash("Registration failed. User may already exist.", "danger")
-        return redirect("/login")    
+        return redirect("/login")
     return render_template("register.html", form=form)
 
 
@@ -92,7 +92,7 @@ def profile():
     )
     user = cursor.fetchone()
     cursor.close()
- 
+
     # if not user:
     #    flash("User not found.", "danger")
     #    return redirect("/login")

@@ -18,7 +18,7 @@ from logging.handlers import RotatingFileHandler
 from flask_mail import Mail, Message
 
 import os
-from datetime import timedelta, date, time 
+from datetime import timedelta, date, time
 
 
 # -- CONFIG --
