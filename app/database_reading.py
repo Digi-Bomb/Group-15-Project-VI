@@ -380,7 +380,7 @@ class DatabaseReadingServices:
             booked_times.append(tupleOfInfo)
 
         return booked_times
-    
+
     def get_booking_start_and_end_times_for_specific_room_exclude_date(self, room_number: str, meeting_date: str):
         """Function that returns a list of start times, and end times for all bookings under a particular room \n
         NOTE: IN ORDER OF START, END TIME"""
@@ -430,21 +430,21 @@ class DatabaseReadingServices:
             booked_times.append(tupleOfInfo)
 
         return booked_times
-    
+
     def return_all_bookings_for_a_user(self, RUID: int):
         """Generic Function for returning all Bookings that a Registered User owns \n
         NOTE RETURNS A LIST OF BOOKINGS OWNED BY A USER \n
         RETURNS FALSE IF NO BOOKINGS OWNED"""
 
         self.cursor.execute("SELECT BID FROM Booking WHERE meetingOwner = %s",(RUID,))
-        
+
         result = self.cursor.fetchall()
 
         if result:
             return result
         else:
             return False, "Unable to find any users for the booking"
-    
+
     def get_registered_user_email_from_RUID(self, RUID: int):
         result = self.cursor.execute(
             "SELECT email FROM RegisteredUser WHERE RUID = %s", (RUID,)
@@ -469,7 +469,7 @@ class DatabaseReadingServices:
             return self.cursor.fetchall()
         else:
             return "No bookings found in the database."
-        
+
     def get_unregistered_user_email_from_URUID(self, URUID: int):
         self.cursor.execute(
             "SELECT email FROM UnregisteredUser WHERE URUID = %s", (URUID,)
@@ -480,7 +480,5 @@ class DatabaseReadingServices:
             return result
         else:
             return "No unregistered user found for that RUID."
-        
+
     #def get_duration_from_given_end_time(self, start_time:time, end_time: time):
-
-
