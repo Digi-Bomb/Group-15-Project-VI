@@ -415,3 +415,52 @@ class DatabaseReadingServices:
         return booked_times
     
     
+    def return_all_bookings_for_a_user(self, RUID: int):
+        """Generic Function for returning all Bookings that a Registered User owns \n
+        NOTE RETURNS A LIST OF BOOKINGS OWNED BY A USER \n
+        RETURNS FALSE IF NO BOOKINGS OWNED"""
+
+        self.cursor.execute("SELECT BID FROM Booking WHERE meetingOwner = %s",(RUID,))
+        
+        result = self.cursor.fetchall()
+
+        if result:
+            return result
+        else:
+            return False, "Unable to find any users for the booking"
+    
+    def get_registered_user_email_from_RUID(self, RUID: int):
+        result = self.cursor.execute(
+            "SELECT email FROM RegisteredUser WHERE RUID = %s", (RUID,)
+        )
+        if result:
+            return self.cursor.fetchall()
+        else:
+            return "No registered user found for that RUID."
+
+    def get_booking_by_link_id(self, link_id: str):
+        result = self.cursor.execute(
+            "SELECT * FROM Booking WHERE link_id = %s", (link_id,)
+        )
+        if result:
+            return self.cursor.fetchall()
+        else:
+            return "No booking found for that shareable link ID."
+
+    def get_all_bookings(self):
+        result = self.cursor.execute("SELECT * FROM Booking")
+        if result:
+            return self.cursor.fetchall()
+        else:
+            return "No bookings found in the database."
+        
+    def get_unregistered_user_email_from_URUID(self, URUID: int):
+        self.cursor.execute(
+            "SELECT email FROM UnregisteredUser WHERE URUID = %s", (URUID,)
+        )
+        result = self.cursor.fetchone()[0]
+
+        if result:
+            return result
+        else:
+            return "No unregistered user found for that RUID."
