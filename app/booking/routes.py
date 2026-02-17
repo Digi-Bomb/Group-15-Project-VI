@@ -32,16 +32,6 @@ def create_booking():
       return redirect("/login")
 
     form = BookingForm()
-    # TODO: needs to generate meetingcapacity based on roomcapacity, colin issue
-
-    if request.method == 'GET':
-        date_str = request.args.get('date', '').strip()
-        # get room object based on room number
-        room = reader.get_room_by_number(room_number)
-        room_capacity = reader.get_room_capacity(room_number)
-        if date_str:
-            form.meeting_date.data = date_str  # Pre-fill the date field if provided in query parameters
-            return render_template("booking.html", form=form, mode="create", room_capacity=room_capacity) #edit once dina is done with room capacity
 
     if form.validate_on_submit():
         BookingService.create_booking(
@@ -53,7 +43,16 @@ def create_booking():
         flash("Booking created", "success")
         return redirect('/meeting.html') # TODO: FIX
 
+
+    date_str = request.args.get('date', '').strip()
+     # get room object based on room number
+    room = reader.get_room_by_number(room_number)
+    #room_capacity = reader.get_room_capacity(room_number)
+    if date_str:
+        form.meeting_date.data = date_str  # Pre-fill the date field if provided in query parameters
+
     return render_template("booking.html", form=form, mode="create", room=room)
+    #selected date, room_number, 
     
 
 
