@@ -135,3 +135,7 @@ mysql.connector.errors.ProgrammingError: 1146 (42S02): Table 'BookEZDatabase.use
 2026-02-14 02:32:14,925 INFO: Flask app startup [in /app/app.py:92]
 2026-02-14 02:35:43,689 INFO: Flask app startup [in /app/app.py:92]
 2026-02-14 02:36:42,057 INFO: Flask app startup [in /app/app.py:92]
+2026-02-17 02:01:07,728 INFO: Flask app startup [in /app/app.py:94]
+2026-02-17 02:01:10,505 INFO: Flask app startup [in /app/app.py:94]
+2026-02-17 02:01:52,750 INFO: Flask app startup [in /app/app.py:94]
+2026-02-17 02:01:55,576 INFO: Flask app startup [in /app/app.py:94]
