@@ -33,12 +33,18 @@ def create_booking():
     form = BookingForm()
 
     if form.validate_on_submit():
+        #call duration function from reader here - will return a duration
         meeting_id = BookingService.create_booking(
             meetingDate=form.meeting_date.data,
             startTime=form.start_time.data,
             duration=form.duration.data,
             meetingOwner=user_id
         )
+        if not meeting_id[0]:
+            if meeting_id[1] == "Room is NOT Available":
+                flash("The selected time slot is already booked. Please choose a different time.", "error")
+            flash("Failed to create booking.", "error")
+            return redirect("/booking")
         flash("Booking created", "success")
         return redirect(f'/booking/{meeting_id[1]}') # TODO: test this redirect
 
@@ -63,8 +69,7 @@ def view_booking(booking_id):
     if not booking[0]:
         abort(404, description="Booking not found")
 
-    return render_template("booking_details.html", booking=booking)
-
+    return render_template("meeting.html", booking=booking)
 
 
 @booking_bp.route('/rsvp', methods=['GET', 'POST'])
