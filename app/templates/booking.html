@@ -64,6 +64,11 @@
                     <div class="col mt-2">
                         <label for="startTime" class="form-label">Start Time</label>
                         <input type="time" id="startTime" min="08:00" max="20:00" required name="start_time">
+                        {{
+                            form.start_time(
+                                class=form-control
+                            )
+                        }}
                         <label for="startTime" class="form-label ms-5">End Time</label>
                         <input type="time" id="endTime" min="08:00" max="20:00" required name="end_time">
                     </div>

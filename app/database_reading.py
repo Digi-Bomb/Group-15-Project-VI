@@ -431,13 +431,15 @@ class DatabaseReadingServices:
 
     def get_room_data_given_room_number(self, room_number: str):
 
-        self.cursor.execute("SELECT roomNumber, companyBuilding, wing, wheelchairAccessible, projectorAccess, whiteboardAccess, maximumCapacity WHERE roomNumber = %s", (room_number,))
+        self.cursor.execute("SELECT roomNumber, companyBuilding, wing, wheelchairAccessible, projectorAccess, whiteboardAccess, maximumCapacity FROM Room WHERE roomNumber = %s", (room_number,))
 
-        result = self.cursor.fetchall()
+        result = self.cursor.fetchone()
 
         # result [0] is roomNumber, result[1] is company building, [2] is wing, at [3] is wheelchairAccessible, at [4] is projectorAccess, at [5] is whiteboardAccess, at [6] is maximumCapacity 
         if result:
+            self.cursor.close()
             return result
     
         else:
+            self.cursor.close()
             return False, "Unable to find the room specified"

@@ -34,7 +34,7 @@ class LogoutForm(FlaskForm):
 #create booking form
 class BookingForm(FlaskForm):
     meeting_date = DateField("Meeting Date", validators=[DataRequired()])
-    start_time = TimeField("Start Time", validators=[DataRequired()])
-    duration = TimeField("Duration", validators=[DataRequired()])
+    start_time = TimeField("Start Time", format="%H:%M", validators=[DataRequired()])
+    end_time = TimeField("End Time", format="%H:%M", validators=[DataRequired()])
     meeting_capacity = SelectField("Capacity", coerce=int)
     submit = SubmitField()
