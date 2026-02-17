@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['make_5fsession_5fpermanent_0',['make_session_permanent',['../namespaceapp_1_1app.html#a91accba869170261b4c2bf2849aac1a5',1,'app::app']]]
+  ['login_0',['login',['../namespaceapp_1_1account_1_1routes.html#acd6c1b7023be24b04df309a8cffd5d88',1,'app::account::routes']]],
+  ['logout_1',['logout',['../namespaceapp_1_1account_1_1routes.html#a71ecde56487f717c1b3f3beca9073070',1,'app::account::routes']]]
 ];
