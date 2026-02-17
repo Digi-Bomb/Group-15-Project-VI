@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, flash, current_app
+from flask import Blueprint, render_template, request, redirect, flash, current_app, session
 
 from booking.booking import Booking
 from notifications.email_notification_service import EmailNotificationService
@@ -33,7 +33,7 @@ def create_booking():
         date_str = request.args.get('date', '').strip()
         if date_str:
             form.meeting_date.data = date_str  # Pre-fill the date field if provided in query parameters
-            return render_template("booking.html", form=form, mode="create")
+            return render_template("booking.html", form=form, room=room, mode="create")
 
     if form.validate_on_submit():
         BookingService.create_booking(
