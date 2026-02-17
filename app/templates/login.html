@@ -9,33 +9,41 @@
     <div class="card p-5 mx-auto gap-2 d-flex" style="width: 35rem;">
         <h4 class="fw-bold">Login to BookEZ</h4>
         <form method="POST" action="/login">
+            {{ form.hidden_tag() }}
             <label for="username" class="form-label">Username</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control border border-primary" placeholder="username"
-                    aria-label="Enter your username" aria-describedby="basic-addon1" id="username" name="username">
+                {{ form.username(
+                class_="form-control border border-primary",
+                placeholder="username",
+                id="username"
+                ) }}
             </div>
             <label for="password" class="form-label">Password</label>
             <div class="input-group mb-3">
-                <input type="password" class="form-control border border-primary" placeholder="password"
-                    aria-label="Enter your password" aria-describedby="basic-addon1" id="password" name="password">
+                {{ form.password(
+                class_="form-control border border-primary",
+                placeholder="password",
+                id="password"
+                ) }}
             </div>
             <div class="row d-flex">
-                <div class="col">
-                    <button type="submit" class="btn btn-primary me-auto mt-3 d-flex"
-                        style="width: 10rem; display: flex;" name="submit">
+                <div class="col me-auto">
+                    <button type="submit" name="{{ form.submit.name }}"
+                        class="btn btn-primary mt-3 me-auto" style="width: 10rem; display: flex;">
                         Login
-                        <i class="bi bi-arrow-right ms-auto"></i>
+                        <i class="bi bi-arrow-right ms-2"></i>
                     </button>
                 </div>
+                <div class="col ms-auto">
+                    <a href="/register" style="width: 10rem; display: flex;"
+                        class="btn btn-outline-primary mt-3 ms-auto" name="register">
+                        Register
+                        <i class="bi bi-arrow-right ms-auto"></i>
+                    </a>
+                </div>
+            </div>
         </form>
-        <div class="col ms-auto">
 
-            <a href="/register" style="width: 10rem; display: flex;" class="btn btn-outline-primary mt-3 ms-auto"
-                name="register">
-                Register
-                <i class="bi bi-arrow-right ms-auto"></i>
-            </a>
-        </div>
     </div>
 </div>
 </div>

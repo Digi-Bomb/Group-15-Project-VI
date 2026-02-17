@@ -28,12 +28,13 @@ class DatabaseWritingServices:
 
         if not checkExists:
 
-            query = """
+            try:
+                query = """
                 INSERT INTO RegisteredUser
                 (username, email, pass, firstName, lastName)
                 VALUES (%s, %s, %s, %s, %s)
-            """
-            values = (username, email, password, first_name, last_name)
+                """
+                values = (username, email, password, first_name, last_name)
 
             # else:
             #     query = """
@@ -43,9 +44,13 @@ class DatabaseWritingServices:
             #     """
             #     values = (username, email, password, first_name, last_name)
 
-            self.cursor.execute(query, values)
-            self.conn.commit()
-            return True
+                self.cursor.execute(query, values)
+                self.conn.commit()
+                return True, "Register successful"
+
+            except Exception as e:
+                self.conn.rollback()
+                print("UPDATE ERROR: ", e)
 
         return False, "User already registered"
 

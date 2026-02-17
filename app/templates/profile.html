@@ -3,5 +3,18 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
+<div class=" d-flex px-5 flex-wrap align-middle gap-5">
+    <div class="card p-5 mx-auto gap-2 d-flex" style="width: 35rem;">
+        <div class="container mt-5">
+            <h3 class="mb-4">Your Profile</h3>
 
-{% endblock %}
+            
+                <label for="username" class="form-label">Username</label>
+                <p id="username" class="text-decoration-underline">{{ user.username }}</p>
+                <label for="username" class="form-label">Username</label>
+                <p id="email" class="text-decoration-underline">{{ user.email }}</p>
+                <label for="username" class="form-label">Username</label>
+                <p id="password" class="text-decoration-underline"> ******** (hidden)</p>
+        </div>
+    </div>
+    {% endblock %}

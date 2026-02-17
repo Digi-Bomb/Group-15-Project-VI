@@ -1,3 +1,4 @@
+from werkzeug.security import check_password_hash
 from database_connection import DatabaseConnection
 from datetime import time, datetime, timedelta, date
 
@@ -23,8 +24,13 @@ class DatabaseReadingServices:
         )
 
         # Needed to ensure we get the first element of the tuple response (only need to know the first email associated with user)
-        result = self.cursor.fetchone()[0]
-        self.cursor.close()  # Empty Cursor
+        row = self.cursor.fetchone()
+
+        if not row:
+            return False, "Unable to find account"
+
+        result = row[0]
+        self.cursor.close()
 
         if result:
             return result
@@ -49,19 +55,18 @@ class DatabaseReadingServices:
                 "SELECT pass FROM RegisteredUser WHERE username = %s", (username,)
             )
 
-        result = self.cursor.fetchone()[0]
-        self.cursor.close()  # Empty Cursor
+        row = self.cursor.fetchone()
 
-        if result:
+        if not row:
+            return False, "Unable to find account"
 
-            if result == password:
-                return True, "Successful Login"
+        result = row[0]
+        self.cursor.close()
 
-            else:
-                return False, "Incorrect Login Information"
-
+        if check_password_hash(result, password):
+            return True, username
         else:
-            False, "Unable to find the account registered under this email or username"
+            return False, "Unable to find the account registered under this email or username"
 
     def get_specific_meeting_owner_for_booking(self, BID: int):
         """Function that returns the sole meeting owner (via RID) of a particular booking (specified by BID)"""
@@ -330,6 +335,35 @@ class DatabaseReadingServices:
             )
 
         return False
+    
+    def get_rooms(self, building: str | None = None):
+            """
+            Returns a list of rooms.
+            If building is provided, filters by companyBuilding.
+            """
+            sql = """
+                SELECT
+                    roomNumber,
+                    companyBuilding,
+                    wheelchairAccessible,
+                    projectorAccess,
+                    whiteboardAccess,
+                    maximumCapacity
+                FROM Room
+            """
+            params = []
+
+            if building:
+                sql += " WHERE companyBuilding = %s"
+                params.append(building)
+
+            sql += " ORDER BY companyBuilding, wing, roomNumber"
+
+            cursor = self.conn.cursor(dictionary=True)
+            cursor.execute(sql, params)          # <-- execute the query
+            results = cursor.fetchall()          # <-- fetch all rows as a list of dicts
+            cursor.close()
+            return results 
 
     def get_booking_start_and_end_times_for_specific_room(self, room_number: str):
         """Function that returns a list of start times, end times, and dates for all bookings under a particular room"""
@@ -379,6 +413,7 @@ class DatabaseReadingServices:
             booked_times.append(tupleOfInfo)
 
         return booked_times
+    
     
     def return_all_bookings_for_a_user(self, RUID: int):
         """Generic Function for returning all Bookings that a Registered User owns \n
