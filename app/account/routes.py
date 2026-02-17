@@ -13,6 +13,7 @@ account_bp = Blueprint("account", __name__)
 
 @account_bp.route('/register', methods=['GET', 'POST'])
 def register():
+    print("Register route accessed")
     db = DatabaseConnection()
     reader = DatabaseReadingServices(db)
     writer = DatabaseWritingServices(db, reader)
@@ -27,6 +28,7 @@ def register():
         createUser = writer.create_new_user(username, email, firstName, lastName, password)
         #can confirm user creation with createUser boolean, flash message accordingly
         print(createUser)
+        print("^createUser result")
         if createUser[0]:
             flash("Registration successful! Please log in.", "success")
         else:
