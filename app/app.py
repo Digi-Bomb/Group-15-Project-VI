@@ -127,6 +127,16 @@ database_read_servicer = database_reading.DatabaseReadingServices(
 databaseConn = database_connection.DatabaseConnection()
 database_reader = database_reading.DatabaseReadingServices(databaseConn)
 
+testpass = generate_password_hash('PassW0rd')
+#test = database_reader.return_all_bookings_for_a_user(1005)
+# createBooking = database_writing.DatabaseWritingServices(
+#     databaseConn, database_reader
+# ).create_new_user('test2', 'test2','','',testpass)
+
+print(testpass)
+
+
+print("Checking For create user... ", createBooking)
 createBooking= database_writing.DatabaseWritingServices(
     databaseConn, database_reader
 ).delete_booking(1078)
