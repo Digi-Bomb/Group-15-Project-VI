@@ -133,10 +133,7 @@ testpass = generate_password_hash('PassW0rd')
 #     databaseConn, database_reader
 # ).create_new_user('test2', 'test2','','',testpass)
 
-print(testpass)
 
-
-print("Checking For create user... ", createBooking)
 createBooking= database_writing.DatabaseWritingServices(
     databaseConn, database_reader
 ).delete_booking(1078)
