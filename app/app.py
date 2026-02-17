@@ -119,12 +119,12 @@ database_read_servicer = database_reading.DatabaseReadingServices(
 databaseConn = database_connection.DatabaseConnection()
 database_reader = database_reading.DatabaseReadingServices(databaseConn)
 
-test = database_reader.get_booking_start_and_end_times_for_specific_room("2G15")
-# createBooking = database_writing.DatabaseWritingServices(
-#     databaseConn, database_reader
-# ).update_number_of_confirmations(1084)
 
-print("Checking For create user... ", test)
+createBooking = database_writing.DatabaseWritingServices(
+    databaseConn, database_reader
+).update_booking_reminder_sent(1084)
+
+print("Checking For create user... ", createBooking)
 
 # -- ROUTES --
 from account.routes import account_bp
