@@ -37,9 +37,9 @@ def test_get_registered_email_from_username():
     assert email == 'testuser1@gmail.com'
 
 def test_validate_user_information():
-   
+
     reader = load_reader()
-    
+
     password = 'PassW0rd'
     password = generate_password_hash(password)
     valid = reader.validate_user_information('testuser', 'testuser1@gmail.com', password)
@@ -52,13 +52,13 @@ def test_getting_meeting_owner():
     reader = load_reader()
 
     owner = reader.get_specific_meeting_owner_for_booking(1083)
-    
+
     assert owner == 1005
 
 def test_getting_username():
 
     reader = load_reader()
-    
+
     user = reader.get_username_via_RUID(1005)
 
     assert user == 'testuser'
@@ -76,17 +76,17 @@ def test_getting_meetings_owned_several_meetings():
 def test_get_registered_users_in_booking_one_user():
 
     reader = load_reader()
-    
+
     registered_users = reader.get_registered_users_associated_with_booking_ID(1083)
     assert registered_users == 1005
 
 def test_get_unregistered_users_in_booking_one_user():
-    
+
     reader = load_reader()
 
     unregistered_users = reader.get_registered_users_associated_with_booking_ID(1083)
     assert unregistered_users == 1005 #FIX THIS!!!
-    
+
 def test_check_for_pre_existing_user_true_for_email_only():
 
     reader = load_reader()
@@ -159,14 +159,14 @@ def test_checking_room_availability_false_existing_duration_leaks_into_booking()
 def test_getting_capacity_acurate():
 
     reader = load_reader()
-   
+
     capacity = reader.get_capacity_of_room('1f05')
     assert capacity == 100
 
 def test_getting_capacity_inacurate():
 
     reader = load_reader()
-   
+
     capacity = reader.get_capacity_of_room('1C09')
     assert not capacity == 100
 
@@ -211,7 +211,7 @@ def test_create_new_user_success():
     # need to randomly generate a running user to avoid double up
     user_info = ('testrunninguser', 'testrunning@gmail.com', 'bleh', 'blah', test_pass)
     adding = writer.create_new_user(user_info[0],user_info[1],user_info[2],user_info[3],user_info[4])
-    
+
     assert adding
 
 def test_create_new_user_failur():
@@ -221,7 +221,7 @@ def test_create_new_user_failur():
     test_pass = generate_password_hash(test_pass)
     user_info = ('testrunninguser', 'testrunninggmail.com', 'bleh', 'blah', test_pass)
     adding = writer.create_new_user(user_info[0],user_info[1],user_info[2],user_info[3],user_info[4])
-    
+
     assert not adding[0]
 
 def test_create_new_booking_success():
@@ -286,10 +286,9 @@ def test_delete_associate_false_if_BID_not_existing():
     # def update_meeting_room(self, BID: int, new_room: str):
 
     # def update_meeting_capacity(self, BID: int, new_capacity: int):
-   
+
     # def update_number_of_confirmations(self, BID: int):
-   
+
     # def update_booking_reminder_sent(self, BID: int):
 
     # def update_bookings_shareable_link(self, shareable_link: str, BID: int):
-     
