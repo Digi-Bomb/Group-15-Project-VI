@@ -41,7 +41,7 @@ class EmailNotificationService:
         
         from ..app import audit_logger
         audit_logger.log_long_term(f"Sent new RSVP confirmation notification email to {meeting_owner_email} for booking ID {booking_id} due to new RSVP confirmation from {attendee_name}.")
-        
+    
     def send_booking_notification_email(self, booking: Booking):
         recipent_list = []
                 

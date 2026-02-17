@@ -45,7 +45,7 @@ def submit():
         flash("Failed to send email.", "error")
         return str(e), 500
 
-def send_booking_notification_emails(self):
+def send_booking_notification_emails():
     all_bookings = DatabaseReadingServices(DatabaseConnection()).get_all_bookings()
     
     for booking in all_bookings:

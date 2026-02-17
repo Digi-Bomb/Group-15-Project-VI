@@ -146,4 +146,6 @@ if __name__ == "__main__":
     scheduler = APScheduler()
     scheduler.add_job(func=send_booking_notification_emails, trigger='interval', id='job', seconds=5)
     scheduler.start()
+    audit_logger.log_long_term("started long log.")
+    audit_logger.log_short_term("started short log.")
     app.run(debug=True, host="0.0.0.0", port=5000)
