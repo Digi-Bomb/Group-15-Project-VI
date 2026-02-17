@@ -4,7 +4,6 @@ var searchData=
   ['database_5fread_5fservicer_1',['database_read_servicer',['../namespaceapp_1_1app.html#a2234f2dcd1b4ea3f5d84fd838e0a7591',1,'app::app']]],
   ['database_5freader_2',['database_reader',['../namespaceapp_1_1app.html#a732be3227d00d82d62ede11c155f386c',1,'app::app']]],
   ['databaseconn_3',['databaseConn',['../namespaceapp_1_1app.html#ac306d926ddb23731be54706d17174a7b',1,'app::app']]],
-  ['debug_4',['debug',['../namespaceapp_1_1app.html#aa9bdf7e2a13ae47e8cc77b2228a7c6cf',1,'app::app']]],
-  ['duration_5',['duration',['../classapp_1_1forms_1_1BookingForm.html#af8de191404b32d32ed5f2b35ba9caef7',1,'app::forms::BookingForm']]],
-  ['duration_5fhours_6',['duration_hours',['../classapp_1_1booking_1_1booking_1_1Booking.html#a22e897b98131694703d94f69243cb1aa',1,'app::booking::booking::Booking']]]
+  ['duration_4',['duration',['../classapp_1_1forms_1_1BookingForm.html#af8de191404b32d32ed5f2b35ba9caef7',1,'app::forms::BookingForm']]],
+  ['duration_5fhours_5',['duration_hours',['../classapp_1_1booking_1_1booking_1_1Booking.html#a22e897b98131694703d94f69243cb1aa',1,'app::booking::booking::Booking']]]
 ];
