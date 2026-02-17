@@ -22,7 +22,7 @@ class BookingService:
         db = DatabaseConnection()
         reader = DatabaseReadingServices(db)
         writer = DatabaseWritingServices(db, reader)
-        
+
         create_booking = writer.create_new_booking(
             meeting_date=meeting_date,
             start_time=start_time,
