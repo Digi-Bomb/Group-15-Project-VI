@@ -192,59 +192,82 @@ class DatabaseReadingServices:
     #         return False
 
     def check_for_room_availability(
-        self, room_number: str, meeting_date: str, start_time: str, duration: str
+        self,
+        room_number: str,
+        meeting_date: str,
+        start_time: str,
+        duration: str,
+        BID: int = None,
     ):
         """Function that validates that a room is available for use \n
-        RETURNS BOOLEAN VALUE \n
+        NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPATE AN EXISTING BOOKING \n
         TRUE == ROOM IS AVAILABLE \n
         FALSE == ROOM TAKEN"""
 
-        start_hours, start_minutes, start_seconds = map(int, start_time.split(':'))
-        start_time = timedelta(hours=start_hours, minutes=start_minutes, seconds=start_seconds)
+        start_hours, start_minutes, start_seconds = map(int, start_time.split(":"))
+        start_time = timedelta(
+            hours=start_hours, minutes=start_minutes, seconds=start_seconds
+        )
 
-        duration_hours, duration_minutes, duration_seconds = map(int, duration.split(':'))
-        duration = timedelta(hours=duration_hours, minutes=duration_minutes, seconds=duration_seconds)
+        duration_hours, duration_minutes, duration_seconds = map(
+            int, duration.split(":")
+        )
+        duration = timedelta(
+            hours=duration_hours, minutes=duration_minutes, seconds=duration_seconds
+        )
 
         end_time = duration + start_time
         meeting_date = datetime.strptime(meeting_date, "%Y-%m-%d").date()
-      
-        # First check room id from associated table
-        self.cursor.execute(
-            "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s",
-            (room_number,),  # Returns ALL bookings for a Room
-        )
+
+        # if a BID is provided
+        if BID:
+            self.cursor.execute(
+                "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s AND BID != %s",
+                (room_number, BID),  # Returns ALL bookings for a Room
+            )
+
+        else:
+            # First check room id from associated table
+            self.cursor.execute(
+                "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s",
+                (room_number,),  # Returns ALL bookings for a Room
+            )
 
         bookings = self.cursor.fetchall()
-        
+
         # Check the Booking times of each
         for (booking_id,) in bookings:
             self.cursor.execute(
                 "SELECT meetingDate, startTime, duration, ADDTIME(startTime, duration) AS endTime FROM Booking WHERE BID = %s",
                 (booking_id,),
             )
-        
+
             row = self.cursor.fetchone()
 
             curmeetingDate_db = row[0]
             curstartTime_db = row[1]
-            curendTime_db = row[3]  
-            
-              # Case 1, start time and date of proposed booking is equal to existing booking
+            curendTime_db = row[3]
+
+            # Case 1, start time and date of proposed booking is equal to existing booking
             if meeting_date == curmeetingDate_db and start_time == curstartTime_db:
-                #print("error1create")
+                # print("error1create")
                 return False
 
             # Case 2, an existing booking leaks into proposed booking start time
-            elif meeting_date == curmeetingDate_db and (curstartTime_db < start_time and curendTime_db > start_time):
-                #print("error2create")
-                
+            elif meeting_date == curmeetingDate_db and (
+                curstartTime_db < start_time and curendTime_db > start_time
+            ):
+                # print("error2create")
+
                 return False
 
             # Case 3, the proposed booking leaks into a specific Booking's time
-            elif meeting_date == curmeetingDate_db and (start_time < curstartTime_db and end_time > curstartTime_db):
-                #print("error3create")
+            elif meeting_date == curmeetingDate_db and (
+                start_time < curstartTime_db and end_time > curstartTime_db
+            ):
+                # print("error3create")
                 return False
-            
+
         return True
 
     def get_capacity_of_room(self, room_number: int):
@@ -269,16 +292,107 @@ class DatabaseReadingServices:
         self.cursor.close()  # Empty Cursor
 
         if result:
-            return self.cursor.fetchone()[0]
+            return result
 
-    # def get_meeting_owner_from_BID(self, BID: int):
-    #     result = self.cursor.execute(
-    #         "SELECT meetingOwner FROM Booking WHERE BID = %s", (BID,)
-    #     )
-    #     if result:
-    #         return self.cursor.fetchall()
-    #     else:
-    #         return "No bookings found for that BID."
+    def get_booking_information_of_specific_booking(self, BID: int):
+        """Returns the meeting date, time, duration, and room of a particular booking"""
+        self.cursor.execute(
+            "SELECT meetingDate, startTime, duration, meetingRoom FROM Booking WHERE BID = %s",
+            (BID,),
+        )
+        row = self.cursor.fetchone()
+        prev_meeting_room = row[3]
+        prev_meeting_time = row[1]
+        prev_meeting_date = row[0]
+        prev_meeting_duration = row[2]
+
+        # Conversions for string input needed by checking room availability
+        total_seconds_meet_time = int(prev_meeting_time.total_seconds())
+        hours_mt, remainder_mt = divmod(total_seconds_meet_time, 3600)
+        minutes_mt, seconds_mt = divmod(remainder_mt, 60)
+
+        prev_meeting_time = f"{hours_mt:02}:{minutes_mt:02}:{seconds_mt:02}"
+
+        total_seconds_meet_duration = int(prev_meeting_duration.total_seconds())
+        hours_md, remainder_md = divmod(total_seconds_meet_duration, 3600)
+        minutes_md, seconds_md = divmod(remainder_md, 60)
+
+        prev_meeting_duration = f"{hours_md:02}:{minutes_md:02}:{seconds_md:02}"
+
+        prev_meeting_date = prev_meeting_date.strftime("%Y-%m-%d")
+
+        if row:
+            return (
+                prev_meeting_room,
+                prev_meeting_date,
+                prev_meeting_time,
+                prev_meeting_duration,
+            )
+
+        return False
+
+    def get_booking_start_and_end_times_for_specific_room(self, room_number: str):
+        """Function that returns a list of start times, end times, and dates for all bookings under a particular room"""
+
+        # First check room id from associated table
+        self.cursor.execute(
+            "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s",
+            (room_number,),  # Returns ALL bookings for a Room
+        )
+
+        bookings = self.cursor.fetchall()
+
+        booked_times = []
+
+        for (booking,) in bookings:
+
+            self.cursor.execute(
+                "SELECT meetingDate, startTime, duration, ADDTIME(startTime, duration) AS endTime FROM Booking WHERE BID = %s",
+                (booking,),
+            )
+
+            row = self.cursor.fetchone()
+
+            curmeetingDate_db = row[0]
+            curmeetingStartTime_db = row[1]
+            # curstartDuration_db = row[2]
+            curendTime_db = row[3]
+
+            # Conversions for string input needed by checking room availability
+            total_seconds_meet_start = int(curmeetingStartTime_db.total_seconds())
+            hours_ms, remainder_ms = divmod(total_seconds_meet_start, 3600)
+            minutes_ms, seconds_ms = divmod(remainder_ms, 60)
+
+            cur_meeting_time = f"{hours_ms:02}:{minutes_ms:02}:{seconds_ms:02}"
+
+            # Conversions for string input needed by checking room availability
+            total_seconds_meet_end = int(curendTime_db.total_seconds())
+            hours_me, remainder_me = divmod(total_seconds_meet_end, 3600)
+            minutes_me, seconds_me = divmod(remainder_me, 60)
+
+            curendTime_db = f"{hours_me:02}:{minutes_me:02}:{seconds_me:02}"
+
+            curmeetingDate_db = curmeetingDate_db.strftime("%Y-%m-%d")
+
+            tupleOfInfo = (curmeetingDate_db, cur_meeting_time, curendTime_db)
+
+            booked_times.append(tupleOfInfo)
+
+        return booked_times
+    
+    def return_all_bookings_for_a_user(self, RUID: int):
+        """Generic Function for returning all Bookings that a Registered User owns \n
+        NOTE RETURNS A LIST OF BOOKINGS OWNED BY A USER \n
+        RETURNS FALSE IF NO BOOKINGS OWNED"""
+
+        self.cursor.execute("SELECT BID FROM Booking WHERE meetingOwner = %s",(RUID,))
+        
+        result = self.cursor.fetchall()
+
+        if result:
+            return result
+        else:
+            return False, "Unable to find any users for the booking"
     
     def get_registered_user_email_from_RUID(self, RUID: int):
         result = self.cursor.execute(
@@ -288,7 +402,6 @@ class DatabaseReadingServices:
             return self.cursor.fetchall()
         else:
             return "No registered user found for that RUID."
-        
     def get_booking_by_link_id(self, link_id: str):
         result = self.cursor.execute(
             "SELECT * FROM Booking WHERE link_id = %s", (link_id,)
@@ -297,7 +410,6 @@ class DatabaseReadingServices:
             return self.cursor.fetchall()
         else:
             return "No booking found for that shareable link ID."
-        
     def get_all_bookings(self):
         result = self.cursor.execute("SELECT * FROM Booking")
         if result:
@@ -305,9 +417,13 @@ class DatabaseReadingServices:
         else:
             return "No bookings found in the database."
         
-    def set_send_reminder_email_flag_for_booking(self, booking_id: int, reminder_sent: bool):
+    def get_unregistered_user_email_from_URUID(self, URUID: int):
         self.cursor.execute(
-            "UPDATE Booking SET reminderSent = %s WHERE BID = %s",
-            (reminder_sent, booking_id)
+            "SELECT email FROM UnregisteredUser WHERE URUID = %s", (URUID,)
         )
-        self.conn.commit()
+        result = self.cursor.fetchone()[0]
+
+        if result:
+            return result
+        else:
+            return "No unregistered user found for that RUID."
