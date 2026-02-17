@@ -13,6 +13,9 @@ account_bp = Blueprint("account", __name__)
 
 @account_bp.route('/register', methods=['GET', 'POST'])
 def register():
+    db = DatabaseConnection()
+    reader = DatabaseReadingServices(db)
+    writer = DatabaseWritingServices(db, reader)
     form = RegisterForm()
     if form.validate_on_submit():
         username = form.username.data
@@ -21,14 +24,14 @@ def register():
         lastName = form.lastName.data
         email = form.email.data
 
-        createUser = DatabaseReadingServices.create_new_user(username, email, firstName, lastName, password)
+        createUser = writer.create_new_user(username, email, firstName, lastName, password)
         #can confirm user creation with createUser boolean, flash message accordingly
+        print(createUser)
         if createUser[0]:
             flash("Registration successful! Please log in.", "success")
         else:
             flash("Registration failed. User may already exist.", "danger")
-
-        return redirect("/login")
+        return redirect("/login")    
     return render_template("register.html", form=form)
 
 
