@@ -45,7 +45,7 @@ class DatabaseWritingServices:
 
             self.cursor.execute(query, values)
             self.conn.commit()
-            return True
+            return True, "User created successfully"
 
         return False, "User already registered"
 
