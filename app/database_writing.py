@@ -64,15 +64,18 @@ class DatabaseWritingServices:
         FALSE == BOOKING DETAILS FAILED; ROOM TAKEN OR MEETING SIZE TOO LARGE"""
 
         checkAvailable = self.reader.check_for_room_availability(
-            room_number=meeting_room, meeting_date=meeting_date, start_time=start_time,duration=duration
+            room_number=meeting_room,
+            meeting_date=meeting_date,
+            start_time=start_time,
+            duration=duration,
         )
 
-        #print("chck available: ", checkAvailable)
+        # print("chck available: ", checkAvailable)
 
         roomCapacity = self.reader.get_capacity_of_room(room_number=meeting_room)
 
         if checkAvailable:
-        
+
             if meeting_capacity <= roomCapacity:
                 query = """
                     INSERT INTO Booking
@@ -189,7 +192,7 @@ class DatabaseWritingServices:
 
             print(attempt_delete_association)
             print(attempt_free_room)
-            
+
             if attempt_delete_association and attempt_free_room:
                 self.cursor.execute("DELETE FROM Booking WHERE BID = %s", (BID,))
                 self.conn.commit()
@@ -232,7 +235,281 @@ class DatabaseWritingServices:
         FALSE == ROOM NOT UPDATED"""
 
         try:
-            self.cursor.execute("DELETE FROM RoomsAssociatedWithBookings WHERE BID = %s", (BID,))
+            self.cursor.execute(
+                "DELETE FROM RoomsAssociatedWithBookings WHERE BID = %s", (BID,)
+            )
+            self.conn.commit()
+
+            return True
+
+        except Exception as e:
+            self.conn.rollback()
+            print("UPDATE ERROR: ", e)
+
+    def update_meeting_time(self, BID: int, new_start_time: str):
+        """Generic function to update a booking's meeting time, given a Booking ID, and a new meeting time \n
+        TRUE == BOOKING UPDATED AS AVAILABLE \n
+        FALSE == BOOKING NOT UPDATED"""
+
+        # First check if new start time is valid:
+        try:
+            previous_booking = self.reader.get_booking_information_of_specific_booking(
+                BID
+            )
+
+            check = self.reader.check_for_room_availability(
+                previous_booking[0],
+                previous_booking[1],
+                new_start_time,
+                previous_booking[3],
+                BID=BID,
+            )
+
+        except Exception as e:
+            self.conn.rollback()
+            print("UPDATE ERROR: ", e)
+            return False, str(e)
+
+        if check:
+            try:
+                self.cursor.execute(
+                    "UPDATE Booking SET startTime = %s  WHERE BID = %s",
+                    (new_start_time, BID),
+                )
+                self.conn.commit()
+
+                return True
+
+            except Exception as e:
+                self.conn.rollback()
+                print("UPDATE ERROR: ", e)
+                return False, str(e)
+
+        return False, "New Meeting Time specified unavailable"
+
+    def update_meeting_date(self, BID: int, new_date: str):
+        """Generic function to update a booking's meeting date, given a Booking ID, and a new meeting date\n
+        NOTE: CHECKS FOR OVERLAP WHEN UPDATING \n
+        TRUE == BOOKING UPDATED \n
+        FALSE == BOOKING NOT UPDATED"""
+
+        # First check if new date is valid:
+        try:
+            previous_booking = self.reader.get_booking_information_of_specific_booking(
+                BID
+            )
+
+            check = self.reader.check_for_room_availability(
+                previous_booking[0],
+                new_date,
+                previous_booking[2],
+                previous_booking[3],
+                BID=BID,
+            )
+
+        except Exception as e:
+            self.conn.rollback()
+            print("UPDATE ERROR: ", e)
+            return False, str(e)
+
+        if check:
+            try:
+                self.cursor.execute(
+                    "UPDATE Booking SET meetingDate = %s  WHERE BID = %s",
+                    (new_date, BID),
+                )
+                self.conn.commit()
+
+                return True
+
+            except Exception as e:
+                self.conn.rollback()
+                print("UPDATE ERROR: ", e)
+                return False, str(e)
+
+        return False, "New Meeting Date specified unavailable"
+
+    def update_meeting_duration(self, BID: int, new_duration: str):
+        """Generic function to update a booking's duration, given a Booking ID, and a new duration\n
+        NOTE: CHECKS FOR OVERLAP WHEN UPDATING \n
+        TRUE == BOOKING UPDATED \n
+        FALSE == BOOKING NOT UPDATED"""
+
+        # First check if new duration is valid:
+        try:
+            previous_booking = self.reader.get_booking_information_of_specific_booking(
+                BID
+            )
+
+            check = self.reader.check_for_room_availability(
+                previous_booking[0],
+                previous_booking[1],
+                previous_booking[2],
+                new_duration,
+                BID=BID,
+            )
+
+        except Exception as e:
+            self.conn.rollback()
+            print("UPDATE ERROR: ", e)
+            return False, str(e)
+
+        if check:
+            try:
+                self.cursor.execute(
+                    "UPDATE Booking SET duration = %s  WHERE BID = %s",
+                    (new_duration, BID),
+                )
+                self.conn.commit()
+
+                return True
+
+            except Exception as e:
+                self.conn.rollback()
+                print("UPDATE ERROR: ", e)
+                return False, str(e)
+
+        return False, "New Meeting Duration specified unavailable"
+
+    def update_meeting_room(self, BID: int, new_room: str):
+        """Generic function to update a booking's room, given a Booking ID, and a new room\n
+        NOTE: CHECKS FOR OVERLAP WHEN UPDATING \n
+        TRUE == BOOKING UPDATED \n
+        FALSE == BOOKING NOT UPDATED"""
+
+        # First check if new room is available:
+        try:
+            previous_booking = self.reader.get_booking_information_of_specific_booking(
+                BID
+            )
+
+            check = self.reader.check_for_room_availability(
+                new_room,
+                previous_booking[1],
+                previous_booking[2],
+                previous_booking[3],
+                BID=BID,
+            )
+
+        except Exception as e:
+            self.conn.rollback()
+            print("UPDATE ERROR: ", e)
+            return False, str(e)
+
+        if check:
+            try:
+                self.cursor.execute(
+                    "UPDATE Booking SET meetingRoom = %s  WHERE BID = %s",
+                    (new_room, BID),
+                )
+                self.conn.commit()
+
+                self.cursor.execute(
+                    "UPDATE RoomsAssociatedWithBookings SET RID = %s  WHERE BID = %s",
+                    (new_room, BID),
+                )
+
+                self.conn.commit()
+                return True
+
+            except Exception as e:
+                self.conn.rollback()
+                print("UPDATE ERROR: ", e)
+                return False, str(e)
+
+        return False, "New Meeting Room specified is unavailable"
+
+    def update_meeting_capacity(self, BID: int, new_capacity: int):
+        """Generic function to update a booking's capacity, given a Booking ID, and a new capacity \n
+        NOTE: CHECKS FOR VALID CAPACITY SPECIFIED WHEN UPDATING \n
+        TRUE == BOOKING UPDATED \n
+        FALSE == BOOKING NOT UPDATED"""
+
+        self.cursor.execute(
+            "SELECT RID FROM RoomsAssociatedWithBookings WHERE BID = %s", (BID,)
+        )
+        RID = self.cursor.fetchone()[0]
+
+        capcity_of_room_for_this_booking = self.reader.get_capacity_of_room(RID)
+
+        if new_capacity <= capcity_of_room_for_this_booking:
+            try:
+                self.cursor.execute(
+                    "UPDATE Booking SET meetingSize = %s  WHERE BID = %s",
+                    (new_capacity, BID),
+                )
+                self.conn.commit()
+
+                return True
+
+            except Exception as e:
+                self.conn.rollback()
+                print("UPDATE ERROR: ", e)
+                return False, str(e)
+
+        return (
+            False,
+            "New Meeting Capacity specified is too large for the room of the booking",
+        )
+
+    def update_number_of_confirmations(self, BID: int):
+        """Generic function to update a booking's number of confirmed attendees by 1 \n
+        TRUE == BOOKING UPDATED \n
+        FALSE == BOOKING NOT UPDATED"""
+
+        self.cursor.execute(
+            "SELECT numberOfConfirmations FROM Booking WHERE BID = %s",
+            (BID,),
+        )
+
+        curNumberOfCons = self.cursor.fetchone()[0]
+        curNumberOfCons += 1
+        try:
+            self.cursor.execute(
+                "UPDATE Booking SET numberOfConfirmations = %s WHERE BID = %s",
+                (curNumberOfCons, BID),
+            )
+
+            self.conn.commit()
+
+            return True
+
+        except Exception as e:
+            self.conn.rollback()
+            print("UPDATE ERROR: ", e)
+            return False, str(e)
+
+    def update_booking_reminder_sent(self, BID: int):
+        """Generic function to update a booking's number of confirmed attendees by 1 \n
+        TRUE == BOOKING UPDATED \n
+        FALSE == BOOKING NOT UPDATED"""
+
+        try:
+            self.cursor.execute(
+                "UPDATE Booking SET reminderSent = %s WHERE BID = %s",
+                (1, BID),
+            )
+
+            self.conn.commit()
+
+            return True
+
+        except Exception as e:
+            self.conn.rollback()
+            print("UPDATE ERROR: ", e)
+            return False, str(e)
+
+    def update_bookings_shareable_link(self, shareable_link: str, BID: int):
+        """Generic function to update a booking's shareable link \n
+        TRUE == BOOKING UPDATED \n
+        FALSE == BOOKING NOT UPDATED"""
+
+        try:
+            self.cursor.execute(
+                "UPDATE Booking SET shareableLink = %s WHERE BID = %s",
+                (shareable_link, BID),
+            )
+
             self.conn.commit()
 
             return True

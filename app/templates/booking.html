@@ -36,8 +36,9 @@
 
 <div class="container-fluid px-5 d-flex flex-wrap">
     <div class="card px-3 mt-3" style="width: 53rem;">
-        <form method="POST" action="{{ url_for('booking', booking_id=booking_id) }}"> <!-- TODO: i think this link should work? -->
-             {{ form.hidden_tag() }}
+        <form method="POST" action="{{ url_for('booking', booking_id=booking_id) }}">
+            <!-- TODO: i think this link should work? -->
+            {{ form.hidden_tag() }}
             <div class="card-body">
                 <label for="meetingName" class="form-label">Name your meeting</label>
                 <div class="input-group mb-3">

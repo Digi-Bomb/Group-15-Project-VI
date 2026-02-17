@@ -9605,25 +9605,6 @@ fieldset:disabled .btn {
   z-index: 3 !important;
 }
 
-/* =========================================================
-   Room Cards (Index Page)
-   ========================================================= */
-
-.room-card-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.room-card {
-  cursor: pointer;
-}
-
-.room-card-link:hover .room-card {
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.15s ease-in-out;
-}
-
 @media (min-width: 576px) {
   .float-sm-start {
     float: left !important;

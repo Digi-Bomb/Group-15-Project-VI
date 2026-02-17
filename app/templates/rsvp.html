@@ -34,21 +34,23 @@
 <div class="container-fluid px-5 d-flex flex-wrap">
     <div class="card px-3 mt-3" style="width: 53rem;">
         <div class="card-body">
-            <label for="guestName" class="form-label">Enter your name</label>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Name..." aria-label="Guest Name"
-                    aria-describedby="basic-addon1" id="guestName" name="guest_name">
-            </div>
-            <label for="guestEmail" class="form-label">Enter your email</label>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="email@email.com" aria-label="Guest Email"
-                    aria-describedby="basic-addon1" id="guestEmail" name="guest_email">
-            </div>
-            <!-- HREF MUST BE FIXED W PARAMS-->
-            <button type="submit" href="/meetingdebug" class="btn btn-primary w-25 mt-4 d-flex" name="submit">
-                RSVP
-                <i class="bi bi-plus-circle ms-auto"></i>
-            </button>
+            <form action="POST">
+                <label for="guestName" class="form-label">Enter your name</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Name..." aria-label="Guest Name"
+                        aria-describedby="basic-addon1" id="guestName" name="guest_name">
+                </div>
+                <label for="guestEmail" class="form-label">Enter your email</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="email@email.com" aria-label="Guest Email"
+                        aria-describedby="basic-addon1" id="guestEmail" name="guest_email">
+                </div>
+                <!-- HREF MUST BE FIXED W PARAMS-->
+                <button type="submit" class="btn btn-primary w-25 mt-4 d-flex" name="submit">
+                    RSVP
+                    <i class="bi bi-plus-circle ms-auto"></i>
+                </button>
+            </form>
         </div>
     </div>
 </div>

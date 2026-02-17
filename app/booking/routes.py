@@ -16,16 +16,19 @@ booking_bp = Blueprint('booking', __name__)
 @booking_bp.route('/booking', methods=['GET', 'POST'])
 def create_booking():
     user_id = session.get("user_id")
-    if not user_id:
-        flash("Please log in to create a booking.", "warning")
-        return redirect("/login")
+    # TEMP COMMENT
+    # if not user_id:
+    #   flash("Please log in to create a booking.", "warning")
+    #   return redirect("/login")
 
     form = BookingForm()
+    # TODO: needs to generate meetingcapacity based on roomcapacity, colin issue
 
     if request.method == 'GET':
         date_str = request.args.get('date', '').strip()
         if date_str:
             form.meeting_date.data = date_str  # Pre-fill the date field if provided in query parameters
+            return render_template("booking.html", form=form, mode="create")
 
     if form.validate_on_submit():
         BookingService.create_booking(
@@ -35,9 +38,10 @@ def create_booking():
             meetingOwner=user_id
         )
         flash("Booking created", "success")
-        return redirect('/')
+        return redirect('/meeting.html') # TODO: FIX
 
     return render_template("booking.html", form=form, mode="create")
+    
 
 
 @booking_bp.route('/rsvp', methods=['GET', 'POST'])

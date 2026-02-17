@@ -34,13 +34,15 @@ def register():
 
 @account_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    db = DatabaseConnection()
+    reader = DatabaseReadingServices(db)
     form = LoginForm()
     if form.validate_on_submit():
         user = form.username.data
         password = form.password.data #
         #validate_user_information returns a tuple (boolean, message) where boolean indicates success of login and message provides additional context
         try:
-            ok, user_id = DatabaseReadingServices.validate_user_information(username=user, password=form.password.data)
+            ok, user_id = reader.validate_user_information(username=user, password=password)
         except RuntimeError:
             flash("Login temporarily unavailable (database offline).", "danger")
             return render_template("login.html", form=form)
@@ -65,3 +67,29 @@ def logout():
         flash('Logged out successfully.', 'success')
         current_app.logger.info(f"User {user_id} logged out")
     return redirect('/')
+
+@account_bp.route("/profile")
+def profile():
+    db = DatabaseConnection()
+    reader = DatabaseReadingServices(db)
+    # Check if user is logged in
+    user_id = session.get("user_id")
+    # if not user_id:
+    #    flash("You must log in to view your profile.", "warning")
+    #    return redirect("/login")
+
+    # Fetch user info from the database
+    #TODO: NEEDS ACTUAL ROUTE PLEASE!!!!!!!!!!
+    cursor = reader.conn.cursor(dictionary=True)
+    cursor.execute(
+        "SELECT username, email FROM RegisteredUser WHERE RUID = %s",
+        (user_id,)
+    )
+    user = cursor.fetchone()
+    cursor.close()
+ 
+    # if not user:
+    #    flash("User not found.", "danger")
+    #    return redirect("/login")
+
+    return render_template("profile.html", user=user)
