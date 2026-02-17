@@ -1,3 +1,4 @@
+from werkzeug.security import check_password_hash
 from database_connection import DatabaseConnection
 from datetime import time, datetime, timedelta, date
 
@@ -54,18 +55,13 @@ class DatabaseReadingServices:
                 "SELECT pass FROM RegisteredUser WHERE username = %s", (username,)
             )
 
-        row = self.cursor.fetchone()
-
-        if not row:
-            return False, "Unable to find account"
-
-        result = row[0]
-        self.cursor.close()
+        result = self.cursor.fetchone()[0]
+        self.cursor.close()  # Empty Cursor
 
         if result:
-
-            if result == password:
-                return True, username
+            #moved comparison of password hash to here since we need to pull the hash from the database first before we can compare it to the plaintext password input by the user
+            if check_password_hash(result, password):
+                return True, "Successful Login"
 
             else:
                 return False, "Incorrect Login Information"
