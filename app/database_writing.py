@@ -35,14 +35,6 @@ class DatabaseWritingServices:
             """
             values = (username, email, password, first_name, last_name)
 
-            # else:
-            #     query = """
-            #         INSERT INTO RegisteredUser
-            #         (username, email, pass, firstName, lastName)
-            #         VALUES ( %s, %s, %s, %s, %s)
-            #     """
-            #     values = (username, email, password, first_name, last_name)
-
             self.cursor.execute(query, values)
             self.conn.commit()
             return True
@@ -190,8 +182,8 @@ class DatabaseWritingServices:
             attempt_delete_association = self.delete_association(BID=BID)
             attempt_free_room = self.update_room_as_available(BID=BID)
 
-            print(attempt_delete_association)
-            print(attempt_free_room)
+            # print(attempt_delete_association)
+            # print(attempt_free_room)
 
             if attempt_delete_association and attempt_free_room:
                 self.cursor.execute("DELETE FROM Booking WHERE BID = %s", (BID,))

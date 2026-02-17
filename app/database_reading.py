@@ -200,7 +200,7 @@ class DatabaseReadingServices:
         BID: int = None,
     ):
         """Function that validates that a room is available for use \n
-        NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPATE AN EXISTING BOOKING \n
+        NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPDATE AN EXISTING BOOKING \n
         TRUE == ROOM IS AVAILABLE \n
         FALSE == ROOM TAKEN"""
 
@@ -331,8 +331,9 @@ class DatabaseReadingServices:
 
         return False
 
-    def get_booking_start_and_end_times_for_specific_room(self, room_number: str):
-        """Function that returns a list of start times, end times, and dates for all bookings under a particular room"""
+    def get_booking_start_and_end_times_for_specific_room_include_date(self, room_number: str):
+        """Function that returns a list of start times, end times, and dates for all bookings under a particular room \n
+        NOTE: IN ORDER OF DATE, START, END TIME"""
 
         # First check room id from associated table
         self.cursor.execute(
@@ -375,6 +376,56 @@ class DatabaseReadingServices:
             curmeetingDate_db = curmeetingDate_db.strftime("%Y-%m-%d")
 
             tupleOfInfo = (curmeetingDate_db, cur_meeting_time, curendTime_db)
+
+            booked_times.append(tupleOfInfo)
+
+        return booked_times
+    
+    def get_booking_start_and_end_times_for_specific_room_exclude_date(self, room_number: str, meeting_date: str):
+        """Function that returns a list of start times, and end times for all bookings under a particular room \n
+        NOTE: IN ORDER OF START, END TIME"""
+
+        # First check room id from associated table
+        self.cursor.execute(
+            "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s",
+            (room_number,),  # Returns ALL bookings for a Room
+        )
+        
+        bookings = self.cursor.fetchall()
+
+        booked_times = []
+
+        for (booking,) in bookings:
+
+            self.cursor.execute(
+                "SELECT startTime, duration, ADDTIME(startTime, duration) AS endTime FROM Booking WHERE BID = %s",
+                (booking,),
+            )
+
+            row = self.cursor.fetchone()
+
+           # curmeetingDate_db = row[0]
+            curmeetingStartTime_db = row[1]
+            # curstartDuration_db = row[2]
+            curendTime_db = row[3]
+
+            # Conversions for string input needed by checking room availability
+            total_seconds_meet_start = int(curmeetingStartTime_db.total_seconds())
+            hours_ms, remainder_ms = divmod(total_seconds_meet_start, 3600)
+            minutes_ms, seconds_ms = divmod(remainder_ms, 60)
+
+            cur_meeting_time = f"{hours_ms:02}:{minutes_ms:02}:{seconds_ms:02}"
+
+            # Conversions for string input needed by checking room availability
+            total_seconds_meet_end = int(curendTime_db.total_seconds())
+            hours_me, remainder_me = divmod(total_seconds_meet_end, 3600)
+            minutes_me, seconds_me = divmod(remainder_me, 60)
+
+            curendTime_db = f"{hours_me:02}:{minutes_me:02}:{seconds_me:02}"
+
+           # curmeetingDate_db = curmeetingDate_db.strftime("%Y-%m-%d")
+
+            tupleOfInfo = (cur_meeting_time, curendTime_db)
 
             booked_times.append(tupleOfInfo)
 
@@ -429,3 +480,7 @@ class DatabaseReadingServices:
             return result
         else:
             return "No unregistered user found for that RUID."
+        
+    #def get_duration_from_given_end_time(self, start_time:time, end_time: time):
+
+
