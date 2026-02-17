@@ -19,7 +19,11 @@ class BookingService:
         meeting_room: str,
         meeting_capacity: int,
     ):
-        create_booking = DatabaseWritingServices.create_new_booking(
+        db = DatabaseConnection()
+        reader = DatabaseReadingServices(db)
+        writer = DatabaseWritingServices(db, reader)
+        
+        create_booking = writer.create_new_booking(
             meeting_date=meeting_date,
             start_time=start_time,
             duration=duration,

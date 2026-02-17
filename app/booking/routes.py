@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request, redirect, flash, current_
 from booking.booking import Booking
 from notifications.email_notification_service import EmailNotificationService
 from .booking_service import BookingService
-from forms import BookingForm, RegisterForm
+from forms import BookingForm
 from database_connection import DatabaseConnection
 from database_reading import DatabaseReadingServices
 from database_writing import DatabaseWritingServices
@@ -24,13 +24,12 @@ def create_booking():
     reader = DatabaseReadingServices(db)
     writer = DatabaseWritingServices(db, reader)
 
-    form = RegisterForm()
     user_id = session.get("user_id")
     room_number = request.args.get('room_number', '').strip()
-    # TEMP COMMENT
-    # if not user_id:
-    #   flash("Please log in to create a booking.", "warning")
-    #   return redirect("/login")
+
+    if not user_id:
+      flash("Please log in to create a booking.", "warning")
+      return redirect("/login")
 
     form = BookingForm()
     # TODO: needs to generate meetingcapacity based on roomcapacity, colin issue
