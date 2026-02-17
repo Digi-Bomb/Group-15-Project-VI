@@ -16,6 +16,28 @@
                 id="username"
                 ) }}
             </div>
+            <div class="row d-flex">
+                <div class="col me-auto">
+                    <label for="email" class="form-label">First Name</label>
+                    <div class="input-group mb-3 me-auto">
+                        {{ form.firstName(
+                        class="form-control border border-primary",
+                        placeholder="First Name...",
+                        id="firstName"
+                        ) }}
+                    </div>
+                </div>
+                <div class="col ms-auto">
+                    <label for="email" class="form-label">Last Name</label>
+                    <div class="input-group mb-3 ms-auto">
+                        {{ form.lastName(
+                        class="form-control border border-primary",
+                        placeholder="Last Name...",
+                        id="lastName"
+                        ) }}
+                    </div>
+                </div>
+            </div>
             <label for="email" class="form-label">E-Mail</label>
             <div class="input-group mb-3">
                 {{ form.email(
@@ -27,24 +49,24 @@
             <label for="password" class="form-label">Password</label>
             <div class="input-group mb-3">
                 {{ form.password(
-                    class="form-control border border-primary",
-                    placeholder="password",
-                    id="password"
-                    ) }}
+                class="form-control border border-primary",
+                placeholder="password",
+                id="password"
+                ) }}
             </div>
             <p>Already have an account? <a href="/login">Login</a></p>
             <div class="row d-flex">
                 <div class="col">
-                    <button type="submit" name="{{ form.submit.name }}"
-                        class="btn btn-primary mt-3 me-auto" style="width: 10rem; display: flex;">
+                    <button type="submit" name="{{ form.submit.name }}" class="btn btn-primary mt-3 me-auto"
+                        style="width: 10rem; display: flex;">
                         Register
                         <i class="bi bi-arrow-right ms-2"></i>
                     </button>
                 </div>
             </div>
         </form>
-        </div>
     </div>
+</div>
 </div>
 </div>
 

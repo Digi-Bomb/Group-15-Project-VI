@@ -24,8 +24,10 @@ def register():
         createUser = DatabaseWritingServices.create_new_user(username, email, firstName, lastName, password)
         #can confirm user creation with createUser boolean, flash message accordingly
         if createUser:
+            print(" register success")
             flash("Registration successful! Please log in.", "success")
         else:
+            print(" register error")
             flash("Registration failed. User may already exist.", "danger")
 
         return redirect("/login")
