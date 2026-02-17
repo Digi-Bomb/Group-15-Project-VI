@@ -125,12 +125,8 @@ Variables</h2></td></tr>
 <tr class="separator:ac306d926ddb23731be54706d17174a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a732be3227d00d82d62ede11c155f386c" id="r_a732be3227d00d82d62ede11c155f386c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a732be3227d00d82d62ede11c155f386c">database_reader</a> = <a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html">database_reading.DatabaseReadingServices</a>(<a class="el" href="namespaceapp_1_1app.html#ac306d926ddb23731be54706d17174a7b">databaseConn</a>)</td></tr>
 <tr class="separator:a732be3227d00d82d62ede11c155f386c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9507063fbc31c2f4ce9bebe4d358ed1c" id="r_a9507063fbc31c2f4ce9bebe4d358ed1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a9507063fbc31c2f4ce9bebe4d358ed1c">test</a> = database_reader.return_all_bookings_for_a_user(1005)</td></tr>
-<tr class="separator:a9507063fbc31c2f4ce9bebe4d358ed1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9bdf7e2a13ae47e8cc77b2228a7c6cf" id="r_aa9bdf7e2a13ae47e8cc77b2228a7c6cf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#aa9bdf7e2a13ae47e8cc77b2228a7c6cf">debug</a></td></tr>
-<tr class="separator:aa9bdf7e2a13ae47e8cc77b2228a7c6cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39af92d7446ea1a80d2ce2b64bbfec95" id="r_a39af92d7446ea1a80d2ce2b64bbfec95"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a39af92d7446ea1a80d2ce2b64bbfec95">True</a></td></tr>
-<tr class="separator:a39af92d7446ea1a80d2ce2b64bbfec95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22b61df64aa062b3dadf7abe4fa916ee" id="r_a22b61df64aa062b3dadf7abe4fa916ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a22b61df64aa062b3dadf7abe4fa916ee">createBooking</a></td></tr>
+<tr class="separator:a22b61df64aa062b3dadf7abe4fa916ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fd9a265be95cf28ca544314bcbd5927" id="r_a0fd9a265be95cf28ca544314bcbd5927"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a0fd9a265be95cf28ca544314bcbd5927">host</a></td></tr>
 <tr class="separator:a0fd9a265be95cf28ca544314bcbd5927"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a719300cdb3e57ac9ccb5279b9075848e" id="r_a719300cdb3e57ac9ccb5279b9075848e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a719300cdb3e57ac9ccb5279b9075848e">port</a></td></tr>
@@ -218,6 +214,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+</div>
+</div>
+<a id="a22b61df64aa062b3dadf7abe4fa916ee" name="a22b61df64aa062b3dadf7abe4fa916ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22b61df64aa062b3dadf7abe4fa916ee">&#9670;&#160;</a></span>createBooking</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.app.createBooking</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><span class="lineno">    1</span>=  database_writing.DatabaseWritingServices(</div>
+<div class="line"><span class="lineno">    2</span>    databaseConn, database_reader</div>
+<div class="line"><span class="lineno">    3</span>).delete_booking(1078)</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a2234f2dcd1b4ea3f5d84fd838e0a7591" name="a2234f2dcd1b4ea3f5d84fd838e0a7591"></a>
@@ -463,34 +476,6 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">app.app.SESSION_COOKIE_SECURE</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9507063fbc31c2f4ce9bebe4d358ed1c" name="a9507063fbc31c2f4ce9bebe4d358ed1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9507063fbc31c2f4ce9bebe4d358ed1c">&#9670;&#160;</a></span>test</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">app.app.test = database_reader.return_all_bookings_for_a_user(1005)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a39af92d7446ea1a80d2ce2b64bbfec95" name="a39af92d7446ea1a80d2ce2b64bbfec95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39af92d7446ea1a80d2ce2b64bbfec95">&#9670;&#160;</a></span>True</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">app.app.True</td>
         </tr>
       </table>
 </div><div class="memdoc">

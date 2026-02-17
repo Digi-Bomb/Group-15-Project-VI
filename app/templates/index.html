@@ -38,7 +38,7 @@
         {% for room in rooms %}
         <div class="col mb-4 d-flex flex-column justify-content-center align-items-center">
 
-            <a href="/booking?room={{ room.roomNumber }}&date={{ selected_date }}" class="card stretched-link text-decoration-none shadow-sm"
+            <a href="/booking?room={{ room.roomNumber }}" class="card stretched-link text-decoration-none shadow-sm"
                 title="Book Room {{ room.roomNumber }}">
 
                 <div class="container-fluid px-4 flex-wrap gap-0 d-flex flex-column justify-content-center align-items-center"
@@ -64,15 +64,13 @@
 
                     <p class="text-muted fs-6 me-auto text-decoration-none">
                         {% set features = [] %}
-                        {% if room.wheelchairAccessible %}{% set _ = features.append("Wheelchair accessible") %}{% endif
-                        %}
+                        {% if room.wheelchairAccessible %}{% set _ = features.append("Wheelchair accessible") %}{% endif%}
                         {% if room.projectorAccess %}{% set _ = features.append("Projector") %}{% endif %}
                         {% if room.whiteboardAccess %}{% set _ = features.append("Whiteboard") %}{% endif %}
                         {{ features|join(", ") if features else "No listed features" }}
                     </p>
                 </div>
             </a>
-
         </div>
         {% endfor %}
     </div>
