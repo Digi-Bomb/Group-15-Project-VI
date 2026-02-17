@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['check_5ffor_5froom_5favailability_0',['check_for_room_availability',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a9b1da0045a5d7cf63c3b90eddacdd1c4',1,'app::database_reading::DatabaseReadingServices']]],
+  ['check_5ffor_5froom_5favailability_0',['check_for_room_availability',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a8c9d5a725a7bcb45db3ea62be084fb6c',1,'app::database_reading::DatabaseReadingServices']]],
   ['check_5fif_5funregistered_5fuser_5fnickname_5fis_5ftaken_5ffor_5fspecific_5fmeeting_1',['check_if_unregistered_user_nickname_is_taken_for_specific_meeting',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a1b132aadf3db0b7db428c3dbcb9da2b8',1,'app::database_reading::DatabaseReadingServices']]],
   ['check_5fif_5fuser_5fis_5fregistered_5falready_2',['check_if_user_is_registered_already',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a2e3cce9f4c44d974ee5a437fb9cac666',1,'app::database_reading::DatabaseReadingServices']]],
   ['confirm_5fpassword_3',['confirm_password',['../classapp_1_1forms_1_1RegisterForm.html#afc711358576b1cd5f2feb8be44ebb54f',1,'app::forms::RegisterForm']]],
