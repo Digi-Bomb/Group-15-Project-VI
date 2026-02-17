@@ -480,5 +480,34 @@ class DatabaseReadingServices:
             return result
         else:
             return "No unregistered user found for that RUID."
+        
+    def get_rooms(self, building: str | None = None):
+            """
+            Returns a list of rooms.
+            If building is provided, filters by companyBuilding.
+            """
+            sql = """
+                SELECT
+                    roomNumber,
+                    companyBuilding,
+                    wheelchairAccessible,
+                    projectorAccess,
+                    whiteboardAccess,
+                    maximumCapacity
+                FROM Room
+            """
+            params = []
+
+            if building:
+                sql += " WHERE companyBuilding = %s"
+                params.append(building)
+
+            sql += " ORDER BY companyBuilding, wing, roomNumber"
+
+            cursor = self.conn.cursor(dictionary=True)
+            cursor.execute(sql, params)          # <-- execute the query
+            results = cursor.fetchall()          # <-- fetch all rows as a list of dicts
+            cursor.close()
+            return results
 
     #def get_duration_from_given_end_time(self, start_time:time, end_time: time):
