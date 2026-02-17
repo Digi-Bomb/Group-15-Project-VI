@@ -10,5 +10,6 @@ var searchData=
   ['create_5fbooking_7',['create_booking',['../classapp_1_1booking_1_1booking__service_1_1BookingService.html#ae8cdad5be0bc2534bea3f9327830849d',1,'app.booking.booking_service.BookingService.create_booking()'],['../namespaceapp_1_1booking_1_1routes.html#adb04bd3890f00389a7072ab442910456',1,'app.booking.routes.create_booking()']]],
   ['create_5fnew_5fbooking_8',['create_new_booking',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a7cf42899022d0268bdb6797d3f7b2cd6',1,'app::database_writing::DatabaseWritingServices']]],
   ['create_5fnew_5fuser_9',['create_new_user',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a417cccd1d46d2dde082f3ce6d5da8eaa',1,'app::database_writing::DatabaseWritingServices']]],
-  ['cursor_10',['cursor',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a13062344bb7b5851b1cddec5906be5be',1,'app.database_reading.DatabaseReadingServices.cursor'],['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a1ccf8e74b4e00cd989be50575226bf02',1,'app.database_writing.DatabaseWritingServices.cursor']]]
+  ['createbooking_10',['createBooking',['../namespaceapp_1_1app.html#a22b61df64aa062b3dadf7abe4fa916ee',1,'app::app']]],
+  ['cursor_11',['cursor',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a13062344bb7b5851b1cddec5906be5be',1,'app.database_reading.DatabaseReadingServices.cursor'],['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a1ccf8e74b4e00cd989be50575226bf02',1,'app.database_writing.DatabaseWritingServices.cursor']]]
 ];

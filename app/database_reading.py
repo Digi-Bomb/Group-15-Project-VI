@@ -390,7 +390,7 @@ class DatabaseReadingServices:
             "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s",
             (room_number,),  # Returns ALL bookings for a Room
         )
-        
+
         bookings = self.cursor.fetchall()
 
         booked_times = []
@@ -398,7 +398,7 @@ class DatabaseReadingServices:
         for (booking,) in bookings:
 
             self.cursor.execute(
-                "SELECT startTime, duration, ADDTIME(startTime, duration) AS endTime FROM Booking WHERE BID = %s",
+                "SELECT startTime, duration, ADDTIME(startTime, duration) AS endTime FROM Booking WHERE BID = %s AND meetingDate = %s",
                 (booking,),
             )
 

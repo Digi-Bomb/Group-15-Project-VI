@@ -9,6 +9,5 @@ var searchData=
   ['validate_5fpassword_6',['validate_password',['../classapp_1_1data__validator_1_1DataValidator.html#a608ec7985ccc3096716bda3b410f698c',1,'app::data_validator::DataValidator']]],
   ['validate_5fuser_5finformation_7',['validate_user_information',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a824aa33e04a8f242a8c851a194084d31',1,'app::database_reading::DatabaseReadingServices']]],
   ['validate_5fusername_8',['validate_username',['../classapp_1_1data__validator_1_1DataValidator.html#a6ea274bd0727e93b70627b93341f53f0',1,'app::data_validator::DataValidator']]],
-  ['validator_9',['validator',['../classapp_1_1booking_1_1booking__service_1_1BookingService.html#aa9389fe7bdcb873d8a07a80e5e34eeec',1,'app::booking::booking_service::BookingService']]],
-  ['view_5fbooking_10',['view_booking',['../namespaceapp_1_1booking_1_1routes.html#a50fb27d8542544e731923c791aad7c1a',1,'app::booking::routes']]]
+  ['view_5fbooking_9',['view_booking',['../namespaceapp_1_1booking_1_1routes.html#a50fb27d8542544e731923c791aad7c1a',1,'app::booking::routes']]]
 ];
