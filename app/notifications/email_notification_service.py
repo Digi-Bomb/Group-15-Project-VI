@@ -1,6 +1,7 @@
 from booking.booking import Booking
 from database_connection import DatabaseConnection
 from database_reading import DatabaseReadingServices
+from database_writing import DatabaseWritingServices
 
 from flask import redirect, flash, current_app
 from flask_mail import Message
@@ -9,6 +10,7 @@ class EmailNotificationService:
     def __init__(self, database: DatabaseConnection):
         self.database = database
         self.database_reading_services = DatabaseReadingServices(database)
+        self.database_writing_services = DatabaseWritingServices(database, self.database_reading_services)
         
     def send_email_notification(self, recipient_email: str, subject: str, body: str) -> bool:
         #to avoid circular import, import mail here, when we need it
@@ -45,16 +47,16 @@ class EmailNotificationService:
     def send_booking_notification_email(self, booking: Booking):
         recipent_list = []
                 
-        for unregistered_user in self.database_reading_services.get_registered_users_associated_with_booking_ID(booking.booking_id):
-            recipent_list.append(unregistered_user)
+        for unregistered_user in self.database_reading_services.get_unregistered_users_associated_with_booking_ID(booking.booking_id):
+            recipent_list.append(self.database_reading_services.get_unregistered_user_email_from_URUID(unregistered_user.URUID))
         
         for registered_user in self.database_reading_services.get_registered_users_associated_with_booking_ID(booking.booking_id):
             recipent_list.append(self.database_reading_services.get_registered_user_email_from_RUID(registered_user.RUID))
             
-        self.send_email_notification(recipent_list, "Reminder: Upcoming Booking", f"Your booking '{booking.booking_name}' is scheduled for {booking.start_time} - {booking.end_time} at {booking.location}.")
+        self.send_email_notification(recipent_list, "Reminder: Upcoming Booking", f"Your booking is scheduled for {booking.start_time} - {booking.end_time} at {booking.location}.")
         
         from ..app import audit_logger
         audit_logger.log_long_term(f"Sent booking reminder notification email to {recipent_list} for booking ID {booking.booking_id}.")
         
         booking.reminder_sent = True
-        self.database_reading_services.set_send_reminder_email_flag_for_booking(booking.booking_id, True)
+        self.database_writing_services.update_booking_reminder_sent(booking.booking_id)
