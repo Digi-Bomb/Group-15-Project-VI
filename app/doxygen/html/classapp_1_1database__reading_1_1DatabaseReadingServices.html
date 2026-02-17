@@ -141,6 +141,12 @@ FALSE == ROOM TAKEN.  <br /></td></tr>
 <tr class="memitem:ab682f55c14913e48f7736e6297be6acd" id="r_ab682f55c14913e48f7736e6297be6acd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#ab682f55c14913e48f7736e6297be6acd">get_booking_start_and_end_times_for_specific_room</a> (self, str room_number)</td></tr>
 <tr class="memdesc:ab682f55c14913e48f7736e6297be6acd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns a list of start times, end times, and dates for all bookings under a particular room.  <br /></td></tr>
 <tr class="separator:ab682f55c14913e48f7736e6297be6acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94e5a7ff34f5feb5f488d890e1b197d2" id="r_a94e5a7ff34f5feb5f488d890e1b197d2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a94e5a7ff34f5feb5f488d890e1b197d2">get_room_by_number</a> (self, str room_number)</td></tr>
+<tr class="memdesc:a94e5a7ff34f5feb5f488d890e1b197d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the room object associated with a particular room number.  <br /></td></tr>
+<tr class="separator:a94e5a7ff34f5feb5f488d890e1b197d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1d413b96b70f4bb5b5e802476289a11" id="r_aa1d413b96b70f4bb5b5e802476289a11"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#aa1d413b96b70f4bb5b5e802476289a11">get_room_capacity</a> (self, str room_number)</td></tr>
+<tr class="memdesc:aa1d413b96b70f4bb5b5e802476289a11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns the capacity of a particular room given its room number.  <br /></td></tr>
+<tr class="separator:aa1d413b96b70f4bb5b5e802476289a11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -494,6 +500,66 @@ FALSE == UNREGISTERED. </p>
 </div><div class="memdoc">
 
 <p>Function that returns a TUPLE (list) of all registered attendees for a specific meeting. </p>
+
+</div>
+</div>
+<a id="a94e5a7ff34f5feb5f488d890e1b197d2" name="a94e5a7ff34f5feb5f488d890e1b197d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94e5a7ff34f5feb5f488d890e1b197d2">&#9670;&#160;</a></span>get_room_by_number()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_reading.DatabaseReadingServices.get_room_by_number </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str&#160;</td>
+          <td class="paramname"><em>room_number</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that returns the room object associated with a particular room number. </p>
+
+</div>
+</div>
+<a id="aa1d413b96b70f4bb5b5e802476289a11" name="aa1d413b96b70f4bb5b5e802476289a11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1d413b96b70f4bb5b5e802476289a11">&#9670;&#160;</a></span>get_room_capacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_reading.DatabaseReadingServices.get_room_capacity </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str&#160;</td>
+          <td class="paramname"><em>room_number</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that returns the capacity of a particular room given its room number. </p>
 
 </div>
 </div>
