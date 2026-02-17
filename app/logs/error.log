@@ -135,3 +135,6 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
     raise get_mysql_exception(
 mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'BID' in 'field list'
+2026-02-17 18:08:54,637 WARNING: Failed login attempt for username: test [in /app/account/routes.py:61]
+2026-02-17 18:08:57,455 WARNING: Failed login attempt for username: test [in /app/account/routes.py:61]
+2026-02-17 18:09:14,141 WARNING: Failed login attempt for username: test [in /app/account/routes.py:61]

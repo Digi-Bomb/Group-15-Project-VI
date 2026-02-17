@@ -414,4 +414,34 @@ class DatabaseReadingServices:
 
         return booked_times
     
+    def get_room_by_number(self, room_number: str):
+        """Function that returns the room object associated with a particular room number"""
+        self.cursor.execute(
+            "SELECT * FROM Room WHERE roomNumber = %s",
+            (room_number,),
+        )
+
+        result = self.cursor.fetchone()
+
+        if result:
+            self.cursor.close()
+            return result
+        else:
+            return "No room found with that number."
+        
+    def get_room_capacity(self, room_number: str):
+        """Function that returns the capacity of a particular room given its room number"""
+        self.cursor.execute(
+            "SELECT maximumCapacity FROM Room WHERE roomNumber = %s",
+            (room_number,),
+        )
+
+        result = self.cursor.fetchone()
+
+        if result:
+            self.cursor.close()
+            return result[0]
+        else:
+            return "No room found with that number."
+    
     

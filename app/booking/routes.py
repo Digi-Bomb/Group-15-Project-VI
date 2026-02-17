@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request, redirect, flash, current_
 from booking.booking import Booking
 from notifications.email_notification_service import EmailNotificationService
 from .booking_service import BookingService
-from forms import BookingForm
+from forms import BookingForm, RegisterForm
 from database_connection import DatabaseConnection
 from database_reading import DatabaseReadingServices
 from database_writing import DatabaseWritingServices
@@ -19,6 +19,12 @@ booking_bp = Blueprint('booking', __name__)
 #needs to take room number and date ?room={{ room.roomNumber }}&date={{ selected_date }}
 @booking_bp.route('/booking', methods=['GET', 'POST'])
 def create_booking():
+
+    db = DatabaseConnection()
+    reader = DatabaseReadingServices(db)
+    writer = DatabaseWritingServices(db, reader)
+
+    form = RegisterForm()
     user_id = session.get("user_id")
     room_number = request.args.get('room_number', '').strip()
     # TEMP COMMENT
@@ -32,8 +38,8 @@ def create_booking():
     if request.method == 'GET':
         date_str = request.args.get('date', '').strip()
         # get room object based on room number
-        room = DatabaseReadingServices(DatabaseConnection()).get_room_by_number(room_number)
-        room_capacity = DatabaseReadingServices(DatabaseConnection()).get_room_capacity(room)
+        room = reader.get_room_by_number(room_number)
+        room_capacity = reader.get_room_capacity(room_number)
         if date_str:
             form.meeting_date.data = date_str  # Pre-fill the date field if provided in query parameters
             return render_template("booking.html", form=form, mode="create", room_capacity=room_capacity) #edit once dina is done with room capacity
