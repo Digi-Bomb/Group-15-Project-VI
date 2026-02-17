@@ -128,6 +128,7 @@ print(check_for_user)
 from account.routes import account_bp
 from booking.routes import booking_bp
 from notifications.routes import notifications_bp, send_booking_notification_emails
+from audit_logging.audit_logger import AuditLogger
 
 # register blueprints
 app.register_blueprint(account_bp)
@@ -141,6 +142,7 @@ def index():
 
 
 if __name__ == "__main__":
+    audit_logger = AuditLogger("logs/long_term.txt", "logs/short_term.txt")
     scheduler = APScheduler()
     scheduler.add_job(func=send_booking_notification_emails, trigger='interval', id='job', seconds=5)
     scheduler.start()

@@ -38,7 +38,10 @@ class EmailNotificationService:
     def send_new_rsvp_notification_email(self, booking_owner_id: int, attendee_name: str, booking_id: int):
         meeting_owner_email = self.database_reading_services.get_registered_user_email_from_RUID(booking_owner_id)
         self.send_email_notification(meeting_owner_email, "New Booking RSVP", f"{attendee_name} has RSVP'd to your booking: '{booking_id}'.")
-    
+        
+        from ..app import audit_logger
+        audit_logger.log_long_term(f"Sent new RSVP confirmation notification email to {meeting_owner_email} for booking ID {booking_id} due to new RSVP confirmation from {attendee_name}.")
+        
     def send_booking_notification_email(self, booking: Booking):
         recipent_list = []
                 
@@ -49,6 +52,9 @@ class EmailNotificationService:
             recipent_list.append(self.database_reading_services.get_registered_user_email_from_RUID(registered_user.RUID))
             
         self.send_email_notification(recipent_list, "Reminder: Upcoming Booking", f"Your booking '{booking.booking_name}' is scheduled for {booking.start_time} - {booking.end_time} at {booking.location}.")
+        
+        from ..app import audit_logger
+        audit_logger.log_long_term(f"Sent booking reminder notification email to {recipent_list} for booking ID {booking.booking_id}.")
         
         booking.reminder_sent = True
         self.database_reading_services.set_send_reminder_email_flag_for_booking(booking.booking_id, True)

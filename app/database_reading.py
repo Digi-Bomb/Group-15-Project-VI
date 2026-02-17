@@ -69,14 +69,14 @@ class DatabaseReadingServices:
         if result:
             return self.cursor.fetchone()[0]
 
-    def get_meeting_owner_from_BID(self, BID: int):
-        result = self.cursor.execute(
-            "SELECT meetingOwner FROM Booking WHERE BID = %s", (BID,)
-        )
-        if result:
-            return self.cursor.fetchall()
-        else:
-            return "No bookings found for that BID."
+    # def get_meeting_owner_from_BID(self, BID: int):
+    #     result = self.cursor.execute(
+    #         "SELECT meetingOwner FROM Booking WHERE BID = %s", (BID,)
+    #     )
+    #     if result:
+    #         return self.cursor.fetchall()
+    #     else:
+    #         return "No bookings found for that BID."
     
     def get_registered_user_email_from_RUID(self, RUID: int):
         result = self.cursor.execute(
