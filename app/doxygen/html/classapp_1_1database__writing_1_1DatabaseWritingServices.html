@@ -166,11 +166,11 @@ FALSE == BOOKING NOT UPDATED.  <br /></td></tr>
 TRUE == BOOKING UPDATED <br  />
 FALSE == BOOKING NOT UPDATED.  <br /></td></tr>
 <tr class="separator:abf2a91dabeb83b99a5d4184325f6fd36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4edb83f0391cb15ef38b081ff062736" id="r_ab4edb83f0391cb15ef38b081ff062736"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#ab4edb83f0391cb15ef38b081ff062736">update_number_of_registeredUser</a> (self, int BID)</td></tr>
-<tr class="memdesc:ab4edb83f0391cb15ef38b081ff062736"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to update a booking's number of confirmed attendees by 1 <br  />
+<tr class="memitem:a69ab01632b658a4cd7fac16055da158b" id="r_a69ab01632b658a4cd7fac16055da158b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a69ab01632b658a4cd7fac16055da158b">update_booking_reminder_sent</a> (self, int BID)</td></tr>
+<tr class="memdesc:a69ab01632b658a4cd7fac16055da158b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to update a booking's number of confirmed attendees by 1 <br  />
 TRUE == BOOKING UPDATED <br  />
 FALSE == BOOKING NOT UPDATED.  <br /></td></tr>
-<tr class="separator:ab4edb83f0391cb15ef38b081ff062736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a69ab01632b658a4cd7fac16055da158b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34abc8660ebf84e70e4f74e02d9646a5" id="r_a34abc8660ebf84e70e4f74e02d9646a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__writing_1_1DatabaseWritingServices.html#a34abc8660ebf84e70e4f74e02d9646a5">update_bookings_shareable_link</a> (self, str shareable_link, int BID)</td></tr>
 <tr class="memdesc:a34abc8660ebf84e70e4f74e02d9646a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function to update a booking's shareable link <br  />
 TRUE == BOOKING UPDATED <br  />
@@ -524,6 +524,38 @@ FALSE == BOOKING DIDNT EXIST OR OTHER FAILURE. </p>
 
 </div>
 </div>
+<a id="a69ab01632b658a4cd7fac16055da158b" name="a69ab01632b658a4cd7fac16055da158b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69ab01632b658a4cd7fac16055da158b">&#9670;&#160;</a></span>update_booking_reminder_sent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_writing.DatabaseWritingServices.update_booking_reminder_sent </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>BID</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic function to update a booking's number of confirmed attendees by 1 <br  />
+TRUE == BOOKING UPDATED <br  />
+FALSE == BOOKING NOT UPDATED. </p>
+
+</div>
+</div>
 <a id="a34abc8660ebf84e70e4f74e02d9646a5" name="a34abc8660ebf84e70e4f74e02d9646a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a34abc8660ebf84e70e4f74e02d9646a5">&#9670;&#160;</a></span>update_bookings_shareable_link()</h2>
 
@@ -764,38 +796,6 @@ FALSE == BOOKING NOT UPDATED. </p>
       <table class="memname">
         <tr>
           <td class="memname">app.database_writing.DatabaseWritingServices.update_number_of_confirmations </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>BID</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Generic function to update a booking's number of confirmed attendees by 1 <br  />
-TRUE == BOOKING UPDATED <br  />
-FALSE == BOOKING NOT UPDATED. </p>
-
-</div>
-</div>
-<a id="ab4edb83f0391cb15ef38b081ff062736" name="ab4edb83f0391cb15ef38b081ff062736"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4edb83f0391cb15ef38b081ff062736">&#9670;&#160;</a></span>update_number_of_registeredUser()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">app.database_writing.DatabaseWritingServices.update_number_of_registeredUser </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em>, </td>
