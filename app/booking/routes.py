@@ -52,8 +52,8 @@ def create_booking():
         form.meeting_date.data = date_str  # Pre-fill the date field if provided in query parameters
 
     return render_template("booking.html", form=form, mode="create", room=room)
-    #selected date, room_number, 
-    
+    #selected date, room_number,
+
 
 
 @booking_bp.route('/rsvp', methods=['GET', 'POST'])
