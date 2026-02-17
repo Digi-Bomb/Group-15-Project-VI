@@ -41,7 +41,8 @@
 
 <div class="container-fluid px-5 d-flex flex-wrap">
     <div class="card px-3 mt-3" style="width: 53rem;">
-        <form method="POST" action="{{ url_for('booking', room=room) }}">
+        <form method="POST" action="{{ url_for('booking.create_booking', room_number=room.roomNumber, date=form.meeting_date.data) }}">
+
             <!-- TODO: i think this link should work? -->
             {{ form.hidden_tag() }}
             <div class="card-body">
