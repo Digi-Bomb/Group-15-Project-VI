@@ -1,4 +1,7 @@
-from flask import Blueprint, render_template, request, redirect, flash, current_app, session, abort
+from flask import Blueprint, render_template, request, redirect, flash, current_app
+
+from booking.booking import Booking
+from notifications.email_notification_service import EmailNotificationService
 from .booking_service import BookingService
 from forms import BookingForm
 from database_connection import DatabaseConnection
@@ -50,28 +53,12 @@ def create_booking():
 @booking_bp.route('/rsvp/<link_id>', methods=['GET', 'POST'])
 def rsvp(link_id=None):
     link = link_id or request.args.get('link')
-    booking = None
-    if link:
-        try:
-            conn = get_db()
-            cursor = conn.cursor(dictionary=True)
-            cursor.execute('SELECT booking_id FROM shareable_links WHERE link_id = %s', (link,))
-            row = cursor.fetchone()
-            if row:
-                cursor.execute('SELECT * FROM bookings WHERE id = %s', (row['booking_id'],))
-                booking = cursor.fetchone()
-        except Exception as e:
-            current_app.logger.debug(f"rsvp lookup failed: {e}")
-            booking = {'booking_name': '(unresolved)'}
-        finally:
-            try:
-                cursor.close()
-                conn.close()
-            except Exception:
-                pass
+    booking = Booking()
+    # booking = DatabaseReadingServices(DatabaseConnection()).get_booking_by_link_id(link)
 
     if request.method == 'POST':
         name = request.form.get('name')
+        # EmailNotificationService(DatabaseConnection()).send_new_rsvp_notification_email(booking.booking_owner_id, name, booking.booking_id)
         flash('RSVP received. Thank you!', 'success')
         return redirect('/')
 
