@@ -42,28 +42,26 @@ def create_booking():
 
     #POST
     if form.validate_on_submit():
-        service = BookingService()
-        #call duration function from reader here - will return a duration
-        meeting_id = service.create_booking(
-            meetingDate=form.meeting_date.data,
-            startTime=form.start_time.data,
-            duration="02:00",
-            meetingOwner=user_id,
-            meetingRoom=room_number,
-            meetingCapacity=form.meeting_capacity.data
+        create_booking = writer.create_new_booking(
+            meeting_date=form.meeting_date.data,
+            start_time=form.start_time.data,
+            duration='02:00',  # Default duration of 2 hours, can be modified to take user input
+            meeting_owner=user_id,
+            meeting_room=room_number,
+            meeting_capacity=form.meeting_capacity.data  # Use the maximumCapacity from room data
         )
-        if not meeting_id[0]:
-            if meeting_id[1] == "Room is NOT Available":
+        #if not true, check message for details and flash accordingly
+        if not create_booking[0]:
+            if create_booking[1] == "Room is NOT Available":
                 flash("The selected time slot is already booked. Please choose a different time.", "error")
-            flash("Failed to create booking.", "error")
+            else:
+                flash("Failed to create booking.", "error")
             return redirect("/booking")
         flash("Booking created!", "success")
-        return redirect(f'/booking/{meeting_id[1]}') # TODO: test this redirect
-
+        return redirect(f'/booking/{create_booking[1]}') # TODO: test this redirect
 
     #refactor to use datepicker js to auto submit date and prefill date field on booking form
     date_str = request.args.get('date', '').strip() or form.meeting_date.data
-
     if date_str:
         form.meeting_date.data = date_str  # Pre-fill the date field if provided in query parameters
 

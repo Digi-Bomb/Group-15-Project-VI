@@ -1,3 +1,4 @@
+from werkzeug.security import check_password_hash
 from database_connection import DatabaseConnection
 from datetime import time, datetime, timedelta, date
 
@@ -54,7 +55,7 @@ class DatabaseReadingServices:
 
         if result:
 
-            if result == password:
+            if check_password_hash(result, password):
                 return True, "Successful Login"
 
             else:
@@ -509,5 +510,19 @@ class DatabaseReadingServices:
             results = cursor.fetchall()          # <-- fetch all rows as a list of dicts
             cursor.close()
             return results
+    
+    def get_room_data_given_room_number(self, room_number: str):
+
+        self.cursor.execute("SELECT roomNumber, companyBuilding, wing, wheelchairAccessible, projectorAccess, whiteboardAccess, maximumCapacity FROM Room WHERE roomNumber = %s", (room_number,))
+
+        result = self.cursor.fetchone()
+
+        # result [0] is roomNumber, result[1] is company building, [2] is wing, at [3] is wheelchairAccessible, at [4] is projectorAccess, at [5] is whiteboardAccess, at [6] is maximumCapacity 
+        if result:
+            self.cursor.close()
+            return result
+    
+        else:
+            return False, "Unable to find the room specified"
 
     #def get_duration_from_given_end_time(self, start_time:time, end_time: time):

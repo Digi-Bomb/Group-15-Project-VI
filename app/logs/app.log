@@ -1,4 +1,4 @@
-2026-02-17 21:50:41,682 ERROR: Exception on / [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+2026-02-18 00:07:33,885 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,43 +12,13 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/app.py", line 171, in index
-    rooms = database_reader.get_rooms()
-            ^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'DatabaseReadingServices' object has no attribute 'get_rooms'
-2026-02-17 21:50:42,642 ERROR: Exception on / [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/app.py", line 171, in index
-    rooms = database_reader.get_rooms()
-            ^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'DatabaseReadingServices' object has no attribute 'get_rooms'
-2026-02-17 21:50:43,842 ERROR: Exception on / [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/app.py", line 171, in index
-    rooms = database_reader.get_rooms()
-            ^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'DatabaseReadingServices' object has no attribute 'get_rooms'
+  File "/app/booking/routes.py", line 45, in create_booking
+    create_booking = writer.create_new_booking(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_writing.py", line 71, in create_new_booking
+    checkAvailable = self.reader.check_for_room_availability(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 208, in check_for_room_availability
+    start_hours, start_minutes, start_seconds = map(int, start_time.split(":"))
+                                                         ^^^^^^^^^^^^^^^^
+AttributeError: 'datetime.time' object has no attribute 'split'
