@@ -149,7 +149,6 @@ createBooking= database_writing.DatabaseWritingServices(
 #     database_connection.DatabaseConnection()
 # ).get_username_via_RUID("1000")
 
-print("Checking For create user... ",createBooking )
 
 # -- ROUTES --
 from account.routes import account_bp

@@ -50,17 +50,19 @@ class DatabaseReadingServices:
             )
 
         result = self.cursor.fetchone()[0]
-        self.cursor.close()  # Empty Cursor
 
         if result:
 
             if result == password:
+                self.cursor.close()  # Empty Cursor
                 return True, "Successful Login"
 
             else:
+                self.cursor.close()
                 return False, "Incorrect Login Information"
 
         else:
+            self.cursor.close()
             False, "Unable to find the account registered under this email or username"
 
     def get_specific_meeting_owner_for_booking(self, BID: int):
