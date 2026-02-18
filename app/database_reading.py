@@ -554,3 +554,26 @@ class DatabaseReadingServices:
             return False, "Unable to find the room specified"
 
     # def get_duration_from_given_end_time(self, start_time:time, end_time: time):
+
+    def get_list_of_registered_and_unregistered_attendees(self, BID: int):
+
+        self.cursor.execute(
+            "SELECT RUID FROM RegisteredBookingAttendees WHERE BID = %s", (BID,)
+        )
+
+        registered_result = self.cursor.fetchall()
+
+        self.cursor.execute(
+            "SELECT URUID FROM UnregisteredBookingAttendees WHERE BID = %s", (BID,)
+        )
+
+        unregistered_result = self.cursor.fetchall()
+
+        if registered_result and unregistered_result:
+            return registered_result, unregistered_result
+
+        elif registered_result:
+            return registered_result
+
+        else:
+            return "Unable to find any users associated with the meeting"
