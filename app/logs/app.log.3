@@ -1,8 +1,24 @@
-2026-02-17 17:32:21,446 ERROR: Exception on / [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+2026-02-17 18:29:31,849 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:29:33,270 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:29:34,098 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:29:57,874 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:30:28,428 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:31:12,774 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:31:13,620 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:37:58,695 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:37:59,619 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:40:14,432 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:40:31,238 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:41:52,413 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:43:06,766 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:43:26,508 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:52:34,556 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 19:38:58,335 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 19:39:14,927 ERROR: Exception on /booking [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
     self._cmysql.query(
-_mysql_connector.MySQLInterfaceError: Unknown column 'BID' in 'field list'
+_mysql_connector.MySQLInterfaceError: Unknown column 'roomNumber' in 'field list'
 
 The above exception was the direct cause of the following exception:
 
@@ -19,10 +35,11 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/app.py", line 155, in index
-  File "/app/database_reading.py", line 315, in get_rooms
-    total_seconds_meet_time = int(prev_meeting_time.total_seconds())
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/booking/routes.py", line 49, in create_booking
+    room = reader.get_room_data_given_room_number(room_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 434, in get_room_data_given_room_number
+    self.cursor.execute("SELECT roomNumber, companyBuilding, wing, wheelchairAccessible, projectorAccess, whiteboardAccess, maximumCapacity WHERE roomNumber = %s", (room_number,))
   File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 353, in execute
     self._connection.cmd_query(
   File "/usr/local/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
@@ -30,15 +47,9 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
     raise get_mysql_exception(
-mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'BID' in 'field list'
-2026-02-17 17:32:22,339 ERROR: Exception on / [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
-    self._cmysql.query(
-_mysql_connector.MySQLInterfaceError: Unknown column 'BID' in 'field list'
-
-The above exception was the direct cause of the following exception:
-
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'roomNumber' in 'field list'
+2026-02-17 19:43:32,742 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 19:43:59,948 ERROR: Exception on /booking [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
@@ -52,26 +63,30 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/app.py", line 155, in index
-  File "/app/database_reading.py", line 315, in get_rooms
-    total_seconds_meet_time = int(prev_meeting_time.total_seconds())
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 353, in execute
-    self._connection.cmd_query(
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
-    return method(cnx, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
-    raise get_mysql_exception(
-mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'BID' in 'field list'
-2026-02-17 17:32:32,825 ERROR: Exception on / [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
-    self._cmysql.query(
-_mysql_connector.MySQLInterfaceError: Unknown column 'BID' in 'field list'
-
-The above exception was the direct cause of the following exception:
-
+  File "/app/booking/routes.py", line 54, in create_booking
+    return render_template("booking.html", form=form, mode="create", room=room)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/app/templates/booking.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "/app/templates/base.html", line 73, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/templates/booking.html", line 56, in block 'content'
+    {% for i in range(1, room[6] + 1) %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: list object has no element 6
+2026-02-17 19:46:50,982 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 19:48:50,166 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
@@ -85,73 +100,57 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/app.py", line 155, in index
-  File "/app/database_reading.py", line 315, in get_rooms
-    total_seconds_meet_time = int(prev_meeting_time.total_seconds())
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 353, in execute
-    self._connection.cmd_query(
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
-    return method(cnx, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
-    raise get_mysql_exception(
-mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'BID' in 'field list'
-2026-02-17 18:08:06,160 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:08:07,203 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:08:54,637 WARNING: Failed login attempt for username: test [in /app/account/routes.py:61]
-2026-02-17 18:08:57,455 WARNING: Failed login attempt for username: test [in /app/account/routes.py:61]
-2026-02-17 18:09:14,141 WARNING: Failed login attempt for username: test [in /app/account/routes.py:61]
-2026-02-17 18:10:36,028 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:11:20,311 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:11:21,168 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:12:34,266 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:12:47,849 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:12:49,281 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:12:50,926 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:12:51,793 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:13:11,321 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:13:16,152 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:13:26,514 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:13:27,311 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:13:38,522 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:14:24,405 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:14:27,813 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:14:42,917 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:15:17,977 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:16:20,051 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:16:42,143 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:16:51,063 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:17:06,190 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:18:18,433 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:19:03,808 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:19:39,000 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:19:48,477 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:19:49,821 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:19:51,253 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:19:53,140 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:19:55,837 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:20:00,152 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:20:01,046 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:20:04,454 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:21:22,778 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:21:31,792 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:21:47,800 WARNING: Failed login attempt for username: test [in /app/account/routes.py:61]
-2026-02-17 18:24:57,034 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:25:11,954 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:25:18,153 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:27:09,555 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:28:14,331 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:28:30,892 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:28:33,205 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:28:42,638 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:28:43,436 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:28:44,816 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:28:46,304 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:28:47,134 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:28:53,910 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:28:56,071 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:29:14,212 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:29:15,697 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:29:17,095 INFO: Flask app startup [in /app/app.py:93]
-2026-02-17 18:29:18,556 INFO: Flask app startup [in /app/app.py:93]
+  File "/app/booking/routes.py", line 35, in create_booking
+    if form.validate_on_submit():
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
+    return self.is_submitted() and self.validate(extra_validators=extra_validators)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/wtforms/form.py", line 329, in validate
+    return super().validate(extra)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/wtforms/form.py", line 146, in validate
+    if not field.validate(self, extra):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/wtforms/fields/core.py", line 231, in validate
+    self.pre_validate(form)
+  File "/usr/local/lib/python3.11/site-packages/wtforms/fields/choices.py", line 136, in pre_validate
+    raise TypeError(self.gettext("Choices cannot be None."))
+TypeError: Choices cannot be None.
+2026-02-17 21:50:36,288 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 21:50:37,825 ERROR: Exception on / [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app.py", line 171, in index
+    rooms = database_reader.get_rooms()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DatabaseReadingServices' object has no attribute 'get_rooms'
+2026-02-17 21:50:38,755 ERROR: Exception on / [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app.py", line 171, in index
+    rooms = database_reader.get_rooms()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DatabaseReadingServices' object has no attribute 'get_rooms'

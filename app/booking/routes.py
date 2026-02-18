@@ -29,8 +29,6 @@ def create_booking():
         return redirect("/")
 
     form = BookingForm()
-
-    # Fetch room data early (used for display/capacity)
     room = reader.get_room_data_given_room_number(room_number)
     if not room:
         flash("Invalid room selected.", "error")
@@ -39,19 +37,19 @@ def create_booking():
     # GET: prefill date safely (string -> date object)
     if request.method == "GET" and date_qs:
         try:
-            form.meeting_date.data = datetime.strptime(date_qs, "%Y-%m-%d").date()
+            form.meeting_date.data = datetime.strptime(date_qs, "%Y-%m-%d").date() #swap to date format for form field
         except ValueError:
             flash("Invalid date format in URL. Use YYYY-MM-DD.", "error")
 
     # POST
     if form.validate_on_submit():
         # WTForms TimeField gives datetime.time, convert to "HH:MM:SS" required by DB logic
-        # Your UI doesn't track seconds, so force ":00"
         start_time_str = form.start_time.data.strftime("%H:%M") + ":00"
+        meeting_date = form.meeting_date.data.strftime("%Y-%m-%d")
 
         # meeting_date is a datetime.date from DateField (good)
         create_booking = writer.create_new_booking(
-            meeting_date=form.meeting_date.data,
+            meeting_date,
             start_time=start_time_str,
             duration="02:00:00",  # keep your default for now
             meeting_owner=user_id,
@@ -77,7 +75,7 @@ def create_booking():
 
     return render_template("booking.html", form=form, mode="create", room=room)
 
-
+# rename to meeting for frontend?
 @booking_bp.route('/booking/<int:booking_id>', methods=['GET'])
 def view_booking(booking_id):
     db = DatabaseConnection()
@@ -89,7 +87,9 @@ def view_booking(booking_id):
 
     return render_template("meeting.html", booking=booking)
 
-#write patch route for booking editing - only allow owner of booking to edit - add delete?
+#GET: get booking info and prefill form for editing (only if owner)
+#PATCH: accept JSON payload to update one or more fields (only if owner)
+#DELETE: delete booking (only if owner)
 @booking_bp.route('/booking/<int:booking_id>/edit', methods=['GET','PATCH', 'DELETE'])
 def edit_booking(booking_id):
     db = DatabaseConnection()
@@ -107,19 +107,113 @@ def edit_booking(booking_id):
 
     if booking[1].booking_owner_id != user_id:
         abort(403, description="You do not have permission to edit this booking")
+    # GET: render edit form pre-filled
+    if request.method == 'GET':
+        form = BookingForm()
+        # populate form fields from booking object where possible
+        try:
+            b = booking[1]
+            # booking meetingDate expected as string 'YYYY-MM-DD' or date-like
+            if hasattr(b, 'meetingDate') and b.meetingDate:
+                try:
+                    form.meeting_date.data = datetime.strptime(str(b.meetingDate), '%Y-%m-%d').date()
+                except Exception:
+                    pass
 
-    # Extract updated data from request (this is just an example, you would need to implement the actual update logic)
-    updated_data = request.get_json()
+            if hasattr(b, 'startTime') and b.startTime:
+                try:
+                    form.start_time.data = datetime.strptime(str(b.startTime), '%H:%M:%S').time()
+                except Exception:
+                    try:
+                        form.start_time.data = datetime.strptime(str(b.startTime), '%H:%M').time()
+                    except Exception:
+                        pass
 
-    # Call the booking service to update the booking (you would need to implement this method in your BookingService)
-    update_result = BookingService.update_booking(booking_id, updated_data)
+            if hasattr(b, 'meetingSize') and b.meetingSize:
+                try:
+                    form.meeting_capacity.data = int(b.meetingSize)
+                except Exception:
+                    pass
+        except Exception:
+            pass
 
-    if not update_result[0]:
-        flash("Failed to update booking.", "error")
+        room = reader.get_room_data_given_room_number(getattr(booking[1], 'meetingRoom', None))
+        return render_template('booking.html', form=form, mode='edit', booking=booking, room=room)
+
+    # PATCH: accept JSON payload to update one or more fields
+    if request.method == 'PATCH':
+        updated_data = request.get_json() or {}
+
+        # Track update outcomes
+        success = True
+        error_msg = None
+
+        # Update date
+        if 'meeting_date' in updated_data:
+            new_date = updated_data.get('meeting_date')
+            result = writer.update_meeting_date(booking_id, new_date)
+            if not result:
+                success = False
+                error_msg = result[1] if isinstance(result, tuple) and len(result) > 1 else 'Failed to update meeting date'
+
+        # Update start time
+        if success and 'start_time' in updated_data:
+            new_start = updated_data.get('start_time')
+            # normalize to HH:MM:SS if user provided HH:MM
+            if new_start and len(new_start.split(':')) == 2:
+                new_start = new_start + ':00'
+            result = writer.update_meeting_time(booking_id, new_start)
+            if not result:
+                success = False
+                error_msg = result[1] if isinstance(result, tuple) and len(result) > 1 else 'Failed to update start time'
+
+        # Update duration
+        if success and 'duration' in updated_data:
+            new_duration = updated_data.get('duration')
+            result = writer.update_meeting_duration(booking_id, new_duration)
+            if not result:
+                success = False
+                error_msg = result[1] if isinstance(result, tuple) and len(result) > 1 else 'Failed to update duration'
+
+        # Update room
+        if success and 'meeting_room' in updated_data:
+            new_room = updated_data.get('meeting_room')
+            result = writer.update_meeting_room(booking_id, new_room)
+            if not result:
+                success = False
+                error_msg = result[1] if isinstance(result, tuple) and len(result) > 1 else 'Failed to update meeting room'
+
+        # Update capacity
+        if success and 'meeting_capacity' in updated_data:
+            try:
+                new_cap = int(updated_data.get('meeting_capacity'))
+            except Exception:
+                new_cap = None
+            if new_cap is None:
+                success = False
+                error_msg = 'Invalid meeting_capacity specified'
+            else:
+                result = writer.update_meeting_capacity(booking_id, new_cap)
+                if not result:
+                    success = False
+                    error_msg = result[1] if isinstance(result, tuple) and len(result) > 1 else 'Failed to update meeting capacity'
+
+        if not success:
+            flash(error_msg or 'Failed to update booking.', 'error')
+            return redirect(f"/booking/{booking_id}")
+
+        flash('Booking updated successfully.', 'success')
         return redirect(f"/booking/{booking_id}")
 
-    flash("Booking updated successfully.", "success")
-    return redirect(f"/booking/{booking_id}")
+    # DELETE: remove booking
+    if request.method == 'DELETE':
+        deleted = writer.delete_booking(booking_id)
+        if deleted:
+            flash('Booking deleted.', 'success')
+            return redirect('/')
+        else:
+            flash('Failed to delete booking.', 'error')
+            return redirect(f"/booking/{booking_id}")
 
 
 @booking_bp.route('/rsvp', methods=['GET', 'POST'])

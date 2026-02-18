@@ -1,4 +1,4 @@
-2026-02-18 02:47:13,087 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+2026-02-18 03:13:37,015 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,79 +12,7 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/booking/routes.py", line 49, in create_booking
-    create_booking = writer.create_new_booking(
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/database_writing.py", line 71, in create_new_booking
-    checkAvailable = self.reader.check_for_room_availability(
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/database_reading.py", line 213, in check_for_room_availability
-    duration_hours, duration_minutes, duration_seconds = map(
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ValueError: not enough values to unpack (expected 3, got 2)
-2026-02-18 02:47:26,718 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/booking/routes.py", line 49, in create_booking
-    create_booking = writer.create_new_booking(
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/database_writing.py", line 71, in create_new_booking
-    checkAvailable = self.reader.check_for_room_availability(
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/database_reading.py", line 213, in check_for_room_availability
-    duration_hours, duration_minutes, duration_seconds = map(
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ValueError: not enough values to unpack (expected 3, got 2)
-2026-02-18 02:49:43,916 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/booking/routes.py", line 51, in create_booking
-    create_booking = writer.create_new_booking(
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/database_writing.py", line 71, in create_new_booking
-    checkAvailable = self.reader.check_for_room_availability(
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/database_reading.py", line 208, in check_for_room_availability
-    start_hours, start_minutes, start_seconds = map(int, start_time.split(":"))
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ValueError: too many values to unpack (expected 3)
-2026-02-18 02:52:25,475 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/booking/routes.py", line 51, in create_booking
+  File "/app/booking/routes.py", line 54, in create_booking
     create_booking = writer.create_new_booking(
                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/app/database_writing.py", line 71, in create_new_booking
@@ -94,7 +22,14 @@ Traceback (most recent call last):
     meeting_date = datetime.strptime(meeting_date, "%Y-%m-%d").date()
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: strptime() argument 1 must be str, not datetime.date
-2026-02-18 02:58:43,685 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+2026-02-18 03:16:46,291 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 311, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
@@ -108,13 +43,14 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/booking/routes.py", line 53, in create_booking
+  File "/app/booking/routes.py", line 54, in create_booking
     create_booking = writer.create_new_booking(
                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/app/database_writing.py", line 71, in create_new_booking
     checkAvailable = self.reader.check_for_room_availability(
                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/database_reading.py", line 221, in check_for_room_availability
-    meeting_date = datetime.strptime(meeting_date, "%Y-%m-%d").date()
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: strptime() argument 1 must be str, not datetime.date
+  File "/app/database_reading.py", line 232, in check_for_room_availability
+    self.cursor.execute(
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 313, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
