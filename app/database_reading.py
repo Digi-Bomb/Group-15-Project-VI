@@ -338,7 +338,7 @@ class DatabaseReadingServices:
                 "BID": BID,
             }
             return booking_dict
-        
+
         abort(404, description="it broke.")
 
     def get_booking_start_and_end_times_for_specific_room_include_date(
