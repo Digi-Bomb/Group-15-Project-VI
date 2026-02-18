@@ -35,3 +35,10 @@ Traceback (most recent call last):
 jinja2.exceptions.TemplateNotFound: login.html
 2026-02-04 22:07:29,060 INFO: Flask app startup [in E:\GitHub\Group-15-Project-VI\app\app.py:83]
 2026-02-04 22:14:38,043 INFO: Flask app startup [in E:\GitHub\Group-15-Project-VI\app\app.py:83]
+2026-02-17 23:32:23,032 INFO: Flask app startup [in E:\GitHub\Group-15-Project-VI\app\app.py:93]
+2026-02-17 23:32:45,338 INFO: Flask app startup [in E:\GitHub\Group-15-Project-VI\app\app.py:93]
+2026-02-17 23:33:32,605 INFO: Flask app startup [in E:\GitHub\Group-15-Project-VI\app\app.py:93]
+2026-02-17 23:34:02,161 INFO: Flask app startup [in E:\GitHub\Group-15-Project-VI\app\app.py:93]
+2026-02-17 23:34:17,158 INFO: Flask app startup [in E:\GitHub\Group-15-Project-VI\app\app.py:93]
+2026-02-17 23:34:48,006 INFO: Flask app startup [in E:\GitHub\Group-15-Project-VI\app\app.py:93]
+2026-02-17 23:36:02,690 INFO: Flask app startup [in E:\GitHub\Group-15-Project-VI\app\app.py:93]
