@@ -7,3 +7,4 @@ Flask-WTF==1.1.1
 WTForms==3.0.1
 Flask-Limiter==3.5.0
 flask-mail==0.9.1
+pytest

@@ -1,5 +1,6 @@
 from werkzeug.security import check_password_hash
 from database_connection import DatabaseConnection
+from flask import abort
 from datetime import time, datetime, timedelta, date
 
 
@@ -302,9 +303,11 @@ class DatabaseReadingServices:
         self.cursor = self.conn.cursor()
         self.cursor.execute(
             "SELECT meetingDate, startTime, duration, meetingRoom FROM Booking WHERE BID = %s",
-            (BID,),
+            (BID,)
         )
         row = self.cursor.fetchone()
+        if not row:
+            abort(404, description="No booking found with that ID.")
         prev_meeting_room = row[3]
         prev_meeting_time = row[1]
         prev_meeting_date = row[0]
@@ -326,14 +329,17 @@ class DatabaseReadingServices:
         prev_meeting_date = prev_meeting_date.strftime("%Y-%m-%d")
 
         if row:
-            return (
-                prev_meeting_room,
-                prev_meeting_date,
-                prev_meeting_time,
-                prev_meeting_duration,
-            )
-
-        return False
+            # dictionary return for ease of access in routes
+            booking_dict = {
+                "meetingRoom": prev_meeting_room,
+                "meetingDate": prev_meeting_date,
+                "startTime": prev_meeting_time,
+                "duration": prev_meeting_duration,
+                "BID": BID,
+            }
+            return booking_dict
+        
+        abort(404, description="it broke.")
 
     def get_booking_start_and_end_times_for_specific_room_include_date(
         self, room_number: str

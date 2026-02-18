@@ -101,13 +101,9 @@ def view_booking(booking_id):
     reader = DatabaseReadingServices(db)
 
     booking = reader.get_booking_information_of_specific_booking(booking_id)
-    room = reader.get_room_data_given_room_number(
-        getattr(booking[1], "meetingRoom", None)
-    )
-    if not booking[0]:
-        abort(404, description="Booking not found")
+    room = reader.get_room_data_given_room_number(booking["meetingRoom"])
 
-    return render_template("meeting.html", room=room)
+    return render_template("meeting.html", booking=booking, room=room)
 
 
 # GET: get booking info and prefill form for editing (only if owner)
