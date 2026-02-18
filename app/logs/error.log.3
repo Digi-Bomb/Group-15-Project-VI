@@ -1,4 +1,4 @@
-2026-02-04 19:18:58,582 ERROR: Exception on /login [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+2026-02-18 02:47:13,087 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,109 +12,17 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/app.py", line 215, in login
-    return render_template("login.html", form=form)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 150, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 1087, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 1016, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/jinja2/environment.py", line 975, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/jinja2/loaders.py", line 126, in load
-    source, filename, uptodate = self.get_source(environment, name)
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 64, in get_source
-    return self._get_source_fast(environment, template)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/templating.py", line 98, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: login.html
-2026-02-05 21:27:42,229 ERROR: Mail send failed: cannot unpack non-iterable NoneType object [in /app/notifications/routes.py:21]
-2026-02-05 21:38:14,275 ERROR: Mail send failed: cannot unpack non-iterable NoneType object [in /app/notifications/routes.py:21]
-2026-02-05 21:39:09,682 ERROR: Exception in /submit: Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 26, in submit
-    mail.send(msg)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
-    message.send(connection)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
-    connection.send(self)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
-    list(sanitize_addresses(message.send_to)),
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
-    return map(lambda e: sanitize_address(e, encoding), addresses)
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
-    nm, addr = addr
-    ^^^^^^^^
-TypeError: cannot unpack non-iterable NoneType object
- [in /app/notifications/routes.py:29]
-2026-02-05 21:39:22,523 ERROR: Exception in /submit: Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 26, in submit
-    mail.send(msg)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
-    message.send(connection)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
-    connection.send(self)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
-    list(sanitize_addresses(message.send_to)),
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
-    return map(lambda e: sanitize_address(e, encoding), addresses)
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
-    nm, addr = addr
-    ^^^^^^^^
-TypeError: cannot unpack non-iterable NoneType object
- [in /app/notifications/routes.py:29]
-2026-02-05 21:51:04,020 ERROR: Exception in /submit: Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 26, in submit
-    try:
-        ^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
-    message.send(connection)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
-    connection.send(self)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
-    list(sanitize_addresses(message.send_to)),
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
-    return map(lambda e: sanitize_address(e, encoding), addresses)
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
-    nm, addr = addr
-    ^^^^^^^^
-TypeError: cannot unpack non-iterable NoneType object
- [in /app/notifications/routes.py:29]
-2026-02-05 21:51:07,897 ERROR: Exception in /submit: Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 26, in submit
-    try:
-        ^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
-    message.send(connection)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
-    connection.send(self)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 189, in send
-    list(sanitize_addresses(message.send_to)),
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 125, in <lambda>
-    return map(lambda e: sanitize_address(e, encoding), addresses)
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 105, in sanitize_address
-    nm, addr = addr
-    ^^^^^^^^
-TypeError: cannot unpack non-iterable NoneType object
- [in /app/notifications/routes.py:29]
-2026-02-05 21:58:29,332 ERROR: Recipient or sender email not configured [in /app/notifications/routes.py:23]
-2026-02-05 21:58:29,332 ERROR: Recipient or sender email not configured [in /app/notifications/routes.py:23]
-2026-02-07 02:51:33,219 ERROR: Exception on /submit [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+  File "/app/booking/routes.py", line 49, in create_booking
+    create_booking = writer.create_new_booking(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_writing.py", line 71, in create_new_booking
+    checkAvailable = self.reader.check_for_room_availability(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 213, in check_for_room_availability
+    duration_hours, duration_minutes, duration_seconds = map(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 3, got 2)
+2026-02-18 02:47:26,718 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
@@ -128,33 +36,103 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/notifications/routes.py", line 9, in submit
-    from ..app import mail
-ImportError: attempted relative import beyond top-level package
-2026-02-10 18:08:46,313 ERROR: Mail send failed: [Errno 111] Connection refused [in /app/notifications/routes.py:38]
+  File "/app/booking/routes.py", line 49, in create_booking
+    create_booking = writer.create_new_booking(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_writing.py", line 71, in create_new_booking
+    checkAvailable = self.reader.check_for_room_availability(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 213, in check_for_room_availability
+    duration_hours, duration_minutes, duration_seconds = map(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 3, got 2)
+2026-02-18 02:49:43,916 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 34, in submit
-    mail.send(msg)  # send using the instance imported from app.py
-    ^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 491, in send
-    with self.connect() as connection:
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 144, in __enter__
-    self.host = self.configure_host()
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 158, in configure_host
-    host = smtplib.SMTP(self.mail.server, self.mail.port)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 255, in __init__
-    (code, msg) = self.connect(host, port)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 341, in connect
-    self.sock = self._get_socket(host, port, self.timeout)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 312, in _get_socket
-    return socket.create_connection((host, port), timeout,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/socket.py", line 863, in create_connection
-    raise exceptions[0]
-  File "/usr/local/lib/python3.11/socket.py", line 848, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 111] Connection refused
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/booking/routes.py", line 51, in create_booking
+    create_booking = writer.create_new_booking(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_writing.py", line 71, in create_new_booking
+    checkAvailable = self.reader.check_for_room_availability(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 208, in check_for_room_availability
+    start_hours, start_minutes, start_seconds = map(int, start_time.split(":"))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 3)
+2026-02-18 02:52:25,475 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/booking/routes.py", line 51, in create_booking
+    create_booking = writer.create_new_booking(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_writing.py", line 71, in create_new_booking
+    checkAvailable = self.reader.check_for_room_availability(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 221, in check_for_room_availability
+    meeting_date = datetime.strptime(meeting_date, "%Y-%m-%d").date()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: strptime() argument 1 must be str, not datetime.date
+2026-02-18 02:58:43,685 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/booking/routes.py", line 53, in create_booking
+    create_booking = writer.create_new_booking(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_writing.py", line 71, in create_new_booking
+    checkAvailable = self.reader.check_for_room_availability(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 221, in check_for_room_availability
+    meeting_date = datetime.strptime(meeting_date, "%Y-%m-%d").date()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: strptime() argument 1 must be str, not datetime.date
+2026-02-18 03:10:53,984 ERROR: Exception on /booking [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/booking/routes.py", line 42, in create_booking
+    form.meeting_date.data = datetime.strftime("%Y-%m-%d")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: descriptor 'strftime' for 'datetime.date' objects doesn't apply to a 'str' object

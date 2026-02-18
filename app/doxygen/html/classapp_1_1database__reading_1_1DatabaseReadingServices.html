@@ -122,7 +122,7 @@ FALSE == Nickname Taken.  <br /></td></tr>
 <tr class="separator:a1b132aadf3db0b7db428c3dbcb9da2b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c9d5a725a7bcb45db3ea62be084fb6c" id="r_a8c9d5a725a7bcb45db3ea62be084fb6c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a8c9d5a725a7bcb45db3ea62be084fb6c">check_for_room_availability</a> (self, str room_number, str meeting_date, str start_time, str duration, int BID=None)</td></tr>
 <tr class="memdesc:a8c9d5a725a7bcb45db3ea62be084fb6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that validates that a room is available for use <br  />
-NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPATE AN EXISTING BOOKING <br  />
+NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPDATE AN EXISTING BOOKING <br  />
 TRUE == ROOM IS AVAILABLE <br  />
 FALSE == ROOM TAKEN.  <br /></td></tr>
 <tr class="separator:a8c9d5a725a7bcb45db3ea62be084fb6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,9 +135,14 @@ FALSE == ROOM TAKEN.  <br /></td></tr>
 <tr class="memitem:a04d93c5a73ffea3df29d39cda5cd968e" id="r_a04d93c5a73ffea3df29d39cda5cd968e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a04d93c5a73ffea3df29d39cda5cd968e">get_booking_information_of_specific_booking</a> (self, int BID)</td></tr>
 <tr class="memdesc:a04d93c5a73ffea3df29d39cda5cd968e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the meeting date, time, duration, and room of a particular booking.  <br /></td></tr>
 <tr class="separator:a04d93c5a73ffea3df29d39cda5cd968e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab682f55c14913e48f7736e6297be6acd" id="r_ab682f55c14913e48f7736e6297be6acd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#ab682f55c14913e48f7736e6297be6acd">get_booking_start_and_end_times_for_specific_room</a> (self, str room_number)</td></tr>
-<tr class="memdesc:ab682f55c14913e48f7736e6297be6acd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns a list of start times, end times, and dates for all bookings under a particular room.  <br /></td></tr>
-<tr class="separator:ab682f55c14913e48f7736e6297be6acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e9997fe58124793e8e6589afd49d234" id="r_a8e9997fe58124793e8e6589afd49d234"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a8e9997fe58124793e8e6589afd49d234">get_booking_start_and_end_times_for_specific_room_include_date</a> (self, str room_number)</td></tr>
+<tr class="memdesc:a8e9997fe58124793e8e6589afd49d234"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns a list of start times, end times, and dates for all bookings under a particular room <br  />
+NOTE: IN ORDER OF DATE, START, END TIME.  <br /></td></tr>
+<tr class="separator:a8e9997fe58124793e8e6589afd49d234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a700f243b7eb20b55ca8af9f943926bc7" id="r_a700f243b7eb20b55ca8af9f943926bc7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a700f243b7eb20b55ca8af9f943926bc7">get_booking_start_and_end_times_for_specific_room_exclude_date</a> (self, str room_number, str meeting_date)</td></tr>
+<tr class="memdesc:a700f243b7eb20b55ca8af9f943926bc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that returns a list of start times, and end times for all bookings under a particular room <br  />
+NOTE: IN ORDER OF START, END TIME.  <br /></td></tr>
+<tr class="separator:a700f243b7eb20b55ca8af9f943926bc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb80b698a73c7d4fb39d3fc179c0b600" id="r_adb80b698a73c7d4fb39d3fc179c0b600"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#adb80b698a73c7d4fb39d3fc179c0b600">return_all_bookings_for_a_user</a> (self, int RUID)</td></tr>
 <tr class="memdesc:adb80b698a73c7d4fb39d3fc179c0b600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Function for returning all Bookings that a Registered User owns <br  />
 NOTE RETURNS A LIST OF BOOKINGS OWNED BY A USER <br  />
@@ -151,6 +156,9 @@ RETURNS FALSE IF NO BOOKINGS OWNED.  <br /></td></tr>
 <tr class="separator:a9005974b3edbb95a687839f34f119a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10df726a660b2d7eab6666aff0ebc5f3" id="r_a10df726a660b2d7eab6666aff0ebc5f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a10df726a660b2d7eab6666aff0ebc5f3">get_unregistered_user_email_from_URUID</a> (self, int URUID)</td></tr>
 <tr class="separator:a10df726a660b2d7eab6666aff0ebc5f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5091584715bb0504a6f0afabf754e11b" id="r_a5091584715bb0504a6f0afabf754e11b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__reading_1_1DatabaseReadingServices.html#a5091584715bb0504a6f0afabf754e11b">get_rooms</a> (self, str|None building=None)</td></tr>
+<tr class="memdesc:a5091584715bb0504a6f0afabf754e11b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of rooms.  <br /></td></tr>
+<tr class="separator:a5091584715bb0504a6f0afabf754e11b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -242,7 +250,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Function that validates that a room is available for use <br  />
-NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPATE AN EXISTING BOOKING <br  />
+NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPDATE AN EXISTING BOOKING <br  />
 TRUE == ROOM IS AVAILABLE <br  />
 FALSE == ROOM TAKEN. </p>
 
@@ -403,14 +411,51 @@ FALSE == UNREGISTERED. </p>
 
 </div>
 </div>
-<a id="ab682f55c14913e48f7736e6297be6acd" name="ab682f55c14913e48f7736e6297be6acd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab682f55c14913e48f7736e6297be6acd">&#9670;&#160;</a></span>get_booking_start_and_end_times_for_specific_room()</h2>
+<a id="a700f243b7eb20b55ca8af9f943926bc7" name="a700f243b7eb20b55ca8af9f943926bc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a700f243b7eb20b55ca8af9f943926bc7">&#9670;&#160;</a></span>get_booking_start_and_end_times_for_specific_room_exclude_date()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">app.database_reading.DatabaseReadingServices.get_booking_start_and_end_times_for_specific_room </td>
+          <td class="memname">app.database_reading.DatabaseReadingServices.get_booking_start_and_end_times_for_specific_room_exclude_date </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str&#160;</td>
+          <td class="paramname"><em>room_number</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str&#160;</td>
+          <td class="paramname"><em>meeting_date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that returns a list of start times, and end times for all bookings under a particular room <br  />
+NOTE: IN ORDER OF START, END TIME. </p>
+
+</div>
+</div>
+<a id="a8e9997fe58124793e8e6589afd49d234" name="a8e9997fe58124793e8e6589afd49d234"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e9997fe58124793e8e6589afd49d234">&#9670;&#160;</a></span>get_booking_start_and_end_times_for_specific_room_include_date()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_reading.DatabaseReadingServices.get_booking_start_and_end_times_for_specific_room_include_date </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em>, </td>
@@ -429,7 +474,8 @@ FALSE == UNREGISTERED. </p>
       </table>
 </div><div class="memdoc">
 
-<p>Function that returns a list of start times, end times, and dates for all bookings under a particular room. </p>
+<p>Function that returns a list of start times, end times, and dates for all bookings under a particular room <br  />
+NOTE: IN ORDER OF DATE, START, END TIME. </p>
 
 </div>
 </div>
@@ -578,6 +624,37 @@ FALSE == UNREGISTERED. </p>
 </div><div class="memdoc">
 
 <p>Function that returns a TUPLE (list) of all registered attendees for a specific meeting. </p>
+
+</div>
+</div>
+<a id="a5091584715bb0504a6f0afabf754e11b" name="a5091584715bb0504a6f0afabf754e11b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5091584715bb0504a6f0afabf754e11b">&#9670;&#160;</a></span>get_rooms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_reading.DatabaseReadingServices.get_rooms </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str | None &#160;</td>
+          <td class="paramname"><em>building</em> = <code>None</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a list of rooms. </p>
+<p>If building is provided, filters by companyBuilding. </p>
 
 </div>
 </div>

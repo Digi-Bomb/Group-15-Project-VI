@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextAreaField, SubmitField
+from wtforms import StringField, PasswordField, TextAreaField, SubmitField, TimeField, DateField, SelectField
 from wtforms.validators import DataRequired, Length, ValidationError, EqualTo, Regexp
 
 
@@ -30,14 +30,17 @@ class NoteForm(FlaskForm):
 
 class LogoutForm(FlaskForm):
     submit = SubmitField("Logout")
-    submit = SubmitField("Logout")
 
 #create booking form
 class BookingForm(FlaskForm):
-    meeting_date = StringField("Meeting Date", validators=[DataRequired()])
-    start_time = StringField("Start Time", validators=[DataRequired()])
-    duration = StringField("Duration", validators=[DataRequired()])
-    meeting_owner = StringField("Meeting Owner", validators=[DataRequired()])
-    meeting_room = StringField("Meeting Room", validators=[DataRequired()])
-    meeting_capacity = StringField("Meeting Capacity", validators=[DataRequired()])
-    submit = SubmitField("Create Booking")
+    meeting_date = DateField("Meeting Date", validators=[DataRequired()])
+    start_time = TimeField("Start Time", format="%H:%M", render_kw={
+            "min": "08:00",
+            "max": "20:00"
+        }, validators=[DataRequired()])
+    end_time = TimeField("End Time", format="%H:%M", render_kw={
+            "min": "08:00",
+            "max": "20:00"
+        }, validators=[DataRequired()])
+    meeting_capacity = SelectField("Capacity", choices=range(1, 100), coerce=int)
+    submit = SubmitField()

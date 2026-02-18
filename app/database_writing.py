@@ -28,24 +28,29 @@ class DatabaseWritingServices:
 
         if not checkExists:
 
-            query = """
+            try:
+                query = """
                 INSERT INTO RegisteredUser
                 (username, email, pass, firstName, lastName)
                 VALUES (%s, %s, %s, %s, %s)
-            """
-            values = (username, email, password, first_name, last_name)
+                """
+                values = (username, email, password, first_name, last_name)
 
-            # else:
-            #     query = """
-            #         INSERT INTO RegisteredUser
-            #         (username, email, pass, firstName, lastName)
-            #         VALUES ( %s, %s, %s, %s, %s)
-            #     """
-            #     values = (username, email, password, first_name, last_name)
+                # else:
+                #     query = """
+                #         INSERT INTO RegisteredUser
+                #         (username, email, pass, firstName, lastName)
+                #         VALUES ( %s, %s, %s, %s, %s)
+                #     """
+                #     values = (username, email, password, first_name, last_name)
 
-            self.cursor.execute(query, values)
-            self.conn.commit()
-            return True
+                self.cursor.execute(query, values)
+                self.conn.commit()
+                return True, "Register successful"
+
+            except Exception as e:
+                self.conn.rollback()
+                print("UPDATE ERROR: ", e)
 
         return False, "User already registered"
 
@@ -106,7 +111,7 @@ class DatabaseWritingServices:
 
                 if attempt_to_associate and attempt_to_book_room:
 
-                    self.cursor.close()
+                    #   self.cursor.close()
                     return True, (booking_id)
                 else:
                     return False, "Unable to associate"
@@ -160,7 +165,7 @@ class DatabaseWritingServices:
 
         self.cursor.execute(query, values)
         self.conn.commit()
-        self.cursor.close()
+        # self.cursor.close()
         return True
 
     def associate_unregistered_user_with_booking(self, BID: int, URUID: str):

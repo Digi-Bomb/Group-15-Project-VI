@@ -14,6 +14,5 @@ var searchData=
   ['datavalidator_11',['DataValidator',['../classapp_1_1data__validator_1_1DataValidator.html',1,'app::data_validator']]],
   ['delete_5fassociation_12',['delete_association',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#ad84c87211995ba8e4989507ff5939270',1,'app::database_writing::DatabaseWritingServices']]],
   ['delete_5fbooking_13',['delete_booking',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a3b04c1e88494c4938bf4606fffff3412',1,'app::database_writing::DatabaseWritingServices']]],
-  ['duration_14',['duration',['../classapp_1_1forms_1_1BookingForm.html#af8de191404b32d32ed5f2b35ba9caef7',1,'app::forms::BookingForm']]],
-  ['duration_5fhours_15',['duration_hours',['../classapp_1_1booking_1_1booking_1_1Booking.html#a22e897b98131694703d94f69243cb1aa',1,'app::booking::booking::Booking']]]
+  ['duration_5fhours_14',['duration_hours',['../classapp_1_1booking_1_1booking_1_1Booking.html#a22e897b98131694703d94f69243cb1aa',1,'app::booking::booking::Booking']]]
 ];

@@ -7,4 +7,8 @@ Flask-WTF==1.1.1
 WTForms==3.0.1
 Flask-Limiter==3.5.0
 flask-mail==0.9.1
+<<<<<<< HEAD
 Flask-APScheduler==1.13.1
+=======
+pytest
+>>>>>>> 5ef677c76370eb292bcd6b2f3351167f4f3a929c

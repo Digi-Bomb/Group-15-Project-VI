@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['submit_0',['submit',['../namespaceapp_1_1notifications_1_1routes.html#a33d386f6b8fc8794a894373b712b6fd2',1,'app::notifications::routes']]]
+  ['profile_0',['profile',['../namespaceapp_1_1account_1_1routes.html#a90115fe5697b8864f88ce6d82e881912',1,'app::account::routes']]]
 ];
