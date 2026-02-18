@@ -1,3 +1,4 @@
+from werkzeug.security import check_password_hash
 from database_connection import DatabaseConnection
 from datetime import time, datetime, timedelta, date
 
@@ -53,8 +54,7 @@ class DatabaseReadingServices:
 
         if result:
 
-            if result == password:
-                self.cursor.close()  # Empty Cursor
+            if check_password_hash(result, password):
                 return True, "Successful Login"
 
             else:
@@ -333,7 +333,9 @@ class DatabaseReadingServices:
 
         return False
 
-    def get_booking_start_and_end_times_for_specific_room_include_date(self, room_number: str):
+    def get_booking_start_and_end_times_for_specific_room_include_date(
+        self, room_number: str
+    ):
         """Function that returns a list of start times, end times, and dates for all bookings under a particular room \n
         NOTE: IN ORDER OF DATE, START, END TIME"""
 
@@ -383,7 +385,30 @@ class DatabaseReadingServices:
 
         return booked_times
 
-    def get_booking_start_and_end_times_for_specific_room_exclude_date(self, room_number: str, meeting_date: str):
+    def change_time_object_into_string(self, time_obj):
+        """Function that takes a time object input and converts it to a string\n
+        RETURNS A STRING IN THE FORMAT OF 'HH:MM:SS'"""
+
+        # Conversions for string input needed by checking room availability
+        seconds_of_time = int(time_obj.total_seconds())
+        hours, remainder = divmod(seconds_of_time, 3600)
+        minutes, seconds = divmod(remainder, 60)
+
+        return_string = f"{hours:02}:{minutes:02}:{seconds:02}"
+
+        return return_string
+
+    def change_date_object_into_string(self, date_obj):
+        """Function that takes a date object input and converts it to a string\n
+        RETURNS A STRING IN THE FORMAT OF 'YYYY-MM-DD'"""
+
+        return_string = date_obj.strftime("%Y-%m-%d")
+
+        return return_string
+
+    def get_booking_start_and_end_times_for_specific_room_exclude_date(
+        self, room_number: str, meeting_date: str
+    ):
         """Function that returns a list of start times, and end times for all bookings under a particular room \n
         NOTE: IN ORDER OF START, END TIME"""
 
@@ -406,7 +431,7 @@ class DatabaseReadingServices:
 
             row = self.cursor.fetchone()
 
-           # curmeetingDate_db = row[0]
+            # curmeetingDate_db = row[0]
             curmeetingStartTime_db = row[1]
             # curstartDuration_db = row[2]
             curendTime_db = row[3]
@@ -425,7 +450,7 @@ class DatabaseReadingServices:
 
             curendTime_db = f"{hours_me:02}:{minutes_me:02}:{seconds_me:02}"
 
-           # curmeetingDate_db = curmeetingDate_db.strftime("%Y-%m-%d")
+            # curmeetingDate_db = curmeetingDate_db.strftime("%Y-%m-%d")
 
             tupleOfInfo = (cur_meeting_time, curendTime_db)
 
@@ -438,7 +463,7 @@ class DatabaseReadingServices:
         NOTE RETURNS A LIST OF BOOKINGS OWNED BY A USER \n
         RETURNS FALSE IF NO BOOKINGS OWNED"""
 
-        self.cursor.execute("SELECT BID FROM Booking WHERE meetingOwner = %s",(RUID,))
+        self.cursor.execute("SELECT BID FROM Booking WHERE meetingOwner = %s", (RUID,))
 
         result = self.cursor.fetchall()
 
@@ -482,13 +507,13 @@ class DatabaseReadingServices:
             return result
         else:
             return "No unregistered user found for that RUID."
-        
+
     def get_rooms(self, building: str | None = None):
-            """
-            Returns a list of rooms.
-            If building is provided, filters by companyBuilding.
-            """
-            sql = """
+        """
+        Returns a list of rooms.
+        If building is provided, filters by companyBuilding.
+        """
+        sql = """
                 SELECT
                     roomNumber,
                     companyBuilding,
@@ -498,18 +523,35 @@ class DatabaseReadingServices:
                     maximumCapacity
                 FROM Room
             """
-            params = []
+        params = []
 
-            if building:
-                sql += " WHERE companyBuilding = %s"
-                params.append(building)
+        if building:
+            sql += " WHERE companyBuilding = %s"
+            params.append(building)
 
-            sql += " ORDER BY companyBuilding, wing, roomNumber"
+        sql += " ORDER BY companyBuilding, wing, roomNumber"
 
-            cursor = self.conn.cursor(dictionary=True)
-            cursor.execute(sql, params)          # <-- execute the query
-            results = cursor.fetchall()          # <-- fetch all rows as a list of dicts
-            cursor.close()
-            return results
+        cursor = self.conn.cursor(dictionary=True)
+        cursor.execute(sql, params)  # <-- execute the query
+        results = cursor.fetchall()  # <-- fetch all rows as a list of dicts
+        cursor.close()
+        return results
 
-    #def get_duration_from_given_end_time(self, start_time:time, end_time: time):
+    def get_room_data_given_room_number(self, room_number: str):
+
+        self.cursor.execute(
+            "SELECT roomNumber, companyBuilding, wing, wheelchairAccessible, projectorAccess, whiteboardAccess, maximumCapacity FROM Room WHERE roomNumber = %s",
+            (room_number,),
+        )
+
+        result = self.cursor.fetchone()
+
+        # result [0] is roomNumber, result[1] is company building, [2] is wing, at [3] is wheelchairAccessible, at [4] is projectorAccess, at [5] is whiteboardAccess, at [6] is maximumCapacity
+        if result:
+            self.cursor.close()
+            return result
+
+        else:
+            return False, "Unable to find the room specified"
+
+    # def get_duration_from_given_end_time(self, start_time:time, end_time: time):

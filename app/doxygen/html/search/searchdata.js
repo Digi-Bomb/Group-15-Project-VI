@@ -27,4 +27,3 @@ var indexSectionLabels =
   4: "Functions",
   5: "Variables"
 };
-
