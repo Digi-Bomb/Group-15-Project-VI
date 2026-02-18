@@ -47,7 +47,7 @@ def login():
         password = form.password.data #
         #validate_user_information returns a tuple (boolean, message) where boolean indicates success of login and message provides additional context
         try:
-            ok, user_id = reader.validate_user_information(username=user, password=password)
+            ok, msg, user_id = reader.validate_user_information(username=user, password=password)
         except RuntimeError:
             flash("Login temporarily unavailable (database offline).", "danger")
             return render_template("login.html", form=form)
