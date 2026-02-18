@@ -62,6 +62,7 @@ class DatabaseWritingServices:
         meeting_owner: str,
         meeting_room: str,
         meeting_capacity: int,
+        shareable_link: str
     ):
         """Generic function for adding a booking to the Database \n
         NOTE: CHECKS FOR EXISTING BOOKED ROOMS AND ROOM CAPACITY \n
@@ -84,8 +85,8 @@ class DatabaseWritingServices:
             if meeting_capacity <= roomCapacity:
                 query = """
                     INSERT INTO Booking
-                    (meetingDate, startTime, duration, meetingOwner, meetingRoom, meetingSize)
-                    VALUES ( %s, %s, %s, %s, %s, %s)
+                    (meetingDate, startTime, duration, meetingOwner, meetingRoom, meetingSize, shareableLink)
+                    VALUES ( %s, %s, %s, %s, %s, %s, %s)
                 """
                 values = (
                     meeting_date,
@@ -94,6 +95,7 @@ class DatabaseWritingServices:
                     meeting_owner,
                     meeting_room,
                     meeting_capacity,
+                    shareable_link,
                 )
 
                 self.cursor.execute(query, values)

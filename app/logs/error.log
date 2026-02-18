@@ -34,3 +34,4 @@ Traceback (most recent call last):
     room = reader.get_room_data_given_room_number(booking["meetingRoom"])
                                                   ~~~~~~~^^^^^^^^^^^^^^^
 KeyError: 'meetingRoom'
+2026-02-18 18:51:16,464 WARNING: Failed login attempt for username: brookec [in /app/account/routes.py:61]

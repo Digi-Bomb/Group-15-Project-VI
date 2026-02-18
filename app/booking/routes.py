@@ -1,5 +1,7 @@
+import random
 from flask import Blueprint, render_template, request, redirect, flash, session, abort
 from datetime import datetime
+import uuid
 
 from booking.booking import Booking
 from notifications.email_notification_service import EmailNotificationService
@@ -63,6 +65,7 @@ def create_booking():
         # )
 
         # meeting_date is a datetime.date from DateField (good)
+        shareable_link = str(uuid.uuid4())
         create_booking = writer.create_new_booking(
             meeting_date,
             start_time=start_time_str,
@@ -70,6 +73,7 @@ def create_booking():
             meeting_owner=user_id,
             meeting_room=room_number,
             meeting_capacity=form.meeting_capacity.data,
+            shareable_link=shareable_link
         )
 
         if not create_booking[0]:
@@ -89,6 +93,8 @@ def create_booking():
             )
             return redirect(f"/booking?room_number={room_number}&date={safe_date}")
 
+        
+        
         flash("Booking created!", "success")
         return redirect(f"/booking/{create_booking[1]}")
 
@@ -110,19 +116,6 @@ def view_booking(booking_id):
 
     return render_template("meeting.html", room=room, booking=booking)
 
-
-@booking_bp.route('/rsvp', methods=['GET', 'POST'])
-@booking_bp.route('/rsvp/<link_id>', methods=['GET', 'POST'])
-def rsvp(link_id=None):
-    link = link_id or request.args.get('link')
-    booking = Booking()
-    booking = DatabaseReadingServices(DatabaseConnection()).get_booking_by_link_id(link)
-
-    if request.method == 'POST':
-        name = request.form.get('name')
-        EmailNotificationService(DatabaseConnection()).send_new_rsvp_notification_email(booking.booking_owner_id, name, booking.booking_id)
-        flash('RSVP received. Thank you!', 'success')
-        return redirect('/')
 # GET: get booking info and prefill form for editing (only if owner)
 # PATCH: accept JSON payload to update one or more fields (only if owner)
 # DELETE: delete booking (only if owner)
@@ -281,7 +274,6 @@ def edit_booking(booking_id):
             flash("Failed to delete booking.", "error")
             return redirect(f"/booking/{booking_id}")
 
-
 @booking_bp.route('/rsvp/<link_id>', methods=['GET', 'POST'])
 def rsvp(link_id=None):
     link = link_id or request.args.get('link')
@@ -295,3 +287,4 @@ def rsvp(link_id=None):
         return redirect('/')
 
     return render_template('rsvp.html', booking=booking)
+

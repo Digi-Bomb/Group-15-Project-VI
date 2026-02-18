@@ -302,7 +302,7 @@ class DatabaseReadingServices:
         """Returns the meeting date, time, duration, and room of a particular booking"""
         self.cursor = self.conn.cursor()
         self.cursor.execute(
-            "SELECT meetingDate, startTime, duration, meetingRoom, numberOfConfirmations, meetingOwner FROM Booking WHERE BID = %s",
+            "SELECT meetingDate, startTime, duration, meetingRoom, numberOfConfirmations, meetingOwner, reminderSent, shareableLink FROM Booking WHERE BID = %s",
             (int(BID),),
         )
         row = self.cursor.fetchone()
@@ -316,6 +316,8 @@ class DatabaseReadingServices:
         prev_meeting_duration = row[2]
         prev_meeting_confirmed = row[4]
         prev_meeting_owner = row[5]
+        prev_reminder_sent = row[6]
+        prev_shareable_link = row[7]
 
         # Conversions for string input needed by checking room availability
         total_seconds_meet_time = int(prev_meeting_time.total_seconds())
@@ -331,6 +333,8 @@ class DatabaseReadingServices:
         prev_meeting_duration = f"{hours_md:02}:{minutes_md:02}:{seconds_md:02}"
 
         prev_meeting_date = prev_meeting_date.strftime("%Y-%m-%d")
+        
+        prev_reminder_sent = bool(prev_reminder_sent)
 
         return (
             prev_meeting_room,
@@ -338,7 +342,9 @@ class DatabaseReadingServices:
             prev_meeting_time,
             prev_meeting_duration,
             prev_meeting_confirmed,
-            prev_meeting_owner
+            prev_meeting_owner,
+            prev_reminder_sent,
+            prev_shareable_link
         )
 
 
@@ -498,6 +504,7 @@ class DatabaseReadingServices:
             return self.cursor.fetchall()
         else:
             return "No booking found for that shareable link ID."
+    
     def get_all_bookings(self):
         self.cursor = self.conn.cursor()
         result = self.cursor.execute("SELECT * FROM Booking")
