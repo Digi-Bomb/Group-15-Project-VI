@@ -7,33 +7,74 @@
     <div class="card p-5 mx-auto gap-2 d-flex" style="width: 35rem;">
         <h4 class="fw-bold">Register for BookEZ</h4>
         <form method="POST" action="/register">
+            {{ form.hidden_tag() }}
             <label for="username" class="form-label">Username</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control border border-primary" placeholder="username"
-                    aria-label="Enter your username" aria-describedby="basic-addon1" id="username" name="username">
+                {{ form.username(
+                class_="form-control border border-primary",
+                placeholder="username",
+                id="username"
+                ) }}
+            </div>
+            <div class="row d-flex">
+                <div class="col me-auto">
+                    <label for="email" class="form-label">First Name</label>
+                    <div class="input-group mb-3 me-auto">
+                        {{ form.firstName(
+                        class="form-control border border-primary",
+                        placeholder="First Name...",
+                        id="firstName"
+                        ) }}
+                    </div>
+                </div>
+                <div class="col ms-auto">
+                    <label for="email" class="form-label">Last Name</label>
+                    <div class="input-group mb-3 ms-auto">
+                        {{ form.lastName(
+                        class="form-control border border-primary",
+                        placeholder="Last Name...",
+                        id="lastName"
+                        ) }}
+                    </div>
+                </div>
             </div>
             <label for="email" class="form-label">E-Mail</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control border border-primary" placeholder="email@email.com"
-                    aria-label="Enter your e-mail" aria-describedby="basic-addon1" id="email" name="email">
+                {{ form.email(
+                class="form-control border border-primary",
+                placeholder="email@email.com",
+                id="email"
+                ) }}
             </div>
             <label for="password" class="form-label">Password</label>
             <div class="input-group mb-3">
-                <input type="password" class="form-control border border-primary" placeholder="password"
-                    aria-label="Enter your password" aria-describedby="basic-addon1" id="password" name="password">
+                {{ form.password(
+                class="form-control border border-primary",
+                placeholder="Password",
+                id="password"
+                ) }}
+            </div>
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <div class="input-group mb-3">
+                {{ form.confirm_password(
+                class="form-control border border-primary",
+                placeholder="Confirm your password",
+                id="confirmPassword"
+                ) }}
             </div>
             <p>Already have an account? <a href="/login">Login</a></p>
             <div class="row d-flex">
                 <div class="col">
-                    <button type="submit" class="btn btn-primary me-auto mt-3 d-flex"
-                        style="width: 10rem; display: flex;" name="submit">
+                    <button type="submit" name="{{ form.submit.name }}" class="btn btn-primary mt-3 me-auto"
+                        style="width: 10rem; display: flex;">
                         Register
-                        <i class="bi bi-arrow-right ms-auto"></i>
+                        <i class="bi bi-arrow-right ms-2"></i>
                     </button>
                 </div>
+            </div>
         </form>
-        </div>
     </div>
+</div>
 </div>
 </div>
 

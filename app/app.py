@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, g, flash
+from flask import request
 
 from forms import LogoutForm
 
@@ -17,8 +18,8 @@ from logging.handlers import RotatingFileHandler
 from flask_mail import Mail, Message
 
 import os
-from datetime import timedelta
-import time
+from datetime import timedelta, date, time
+
 
 # -- CONFIG --
 mail = Mail()
@@ -106,6 +107,13 @@ def make_session_permanent():
 def add_logout_form():
     g.logout_form = LogoutForm()
 
+# context processor for navbar
+@app.context_processor
+def inject_user():
+    return dict(
+        user_id=session.get("user_id"),
+        is_logged_in=("user_id" in session)
+    )
 
 # Forms are defined in app/forms.py and imported above
 
@@ -119,12 +127,29 @@ database_read_servicer = database_reading.DatabaseReadingServices(
 databaseConn = database_connection.DatabaseConnection()
 database_reader = database_reading.DatabaseReadingServices(databaseConn)
 
-test = database_reader.get_booking_start_and_end_times_for_specific_room("2G15")
+testpass = generate_password_hash('PassW0rd')
+#test = database_reader.return_all_bookings_for_a_user(1005)
 # createBooking = database_writing.DatabaseWritingServices(
 #     databaseConn, database_reader
-# ).update_number_of_confirmations(1084)
+# ).create_new_user('test2', 'test2','','',testpass)
 
-print("Checking For create user... ", test)
+
+createBooking= database_writing.DatabaseWritingServices(
+    databaseConn, database_reader
+).delete_booking(1078)
+
+
+# testAddBID = testAddBID[1]
+# if testAddBID == 0:
+#     test2 = database_writing.DatabaseWritingServices(
+#         databaseConn, database_reader
+#     ).associate_unregistered_user_with_booking(testAddBID, 1000)
+
+# test = database_reading.DatabaseReadingServices(
+#     database_connection.DatabaseConnection()
+# ).get_username_via_RUID("1000")
+
+print("Checking For create user... ",createBooking )
 
 # -- ROUTES --
 from account.routes import account_bp
@@ -137,9 +162,19 @@ app.register_blueprint(booking_bp)
 app.register_blueprint(notifications_bp)
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    selected_date = request.args.get("date")
+    if not selected_date:
+        selected_date = date.today().isoformat()
+
+    rooms = database_reader.get_rooms()
+
+    return render_template(
+        "index.html",
+        rooms=rooms,
+        selected_date=selected_date
+    )
 
 
 if __name__ == "__main__":

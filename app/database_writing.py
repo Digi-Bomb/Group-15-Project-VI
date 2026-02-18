@@ -28,12 +28,13 @@ class DatabaseWritingServices:
 
         if not checkExists:
 
-            query = """
+            try:
+                query = """
                 INSERT INTO RegisteredUser
                 (username, email, pass, firstName, lastName)
                 VALUES (%s, %s, %s, %s, %s)
-            """
-            values = (username, email, password, first_name, last_name)
+                """
+                values = (username, email, password, first_name, last_name)
 
             # else:
             #     query = """
@@ -43,9 +44,13 @@ class DatabaseWritingServices:
             #     """
             #     values = (username, email, password, first_name, last_name)
 
-            self.cursor.execute(query, values)
-            self.conn.commit()
-            return True
+                self.cursor.execute(query, values)
+                self.conn.commit()
+                return True, "Register successful"
+
+            except Exception as e:
+                self.conn.rollback()
+                print("UPDATE ERROR: ", e)
 
         return False, "User already registered"
 
@@ -435,7 +440,7 @@ class DatabaseWritingServices:
         if new_capacity <= capcity_of_room_for_this_booking:
             try:
                 self.cursor.execute(
-                    "UPDATE Booking SET duration = %s  WHERE BID = %s",
+                    "UPDATE Booking SET meetingSize = %s  WHERE BID = %s",
                     (new_capacity, BID),
                 )
                 self.conn.commit()
@@ -479,22 +484,15 @@ class DatabaseWritingServices:
             print("UPDATE ERROR: ", e)
             return False, str(e)
 
-    def update_number_of_registeredUser(self, BID: int):
+    def update_booking_reminder_sent(self, BID: int):
         """Generic function to update a booking's number of confirmed attendees by 1 \n
         TRUE == BOOKING UPDATED \n
         FALSE == BOOKING NOT UPDATED"""
 
-        self.cursor.execute(
-            "SELECT numberOfConfirmations FROM Booking WHERE BID = %s",
-            (BID,),
-        )
-
-        curNumberOfCons = self.cursor.fetchone()[0]
-        curNumberOfCons += 1
         try:
             self.cursor.execute(
-                "UPDATE Booking SET numberOfConfirmations = %s WHERE BID = %s",
-                (curNumberOfCons, BID),
+                "UPDATE Booking SET reminderSent = %s WHERE BID = %s",
+                (1, BID),
             )
 
             self.conn.commit()

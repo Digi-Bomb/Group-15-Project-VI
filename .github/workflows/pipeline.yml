@@ -62,48 +62,48 @@ jobs:
         run: |
           pre-commit run --all-files
 
-  doxygen:
-    runs-on: ubuntu-latest
+  # doxygen:
+  #   runs-on: ubuntu-latest
     
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #         token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install Doxygen
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y doxygen graphviz
+  #     - name: Install Doxygen
+  #       run: |
+  #         sudo apt-get update
+  #         sudo apt-get install -y doxygen graphviz
 
-      - name: Generate documentation
-        run: doxygen Doxyfile
+  #     - name: Generate documentation
+  #       run: doxygen Doxyfile
 
-      - name: Upload documentation artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: doxygen-documentation
-          path: app/doxygen/html
-          retention-days: 30
+  #     - name: Upload documentation artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: doxygen-documentation
+  #         path: app/doxygen/html
+  #         retention-days: 30
 
-      - name: Commit generated documentation
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: |
-          if [[ -n "$(git status --porcelain app/doxygen)" ]]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add app/doxygen/html
-            git commit -m "docs: regenerate Doxygen documentation [skip ci]" || true
-            git push
-          else
-            echo "Documentation is up to date"
-          fi
+  #     - name: Commit generated documentation
+  #       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  #       run: |
+  #         if [[ -n "$(git status --porcelain app/doxygen)" ]]; then
+  #           git config user.name "github-actions[bot]"
+  #           git config user.email "github-actions[bot]@users.noreply.github.com"
+  #           git add app/doxygen/html
+  #           git commit -m "docs: regenerate Doxygen documentation [skip ci]" || true
+  #           git push
+  #         else
+  #           echo "Documentation is up to date"
+  #         fi
 
-      - name: Deploy to GitHub Pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./app/doxygen/html
-          cname: false
+  #     - name: Deploy to GitHub Pages
+  #       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  #       uses: peaceiris/actions-gh-pages@v3
+  #       with:
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  #         publish_dir: ./app/doxygen/html
+  #         cname: false

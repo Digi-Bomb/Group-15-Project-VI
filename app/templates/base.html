@@ -37,15 +37,43 @@
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#">Notifications</a>
                     </li>
-                    {{ nav_link('profile', '/profile') }}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if not is_logged_in %}
+                            <li><a class="dropdown-item" href="/login">Login</a></li>
+                            <li><a class="dropdown-item" href="/register">Register</a></li>
+                            {% else %}
+                            <li><a class="dropdown-item" href="/profile">View Profile</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
 
                 </ul>
             </div>
         </div>
     </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show mb-2" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
 
     <main>
+
         {% block content %}{% endblock %}
+
     </main>
 
 

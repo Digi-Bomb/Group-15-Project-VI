@@ -1,3 +1,4 @@
+from werkzeug.security import check_password_hash
 from database_connection import DatabaseConnection
 from datetime import time, datetime, timedelta, date
 
@@ -54,7 +55,7 @@ class DatabaseReadingServices:
 
         if result:
 
-            if result == password:
+            if check_password_hash(result, password):
                 return True, "Successful Login"
 
             else:
@@ -200,7 +201,7 @@ class DatabaseReadingServices:
         BID: int = None,
     ):
         """Function that validates that a room is available for use \n
-        NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPATE AN EXISTING BOOKING \n
+        NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPDATE AN EXISTING BOOKING \n
         TRUE == ROOM IS AVAILABLE \n
         FALSE == ROOM TAKEN"""
 
@@ -331,8 +332,11 @@ class DatabaseReadingServices:
 
         return False
 
-    def get_booking_start_and_end_times_for_specific_room(self, room_number: str):
-        """Function that returns a list of start times, end times, and dates for all bookings under a particular room"""
+    def get_booking_start_and_end_times_for_specific_room_include_date(
+        self, room_number: str
+    ):
+        """Function that returns a list of start times, end times, and dates for all bookings under a particular room \n
+        NOTE: IN ORDER OF DATE, START, END TIME"""
 
         # First check room id from associated table
         self.cursor.execute(
@@ -400,3 +404,153 @@ class DatabaseReadingServices:
         return_string = date_obj.strftime("%Y-%m-%d")
 
         return return_string
+
+    def get_booking_start_and_end_times_for_specific_room_exclude_date(
+        self, room_number: str, meeting_date: str
+    ):
+        """Function that returns a list of start times, and end times for all bookings under a particular room \n
+        NOTE: IN ORDER OF START, END TIME"""
+
+        # First check room id from associated table
+        self.cursor.execute(
+            "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s",
+            (room_number,),  # Returns ALL bookings for a Room
+        )
+
+        bookings = self.cursor.fetchall()
+
+        booked_times = []
+
+        for (booking,) in bookings:
+
+            self.cursor.execute(
+                "SELECT startTime, duration, ADDTIME(startTime, duration) AS endTime FROM Booking WHERE BID = %s AND meetingDate = %s",
+                (booking,),
+            )
+
+            row = self.cursor.fetchone()
+
+            # curmeetingDate_db = row[0]
+            curmeetingStartTime_db = row[1]
+            # curstartDuration_db = row[2]
+            curendTime_db = row[3]
+
+            # Conversions for string input needed by checking room availability
+            total_seconds_meet_start = int(curmeetingStartTime_db.total_seconds())
+            hours_ms, remainder_ms = divmod(total_seconds_meet_start, 3600)
+            minutes_ms, seconds_ms = divmod(remainder_ms, 60)
+
+            cur_meeting_time = f"{hours_ms:02}:{minutes_ms:02}:{seconds_ms:02}"
+
+            # Conversions for string input needed by checking room availability
+            total_seconds_meet_end = int(curendTime_db.total_seconds())
+            hours_me, remainder_me = divmod(total_seconds_meet_end, 3600)
+            minutes_me, seconds_me = divmod(remainder_me, 60)
+
+            curendTime_db = f"{hours_me:02}:{minutes_me:02}:{seconds_me:02}"
+
+            # curmeetingDate_db = curmeetingDate_db.strftime("%Y-%m-%d")
+
+            tupleOfInfo = (cur_meeting_time, curendTime_db)
+
+            booked_times.append(tupleOfInfo)
+
+        return booked_times
+
+    def return_all_bookings_for_a_user(self, RUID: int):
+        """Generic Function for returning all Bookings that a Registered User owns \n
+        NOTE RETURNS A LIST OF BOOKINGS OWNED BY A USER \n
+        RETURNS FALSE IF NO BOOKINGS OWNED"""
+
+        self.cursor.execute("SELECT BID FROM Booking WHERE meetingOwner = %s", (RUID,))
+
+        result = self.cursor.fetchall()
+
+        if result:
+            return result
+        else:
+            return False, "Unable to find any users for the booking"
+
+    def get_registered_user_email_from_RUID(self, RUID: int):
+        result = self.cursor.execute(
+            "SELECT email FROM RegisteredUser WHERE RUID = %s", (RUID,)
+        )
+        if result:
+            return self.cursor.fetchall()
+        else:
+            return "No registered user found for that RUID."
+
+    def get_booking_by_link_id(self, link_id: str):
+        result = self.cursor.execute(
+            "SELECT * FROM Booking WHERE link_id = %s", (link_id,)
+        )
+        if result:
+            return self.cursor.fetchall()
+        else:
+            return "No booking found for that shareable link ID."
+
+    def get_all_bookings(self):
+        result = self.cursor.execute("SELECT * FROM Booking")
+        if result:
+            return self.cursor.fetchall()
+        else:
+            return "No bookings found in the database."
+
+    def get_unregistered_user_email_from_URUID(self, URUID: int):
+        self.cursor.execute(
+            "SELECT email FROM UnregisteredUser WHERE URUID = %s", (URUID,)
+        )
+        result = self.cursor.fetchone()[0]
+
+        if result:
+            return result
+        else:
+            return "No unregistered user found for that RUID."
+
+    def get_rooms(self, building: str | None = None):
+        """
+        Returns a list of rooms.
+        If building is provided, filters by companyBuilding.
+        """
+        sql = """
+                SELECT
+                    roomNumber,
+                    companyBuilding,
+                    wheelchairAccessible,
+                    projectorAccess,
+                    whiteboardAccess,
+                    maximumCapacity
+                FROM Room
+            """
+        params = []
+
+        if building:
+            sql += " WHERE companyBuilding = %s"
+            params.append(building)
+
+        sql += " ORDER BY companyBuilding, wing, roomNumber"
+
+        cursor = self.conn.cursor(dictionary=True)
+        cursor.execute(sql, params)  # <-- execute the query
+        results = cursor.fetchall()  # <-- fetch all rows as a list of dicts
+        cursor.close()
+        return results
+
+    def get_room_data_given_room_number(self, room_number: str):
+
+        self.cursor.execute(
+            "SELECT roomNumber, companyBuilding, wing, wheelchairAccessible, projectorAccess, whiteboardAccess, maximumCapacity FROM Room WHERE roomNumber = %s",
+            (room_number,),
+        )
+
+        result = self.cursor.fetchone()
+
+        # result [0] is roomNumber, result[1] is company building, [2] is wing, at [3] is wheelchairAccessible, at [4] is projectorAccess, at [5] is whiteboardAccess, at [6] is maximumCapacity
+        if result:
+            self.cursor.close()
+            return result
+
+        else:
+            return False, "Unable to find the room specified"
+
+    # def get_duration_from_given_end_time(self, start_time:time, end_time: time):

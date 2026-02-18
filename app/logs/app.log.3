@@ -1,18 +1,11 @@
-2026-02-05 21:58:29,332 ERROR: Recipient or sender email not configured [in /app/notifications/routes.py:23]
-2026-02-05 22:02:27,879 INFO: Flask app startup [in /app/app.py:86]
-2026-02-05 22:03:01,589 INFO: Flask app startup [in /app/app.py:86]
-2026-02-05 22:03:01,589 INFO: Flask app startup [in /app/app.py:86]
-2026-02-07 02:26:06,361 INFO: Flask app startup [in /app/app.py:86]
-2026-02-07 02:26:26,801 INFO: Flask app startup [in /app/app.py:86]
-2026-02-07 02:26:26,801 INFO: Flask app startup [in /app/app.py:86]
-2026-02-07 02:45:58,510 INFO: Flask app startup [in /app/app.py:86]
-2026-02-07 02:45:59,920 INFO: Flask app startup [in /app/app.py:86]
-2026-02-07 02:46:01,188 INFO: Flask app startup [in /app/app.py:86]
-2026-02-07 02:46:02,382 INFO: Flask app startup [in /app/app.py:86]
-2026-02-07 02:46:04,148 INFO: Flask app startup [in /app/app.py:86]
-2026-02-07 02:46:06,726 INFO: Flask app startup [in /app/app.py:86]
-2026-02-07 02:51:17,904 INFO: Flask app startup [in /app/app.py:86]
-2026-02-07 02:51:33,219 ERROR: Exception on /submit [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+2026-02-17 17:32:21,446 ERROR: Exception on / [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Unknown column 'BID' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
@@ -26,111 +19,139 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/notifications/routes.py", line 9, in submit
-    from ..app import mail
-ImportError: attempted relative import beyond top-level package
-2026-02-10 18:02:03,710 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:04,181 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:04,181 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:05,543 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:05,946 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:05,946 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:07,246 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:07,671 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:07,671 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:08,992 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:09,200 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:09,200 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:10,803 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:11,111 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:11,111 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:13,438 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:13,652 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:13,652 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:17,558 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:17,768 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:02:17,768 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:04:56,342 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:04:56,810 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:04:56,810 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:04:57,949 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:04:58,175 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:04:58,175 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:04:59,453 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:04:59,741 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:04:59,741 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:00,872 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:01,180 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:01,180 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:02,781 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:03,043 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:03,043 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:05,332 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:05,528 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:05,528 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:09,512 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:09,735 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:09,735 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:17,062 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:17,240 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:17,240 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:30,943 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:31,374 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:05:31,374 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:07:26,997 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:08:25,217 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:08:25,217 INFO: Flask app startup [in /app/app.py:86]
-2026-02-10 18:08:46,313 ERROR: Mail send failed: [Errno 111] Connection refused [in /app/notifications/routes.py:38]
+  File "/app/app.py", line 155, in index
+  File "/app/database_reading.py", line 315, in get_rooms
+    total_seconds_meet_time = int(prev_meeting_time.total_seconds())
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 353, in execute
+    self._connection.cmd_query(
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'BID' in 'field list'
+2026-02-17 17:32:22,339 ERROR: Exception on / [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 34, in submit
-    mail.send(msg)  # send using the instance imported from app.py
-    ^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 491, in send
-    with self.connect() as connection:
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 144, in __enter__
-    self.host = self.configure_host()
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 158, in configure_host
-    host = smtplib.SMTP(self.mail.server, self.mail.port)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 255, in __init__
-    (code, msg) = self.connect(host, port)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 341, in connect
-    self.sock = self._get_socket(host, port, self.timeout)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 312, in _get_socket
-    return socket.create_connection((host, port), timeout,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/socket.py", line 863, in create_connection
-    raise exceptions[0]
-  File "/usr/local/lib/python3.11/socket.py", line 848, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 111] Connection refused
-2026-02-10 18:08:46,313 ERROR: Mail send failed: [Errno 111] Connection refused [in /app/notifications/routes.py:38]
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Unknown column 'BID' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
-  File "/app/notifications/routes.py", line 34, in submit
-    mail.send(msg)  # send using the instance imported from app.py
-    ^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 491, in send
-    with self.connect() as connection:
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 144, in __enter__
-    self.host = self.configure_host()
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 158, in configure_host
-    host = smtplib.SMTP(self.mail.server, self.mail.port)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 255, in __init__
-    (code, msg) = self.connect(host, port)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 341, in connect
-    self.sock = self._get_socket(host, port, self.timeout)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/smtplib.py", line 312, in _get_socket
-    return socket.create_connection((host, port), timeout,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/socket.py", line 863, in create_connection
-    raise exceptions[0]
-  File "/usr/local/lib/python3.11/socket.py", line 848, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 111] Connection refused
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app.py", line 155, in index
+  File "/app/database_reading.py", line 315, in get_rooms
+    total_seconds_meet_time = int(prev_meeting_time.total_seconds())
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 353, in execute
+    self._connection.cmd_query(
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'BID' in 'field list'
+2026-02-17 17:32:32,825 ERROR: Exception on / [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Unknown column 'BID' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app.py", line 155, in index
+  File "/app/database_reading.py", line 315, in get_rooms
+    total_seconds_meet_time = int(prev_meeting_time.total_seconds())
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 353, in execute
+    self._connection.cmd_query(
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'BID' in 'field list'
+2026-02-17 18:08:06,160 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:08:07,203 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:08:54,637 WARNING: Failed login attempt for username: test [in /app/account/routes.py:61]
+2026-02-17 18:08:57,455 WARNING: Failed login attempt for username: test [in /app/account/routes.py:61]
+2026-02-17 18:09:14,141 WARNING: Failed login attempt for username: test [in /app/account/routes.py:61]
+2026-02-17 18:10:36,028 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:11:20,311 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:11:21,168 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:12:34,266 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:12:47,849 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:12:49,281 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:12:50,926 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:12:51,793 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:13:11,321 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:13:16,152 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:13:26,514 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:13:27,311 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:13:38,522 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:14:24,405 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:14:27,813 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:14:42,917 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:15:17,977 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:16:20,051 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:16:42,143 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:16:51,063 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:17:06,190 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:18:18,433 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:19:03,808 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:19:39,000 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:19:48,477 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:19:49,821 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:19:51,253 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:19:53,140 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:19:55,837 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:20:00,152 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:20:01,046 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:20:04,454 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:21:22,778 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:21:31,792 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:21:47,800 WARNING: Failed login attempt for username: test [in /app/account/routes.py:61]
+2026-02-17 18:24:57,034 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:25:11,954 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:25:18,153 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:27:09,555 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:28:14,331 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:28:30,892 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:28:33,205 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:28:42,638 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:28:43,436 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:28:44,816 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:28:46,304 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:28:47,134 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:28:53,910 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:28:56,071 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:29:14,212 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:29:15,697 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:29:17,095 INFO: Flask app startup [in /app/app.py:93]
+2026-02-17 18:29:18,556 INFO: Flask app startup [in /app/app.py:93]

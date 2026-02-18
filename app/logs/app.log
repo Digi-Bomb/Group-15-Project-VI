@@ -1,11 +1,4 @@
-2026-02-11 00:33:09,663 ERROR: Exception on /login [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
-    self._cmysql.query(
-_mysql_connector.MySQLInterfaceError: Table 'BookEZDatabase.users' doesn't exist
-
-The above exception was the direct cause of the following exception:
-
+2026-02-18 00:07:33,885 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
@@ -19,24 +12,18 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/account/routes.py", line 56, in login
-    cursor.execute(
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 353, in execute
-    self._connection.cmd_query(
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
-    return method(cnx, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
-    raise get_mysql_exception(
-mysql.connector.errors.ProgrammingError: 1146 (42S02): Table 'BookEZDatabase.users' doesn't exist
-2026-02-11 00:33:38,154 ERROR: Exception on /login [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
-    self._cmysql.query(
-_mysql_connector.MySQLInterfaceError: Table 'BookEZDatabase.users' doesn't exist
-
-The above exception was the direct cause of the following exception:
-
+  File "/app/booking/routes.py", line 45, in create_booking
+    create_booking = writer.create_new_booking(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_writing.py", line 71, in create_new_booking
+    checkAvailable = self.reader.check_for_room_availability(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 208, in check_for_room_availability
+    start_hours, start_minutes, start_seconds = map(int, start_time.split(":"))
+                                                         ^^^^^^^^^^^^^^^^
+AttributeError: 'datetime.time' object has no attribute 'split'
+2026-02-18 02:43:48,100 INFO: Flask app startup [in /app/app.py:93]
+2026-02-18 02:47:13,087 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
@@ -50,70 +37,112 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/account/routes.py", line 56, in login
-    cursor.execute(
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 353, in execute
-    self._connection.cmd_query(
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
-    return method(cnx, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
-    raise get_mysql_exception(
-mysql.connector.errors.ProgrammingError: 1146 (42S02): Table 'BookEZDatabase.users' doesn't exist
-2026-02-11 19:55:30,606 INFO: Flask app startup [in /app/app.py:92]
-2026-02-11 19:55:49,512 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:20,122 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:21,677 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:21,677 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:23,655 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:24,954 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:24,954 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:26,926 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:28,199 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:28,199 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:30,293 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:31,571 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:31,571 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:34,117 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:35,400 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:35,400 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:38,704 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:40,015 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:40,015 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:45,007 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:46,248 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:46,248 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:54,350 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:55,647 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:07:55,647 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:08:10,759 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:08:12,090 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:08:12,090 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:08:39,389 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:08:40,672 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:08:40,672 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:09:33,588 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:09:34,863 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:09:34,863 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:10:36,565 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:10:37,865 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:10:37,865 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:11:39,584 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:11:40,910 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:11:40,910 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:12:42,733 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:12:44,091 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:12:44,091 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:13:45,884 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:31:06,688 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:31:08,886 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:31:11,066 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:31:13,240 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:31:15,921 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:31:19,312 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:31:24,311 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:31:32,500 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:31:47,094 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:32:14,925 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:35:43,689 INFO: Flask app startup [in /app/app.py:92]
-2026-02-14 02:36:42,057 INFO: Flask app startup [in /app/app.py:92]
+  File "/app/booking/routes.py", line 49, in create_booking
+    create_booking = writer.create_new_booking(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_writing.py", line 71, in create_new_booking
+    checkAvailable = self.reader.check_for_room_availability(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 213, in check_for_room_availability
+    duration_hours, duration_minutes, duration_seconds = map(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 3, got 2)
+2026-02-18 02:47:26,718 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/booking/routes.py", line 49, in create_booking
+    create_booking = writer.create_new_booking(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_writing.py", line 71, in create_new_booking
+    checkAvailable = self.reader.check_for_room_availability(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 213, in check_for_room_availability
+    duration_hours, duration_minutes, duration_seconds = map(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 3, got 2)
+2026-02-18 02:49:18,366 INFO: Flask app startup [in /app/app.py:93]
+2026-02-18 02:49:43,916 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/booking/routes.py", line 51, in create_booking
+    create_booking = writer.create_new_booking(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_writing.py", line 71, in create_new_booking
+    checkAvailable = self.reader.check_for_room_availability(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 208, in check_for_room_availability
+    start_hours, start_minutes, start_seconds = map(int, start_time.split(":"))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 3)
+2026-02-18 02:52:19,228 INFO: Flask app startup [in /app/app.py:93]
+2026-02-18 02:52:25,475 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/booking/routes.py", line 51, in create_booking
+    create_booking = writer.create_new_booking(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_writing.py", line 71, in create_new_booking
+    checkAvailable = self.reader.check_for_room_availability(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 221, in check_for_room_availability
+    meeting_date = datetime.strptime(meeting_date, "%Y-%m-%d").date()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: strptime() argument 1 must be str, not datetime.date
+2026-02-18 02:58:14,037 INFO: Flask app startup [in /app/app.py:93]
+2026-02-18 02:58:43,685 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/booking/routes.py", line 53, in create_booking
+    create_booking = writer.create_new_booking(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_writing.py", line 71, in create_new_booking
+    checkAvailable = self.reader.check_for_room_availability(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 221, in check_for_room_availability
+    meeting_date = datetime.strptime(meeting_date, "%Y-%m-%d").date()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: strptime() argument 1 must be str, not datetime.date
