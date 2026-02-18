@@ -14,4 +14,4 @@ def test_booking_routes_require_login(client, path):
 
 def test_rsvp_does_not_require_login(client):
     resp = client.get("/rsvp")
-    assert resp.status_code in (200, 302)  
+    assert resp.status_code in (200, 302)
