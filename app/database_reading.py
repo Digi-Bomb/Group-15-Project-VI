@@ -379,3 +379,24 @@ class DatabaseReadingServices:
             booked_times.append(tupleOfInfo)
 
         return booked_times
+
+    def change_time_object_into_string(self, time_obj):
+        """Function that takes a time object input and converts it to a string\n
+        RETURNS A STRING IN THE FORMAT OF 'HH:MM:SS'"""
+
+        # Conversions for string input needed by checking room availability
+        seconds_of_time = int(time_obj.total_seconds())
+        hours, remainder = divmod(seconds_of_time, 3600)
+        minutes, seconds = divmod(remainder, 60)
+
+        return_string = f"{hours:02}:{minutes:02}:{seconds:02}"
+
+        return return_string
+
+    def change_date_object_into_string(self, date_obj):
+        """Function that takes a date object input and converts it to a string\n
+        RETURNS A STRING IN THE FORMAT OF 'YYYY-MM-DD'"""
+
+        return_string = date_obj.strftime("%Y-%m-%d")
+
+        return return_string
