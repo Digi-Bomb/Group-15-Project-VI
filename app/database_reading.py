@@ -1,5 +1,6 @@
 from werkzeug.security import check_password_hash
 from database_connection import DatabaseConnection
+from flask import abort
 from datetime import time, datetime, timedelta, date
 
 
@@ -7,7 +8,7 @@ class DatabaseReadingServices:
     def __init__(self, database: DatabaseConnection):
         self.database = database
         self.conn = self.database.connect()
-        self.cursor = self.conn.cursor()
+        #self.cursor = self.conn.cursor()
 
     # def generic_registered_user_reads_gets_associated_fields(
     #     self, field_to_find, search_field
@@ -18,6 +19,7 @@ class DatabaseReadingServices:
 
     def get_specific_registered_user_email_given_username(self, username: str):
         """Function that returns the username associated with an email (for users who forget)"""
+        self.cursor = self.conn.cursor()
         self.cursor.execute(
             "SELECT email FROM RegisteredUser WHERE username = %s",
             (username,),
@@ -25,7 +27,7 @@ class DatabaseReadingServices:
 
         # Needed to ensure we get the first element of the tuple response (only need to know the first email associated with user)
         result = self.cursor.fetchone()[0]
-        # self.cursor.close()  # Empty Cursor
+        self.cursor.close()  # Empty Cursor
 
         if result:
             return result
@@ -39,34 +41,31 @@ class DatabaseReadingServices:
         """NOTE: NEEDS HASHING SUPPORT; INPUT REQUIRES AT LEAST 2 NON NULL INPUT VALUES. \n
         Function that returns a boolean and a string message confirming that the password matches the provided username or email
         """
-
+        self.cursor = self.conn.cursor()
         if email:
             self.cursor.execute(
-                "SELECT pass FROM RegisteredUser WHERE email = %s", (email,)
+                "SELECT RUID, pass FROM RegisteredUser WHERE email = %s", (email,)
             )
 
         elif username:
             self.cursor.execute(
-                "SELECT pass FROM RegisteredUser WHERE username = %s", (username,)
+                "SELECT RUID, pass FROM RegisteredUser WHERE username = %s", (username,)
             )
 
-        result = self.cursor.fetchone()[0]
-        # self.cursor.close()  # Empty Cursor
+        row = self.cursor.fetchone()
+        self.cursor.close()  # Empty Cursor
 
-        if result:
+        if row:
+            ruid, stored_hash = row[0], row[1]
+            if check_password_hash(stored_hash, password):
+                return True, "Successful Login", ruid
+            return False, "Incorrect Login Information", None
 
-            if check_password_hash(result, password):
-                return True, "Successful Login"
-
-            else:
-                return False, "Incorrect Login Information"
-
-        else:
-            False, "Unable to find the account registered under this email or username"
+        return False, "Unable to find the account registered under this email or username", None
 
     def get_specific_meeting_owner_for_booking(self, BID: int):
         """Function that returns the sole meeting owner (via RID) of a particular booking (specified by BID)"""
-
+        self.cursor = self.conn.cursor()
         self.cursor.execute("SELECT meetingOwner from Booking WHERE BID = %s", (BID,))
         result = self.cursor.fetchone()[0]
 
@@ -77,7 +76,7 @@ class DatabaseReadingServices:
 
     def get_username_via_RUID(self, RUID: int):
         """Function that returns the username of a registered user given a RUID (Registered User ID)"""
-
+        self.cursor = self.conn.cursor()
         self.cursor.execute(
             "SELECT username FROM RegisteredUser WHERE RUID = %s", (RUID,)
         )
@@ -89,7 +88,7 @@ class DatabaseReadingServices:
 
     def get_meetings_owned_by_registered_user(self, RUID: int):
         """Function that returns a TUPLE object of the meetings that a specific user has created"""
-
+        self.cursor = self.conn.cursor()
         self.cursor.execute(
             "SELECT BID FROM Booking WHERE meetingOwner = %s",
             (RUID,),
@@ -104,7 +103,7 @@ class DatabaseReadingServices:
 
     def get_registered_users_associated_with_booking_ID(self, BID: int):
         """Function that returns a TUPLE (list) of all registered attendees for a specific meeting"""
-
+        self.cursor = self.conn.cursor()
         self.cursor.execute(
             "SELECT RegisteredAttendee FROM RegisteredBookingAttendees WHERE BID = %s",
             (BID,),
@@ -119,7 +118,7 @@ class DatabaseReadingServices:
 
     def get_unregistered_users_associated_with_booking_ID(self, BUID: int):
         """Function that returns a TUPLE (list) of all unregistered attendees for a specific meeting"""
-
+        self.cursor = self.conn.cursor()
         self.cursor.execute(
             "SELECT unregisteredAttendee FROM UnregisteredBookingAttendees WHERE BID = %s",
             (BUID,),
@@ -137,6 +136,7 @@ class DatabaseReadingServices:
         REQUIRES USERNAME AND EMAIL \n
         TRUE == REGISTERED \n
         FALSE == UNREGISTERED"""
+        self.cursor = self.conn.cursor()
         self.cursor.execute(
             "SELECT RUID FROM RegisteredUser WHERE username = %s OR email = %s",
             (username, email),
@@ -156,7 +156,7 @@ class DatabaseReadingServices:
         REQUIRES BOOKING ID AND NICKNAME TO CHECK; RETURNS TUPLE OF BOOLEAN AND RESP MESSAGE \n
         TRUE == Nickname Available \n
         FALSE == Nickname Taken"""
-
+        self.cursor = self.conn.cursor()
         self.cursor.execute(
             "SELECT unregisteredAttendee FROM UnregisteredBookingAttendees WHERE BID = %s",
             (BID,),
@@ -171,10 +171,10 @@ class DatabaseReadingServices:
             curnickname = self.cursor.fetchone()[0]
 
             if curnickname == nickname:
-                # self.cursor.close()  # Empty Cursor
+                self.cursor.close()  # Empty Cursor
                 return False, "Nickname is taken"
 
-        # self.cursor.close()  # Empty Cursor
+        self.cursor.close()  # Empty Cursor
         return True, "Nickname available"
 
     # def check_booking_still_active(self, BID: int):
@@ -204,7 +204,7 @@ class DatabaseReadingServices:
         NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPDATE AN EXISTING BOOKING \n
         TRUE == ROOM IS AVAILABLE \n
         FALSE == ROOM TAKEN"""
-
+        self.cursor = self.conn.cursor()
         start_hours, start_minutes, start_seconds = map(int, start_time.split(":"))
         start_time = timedelta(
             hours=start_hours, minutes=start_minutes, seconds=start_seconds
@@ -273,11 +273,13 @@ class DatabaseReadingServices:
 
     def get_capacity_of_room(self, room_number: int):
         """Function that returns the INTEGER Capacity of the room (specified by room number)"""
+
+        self.cursor = self.conn.cursor()
         self.cursor.execute(
             "SELECT maximumCapacity FROM Room WHERE roomNumber = %s", (room_number,)
         )
         result = self.cursor.fetchone()[0]
-        # self.cursor.close()  # Empty Cursor
+        self.cursor.close()  # Empty Cursor
 
         if result:
             return result
@@ -286,26 +288,34 @@ class DatabaseReadingServices:
 
     def get_branch_location_of_room_associated_with_room_number(self, room_number: int):
         """Returns the building for which the room exists within (specified by room number)"""
+        self.cursor = self.conn.cursor()
         self.cursor.execute(
             "SELECT companyBuilding FROM Room WHERE roomNumber = %s", (room_number,)
         )
         result = self.cursor.fetchone()[0]
-        # self.cursor.close()  # Empty Cursor
+        self.cursor.close()  # Empty Cursor
 
         if result:
             return result
 
     def get_booking_information_of_specific_booking(self, BID: int):
         """Returns the meeting date, time, duration, and room of a particular booking"""
+        self.cursor = self.conn.cursor()
         self.cursor.execute(
-            "SELECT meetingDate, startTime, duration, meetingRoom FROM Booking WHERE BID = %s",
-            (BID,),
+            "SELECT meetingDate, startTime, duration, meetingRoom, numberOfConfirmations, meetingOwner FROM Booking WHERE BID = %s",
+            (int(BID),),
         )
         row = self.cursor.fetchone()
+
+        if not row:
+            return False
+
         prev_meeting_room = row[3]
         prev_meeting_time = row[1]
         prev_meeting_date = row[0]
         prev_meeting_duration = row[2]
+        prev_meeting_confirmed = row[4]
+        prev_meeting_owner = row[5]
 
         # Conversions for string input needed by checking room availability
         total_seconds_meet_time = int(prev_meeting_time.total_seconds())
@@ -322,21 +332,22 @@ class DatabaseReadingServices:
 
         prev_meeting_date = prev_meeting_date.strftime("%Y-%m-%d")
 
-        if row:
-            return (
-                prev_meeting_room,
-                prev_meeting_date,
-                prev_meeting_time,
-                prev_meeting_duration,
-            )
+        return (
+            prev_meeting_room,
+            prev_meeting_date,
+            prev_meeting_time,
+            prev_meeting_duration,
+            prev_meeting_confirmed,
+            prev_meeting_owner
+        )
 
-        return False
 
     def get_booking_start_and_end_times_for_specific_room_include_date(
         self, room_number: str
     ):
         """Function that returns a list of start times, end times, and dates for all bookings under a particular room \n
         NOTE: IN ORDER OF DATE, START, END TIME"""
+        self.cursor = self.conn.cursor()
 
         # First check room id from associated table
         self.cursor.execute(
@@ -387,7 +398,6 @@ class DatabaseReadingServices:
     def change_time_object_into_string(self, time_obj):
         """Function that takes a time object input and converts it to a string\n
         RETURNS A STRING IN THE FORMAT OF 'HH:MM:SS'"""
-
         # Conversions for string input needed by checking room availability
         seconds_of_time = int(time_obj.total_seconds())
         hours, remainder = divmod(seconds_of_time, 3600)
@@ -400,16 +410,14 @@ class DatabaseReadingServices:
     def change_date_object_into_string(self, date_obj):
         """Function that takes a date object input and converts it to a string\n
         RETURNS A STRING IN THE FORMAT OF 'YYYY-MM-DD'"""
-
-        return_string = date_obj.strftime("%Y-%m-%d")
-
-        return return_string
+        return date_obj.strftime("%Y-%m-%d")
 
     def get_booking_start_and_end_times_for_specific_room_exclude_date(
         self, room_number: str, meeting_date: str
     ):
         """Function that returns a list of start times, and end times for all bookings under a particular room \n
         NOTE: IN ORDER OF START, END TIME"""
+        self.cursor = self.conn.cursor()
 
         # First check room id from associated table
         self.cursor.execute(
@@ -461,6 +469,7 @@ class DatabaseReadingServices:
         """Generic Function for returning all Bookings that a Registered User owns \n
         NOTE RETURNS A LIST OF BOOKINGS OWNED BY A USER \n
         RETURNS FALSE IF NO BOOKINGS OWNED"""
+        self.cursor = self.conn.cursor()
 
         self.cursor.execute("SELECT BID FROM Booking WHERE meetingOwner = %s", (RUID,))
 
@@ -472,6 +481,7 @@ class DatabaseReadingServices:
             return False, "Unable to find any users for the booking"
 
     def get_registered_user_email_from_RUID(self, RUID: int):
+        self.cursor = self.conn.cursor()
         result = self.cursor.execute(
             "SELECT email FROM RegisteredUser WHERE RUID = %s", (RUID,)
         )
@@ -481,6 +491,7 @@ class DatabaseReadingServices:
             return "No registered user found for that RUID."
 
     def get_booking_by_link_id(self, link_id: str):
+        self.cursor = self.conn.cursor()
         result = self.cursor.execute(
             "SELECT * FROM Booking WHERE link_id = %s", (link_id,)
         )
@@ -490,6 +501,7 @@ class DatabaseReadingServices:
             return "No booking found for that shareable link ID."
 
     def get_all_bookings(self):
+        self.cursor = self.conn.cursor()
         result = self.cursor.execute("SELECT * FROM Booking")
         if result:
             return self.cursor.fetchall()
@@ -497,6 +509,7 @@ class DatabaseReadingServices:
             return "No bookings found in the database."
 
     def get_unregistered_user_email_from_URUID(self, URUID: int):
+        self.cursor = self.conn.cursor()
         self.cursor.execute(
             "SELECT email FROM UnregisteredUser WHERE URUID = %s", (URUID,)
         )
@@ -533,11 +546,11 @@ class DatabaseReadingServices:
         cursor = self.conn.cursor(dictionary=True)
         cursor.execute(sql, params)  # <-- execute the query
         results = cursor.fetchall()  # <-- fetch all rows as a list of dicts
-        # cursor.close()
+        cursor.close()
         return results
 
     def get_room_data_given_room_number(self, room_number: str):
-
+        self.cursor = self.conn.cursor()
         self.cursor.execute(
             "SELECT roomNumber, companyBuilding, wing, wheelchairAccessible, projectorAccess, whiteboardAccess, maximumCapacity FROM Room WHERE roomNumber = %s",
             (room_number,),
@@ -547,7 +560,7 @@ class DatabaseReadingServices:
 
         # result [0] is roomNumber, result[1] is company building, [2] is wing, at [3] is wheelchairAccessible, at [4] is projectorAccess, at [5] is whiteboardAccess, at [6] is maximumCapacity
         if result:
-            # self.cursor.close()
+            self.cursor.close()
             return result
 
         else:

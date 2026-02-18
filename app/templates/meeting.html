@@ -11,16 +11,17 @@
     </a>
     <a class="text-dark fs-6 text-decoration-underline ms-auto">
         <i class="bi bi-calendar-week me-1"></i>
-        {{ selected_date }} <!-- vanilla datepicker bullshit -->
+        {{ booking[1] }} <!-- vanilla datepicker bullshit -->
     </a>
 </div>
 
 <div class="container-fluid px-5 d-flex flex-wrap mt-5">
-    <p class="text-dark fw-bold fs-5 mb-2 ms-4">{{ room.roomNumber }} - Meeting Room</p>
     <p class="text-muted fs-5 me-3 ms-3 mb-0">
         <i class="bi bi-people-fill text-muted"></i>
-        4
+        {{ room[6] }}
     </p>
+    <p class="text-dark fw-bold fs-5 mb-2 ms-2">{{ booking[0] }} - Meeting Room</p>
+
 </div>
 
 
@@ -38,7 +39,7 @@
             <div class="card border-0 mt-1" style="width: 70rem;">
                 <div class="card-body">
 
-                    <h5 class="text-center mb-3">{{ selected_date }}</h5>
+                    <h5 class="text-center mb-3">{{ booking[1] }}</h5> <!-- needs fixing, i need access to the date osmehow-->
 
                     <div class="table-wrapper rounded overflow-hidden border">
                         <div class="table-responsive">
@@ -128,10 +129,10 @@
         <br>
         <br>
         <br>
-        <p class="text-muted fs-6"> Attending Members (3/4)</p>
+        <p class="text-muted fs-6"> Attending Members ( {{ booking[4] }} / {{ room[6] }})</p>
         <ul class="gap-4 list-unstyled fs-6">
             <li class="fw-bold  mb-2">
-                <i class="bi bi-award-fill mb-3"></i> Name
+                <i class="bi bi-award-fill mb-3"></i> {{ booking[5] }} <!-- owner -->
             </li>
             <li class=" mb-2">
                 <i class="bi bi-award-fill opacity-0 "></i> Name
