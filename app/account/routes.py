@@ -65,12 +65,15 @@ def login():
 
 @account_bp.route('/logout', methods=['POST'])
 def logout():
-    form = g.logout_form
-    if form.validate_on_submit():
-        user_id = session.get('user_id')
-        session.clear()
-        flash('Logged out successfully.', 'success')
-        current_app.logger.info(f"User {user_id} logged out")
+    form = LogoutForm()  # create new logout form instance to validate CSRF token
+    if not form.validate_on_submit():
+        flash("Invalid logout request.", "danger")
+        return redirect('/')
+
+    user_id = session.get('user_id')
+    session.clear()
+    flash('Logged out successfully.', 'success')
+    current_app.logger.info(f"User {user_id} logged out")
     return redirect('/')
 
 @account_bp.route("/profile")

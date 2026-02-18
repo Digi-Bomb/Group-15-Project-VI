@@ -74,3 +74,38 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 313, in execute
     raise ProgrammingError("Cursor is not connected", 2055) from err
 mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+2026-02-18 03:31:55,040 INFO: Flask app startup [in /app/app.py:93]
+2026-02-18 03:32:25,466 ERROR: Exception on /booking [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 311, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/booking/routes.py", line 51, in create_booking
+    create_booking = writer.create_new_booking(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_writing.py", line 71, in create_new_booking
+    checkAvailable = self.reader.check_for_room_availability(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/database_reading.py", line 232, in check_for_room_availability
+    self.cursor.execute(
+  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 313, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+2026-02-18 03:38:24,178 INFO: Flask app startup [in /app/app.py:93]
+2026-02-18 03:38:31,755 INFO: User Successful Login logged out [in /app/account/routes.py:76]
