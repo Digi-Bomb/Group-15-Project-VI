@@ -25,7 +25,7 @@ class DatabaseReadingServices:
 
         # Needed to ensure we get the first element of the tuple response (only need to know the first email associated with user)
         result = self.cursor.fetchone()[0]
-        self.cursor.close()  # Empty Cursor
+        # self.cursor.close()  # Empty Cursor
 
         if result:
             return result
@@ -51,6 +51,7 @@ class DatabaseReadingServices:
             )
 
         result = self.cursor.fetchone()[0]
+        # self.cursor.close()  # Empty Cursor
 
         if result:
 
@@ -172,10 +173,10 @@ class DatabaseReadingServices:
             curnickname = self.cursor.fetchone()[0]
 
             if curnickname == nickname:
-                self.cursor.close()  # Empty Cursor
+                # self.cursor.close()  # Empty Cursor
                 return False, "Nickname is taken"
 
-        self.cursor.close()  # Empty Cursor
+        # self.cursor.close()  # Empty Cursor
         return True, "Nickname available"
 
     # def check_booking_still_active(self, BID: int):
@@ -278,7 +279,7 @@ class DatabaseReadingServices:
             "SELECT maximumCapacity FROM Room WHERE roomNumber = %s", (room_number,)
         )
         result = self.cursor.fetchone()[0]
-        self.cursor.close()  # Empty Cursor
+        # self.cursor.close()  # Empty Cursor
 
         if result:
             return result
@@ -291,7 +292,7 @@ class DatabaseReadingServices:
             "SELECT companyBuilding FROM Room WHERE roomNumber = %s", (room_number,)
         )
         result = self.cursor.fetchone()[0]
-        self.cursor.close()  # Empty Cursor
+        # self.cursor.close()  # Empty Cursor
 
         if result:
             return result
@@ -534,7 +535,7 @@ class DatabaseReadingServices:
         cursor = self.conn.cursor(dictionary=True)
         cursor.execute(sql, params)  # <-- execute the query
         results = cursor.fetchall()  # <-- fetch all rows as a list of dicts
-        cursor.close()
+        # cursor.close()
         return results
 
     def get_room_data_given_room_number(self, room_number: str):
@@ -548,7 +549,7 @@ class DatabaseReadingServices:
 
         # result [0] is roomNumber, result[1] is company building, [2] is wing, at [3] is wheelchairAccessible, at [4] is projectorAccess, at [5] is whiteboardAccess, at [6] is maximumCapacity
         if result:
-            self.cursor.close()
+            # self.cursor.close()
             return result
 
         else:
