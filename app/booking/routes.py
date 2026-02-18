@@ -1,69 +1,79 @@
-from flask import Blueprint, render_template, request, redirect, flash, current_app, session, abort
+from flask import Blueprint, render_template, request, redirect, flash, session, abort
+from datetime import datetime
 
 from booking.booking import Booking
-from notifications.email_notification_service import EmailNotificationService
 from .booking_service import BookingService
 from forms import BookingForm
 from database_connection import DatabaseConnection
 from database_reading import DatabaseReadingServices
 from database_writing import DatabaseWritingServices
 
-booking_bp = Blueprint('booking', __name__)
+booking_bp = Blueprint("booking", __name__)
 
-#TODO
-#booking creation
-#ID specific booking edit
-#include response codes to all response packages
-#start writing functions for booking service to handle booking creation / editing
-
-#needs to take room number and date ?room={{ room.roomNumber }}&date={{ selected_date }}
-@booking_bp.route('/booking', methods=['GET', 'POST'])
+@booking_bp.route("/booking", methods=["GET", "POST"])
 def create_booking():
     db = DatabaseConnection()
     reader = DatabaseReadingServices(db)
     writer = DatabaseWritingServices(db, reader)
 
     user_id = session.get("user_id")
-    room_number = request.args.get('room_number', '').strip()
+    room_number = request.args.get("room_number", "").strip()
+    date_qs = request.args.get("date", "").strip()  # "YYYY-MM-DD" from query string
 
     if not user_id:
-      flash("Please log in to create a booking.", "warning")
-      return redirect("/login")
+        flash("Please log in to create a booking.", "warning")
+        return redirect("/login")
+
+    if not room_number:
+        flash("No room selected.", "error")
+        return redirect("/")
 
     form = BookingForm()
 
-    # Fetch room data early (used for choices + capacity)
+    # Fetch room data early (used for display/capacity)
     room = reader.get_room_data_given_room_number(room_number)
-
     if not room:
         flash("Invalid room selected.", "error")
         return redirect("/")
 
+    # GET: prefill date safely (string -> date object)
+    if request.method == "GET" and date_qs:
+        try:
+            form.meeting_date.data = datetime.strptime(date_qs, "%Y-%m-%d").date()
+        except ValueError:
+            flash("Invalid date format in URL. Use YYYY-MM-DD.", "error")
 
-    #POST
+    # POST
     if form.validate_on_submit():
+        # WTForms TimeField gives datetime.time, convert to "HH:MM:SS" required by DB logic
+        # Your UI doesn't track seconds, so force ":00"
+        start_time_str = form.start_time.data.strftime("%H:%M") + ":00"
+
+        # meeting_date is a datetime.date from DateField (good)
         create_booking = writer.create_new_booking(
             meeting_date=form.meeting_date.data,
-            start_time=form.start_time.data,
-            duration='02:00',  # Default duration of 2 hours, can be modified to take user input
+            start_time=start_time_str,
+            duration="02:00:00",  # keep your default for now
             meeting_owner=user_id,
             meeting_room=room_number,
-            meeting_capacity=form.meeting_capacity.data  # Use the maximumCapacity from room data
+            meeting_capacity=form.meeting_capacity.data,
         )
-        #if not true, check message for details and flash accordingly
+
         if not create_booking[0]:
             if create_booking[1] == "Room is NOT Available":
-                flash("The selected time slot is already booked. Please choose a different time.", "error")
+                flash(
+                    "The selected time slot is already booked. Please choose a different time.",
+                    "error",
+                )
             else:
                 flash("Failed to create booking.", "error")
-            return redirect("/booking")
-        flash("Booking created!", "success")
-        return redirect(f'/booking/{create_booking[1]}') # TODO: test this redirect
 
-    #refactor to use datepicker js to auto submit date and prefill date field on booking form
-    date_str = request.args.get('date', '').strip() or form.meeting_date.data
-    if date_str:
-        form.meeting_date.data = date_str  # Pre-fill the date field if provided in query parameters
+            # keep user on same room/date page instead of losing query params
+            safe_date = form.meeting_date.data.strftime("%Y-%m-%d") if form.meeting_date.data else ""
+            return redirect(f"/booking?room_number={room_number}&date={safe_date}")
+
+        flash("Booking created!", "success")
+        return redirect(f"/booking/{create_booking[1]}")
 
     return render_template("booking.html", form=form, mode="create", room=room)
 
