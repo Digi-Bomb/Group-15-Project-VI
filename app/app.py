@@ -107,13 +107,12 @@ def make_session_permanent():
 def add_logout_form():
     g.logout_form = LogoutForm()
 
+
 # context processor for navbar
 @app.context_processor
 def inject_user():
-    return dict(
-        user_id=session.get("user_id"),
-        is_logged_in=("user_id" in session)
-    )
+    return dict(user_id=session.get("user_id"), is_logged_in=("user_id" in session))
+
 
 # Forms are defined in app/forms.py and imported above
 
@@ -127,14 +126,14 @@ database_read_servicer = database_reading.DatabaseReadingServices(
 databaseConn = database_connection.DatabaseConnection()
 database_reader = database_reading.DatabaseReadingServices(databaseConn)
 
-testpass = generate_password_hash('PassW0rd')
-#test = database_reader.return_all_bookings_for_a_user(1005)
+testpass = generate_password_hash("PassW0rd")
+# test = database_reader.return_all_bookings_for_a_user(1005)
 # createBooking = database_writing.DatabaseWritingServices(
 #     databaseConn, database_reader
 # ).create_new_user('test2', 'test2','','',testpass)
 
 
-createBooking= database_writing.DatabaseWritingServices(
+createBooking = database_writing.DatabaseWritingServices(
     databaseConn, database_reader
 ).delete_booking(1078)
 
@@ -149,7 +148,8 @@ createBooking= database_writing.DatabaseWritingServices(
 #     database_connection.DatabaseConnection()
 # ).get_username_via_RUID("1000")
 
-
+test = database_reader.get_booking_by_link_id("b7049b44-f929-4e3a-9fe1-63f0fccdc386")
+print(test)
 # -- ROUTES --
 from account.routes import account_bp
 from booking.routes import booking_bp
@@ -169,11 +169,7 @@ def index():
 
     rooms = database_reader.get_rooms()
 
-    return render_template(
-        "index.html",
-        rooms=rooms,
-        selected_date=selected_date
-    )
+    return render_template("index.html", rooms=rooms, selected_date=selected_date)
 
 
 if __name__ == "__main__":

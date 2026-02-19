@@ -8,7 +8,7 @@ class DatabaseReadingServices:
     def __init__(self, database: DatabaseConnection):
         self.database = database
         self.conn = self.database.connect()
-        #self.cursor = self.conn.cursor()
+        # self.cursor = self.conn.cursor()
 
     # def generic_registered_user_reads_gets_associated_fields(
     #     self, field_to_find, search_field
@@ -61,7 +61,11 @@ class DatabaseReadingServices:
                 return True, "Successful Login", ruid
             return False, "Incorrect Login Information", None
 
-        return False, "Unable to find the account registered under this email or username", None
+        return (
+            False,
+            "Unable to find the account registered under this email or username",
+            None,
+        )
 
     def get_specific_meeting_owner_for_booking(self, BID: int):
         """Function that returns the sole meeting owner (via RID) of a particular booking (specified by BID)"""
@@ -338,9 +342,8 @@ class DatabaseReadingServices:
             prev_meeting_time,
             prev_meeting_duration,
             prev_meeting_confirmed,
-            prev_meeting_owner
+            prev_meeting_owner,
         )
-
 
     def get_booking_start_and_end_times_for_specific_room_include_date(
         self, room_number: str
@@ -492,19 +495,26 @@ class DatabaseReadingServices:
 
     def get_booking_by_link_id(self, link_id: str):
         self.cursor = self.conn.cursor()
-        result = self.cursor.execute(
-            "SELECT * FROM Booking WHERE link_id = %s", (link_id,)
+        self.cursor.execute(
+            "SELECT * FROM Booking WHERE shareableLink = %s", (link_id,)
         )
+        print(link_id)
+
+        result = self.cursor.fetchall()
+
         if result:
-            return self.cursor.fetchall()
+            return result
         else:
             return "No booking found for that shareable link ID."
 
     def get_all_bookings(self):
         self.cursor = self.conn.cursor()
-        result = self.cursor.execute("SELECT * FROM Booking")
+        self.cursor.execute("SELECT * FROM Booking")
+        result = self.cursor.fetchall()
+
         if result:
-            return self.cursor.fetchall()
+            return result
+
         else:
             return "No bookings found in the database."
 
