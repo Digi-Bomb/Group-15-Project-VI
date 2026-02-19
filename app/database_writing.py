@@ -87,10 +87,26 @@ class DatabaseWritingServices:
 
                 self.cursor.execute(query, values)
                 self.conn.commit()
+                URUID = (
+                    self.cursor.lastrowid
+                )  # POTENTIALLY unsafe for multiple users (?)
+
+                attempt_to_associate = self.associate_unregistered_user_with_booking(
+                    BID, URUID
+                )
+                if attempt_to_associate:
+                    return True, "Unregistered user associated succesfully"
+                else:
+                    return (
+                        False,
+                        "Unable to associate Unregistered user with booking",
+                    )
 
             except Exception as e:
                 self.conn.rollback()
                 print("CREATE ERROR: ", e)
+        else:
+            False, "Nickname provided is already taken for this meeting"
 
     def create_new_booking(
         self,
