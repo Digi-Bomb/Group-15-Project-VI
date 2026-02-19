@@ -160,8 +160,9 @@ class DatabaseWritingServices:
             except Exception as e:
                 self.conn.rollback()
                 print("CREATE ERROR: ", e)
+                return False, str(e)
         else:
-            False, "Nickname provided is already taken for this meeting"
+            return False, "Nickname provided is already taken for this meeting"
 
     def create_new_booking(
         self,
@@ -287,7 +288,7 @@ class DatabaseWritingServices:
         query = """
             INSERT INTO UnregisteredBookingAttendees
             (BID, unregisteredAttendee)
-            VALUES ( %s, %s)
+            VALUES (%s, %s)
         """
 
         values = (BID, URUID)
