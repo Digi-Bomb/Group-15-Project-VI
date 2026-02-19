@@ -8,7 +8,7 @@ class DatabaseReadingServices:
     def __init__(self, database: DatabaseConnection):
         self.database = database
         self.conn = self.database.connect()
-        #self.cursor = self.conn.cursor()
+        # self.cursor = self.conn.cursor()
 
     # def generic_registered_user_reads_gets_associated_fields(
     #     self, field_to_find, search_field
@@ -61,7 +61,11 @@ class DatabaseReadingServices:
                 return True, "Successful Login", ruid
             return False, "Incorrect Login Information", None
 
-        return False, "Unable to find the account registered under this email or username", None
+        return (
+            False,
+            "Unable to find the account registered under this email or username",
+            None,
+        )
 
     def get_specific_meeting_owner_for_booking(self, BID: int):
         """Function that returns the sole meeting owner (via RID) of a particular booking (specified by BID)"""
@@ -347,7 +351,6 @@ class DatabaseReadingServices:
             prev_shareable_link
         )
 
-
     def get_booking_start_and_end_times_for_specific_room_include_date(
         self, room_number: str
     ):
@@ -513,9 +516,12 @@ class DatabaseReadingServices:
     
     def get_all_bookings(self):
         self.cursor = self.conn.cursor()
-        result = self.cursor.execute("SELECT * FROM Booking")
+        self.cursor.execute("SELECT * FROM Booking")
+        result = self.cursor.fetchall()
+
         if result:
-            return self.cursor.fetchall()
+            return result
+
         else:
             return "No bookings found in the database."
 
@@ -578,3 +584,26 @@ class DatabaseReadingServices:
             return False, "Unable to find the room specified"
 
     # def get_duration_from_given_end_time(self, start_time:time, end_time: time):
+
+    def get_list_of_registered_and_unregistered_attendees(self, BID: int):
+
+        self.cursor.execute(
+            "SELECT RUID FROM RegisteredBookingAttendees WHERE BID = %s", (BID,)
+        )
+
+        registered_result = self.cursor.fetchall()
+
+        self.cursor.execute(
+            "SELECT URUID FROM UnregisteredBookingAttendees WHERE BID = %s", (BID,)
+        )
+
+        unregistered_result = self.cursor.fetchall()
+
+        if registered_result and unregistered_result:
+            return registered_result, unregistered_result
+
+        elif registered_result:
+            return registered_result
+
+        else:
+            return "Unable to find any users associated with the meeting"
