@@ -11,6 +11,8 @@ from database_connection import DatabaseConnection
 from database_reading import DatabaseReadingServices
 from database_writing import DatabaseWritingServices
 
+from audit_logging.audit_logger import AuditLogger
+
 booking_bp = Blueprint("booking", __name__)
 
 
@@ -281,6 +283,8 @@ def rsvp(link_id):
     result = DatabaseReadingServices(DatabaseConnection()).get_booking_by_link_id(link_id)
     
     if isinstance(result, str) or (isinstance(result, tuple) and result[0] == 'N'):
+        audit_logger = AuditLogger()
+        audit_logger.log_long_term(f"Failed RSVP attempt with invalid link_id: {link_id}")
         flash("No booking found for that shareable link ID.", 'error')
         return redirect('/')
     

@@ -180,7 +180,7 @@ def index():
 
 
 if __name__ == "__main__":
-    audit_logger = AuditLogger("logs/long_term.txt", "logs/short_term.txt")
+    audit_logger = AuditLogger()
     scheduler = APScheduler()
     scheduler.add_job(func=send_booking_notification_emails, trigger='interval', id='job', seconds=5)
     scheduler.start()

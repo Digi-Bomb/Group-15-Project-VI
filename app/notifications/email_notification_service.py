@@ -5,6 +5,7 @@ from database_writing import DatabaseWritingServices
 
 from flask import redirect, flash, current_app
 from flask_mail import Message
+from audit_logging.audit_logger import AuditLogger
 
 class EmailNotificationService:
     def __init__(self, database: DatabaseConnection):
@@ -41,8 +42,9 @@ class EmailNotificationService:
         meeting_owner_email = self.database_reading_services.get_registered_user_email_from_RUID(booking_owner_id)
         self.send_email_notification(meeting_owner_email, "New Booking RSVP", f"{attendee_name} has RSVP'd to your booking: '{booking_id}'.")
         
-        # from ..app import audit_logger
-        # audit_logger.log_long_term(f"Sent new RSVP confirmation notification email to {meeting_owner_email} for booking ID {booking_id} due to new RSVP confirmation from {attendee_name}.")
+        audit_logger = AuditLogger()
+        
+        audit_logger.log_long_term(f"Sent new RSVP confirmation notification email to {meeting_owner_email} for booking ID {booking_id} due to new RSVP confirmation from {attendee_name}.")
     
     def send_booking_notification_email(self, booking: Booking):
         recipent_list = []
@@ -55,8 +57,8 @@ class EmailNotificationService:
             
         self.send_email_notification(recipent_list, "Reminder: Upcoming Booking", f"Your booking is scheduled for {booking.start_time} - {booking.end_time} at {booking.location}.")
         
-        # from ..app import audit_logger
-        # audit_logger.log_long_term(f"Sent booking reminder notification email to {recipent_list} for booking ID {booking.booking_id}.")
+        audit_logger = AuditLogger()
+        audit_logger.log_long_term(f"Sent booking reminder notification email to {recipent_list} for booking ID {booking.booking_id}.")
         
         booking.reminder_sent = True
         self.database_writing_services.update_booking_reminder_sent(booking.booking_id)
