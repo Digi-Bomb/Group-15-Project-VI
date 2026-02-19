@@ -7,6 +7,11 @@
 </li>
 {% endmacro %}
 
+{% macro nav_link_logo(href) %}
+<a class="nav-link {% if current_page == name %}active{% endif %}" href="{{ href }}"><img src="{{ url_for('static', filename='images/logo.svg') }}" width="150" height="100" alt=""
+                class="d-inline-block align-text-top"></a>
+{% endmacro %}
+
 
 <head>
     <meta charset="UTF-8">
@@ -23,10 +28,7 @@
 <body>
     <nav class="navbar navbar-expand-md">
         <div class="container-fluid d-flex px-5">
-            <a class="navbar-brand" href="#">
-                <img src="{{ url_for('static', filename='images/logo.svg') }}" width="150" height="100" alt=""
-                    class="d-inline-block align-text-top">
-            </a>
+            {{ nav_link_logo('/') }}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
