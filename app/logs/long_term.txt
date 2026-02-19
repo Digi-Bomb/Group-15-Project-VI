@@ -18,3 +18,19 @@
 [2026-02-19 03:21:04.552844] started long log.
 [2026-02-19 03:21:33.222275] started long log.
 [2026-02-19 03:21:51.422154] started long log.
+[2026-02-19 18:11:05.408077] started long log.
+[2026-02-19 18:11:07.396733] started long log.
+[2026-02-19 18:12:36.261896] started long log.
+[2026-02-19 18:14:09.034174] started long log.
+[2026-02-19 18:14:16.789210] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1100 due to new RSVP confirmation from test1.
+[2026-02-19 18:14:54.441006] started long log.
+[2026-02-19 18:15:07.292594] started long log.
+[2026-02-19 18:16:03.553110] started long log.
+[2026-02-19 18:16:05.609238] started long log.
+[2026-02-19 18:17:54.299614] started long log.
+[2026-02-19 18:19:05.277263] started long log.
+[2026-02-19 18:26:28.357316] started long log.
+[2026-02-19 18:26:41.999954] started long log.
+[2026-02-19 18:27:09.551393] started long log.
+[2026-02-19 18:27:11.731822] started long log.
+[2026-02-19 18:29:27.653070] started long log.

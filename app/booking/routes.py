@@ -295,6 +295,12 @@ def rsvp(link_id):
 
     if request.method == 'POST':
         name = request.form.get('guest_name')
+        email = request.form.get('guest_email')
+        add_attendee = DatabaseWritingServices(DatabaseConnection(), DatabaseReadingServices(DatabaseConnection())).create_new_unregistered_user(name, email, booking_id)
+        if not add_attendee[0]:
+            flash(add_attendee[1], 'error')
+            return redirect(f'/rsvp/{link_id}')
+        
         EmailNotificationService(DatabaseConnection()).send_new_rsvp_notification_email(booking_info[5], name, booking_id)
         flash('RSVP received. Thank you!', 'success')
         return redirect('/')

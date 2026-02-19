@@ -53,6 +53,61 @@ class DatabaseWritingServices:
                 print("UPDATE ERROR: ", e)
 
         return False, "User already registered"
+    
+    def create_new_unregistered_user(self, BID: int, nickname: str, email: str = ""):
+        """Generic function for adding an unregistered user to the Database \n
+        NOTE: CHECKS FOR EXISTING NICKNAMES BY BID, NEEDS NICKNAME \n
+        TRUE == USER ADDED \n
+        FALSE == USER ALREADY EXISTED"""
+
+        nickname_available = self.reader.check_if_unregistered_user_nickname_is_taken_for_specific_meeting(
+            BID, nickname
+        )
+
+        if nickname_available[0]:
+
+            try:
+                if email:
+                    query = """
+                    INSERT INTO UnregisteredUser
+                    (BID, nickname, email)
+                    VALUES (%s, %s, %s)
+                    """
+                    values = (BID, nickname, email)
+                else:
+                    query = """
+                    INSERT INTO UnregisteredUser
+                    (BID, nickname)
+                    VALUES (%s, %s)
+                    """
+                    values = (
+                        BID,
+                        nickname,
+                    )
+
+                self.cursor.execute(query, values)
+                self.conn.commit()
+                URUID = (
+                    self.cursor.lastrowid
+                )  # POTENTIALLY unsafe for multiple users (?)
+               
+                attempt_to_associate = self.associate_unregistered_user_with_booking(
+                    BID, URUID
+                )
+                if attempt_to_associate:
+                    return True, "Unregistered user associated succesfully"
+                else:
+                    return (
+                        False,
+                        "Unable to associate Unregistered user with booking",
+                    )
+
+            except Exception as e:
+                self.conn.rollback()
+                print("CREATE ERROR: ", e)
+                return False, str(e)
+        else:
+            return False, "Nickname provided is already taken for this meeting"
 
     def create_new_booking(
         self,
