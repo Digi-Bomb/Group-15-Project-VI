@@ -38,3 +38,15 @@
 [2026-02-19 18:33:02.646790] started long log.
 [2026-02-19 18:33:36.453936] started long log.
 [2026-02-19 18:33:59.248235] started long log.
+[2026-02-19 18:43:41.202963] started long log.
+[2026-02-19 18:43:43.427753] started long log.
+[2026-02-19 18:44:02.117119] started long log.
+[2026-02-19 18:44:10.208642] started long log.
+[2026-02-19 18:44:24.756765] started long log.
+[2026-02-19 18:44:39.733509] started long log.
+[2026-02-19 18:44:51.774856] started long log.
+[2026-02-19 18:51:14.201556] started long log.
+[2026-02-19 18:51:16.165999] started long log.
+[2026-02-19 18:51:54.299481] started long log.
+[2026-02-19 18:52:29.932501] started long log.
+[2026-02-19 18:52:36.276908] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1102 due to new RSVP confirmation from wsa.

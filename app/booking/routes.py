@@ -296,7 +296,7 @@ def rsvp(link_id):
     if request.method == 'POST':
         name = request.form.get('guest_name')
         email = request.form.get('guest_email')
-        add_attendee = DatabaseWritingServices(DatabaseConnection(), DatabaseReadingServices(DatabaseConnection())).create_new_unregistered_user(name, email, booking_id)
+        add_attendee = DatabaseWritingServices(DatabaseConnection(), DatabaseReadingServices(DatabaseConnection())).create_new_unregistered_user(booking_id, name, email)
         if not add_attendee[0]:
             flash(add_attendee[1], 'error')
             return redirect(f'/rsvp/{link_id}')
