@@ -1,147 +1,47 @@
-2026-02-18 05:09:56,368 ERROR: Exception on /booking/1092 [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/booking/routes.py", line 103, in view_booking
-    booking = reader.get_booking_information_of_specific_booking(booking_id)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/database_reading.py", line 303, in get_booking_information_of_specific_booking
-    self.cursor.execute(
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 335, in execute
-    raise ProgrammingError(
-mysql.connector.errors.ProgrammingError: Not all parameters were used in the SQL statement
-2026-02-18 05:12:19,150 INFO: Flask app startup [in /app/app.py:93]
-2026-02-18 05:15:37,335 INFO: Flask app startup [in /app/app.py:93]
-2026-02-18 05:21:29,929 INFO: Flask app startup [in /app/app.py:93]
-2026-02-18 05:21:31,694 ERROR: Exception on /booking/1094 [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/booking/routes.py", line 105, in view_booking
-    getattr(booking[1], "meetingRoom", None)
-            ~~~~~~~^^^
-KeyError: 1
-2026-02-18 05:21:55,330 ERROR: Exception on /booking/1095 [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-<<<<<<< HEAD
-  File "/app/notifications/routes.py", line 9, in submit
-    from ..app import mail
-ImportError: attempted relative import beyond top-level package
-2026-02-10 18:28:35,173 INFO: Flask app startup [in /app/app.py:89]
-2026-02-10 18:31:12,836 INFO: Flask app startup [in /app/app.py:89]
-2026-02-10 18:31:13,675 INFO: Flask app startup [in /app/app.py:89]
-2026-02-10 18:31:46,061 INFO: Flask app startup [in /app/app.py:89]
-2026-02-10 22:12:21,864 INFO: Flask app startup [in /app/app.py:89]
-2026-02-10 22:12:23,475 INFO: Flask app startup [in /app/app.py:89]
-2026-02-10 22:13:27,104 INFO: Flask app startup [in /app/app.py:89]
-2026-02-10 22:13:28,471 INFO: Flask app startup [in /app/app.py:89]
-2026-02-10 22:14:08,869 INFO: Flask app startup [in /app/app.py:89]
-2026-02-10 22:14:08,869 INFO: Flask app startup [in /app/app.py:89]
-2026-02-10 22:21:48,655 INFO: Flask app startup [in /app/app.py:90]
-2026-02-10 22:22:03,846 INFO: Flask app startup [in /app/app.py:90]
-2026-02-10 22:22:04,480 INFO: Flask app startup [in /app/app.py:90]
-=======
-  File "/app/account/routes.py", line 56, in login
-    cursor.execute(
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 353, in execute
-    self._connection.cmd_query(
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
-    return method(cnx, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
-    raise get_mysql_exception(
-mysql.connector.errors.ProgrammingError: 1146 (42S02): Table 'BookEZDatabase.users' doesn't exist
-2026-02-11 00:33:38,154 ERROR: Exception on /login [POST] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/booking/routes.py", line 105, in view_booking
-    getattr(booking[1], "meetingRoom", None)
-            ~~~~~~~^^^
-KeyError: 1
-2026-02-18 05:23:05,700 INFO: Flask app startup [in /app/app.py:93]
-2026-02-18 05:23:08,286 ERROR: Exception on /booking/1095 [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/booking/routes.py", line 104, in view_booking
-    room = reader.get_room_data_given_room_number(booking["meetingRoom"])
-                                                  ~~~~~~~^^^^^^^^^^^^^^^
-KeyError: 'meetingRoom'
-2026-02-18 05:23:47,073 INFO: Flask app startup [in /app/app.py:93]
-2026-02-18 05:28:58,537 INFO: Flask app startup [in /app/app.py:93]
-2026-02-18 05:49:31,493 INFO: Flask app startup [in /app/app.py:93]
-2026-02-18 17:12:50,169 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:12:53,298 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:12:55,955 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:14:21,198 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:14:24,025 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:14:26,587 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:14:46,075 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:14:48,587 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:14:51,192 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:14:53,815 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:18:11,930 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:18:14,364 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:19:28,346 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:19:52,506 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:21:37,663 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:23:32,216 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:23:34,301 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:28:53,708 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:28:55,799 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:34:18,942 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:35:35,987 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:40:59,422 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:50:32,657 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:50:49,115 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:51:58,779 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:52:37,241 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 17:52:42,272 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 18:01:33,131 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 18:01:35,623 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 18:02:46,014 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 18:02:48,335 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 18:04:22,849 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 18:47:50,830 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 18:50:04,935 INFO: Flask app startup [in /app/app.py:95]
-2026-02-18 18:51:16,464 WARNING: Failed login attempt for username: brookec [in /app/account/routes.py:61]
+2026-02-18 23:29:17,659 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:29:21,734 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:29:27,398 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:29:36,212 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:29:51,456 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:30:20,124 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:31:13,993 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:31:36,528 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:31:39,130 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:31:41,938 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:31:44,691 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:34:41,036 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:34:43,401 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:36:36,270 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:37:12,336 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:38:44,472 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:39:04,152 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:39:17,735 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:39:23,046 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:40:19,679 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:40:40,497 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:41:14,540 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:41:42,870 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:41:45,553 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:43:45,274 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:44:25,117 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:44:27,121 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:45:05,819 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:45:50,150 INFO: Flask app startup [in /app/app.py:95]
+2026-02-18 23:49:42,223 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:07:06,025 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:07:17,169 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:07:25,946 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:10:53,725 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:11:09,943 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:12:13,179 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:12:22,651 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:12:22,651 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:13:06,848 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:14:06,457 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:14:17,538 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:14:40,679 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:16:38,502 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 00:17:02,913 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:16:22,198 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:16:27,474 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:17:07,808 INFO: Flask app startup [in /app/app.py:95]

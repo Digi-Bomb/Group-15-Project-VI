@@ -274,17 +274,26 @@ def edit_booking(booking_id):
             flash("Failed to delete booking.", "error")
             return redirect(f"/booking/{booking_id}")
 
-@booking_bp.route('/rsvp/<link_id>', methods=['GET', 'POST'])
-def rsvp(link_id=None):
-    link = link_id or request.args.get('link')
-    booking = Booking()
-    booking = DatabaseReadingServices(DatabaseConnection()).get_booking_by_link_id(link)
+@booking_bp.route('/rsvp/<string:link_id>', methods=['GET', 'POST'])
+def rsvp(link_id):
+    print(f"Received RSVP request for link_id: {link_id}")
+    
+    result = DatabaseReadingServices(DatabaseConnection()).get_booking_by_link_id(link_id)
+    
+    if isinstance(result, str) or (isinstance(result, tuple) and result[0] == 'N'):
+        flash("No booking found for that shareable link ID.", 'error')
+        return redirect('/')
+    
+    booking_id = result
+    
+    booking_info = DatabaseReadingServices(DatabaseConnection()).get_booking_information_of_specific_booking(booking_id)
+    room = DatabaseReadingServices(DatabaseConnection()).get_room_data_given_room_number(booking_info[0])
 
     if request.method == 'POST':
-        name = request.form.get('name')
-        EmailNotificationService(DatabaseConnection()).send_new_rsvp_notification_email(booking.booking_owner_id, name, booking.booking_id)
+        name = request.form.get('guest_name')
+        EmailNotificationService(DatabaseConnection()).send_new_rsvp_notification_email(booking_info[5], name, booking_id)
         flash('RSVP received. Thank you!', 'success')
         return redirect('/')
 
-    return render_template('rsvp.html', booking=booking)
+    return render_template('rsvp.html', room=room, booking=booking_info)
 

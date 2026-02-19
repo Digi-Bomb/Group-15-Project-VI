@@ -497,13 +497,16 @@ class DatabaseReadingServices:
             return "No registered user found for that RUID."
     def get_booking_by_link_id(self, link_id: str):
         self.cursor = self.conn.cursor()
-        result = self.cursor.execute(
-            "SELECT * FROM Booking WHERE link_id = %s", (link_id,)
+        self.cursor.execute(
+            "SELECT * FROM Booking WHERE shareableLink = %s", (link_id,)
         )
+        result = self.cursor.fetchone()[0]
+
         if result:
-            return self.cursor.fetchall()
+            return result
         else:
             return "No booking found for that shareable link ID."
+        
     
     def get_all_bookings(self):
         self.cursor = self.conn.cursor()
