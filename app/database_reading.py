@@ -491,10 +491,13 @@ class DatabaseReadingServices:
         result = self.cursor.execute(
             "SELECT email FROM RegisteredUser WHERE RUID = %s", (RUID,)
         )
+        result = self.cursor.fetchone()[0]
+
         if result:
-            return self.cursor.fetchall()
+            return result
         else:
             return "No registered user found for that RUID."
+        
     def get_booking_by_link_id(self, link_id: str):
         self.cursor = self.conn.cursor()
         self.cursor.execute(
@@ -526,7 +529,7 @@ class DatabaseReadingServices:
         if result:
             return result
         else:
-            return "No unregistered user found for that RUID."
+            return "No unregistered user found for that URUID."
 
     def get_rooms(self, building: str | None = None):
         """

@@ -9,41 +9,41 @@ from database_reading import DatabaseReadingServices
 
 notifications_bp = Blueprint('notifications', __name__)
 
-@notifications_bp.route('/submit', methods=['POST'])
-def submit():
-    #to avoid circular import, import mail here, when we need it
-    from app import mail
+# @notifications_bp.route('/submit', methods=['POST'])
+# def submit():
+#     #to avoid circular import, import mail here, when we need it
+#     from app import mail
 
-    name = request.form.get('name', '').strip() #strip whitespace, default to empty string if not provided
-    subject = request.form.get('subject', 'No subject').strip()
-    message = request.form.get('message', '').strip()
+#     name = request.form.get('name', '').strip() #strip whitespace, default to empty string if not provided
+#     subject = request.form.get('subject', 'No subject').strip()
+#     message = request.form.get('message', '').strip()
 
-    if not message:
-        flash("Message cannot be empty.", "warning")
-        return redirect("/")
+#     if not message:
+#         flash("Message cannot be empty.", "warning")
+#         return redirect("/")
 
-    recipient_email = current_app.config.get('REC_EMAIL')
-    sender_email = current_app.config.get('MAIL_DEFAULT_SENDER')
+#     recipient_email = current_app.config.get('REC_EMAIL')
+#     sender_email = current_app.config.get('MAIL_DEFAULT_SENDER')
 
-    if not recipient_email or not sender_email:
-        current_app.logger.error("Recipient or sender email not configured")
-        flash("Email configuration missing.", "error")
-        return redirect("/")
+#     if not recipient_email or not sender_email:
+#         current_app.logger.error("Recipient or sender email not configured")
+#         flash("Email configuration missing.", "error")
+#         return redirect("/")
 
-    try:
-        msg = Message(
-            subject=subject,
-            sender=sender_email,
-            recipients=[recipient_email]
-        )
-        msg.body = f"Name: {name}\nSubject: {subject}\nMessage: {message}"
-        mail.send(msg)  # send using the instance imported from app.py
-        flash("Email sent successfully!", "success")
-        return redirect("/")
-    except (ConnectionError, TimeoutError, OSError) as e:
-        current_app.logger.error(f"Mail send failed: {e}", exc_info=True)
-        flash("Failed to send email.", "error")
-        return str(e), 500
+#     try:
+#         msg = Message(
+#             subject=subject,
+#             sender=sender_email,
+#             recipients=[recipient_email]
+#         )
+#         msg.body = f"Name: {name}\nSubject: {subject}\nMessage: {message}"
+#         mail.send(msg)  # send using the instance imported from app.py
+#         flash("Email sent successfully!", "success")
+#         return redirect("/")
+#     except (ConnectionError, TimeoutError, OSError) as e:
+#         current_app.logger.error(f"Mail send failed: {e}", exc_info=True)
+#         flash("Failed to send email.", "error")
+#         return str(e), 500
 
 def send_booking_notification_emails():
     all_bookings = DatabaseReadingServices(DatabaseConnection()).get_all_bookings()
@@ -53,5 +53,5 @@ def send_booking_notification_emails():
         booking_info = DatabaseReadingServices(DatabaseConnection()).get_booking_information_of_specific_booking(booking_id)
         if not booking_info[6]:
             if booking_info[1] - datetime.now() <= datetime.timedelta(minutes=30):
-                EmailNotificationService(DatabaseConnection()).send_new_rsvp_notification_email(booking_info[5], "Reminder: Upcoming Booking", f"Your booking in {booking_info[3]} is scheduled at {booking_info[1]} for {booking_info[2]}.")
+                EmailNotificationService(DatabaseConnection()).send_booking_notification_email(booking_info[5], "Reminder: Upcoming Booking", f"Your booking in {booking_info[3]} is scheduled at {booking_info[1]} for {booking_info[2]}.")
                 
