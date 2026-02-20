@@ -5,7 +5,7 @@ class AuditLogger:
         self.long_term_file_path = "logs/long_term.txt"
         self.short_term_file_path = "logs/short_term.txt"
         
-    def log_long_term(self, message: str):
+    def log_audit_term(self, message: str):
         with open(self.long_term_file_path, 'a') as f:
             f.write(f"[{datetime.datetime.now()}] {message}\n")
     

@@ -50,3 +50,6 @@
 [2026-02-19 18:51:54.299481] started long log.
 [2026-02-19 18:52:29.932501] started long log.
 [2026-02-19 18:52:36.276908] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1102 due to new RSVP confirmation from wsa.
+[2026-02-19 18:55:58.788133] started long log.
+[2026-02-19 18:56:01.802497] started long log.
+[2026-02-19 18:56:41.291914] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1102 due to new RSVP confirmation from wedasx.
