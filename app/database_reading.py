@@ -306,7 +306,7 @@ class DatabaseReadingServices:
         """Returns the meeting date, time, duration, and room of a particular booking"""
         self.cursor = self.conn.cursor()
         self.cursor.execute(
-            "SELECT meetingDate, startTime, duration, meetingRoom, numberOfConfirmations, meetingOwner FROM Booking WHERE BID = %s",
+            "SELECT meetingDate, startTime, duration, meetingRoom, numberOfConfirmations, meetingOwner, reminderSent, shareableLink FROM Booking WHERE BID = %s",
             (int(BID),),
         )
         row = self.cursor.fetchone()
@@ -320,6 +320,8 @@ class DatabaseReadingServices:
         prev_meeting_duration = row[2]
         prev_meeting_confirmed = row[4]
         prev_meeting_owner = row[5]
+        prev_reminder_sent = row[6]
+        prev_shareable_link = row[7]
 
         # Conversions for string input needed by checking room availability
         total_seconds_meet_time = int(prev_meeting_time.total_seconds())
@@ -335,6 +337,8 @@ class DatabaseReadingServices:
         prev_meeting_duration = f"{hours_md:02}:{minutes_md:02}:{seconds_md:02}"
 
         prev_meeting_date = prev_meeting_date.strftime("%Y-%m-%d")
+        
+        prev_reminder_sent = bool(prev_reminder_sent)
 
         return (
             prev_meeting_room,
@@ -343,6 +347,8 @@ class DatabaseReadingServices:
             prev_meeting_duration,
             prev_meeting_confirmed,
             prev_meeting_owner,
+            prev_reminder_sent,
+            prev_shareable_link
         )
 
     def get_booking_start_and_end_times_for_specific_room_include_date(
@@ -488,25 +494,26 @@ class DatabaseReadingServices:
         result = self.cursor.execute(
             "SELECT email FROM RegisteredUser WHERE RUID = %s", (RUID,)
         )
+        result = self.cursor.fetchone()[0]
+
         if result:
-            return self.cursor.fetchall()
+            return result
         else:
             return "No registered user found for that RUID."
-
+        
     def get_booking_by_link_id(self, link_id: str):
         self.cursor = self.conn.cursor()
         self.cursor.execute(
             "SELECT * FROM Booking WHERE shareableLink = %s", (link_id,)
         )
-        print(link_id)
-
-        result = self.cursor.fetchall()
+        result = self.cursor.fetchone()[0]
 
         if result:
             return result
         else:
             return "No booking found for that shareable link ID."
-
+        
+    
     def get_all_bookings(self):
         self.cursor = self.conn.cursor()
         self.cursor.execute("SELECT * FROM Booking")
@@ -528,7 +535,7 @@ class DatabaseReadingServices:
         if result:
             return result
         else:
-            return "No unregistered user found for that RUID."
+            return "No unregistered user found for that URUID."
 
     def get_rooms(self, building: str | None = None):
         """

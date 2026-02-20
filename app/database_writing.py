@@ -53,7 +53,7 @@ class DatabaseWritingServices:
                 print("UPDATE ERROR: ", e)
 
         return False, "User already registered"
-
+    
     def create_new_unregistered_user(self, BID: int, nickname: str, email: str = ""):
         """Generic function for adding an unregistered user to the Database \n
         NOTE: CHECKS FOR EXISTING NICKNAMES BY BID, NEEDS NICKNAME \n
@@ -70,18 +70,17 @@ class DatabaseWritingServices:
                 if email:
                     query = """
                     INSERT INTO UnregisteredUser
-                    (BID, nickname, email)
-                    VALUES (%s, %s, %s)
+                    (nickname, email)
+                    VALUES (%s, %s)
                     """
-                    values = (BID, nickname, email)
+                    values = (nickname, email)
                 else:
                     query = """
                     INSERT INTO UnregisteredUser
-                    (BID, nickname)
-                    VALUES (%s, %s)
+                    (nickname)
+                    VALUES (%s)
                     """
                     values = (
-                        BID,
                         nickname,
                     )
 
@@ -90,7 +89,7 @@ class DatabaseWritingServices:
                 URUID = (
                     self.cursor.lastrowid
                 )  # POTENTIALLY unsafe for multiple users (?)
-
+               
                 attempt_to_associate = self.associate_unregistered_user_with_booking(
                     BID, URUID
                 )
@@ -105,8 +104,9 @@ class DatabaseWritingServices:
             except Exception as e:
                 self.conn.rollback()
                 print("CREATE ERROR: ", e)
+                return False, str(e)
         else:
-            False, "Nickname provided is already taken for this meeting"
+            return False, "Nickname provided is already taken for this meeting"
 
     def create_new_booking(
         self,
@@ -116,6 +116,7 @@ class DatabaseWritingServices:
         meeting_owner: str,
         meeting_room: str,
         meeting_capacity: int,
+        shareable_link: str
     ):
         """Generic function for adding a booking to the Database \n
         NOTE: CHECKS FOR EXISTING BOOKED ROOMS AND ROOM CAPACITY \n
@@ -138,8 +139,8 @@ class DatabaseWritingServices:
             if meeting_capacity <= roomCapacity:
                 query = """
                     INSERT INTO Booking
-                    (meetingDate, startTime, duration, meetingOwner, meetingRoom, meetingSize)
-                    VALUES ( %s, %s, %s, %s, %s, %s)
+                    (meetingDate, startTime, duration, meetingOwner, meetingRoom, meetingSize, shareableLink)
+                    VALUES ( %s, %s, %s, %s, %s, %s, %s)
                 """
                 values = (
                     meeting_date,
@@ -148,6 +149,7 @@ class DatabaseWritingServices:
                     meeting_owner,
                     meeting_room,
                     meeting_capacity,
+                    shareable_link,
                 )
 
                 self.cursor.execute(query, values)
@@ -230,7 +232,7 @@ class DatabaseWritingServices:
         query = """
             INSERT INTO UnregisteredBookingAttendees
             (BID, unregisteredAttendee)
-            VALUES ( %s, %s)
+            VALUES (%s, %s)
         """
 
         values = (BID, URUID)

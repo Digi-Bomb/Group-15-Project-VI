@@ -27,10 +27,10 @@
 
 <div class="px-5 d-flex" style="width: 75rem;">
     <p class="text-muted fs-6 mb-2 ms-4">"Your Meeting"</p>
-    <button type="button" class="btn btn-outline-primary text-decoration-none ms-auto align-top" name="share">
-        <i class="bi bi-link-45deg">
-            Share
-        </i>
+    <button class="btn btn-outline-primary text-decoration-none ms-auto align-top" role="button">
+    <i class="bi bi-link-45deg"></i>
+    Share
+    </button>
 </div>
 
 <div class="row">
@@ -142,12 +142,33 @@
             </li>
         </ul>
         <!-- jinja if not logged in-->
-        <button type="button" href="/rsvp" class="btn btn-outline-primary w-75 text-start d-flex fs-6">
-            RSVP <!-- link needs to have params, wait for merge -->
-            <i class="bi bi-plus-circle ms-auto"></i>
-        </button>
+
+        <button type="button" class="btn btn-outline-primary w-75 text-start d-flex fs-6" name="rsvp" title="Copy link to clipboard">
+    RSVP
+    <i class="bi bi-plus-circle ms-auto"></i>
+</button>
     </div>
 </div>
 
+<script>
+document.querySelector('button[name="rsvp"]').addEventListener('click', function(e) {
+    const url = "/rsvp/{{ booking[7] }}";
+    const fullUrl = window.location.origin + url;
+    
+    navigator.clipboard.writeText(fullUrl).then(() => {
+        const btn = e.target.closest('button');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+        btn.classList.add('btn-success');
+        btn.classList.remove('btn-outline-primary');
+        
+        setTimeout(() => {
+            btn.innerHTML = originalHTML;
+            btn.classList.remove('btn-success');
+            btn.classList.add('btn-outline-primary');
+        }, 2000);
+    });
+});
+</script>
 
 {% endblock %}

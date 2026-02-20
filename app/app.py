@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, g, flash
 from flask import request
 
-from forms import LogoutForm
-
+from forms import RegisterForm, LoginForm, NoteForm, LogoutForm
 from werkzeug.security import generate_password_hash, check_password_hash
 
 import database_connection
@@ -16,6 +15,9 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 from flask_mail import Mail, Message
+
+from flask_apscheduler import APScheduler
+
 
 import os
 from datetime import timedelta, date, time
@@ -153,7 +155,8 @@ print(test)
 # -- ROUTES --
 from account.routes import account_bp
 from booking.routes import booking_bp
-from notifications.routes import notifications_bp
+from notifications.routes import notifications_bp, send_booking_notification_emails
+from audit_logging.audit_logger import AuditLogger
 
 # register blueprints
 app.register_blueprint(account_bp)
@@ -173,4 +176,10 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    audit_logger = AuditLogger()
+    scheduler = APScheduler()
+    scheduler.add_job(func=send_booking_notification_emails, trigger='interval', id='job', seconds=5)
+    scheduler.start()
+    audit_logger.log_audit_term("started long log.")
+    audit_logger.log_short_term("started short log.")
+    app.run(debug=True, host="0.0.0.0", port=5000)
