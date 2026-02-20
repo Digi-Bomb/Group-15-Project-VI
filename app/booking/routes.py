@@ -103,7 +103,7 @@ def create_booking():
             )
             return redirect(f"/booking?room_number={room_number}&date={safe_date}")
 
-        
+
         audit_logger.log_audit_event("Booking created", f"User ID {user_id} created a booking for room {room_number} on {meeting_date} at {start_time_str} for 2 hr with booking ID {create_booking[1]}.")
         flash("Booking created!", "success")
         return redirect(f"/booking/{create_booking[1]}")
@@ -289,16 +289,16 @@ def edit_booking(booking_id):
             return redirect(f"/booking/{booking_id}")
 
 @booking_bp.route('/rsvp/<string:link_id>', methods=['GET', 'POST'])
-def rsvp(link_id):    
+def rsvp(link_id):
     result = DatabaseReadingServices(DatabaseConnection()).get_booking_by_link_id(link_id)
-    
+
     if isinstance(result, str) or (isinstance(result, tuple) and result[0] == 'N'):
         audit_logger.log_audit_term(f"Failed RSVP attempt with invalid link_id: {link_id}")
         flash("No booking found for that shareable link ID.", 'error')
         return redirect('/')
-    
+
     booking_id = result
-    
+
     booking_info = DatabaseReadingServices(DatabaseConnection()).get_booking_information_of_specific_booking(booking_id)
     room = DatabaseReadingServices(DatabaseConnection()).get_room_data_given_room_number(booking_info[0])
 
@@ -310,11 +310,10 @@ def rsvp(link_id):
             audit_logger.log_audit_term(f"Failed RSVP attempt for booking ID {booking_id} with name {name} and email {email} due to database error: {add_attendee[1]}")
             flash(add_attendee[1], 'error')
             return redirect(f'/rsvp/{link_id}')
-        
+
         EmailNotificationService(DatabaseConnection()).send_new_rsvp_notification_email(booking_info[5], name, booking_id)
         audit_logger.log_audit_term(f"Received new RSVP for booking ID {booking_id} from {name} ({email}).")
         flash('RSVP received. Thank you!', 'success')
         return redirect('/')
 
     return render_template('rsvp.html', room=room, booking=booking_info)
-

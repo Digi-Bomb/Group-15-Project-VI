@@ -14,7 +14,7 @@ class EmailNotificationService:
         self.database = database
         self.database_reading_services = DatabaseReadingServices(database)
         self.database_writing_services = DatabaseWritingServices(database, self.database_reading_services)
-        
+
     def send_email_notification(self, recipient_email: str, subject: str, body: str) -> bool:
         #to avoid circular import, import mail here, when we need it
         from app import mail
@@ -41,25 +41,25 @@ class EmailNotificationService:
             audit_logger.log_audit_term(f"Failed to send email notification to {recipient_email} due to error: {e}")
             flash("Failed to send email.", "error")
             return False
-    
+
     def send_new_rsvp_notification_email(self, booking_owner_id: int, attendee_name: str, booking_id: int):
         meeting_owner_email = self.database_reading_services.get_registered_user_email_from_RUID(booking_owner_id)
         self.send_email_notification(meeting_owner_email, "New Booking RSVP", f"{attendee_name} has RSVP'd to your booking: '{booking_id}'.")
-        
+
         audit_logger.log_audit_term(f"Sent new RSVP confirmation notification email to {meeting_owner_email} for booking ID {booking_id} due to new RSVP confirmation from {attendee_name}.")
-    
+
     def send_booking_notification_email(self, booking: Booking):
         recipent_list = []
-                
+
         for unregistered_user in self.database_reading_services.get_unregistered_users_associated_with_booking_ID(booking.booking_id):
             recipent_list.append(self.database_reading_services.get_unregistered_user_email_from_URUID(unregistered_user.URUID))
-        
+
         for registered_user in self.database_reading_services.get_registered_users_associated_with_booking_ID(booking.booking_id):
             recipent_list.append(self.database_reading_services.get_registered_user_email_from_RUID(registered_user.RUID))
-            
+
         self.send_email_notification(recipent_list, "Reminder: Upcoming Booking", f"Your booking is scheduled for {booking.start_time} - {booking.end_time} at {booking.location}.")
-        
+
         audit_logger.log_audit_term(f"Sent booking reminder notification email to {recipent_list} for booking ID {booking.booking_id}.")
-        
+
         booking.reminder_sent = True
         self.database_writing_services.update_booking_reminder_sent(booking.booking_id)

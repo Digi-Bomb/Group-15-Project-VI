@@ -154,14 +154,14 @@
 document.querySelector('button[name="rsvp"]').addEventListener('click', function(e) {
     const url = "/rsvp/{{ booking[7] }}";
     const fullUrl = window.location.origin + url;
-    
+
     navigator.clipboard.writeText(fullUrl).then(() => {
         const btn = e.target.closest('button');
         const originalHTML = btn.innerHTML;
         btn.innerHTML = '<i class="bi bi-check"></i> Copied!';
         btn.classList.add('btn-success');
         btn.classList.remove('btn-outline-primary');
-        
+
         setTimeout(() => {
             btn.innerHTML = originalHTML;
             btn.classList.remove('btn-success');
