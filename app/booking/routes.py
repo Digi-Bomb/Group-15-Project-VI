@@ -347,7 +347,7 @@ def rsvp(link_id):
         EmailNotificationService(DatabaseConnection()).send_new_rsvp_notification_email(booking_info[5], name, booking_id)
         # +1 to number of confirmations after successful create
         writer.update_number_of_confirmations(booking_id)
-        audit_logger.log_audit_term(f"Received new RSVP for booking ID {booking_id} from {name} ({email}).")
+        audit_logger.log_audit_event(f"Received new RSVP for booking ID {booking_id} from {name} ({email}).")
         flash('RSVP received. Thank you!', 'success')
         return redirect('/')
 

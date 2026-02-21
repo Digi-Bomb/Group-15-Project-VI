@@ -66,3 +66,21 @@
 [2026-02-21 14:19:24.239423] Sent email notification to brookecronin123@gmail.com with subject 'New Booking RSVP'.: 
 [2026-02-21 14:19:24.242940] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1107 due to new RSVP confirmation from test2.: 
 [2026-02-21 14:19:24.247127] Received new RSVP for booking ID 1107 from test2 ().: 
+[2026-02-21 14:32:49.591258] started long log.: 
+[2026-02-21 14:32:51.880290] started long log.: 
+[2026-02-21 14:33:22.107433] Logout successful: User with ID 1010 logged out successfully.
+[2026-02-21 14:33:33.505975] Login successful: Successful login for user: brookec
+[2026-02-21 14:34:10.471684] Booking created: User ID 1010 created a booking for room 3G15 on 2026-02-21 at 08:00:00 for 2 hr with booking ID 1108.
+[2026-02-21 14:38:20.514485] started long log.: 
+[2026-02-21 14:38:22.713743] started long log.: 
+[2026-02-21 14:38:26.452263] started long log.: 
+[2026-02-21 14:38:28.512739] started long log.: 
+[2026-02-21 14:41:24.013199] started long log.: 
+[2026-02-21 14:41:26.203859] started long log.: 
+[2026-02-21 14:41:59.505676] Sent email notification to brookecronin123@gmail.com with subject 'New Booking RSVP'.: 
+[2026-02-21 14:41:59.509429] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1108 due to new RSVP confirmation from ewdscdscds.: 
+[2026-02-21 14:43:00.218269] started long log.: 
+[2026-02-21 14:43:06.181942] Failed RSVP attempt for booking ID 1108 with name ewdscdscds and email  due to database error: Nickname provided is already taken for this meeting: 
+[2026-02-21 14:43:17.952262] Sent email notification to brookecronin123@gmail.com with subject 'New Booking RSVP'.: 
+[2026-02-21 14:43:17.955225] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1108 due to new RSVP confirmation from qwsadcsa.: 
+[2026-02-21 14:43:18.088107] Received new RSVP for booking ID 1108 from qwsadcsa ().: 
