@@ -293,7 +293,7 @@ def rsvp(link_id):
     result = DatabaseReadingServices(DatabaseConnection()).get_booking_by_link_id(link_id)
     
     if isinstance(result, str) or (isinstance(result, tuple) and result[0] == 'N'):
-        audit_logger.log_audit_term(f"Failed RSVP attempt with invalid link_id: {link_id}")
+        audit_logger.log_audit_event(f"Failed RSVP attempt with invalid link_id: {link_id}")
         flash("No booking found for that shareable link ID.", 'error')
         return redirect('/')
     
@@ -307,12 +307,12 @@ def rsvp(link_id):
         email = request.form.get('guest_email')
         add_attendee = DatabaseWritingServices(DatabaseConnection(), DatabaseReadingServices(DatabaseConnection())).create_new_unregistered_user(booking_id, name, email)
         if not add_attendee[0]:
-            audit_logger.log_audit_term(f"Failed RSVP attempt for booking ID {booking_id} with name {name} and email {email} due to database error: {add_attendee[1]}")
+            audit_logger.log_audit_event(f"Failed RSVP attempt for booking ID {booking_id} with name {name} and email {email} due to database error: {add_attendee[1]}")
             flash(add_attendee[1], 'error')
             return redirect(f'/rsvp/{link_id}')
         
         EmailNotificationService(DatabaseConnection()).send_new_rsvp_notification_email(booking_info[5], name, booking_id)
-        audit_logger.log_audit_term(f"Received new RSVP for booking ID {booking_id} from {name} ({email}).")
+        audit_logger.log_audit_event(f"Received new RSVP for booking ID {booking_id} from {name} ({email}).")
         flash('RSVP received. Thank you!', 'success')
         return redirect('/')
 

@@ -25,7 +25,7 @@ class DatabaseConnection:
                     ssl_verify_cert=False,  # fine for now
                     ssl_disabled=False,
                 )
-                print("OOOOOOO WE ARE CONNECTED BABY!!!!")
+                # print("OOOOOOO WE ARE CONNECTED BABY!!!!")
                 return test
             except mysql.connector.Error as exc:
                 last_error = exc

@@ -10,15 +10,14 @@ from audit_logging.audit_logger import AuditLogger
 ## @brief Blueprint for account-related routes
 account_bp = Blueprint("account", __name__)
 
-audit_logger = AuditLogger()
-
 @account_bp.route('/register', methods=['GET', 'POST'])
 def register():
-    print("Register route accessed")
+    # print("Register route accessed")
     db = DatabaseConnection()
     reader = DatabaseReadingServices(db)
     writer = DatabaseWritingServices(db, reader)
     form = RegisterForm()
+    audit_logger = AuditLogger()
     if form.validate_on_submit():
         username = form.username.data
         password = generate_password_hash(form.password.data)
@@ -28,8 +27,8 @@ def register():
 
         createUser = writer.create_new_user(username, email, firstName, lastName, password)
         #can confirm user creation with createUser boolean, flash message accordingly
-        print(createUser)
-        print("^createUser result")
+        # print(createUser)
+        # print("^createUser result")
         if createUser[0]:
             audit_logger.log_audit_event("User registered", f"Successfully registered user: (username: {username}, email: {email}, firstName: {firstName}, lastName: {lastName})")
             flash("Registration successful! Please log in.", "success")
@@ -45,7 +44,7 @@ def login():
     db = DatabaseConnection()
     reader = DatabaseReadingServices(db)
     form = LoginForm()
-    
+    audit_logger = AuditLogger()
     if form.validate_on_submit():
         user = form.username.data
         password = form.password.data #
@@ -72,6 +71,7 @@ def login():
 @account_bp.route('/logout', methods=['POST'])
 def logout():
     form = LogoutForm()  # create new logout form instance to validate CSRF token
+    audit_logger = AuditLogger()
     if not form.validate_on_submit():
         audit_logger.log_audit_event("Logout failed - invalid CSRF token", "Invalid logout attempt due to failed CSRF validation.")
         flash("Invalid logout request.", "danger")

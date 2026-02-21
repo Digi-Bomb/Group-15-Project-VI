@@ -53,3 +53,16 @@
 [2026-02-19 18:55:58.788133] started long log.
 [2026-02-19 18:56:01.802497] started long log.
 [2026-02-19 18:56:41.291914] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1102 due to new RSVP confirmation from wedasx.
+[2026-02-21 14:14:39.922539] started long log.
+[2026-02-21 14:14:42.322117] started long log.
+[2026-02-21 14:16:23.612836] started long log.
+[2026-02-21 14:16:25.723424] started long log.
+[2026-02-21 14:17:10.082775] started long log.
+[2026-02-21 14:17:28.888394] started long log.
+[2026-02-21 14:18:14.832342] started long log.: 
+[2026-02-21 14:18:19.417531] Unauthorized booking creation attempt: Attempt to access booking creation without being logged in.
+[2026-02-21 14:18:30.694530] Login successful: Successful login for user: brookec
+[2026-02-21 14:18:56.916416] Booking created: User ID 1010 created a booking for room 1C09 on 2026-02-21 at 16:33:00 for 2 hr with booking ID 1107.
+[2026-02-21 14:19:24.239423] Sent email notification to brookecronin123@gmail.com with subject 'New Booking RSVP'.: 
+[2026-02-21 14:19:24.242940] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1107 due to new RSVP confirmation from test2.: 
+[2026-02-21 14:19:24.247127] Received new RSVP for booking ID 1107 from test2 ().: 

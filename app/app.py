@@ -151,7 +151,7 @@ createBooking = database_writing.DatabaseWritingServices(
 # ).get_username_via_RUID("1000")
 
 test = database_reader.get_booking_by_link_id("b7049b44-f929-4e3a-9fe1-63f0fccdc386")
-print(test)
+# print(test)
 # -- ROUTES --
 from account.routes import account_bp
 from booking.routes import booking_bp
@@ -180,6 +180,6 @@ if __name__ == "__main__":
     scheduler = APScheduler()
     scheduler.add_job(func=send_booking_notification_emails, trigger='interval', id='job', seconds=5)
     scheduler.start()
-    audit_logger.log_audit_term("started long log.")
+    audit_logger.log_audit_event("started long log.")
     audit_logger.log_short_term("started short log.")
     app.run(debug=True, host="0.0.0.0", port=5000)
