@@ -27,10 +27,12 @@
 
 <div class="px-5 d-flex" style="width: 75rem;">
     <p class="text-muted fs-6 mb-2 ms-4">"Your Meeting"</p>
-    <button class="btn btn-outline-primary text-decoration-none ms-auto align-top" role="button">
-    <i class="bi bi-link-45deg"></i>
-    Share
-    </button>
+    {% if user == booking[5] %}
+        <a class="btn btn-outline-primary text-decoration-none ms-auto align-top" href="{{ url_for('booking.edit_booking', booking_id=booking[8])}}">
+            <i class="bi bi-pencil"></i>
+                Edit
+        </a>
+    {% endif %}
 </div>
 
 <div class="row">
@@ -39,7 +41,7 @@
             <div class="card border-0 mt-1" style="width: 70rem;">
                 <div class="card-body">
 
-                    <h5 class="text-center mb-3">{{ booking[1] }}</h5> <!-- needs fixing, i need access to the date osmehow-->
+                    <h5 class="text-center mb-3 fw-bold">{{ booking[1] }}</h5> <!-- needs fixing, i need access to the date osmehow-->
 
                     <div class="table-wrapper rounded overflow-hidden border">
                         <div class="table-responsive">
@@ -53,34 +55,35 @@
                                 </thead>
 
                                 <tbody>
-                                    {% for slot, display_time in time_slots %}
+                                {% for slot, display_time in time_slots %}
 
-                                        {% set booked = None %}
-                                        {% for b in booked_times %}
-                                            {% if booking[1] == b[0] and slot >= b[1] and slot < b[2] %}
-                                                {% set booked = b %}
-                                            {% endif %}
-                                        {% endfor %}
+                                    {% set ns = namespace(booked=None) %}
 
-                                        <tr>
-                                            <td>{{ display_time }}</td>
-
-                                            {% if booked %}
-                                                {% if booked[3] == current_user_id %}
-                                                    <td class="bg-success text-white">
-                                                {% else %}
-                                                    <td class="bg-primary text-white">
-                                                {% endif %}
-                                                    Room Booked<br>
-                                                    {{ booked[1] }} – {{ booked[2] }}
-                                                </td>
-                                            {% else %}
-                                                <td></td>
-                                            {% endif %}
-
-                                        </tr>
+                                    {% for b in booked_times %}
+                                        {% if booking[1] == b[0] and slot >= b[1] and slot < b[2] %}
+                                            {% set ns.booked = b %}
+                                        {% endif %}
                                     {% endfor %}
-                                    </tbody>
+
+                                    <tr>
+                                        <td>{{ display_time }}</td>
+
+                                        {% if ns.booked %}
+                                            {% if ns.booked[3] == user %}
+                                                <td class="bg-primary text-white">
+                                            {% else %}
+                                                <td class="bg-info text-white">
+                                            {% endif %}
+                                                Room Booked<br>
+                                                {{ ns.booked[1] }} – {{ ns.booked[2] }}
+                                            </td>
+                                        {% else %}
+                                            <td></td>
+                                        {% endif %}
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
                             </table>
                         </div>
 
@@ -94,7 +97,7 @@
         <br>
         <br>
         <br>
-        <p class="text-muted fs-6"> Attending Members ( {{ booking[4] }} / {{ room[6] }})</p>
+        <p class="text-muted fs-6"> Attending Members ( {{ booking[4] }} / {{ booking[9] }})</p>
         <ul class="gap-4 list-unstyled fs-6">
             <li class="fw-bold  mb-2">
                 <i class="bi bi-award-fill mb-3"></i> 
