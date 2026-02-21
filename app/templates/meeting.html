@@ -53,69 +53,34 @@
                                 </thead>
 
                                 <tbody>
+                                    {% for slot, display_time in time_slots %}
 
-                                    <tr>
-                                        <td>8:00 AM</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>9:00 AM</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>10:00 AM</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-muted">11:00 AM</td>
-                                        <td class="bg-primary text-white">
-                                            Room Booked<br>
-                                            11:00 – 1:00
-                                            <!-- TODO: hard coded but needs some jinja code to mark itself as booked-->
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-muted">12:00 PM</td>
-                                        <td class="bg-primary text-white">
-                                            Room Booked<br>
-                                            11:00 – 1:00
-                                            <!-- also differentiate between booked time belonging to meeting id, and otherwise (with colours)-->
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1:00 PM</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2:00 PM</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3:00 PM</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>4:00 PM</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>5:00 PM</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>6:00 PM</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>7:00 PM</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>8:00 PM</td>
-                                        <td></td>
-                                    </tr>
+                                        {% set booked = None %}
+                                        {% for b in booked_times %}
+                                            {% if booking[1] == b[0] and slot >= b[1] and slot < b[2] %}
+                                                {% set booked = b %}
+                                            {% endif %}
+                                        {% endfor %}
 
-                                </tbody>
+                                        <tr>
+                                            <td>{{ display_time }}</td>
+
+                                            {% if booked %}
+                                                {% if booked[3] == current_user_id %}
+                                                    <td class="bg-success text-white">
+                                                {% else %}
+                                                    <td class="bg-primary text-white">
+                                                {% endif %}
+                                                    Room Booked<br>
+                                                    {{ booked[1] }} – {{ booked[2] }}
+                                                </td>
+                                            {% else %}
+                                                <td></td>
+                                            {% endif %}
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
                             </table>
                         </div>
 
@@ -132,14 +97,22 @@
         <p class="text-muted fs-6"> Attending Members ( {{ booking[4] }} / {{ room[6] }})</p>
         <ul class="gap-4 list-unstyled fs-6">
             <li class="fw-bold  mb-2">
-                <i class="bi bi-award-fill mb-3"></i> {{ booking[5] }} <!-- owner -->
+                <i class="bi bi-award-fill mb-3"></i> 
+                 <!-- owner (this is super unoptimized ik dont kill me in gta6 please )-->
+                  {% for attendee in attendees %}
+                    {% if attendee[0] == booking[5] %}
+                        {{ attendee[1] }}
+                    {% endif %}
+                  {% endfor %}
             </li>
-            <li class=" mb-2">
-                <i class="bi bi-award-fill opacity-0 "></i> Name
-            </li>
-            <li class=" mb-2">
-                <i class="bi bi-award-fill opacity-0"></i> Name
-            </li>
+
+            {% for attendee in attendees %}
+                {% if attendee[0] != booking[5] %}
+                    <li class=" mb-2">
+                        <i class="bi bi-award-fill opacity-0 "></i> {{ attendee[1] }}
+                    </li>
+                {% endif %}
+            {% endfor %}
         </ul>
         <!-- jinja if not logged in-->
 

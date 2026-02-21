@@ -306,8 +306,8 @@ class DatabaseReadingServices:
         """Returns the meeting date, time, duration, and room of a particular booking"""
         self.cursor = self.conn.cursor()
         self.cursor.execute(
-            "SELECT meetingDate, startTime, duration, meetingRoom, numberOfConfirmations, meetingOwner, reminderSent, shareableLink FROM Booking WHERE BID = %s",
-            (int(BID),),
+            "SELECT meetingDate, startTime, duration, meetingRoom, numberOfConfirmations, meetingOwner, reminderSent, shareableLink, BID FROM Booking WHERE BID = %s",
+            (BID,),
         )
         row = self.cursor.fetchone()
 
@@ -322,6 +322,7 @@ class DatabaseReadingServices:
         prev_meeting_owner = row[5]
         prev_reminder_sent = row[6]
         prev_shareable_link = row[7]
+        prev_booking_id = row[8]
 
         # Conversions for string input needed by checking room availability
         total_seconds_meet_time = int(prev_meeting_time.total_seconds())
@@ -348,7 +349,8 @@ class DatabaseReadingServices:
             prev_meeting_confirmed,
             prev_meeting_owner,
             prev_reminder_sent,
-            prev_shareable_link
+            prev_shareable_link,
+            prev_booking_id
         )
 
     def get_booking_start_and_end_times_for_specific_room_include_date(
@@ -399,6 +401,60 @@ class DatabaseReadingServices:
             curmeetingDate_db = curmeetingDate_db.strftime("%Y-%m-%d")
 
             tupleOfInfo = (curmeetingDate_db, cur_meeting_time, curendTime_db)
+
+            booked_times.append(tupleOfInfo)
+
+        return booked_times
+    
+    def get_booking_start_and_end_times_for_specific_room_include_date_with_meeting_owner(
+        self, room_number: str
+    ):
+        """Function that returns a list of start times, end times, and dates WITH meeting owner for all bookings under a particular room \n
+        NOTE: IN ORDER OF DATE, START, END TIME"""
+        self.cursor = self.conn.cursor()
+
+        # First check room id from associated table
+        self.cursor.execute(
+            "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s",
+            (room_number,),  # Returns ALL bookings for a Room
+        )
+
+        bookings = self.cursor.fetchall()
+
+        booked_times = []
+
+        for (booking,) in bookings:
+
+            self.cursor.execute(
+                "SELECT meetingDate, startTime, duration, meetingOwner ADDTIME(startTime, duration) AS endTime FROM Booking WHERE BID = %s",
+                (booking,),
+            )
+
+            row = self.cursor.fetchone()
+
+            curmeetingDate_db = row[0]
+            curmeetingStartTime_db = row[1]
+            # curstartDuration_db = row[2]
+            curendTime_db = row[4]
+            curmeetingOwner_db = row[3]
+
+            # Conversions for string input needed by checking room availability
+            total_seconds_meet_start = int(curmeetingStartTime_db.total_seconds())
+            hours_ms, remainder_ms = divmod(total_seconds_meet_start, 3600)
+            minutes_ms, seconds_ms = divmod(remainder_ms, 60)
+
+            cur_meeting_time = f"{hours_ms:02}:{minutes_ms:02}:{seconds_ms:02}"
+
+            # Conversions for string input needed by checking room availability
+            total_seconds_meet_end = int(curendTime_db.total_seconds())
+            hours_me, remainder_me = divmod(total_seconds_meet_end, 3600)
+            minutes_me, seconds_me = divmod(remainder_me, 60)
+
+            curendTime_db = f"{hours_me:02}:{minutes_me:02}:{seconds_me:02}"
+
+            curmeetingDate_db = curmeetingDate_db.strftime("%Y-%m-%d")
+
+            tupleOfInfo = (curmeetingDate_db, cur_meeting_time, curendTime_db, curmeetingOwner_db)
 
             booked_times.append(tupleOfInfo)
 
@@ -488,6 +544,26 @@ class DatabaseReadingServices:
             return result
         else:
             return False, "Unable to find any users for the booking"
+        
+    def return_all_bookings_with_info_for_a_user(self, RUID: int):
+        """
+        Returns all bookings owned by a registered user along with full info.
+        Always returns a tuple of bookings; empty tuple if none found.
+        """
+
+        self.cursor = self.conn.cursor()
+
+        # Select the relevant booking info
+        self.cursor.execute(
+            "SELECT meetingRoom, meetingDate, startTime, duration, numberOfConfirmations, meetingOwner, reminderSent, shareableLink, BID FROM Booking WHERE meetingOwner = %s",
+            (RUID,),
+        )
+    
+        bookings = self.cursor.fetchall()
+        self.cursor.close()
+
+        # Return as tuple (even if empty)
+        return tuple(bookings)
 
     def get_registered_user_email_from_RUID(self, RUID: int):
         self.cursor = self.conn.cursor()
@@ -607,3 +683,31 @@ class DatabaseReadingServices:
 
         else:
             return "Unable to find any users associated with the meeting"
+        
+    def get_list_of_registered_and_unregistered_attendees_with_user_info(self, BID: int):
+        
+        self.cursor = self.conn.cursor()
+
+        # Registered attendees
+        self.cursor.execute("""
+            SELECT RU.*
+            FROM RegisteredBookingAttendees RBA
+            JOIN RegisteredUser RU ON RBA.RegisteredAttendee = RU.RUID
+            WHERE RBA.BID = %s
+        """, (BID,))
+    
+        registered = self.cursor.fetchall()
+
+        # Unregistered attendees
+        self.cursor.execute("""
+            SELECT URU.*
+            FROM UnregisteredBookingAttendees UBA
+            JOIN UnregisteredUser URU ON UBA.unregisteredAttendee = URU.URUID
+            WHERE UBA.BID = %s
+        """, (BID,))
+    
+        unregistered = self.cursor.fetchall()
+        self.cursor.close()
+
+        all_attendees = tuple(registered + unregistered)
+        return all_attendees

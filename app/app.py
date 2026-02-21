@@ -151,7 +151,9 @@ createBooking = database_writing.DatabaseWritingServices(
 # ).get_username_via_RUID("1000")
 
 test = database_reader.get_booking_by_link_id("b7049b44-f929-4e3a-9fe1-63f0fccdc386")
-print(test)
+# print(test)
+# whoever left this here, i will fire you!!!!!!!!! -dina
+
 # -- ROUTES --
 from account.routes import account_bp
 from booking.routes import booking_bp
@@ -171,6 +173,13 @@ def index():
         selected_date = date.today().isoformat()
 
     rooms = database_reader.get_rooms()
+    
+    user_id = session.get("user_id")
+
+    # if a user is logged in, display their bookings at the top
+    if user_id:
+        my_bookings = database_reader.return_all_bookings_with_info_for_a_user(user_id)
+        return render_template("index.html", rooms=rooms, selected_date=selected_date, bookings=my_bookings, user=user_id)
 
     return render_template("index.html", rooms=rooms, selected_date=selected_date)
 
