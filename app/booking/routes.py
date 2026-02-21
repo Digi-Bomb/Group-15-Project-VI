@@ -1,6 +1,6 @@
 import random
 from flask import Blueprint, render_template, request, redirect, flash, session, abort
-from datetime import datetime
+from datetime import datetime, timedelta
 import uuid
 
 from booking.booking import Booking
@@ -10,6 +10,7 @@ from forms import BookingForm
 from database_connection import DatabaseConnection
 from database_reading import DatabaseReadingServices
 from database_writing import DatabaseWritingServices
+from time_manager import TimeManager
 
 from audit_logging.audit_logger import AuditLogger
 
@@ -30,19 +31,19 @@ def create_booking():
     date_qs = request.args.get("date", "").strip()  # "YYYY-MM-DD" from query string
 
     if not user_id:
-        audit_logger.log_audit_event("Unauthorized booking creation attempt", "Attempt to access booking creation without being logged in.")
+        #audit_logger.log_audit_event("Unauthorized booking creation attempt", "Attempt to access booking creation without being logged in.")
         flash("Please log in to create a booking.", "warning")
         return redirect("/login")
 
     if not room_number:
-        audit_logger.log_audit_event("Booking creation failed - no room selected", f"User ID {user_id} attempted to create a booking without selecting a room first.")
+        #audit_logger.log_audit_event("Booking creation failed - no room selected", f"User ID {user_id} attempted to create a booking without selecting a room first.")
         flash("No room selected.", "error")
         return redirect("/")
 
     form = BookingForm()
     room = reader.get_room_data_given_room_number(room_number)
     if not room:
-        audit_logger.log_audit_event("Booking creation failed - invalid room", f"User ID {user_id} attempted to create a booking with invalid room number: {room_number}.")
+        #audit_logger.log_audit_event("Booking creation failed - invalid room", f"User ID {user_id} attempted to create a booking with invalid room number: {room_number}.")
         flash("Invalid room selected.", "error")
         return redirect("/")
 
@@ -53,7 +54,7 @@ def create_booking():
                 date_qs, "%Y-%m-%d"
             ).date()  # swap to date format for form field
         except ValueError:
-            audit_logger.log_audit_event("Booking creation - invalid date format in query string", f"User ID {user_id} provided invalid date format in query string: {date_qs}.")
+            #audit_logger.log_audit_event("Booking creation - invalid date format in query string", f"User ID {user_id} provided invalid date format in query string: {date_qs}.")
             flash("Invalid date format in URL. Use YYYY-MM-DD.", "error")
 
     # POST
@@ -86,13 +87,13 @@ def create_booking():
 
         if not create_booking[0]:
             if create_booking[1] == "Room is NOT Available":
-                audit_logger.log_audit_event("Booking creation failed - time slot unavailable", f"User ID {user_id} attempted to create a booking for room {room_number} on {meeting_date} at {start_time_str} for 2 hr, but the time slot was already booked.")
+                #audit_logger.log_audit_event("Booking creation failed - time slot unavailable", f"User ID {user_id} attempted to create a booking for room {room_number} on {meeting_date} at {start_time_str} for 2 hr, but the time slot was already booked.")
                 flash(
                     "The selected time slot is already booked. Please choose a different time.",
                     "error",
                 )
             else:
-                audit_logger.log_audit_event("Booking creation failed - database error", f"User ID {user_id} attempted to create a booking but encountered a database error: {create_booking[1]}")
+                #audit_logger.log_audit_event("Booking creation failed - database error", f"User ID {user_id} attempted to create a booking but encountered a database error: {create_booking[1]}")
                 flash("Failed to create booking.", "error")
 
             # keep user on same room/date page instead of losing query params
@@ -121,11 +122,30 @@ def view_booking(booking_id):
     room = reader.get_room_data_given_room_number(
         booking[0]
     )
+
+    time_slots = [
+        ('08:00', '8:00 AM'),
+        ('09:00', '9:00 AM'),
+        ('10:00', '10:00 AM'),
+        ('11:00', '11:00 AM'),
+        ('12:00', '12:00 PM'),
+        ('13:00', '1:00 PM'),
+        ('14:00', '2:00 PM'),
+        ('15:00', '3:00 PM'),
+        ('16:00', '4:00 PM'),
+        ('17:00', '5:00 PM'),
+        ('18:00', '6:00 PM'),
+        ('19:00', '7:00 PM'),
+        ('20:00', '8:00 PM'),
+    ]
+    attendees = reader.get_list_of_registered_and_unregistered_attendees_with_user_info(booking_id)
+    booked_times = reader.get_booking_start_and_end_times_for_specific_room_include_date(booking[0])
+
     if not booking[0]:
         audit_logger.log_audit_event("View booking failed - booking not found", f"User attempted to view booking with ID {booking_id} but it was not found in the database.")
         abort(404, description="Booking not found")
 
-    return render_template("meeting.html", room=room, booking=booking)
+    return render_template("meeting.html", room=room, booking=booking, attendees=attendees, booked_times=booked_times, time_slots=time_slots)
 
 # GET: get booking info and prefill form for editing (only if owner)
 # PATCH: accept JSON payload to update one or more fields (only if owner)
@@ -290,30 +310,46 @@ def edit_booking(booking_id):
 
 @booking_bp.route('/rsvp/<string:link_id>', methods=['GET', 'POST'])
 def rsvp(link_id):
-    result = DatabaseReadingServices(DatabaseConnection()).get_booking_by_link_id(link_id)
-
+    db = DatabaseConnection()
+    db.connect()
+    reader = DatabaseReadingServices(db)
+    writer = DatabaseWritingServices(db, reader)    
+    result = reader.get_booking_by_link_id(link_id)
+    tm = TimeManager()
+    
     if isinstance(result, str) or (isinstance(result, tuple) and result[0] == 'N'):
         audit_logger.log_audit_event(f"Failed RSVP attempt with invalid link_id: {link_id}")
         flash("No booking found for that shareable link ID.", 'error')
         return redirect('/')
 
     booking_id = result
+    
+    booking_info = reader.get_booking_information_of_specific_booking(booking_id)
+    room = reader.get_room_data_given_room_number(booking_info[0])
 
-    booking_info = DatabaseReadingServices(DatabaseConnection()).get_booking_information_of_specific_booking(booking_id)
-    room = DatabaseReadingServices(DatabaseConnection()).get_room_data_given_room_number(booking_info[0])
+    meeting_owner = reader.get_username_via_RUID(booking_info[5])
+
+    # endtime bullshit
+    start_str = booking_info[2]
+    duration_str = booking_info[3]
+
+    end_time = TimeManager.get_end_time_from_start_time_and_duration(start_str, duration_str)
 
     if request.method == 'POST':
         name = request.form.get('guest_name')
         email = request.form.get('guest_email')
-        add_attendee = DatabaseWritingServices(DatabaseConnection(), DatabaseReadingServices(DatabaseConnection())).create_new_unregistered_user(booking_id, name, email)
+        add_attendee = writer.create_new_unregistered_user(booking_id, name, email)
         if not add_attendee[0]:
             audit_logger.log_audit_event(f"Failed RSVP attempt for booking ID {booking_id} with name {name} and email {email} due to database error: {add_attendee[1]}")
             flash(add_attendee[1], 'error')
             return redirect(f'/rsvp/{link_id}')
 
         EmailNotificationService(DatabaseConnection()).send_new_rsvp_notification_email(booking_info[5], name, booking_id)
-        audit_logger.log_audit_event(f"Received new RSVP for booking ID {booking_id} from {name} ({email}).")
+        # +1 to number of confirmations after successful create
+        writer.update_number_of_confirmations(booking_id)
+        audit_logger.log_audit_term(f"Received new RSVP for booking ID {booking_id} from {name} ({email}).")
         flash('RSVP received. Thank you!', 'success')
         return redirect('/')
 
-    return render_template('rsvp.html', room=room, booking=booking_info)
+    return render_template('rsvp.html', room=room, booking=booking_info, end_time=end_time, start_time=start_str, meeting_owner=meeting_owner)
+

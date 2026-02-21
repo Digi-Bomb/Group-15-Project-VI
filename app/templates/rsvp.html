@@ -11,7 +11,7 @@
     </a>
     <a class="text-dark fs-6 text-decoration-underline ms-auto">
         <i class="bi bi-calendar-week me-1"></i>
-        {{ selected_date }} <!-- vanilla datepicker bullshit -->
+        {{ booking[1] }} <!-- vanilla datepicker bullshit -->
     </a>
 </div>
 
@@ -19,15 +19,15 @@
     <p class="text-dark fw-bold fs-5 mb-2 ms-4">3G15 - West Wing</p> <!-- passed param, hard coded for now -->
     <p class="text-muted fs-5 me-3 ms-3 mb-0">
         <i class="bi bi-people-fill text-muted"></i>
-        4
+        {{ room[6] }}
     </p>
     <p class="text-dark fw-bold fs-5 mb-2 ms-4 ms-auto w-50">
-        08:00 - 20:00
+        {{ start_time }} - {{ end_time }}
     </p> <!-- passed param, hard coded for now -->
 </div>
 
 <div class="container-fluid px-5 d-flex flex-wrap">
-    <p class="text-muted fs-6 mb-2 ms-4">"Meeting name"</p>
+    <p class="text-muted fs-6 mb-2 ms-4">Meeting with {{ meeting_owner }}</p>
     <!-- passed param, hard coded for now -->
 </div>
 
