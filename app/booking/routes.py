@@ -104,8 +104,8 @@ def create_booking():
             )
             return redirect(f"/booking?room_number={room_number}&date={safe_date}")
 
-        
-        #audit_logger.log_audit_event("Booking created", f"User ID {user_id} created a booking for room {room_number} on {meeting_date} at {start_time_str} for 2 hr with booking ID {create_booking[1]}.")
+
+        audit_logger.log_audit_event("Booking created", f"User ID {user_id} created a booking for room {room_number} on {meeting_date} at {start_time_str} for 2 hr with booking ID {create_booking[1]}.")
         flash("Booking created!", "success")
         return redirect(f"/booking/{create_booking[1]}")
 
@@ -321,7 +321,7 @@ def rsvp(link_id):
         audit_logger.log_audit_term(f"Failed RSVP attempt with invalid link_id: {link_id}")
         flash("No booking found for that shareable link ID.", 'error')
         return redirect('/')
-    
+
     booking_id = result
     
     booking_info = reader.get_booking_information_of_specific_booking(booking_id)
@@ -343,7 +343,7 @@ def rsvp(link_id):
             audit_logger.log_audit_term(f"Failed RSVP attempt for booking ID {booking_id} with name {name} and email {email} due to database error: {add_attendee[1]}")
             flash(add_attendee[1], 'error')
             return redirect(f'/rsvp/{link_id}')
-        
+
         EmailNotificationService(DatabaseConnection()).send_new_rsvp_notification_email(booking_info[5], name, booking_id)
         # +1 to number of confirmations after successful create
         writer.update_number_of_confirmations(booking_id)

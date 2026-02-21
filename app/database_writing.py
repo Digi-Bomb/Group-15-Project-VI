@@ -53,7 +53,7 @@ class DatabaseWritingServices:
                 print("UPDATE ERROR: ", e)
 
         return False, "User already registered"
-    
+
     def create_new_unregistered_user(self, BID: int, nickname: str, email: str = ""):
         """Generic function for adding an unregistered user to the Database \n
         NOTE: CHECKS FOR EXISTING NICKNAMES BY BID, NEEDS NICKNAME \n
@@ -89,7 +89,7 @@ class DatabaseWritingServices:
                 URUID = (
                     self.cursor.lastrowid
                 )  # POTENTIALLY unsafe for multiple users (?)
-               
+
                 attempt_to_associate = self.associate_unregistered_user_with_booking(
                     BID, URUID
                 )

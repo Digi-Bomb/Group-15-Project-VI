@@ -46,7 +46,7 @@ def login():
     db = DatabaseConnection()
     reader = DatabaseReadingServices(db)
     form = LoginForm()
-    
+
     if form.validate_on_submit():
         user = form.username.data
         password = form.password.data #
