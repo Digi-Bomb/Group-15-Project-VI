@@ -78,7 +78,7 @@ def create_booking():
         create_booking = writer.create_new_booking(
             meeting_date,
             start_time=start_time_str,
-            duration="02:00:00",  # keep your default for now
+            duration="02:00:00",  
             meeting_owner=user_id,
             meeting_room=room_number,
             meeting_capacity=form.meeting_capacity.data,
@@ -333,6 +333,8 @@ def rsvp(link_id):
 
     booking_id = result
     
+    # [0] room, [1] date, [2] start time, [3] duration, [4] "confirmed", 
+    # [5] owner ID, [6] reminder sent flag, [7]shareable link, [8]booking ID, [9] booking 'size'
     booking_info = reader.get_booking_information_of_specific_booking(booking_id)
     room = reader.get_room_data_given_room_number(booking_info[0])
 
@@ -347,6 +349,15 @@ def rsvp(link_id):
     if request.method == 'POST':
         name = request.form.get('guest_name')
         email = request.form.get('guest_email')
+        #check for capacity before allowing RSVP
+        #get numberofconfirmations from booking table
+        current_confirmations = reader.get_number_of_confirmations_for_booking(booking_id)
+        #if valid return from both calls and confirmations greater than or equal to capacity, reject RSVP and flash message about capacity limit
+        if current_confirmations is not None and booking_info[9] is not None and current_confirmations >= booking_info[9]:
+            audit_logger.log_audit_term(f"Failed RSVP attempt for booking ID {booking_id} with name {name} and email {email} due to capacity limit reached.")
+            flash("Sorry, this meeting has reached its capacity limit.", 'error')
+            return redirect(f'/rsvp/{link_id}')
+
         add_attendee = writer.create_new_unregistered_user(booking_id, name, email)
         if not add_attendee[0]:
             audit_logger.log_audit_term(f"Failed RSVP attempt for booking ID {booking_id} with name {name} and email {email} due to database error: {add_attendee[1]}")

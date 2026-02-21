@@ -767,3 +767,16 @@ class DatabaseReadingServices:
 
         all_attendees = tuple(registered + unregistered)
         return all_attendees
+
+    def get_number_of_confirmations_for_booking(self, BID: int):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute(
+            "SELECT numberOfConfirmations FROM Booking WHERE BID = %s", (BID,)
+        )
+
+        result = self.cursor.fetchone()[0]
+
+        if result is not None:
+            return result
+        else:
+            return "Unable to find the booking specified or no confirmations yet."
