@@ -31,10 +31,10 @@ def register():
         # print(createUser)
         # print("^createUser result")
         if createUser[0]:
-            #audit_logger.log_audit_event("User registered", f"Successfully registered user: (username: {username}, email: {email}, firstName: {firstName}, lastName: {lastName})")
+            audit_logger.log_audit_event("User registered", f"Successfully registered user: (username: {username}, email: {email}, firstName: {firstName}, lastName: {lastName})")
             flash("Registration successful! Please log in.", "success")
         else:
-            #audit_logger.log_audit_event("User registration failed", f"Failed to register user: {username} (username may already exist)")
+            audit_logger.log_audit_event("User registration failed", f"Failed to register user: {username} (username may already exist)")
             flash("Registration failed. User may already exist.", "danger")
         return redirect("/login")
     return render_template("register.html", form=form)
@@ -53,16 +53,16 @@ def login():
         try:
             ok, msg, user_id = reader.validate_user_information(username=user, password=password)
         except RuntimeError:
-            #audit_logger.log_audit_event("Login failed - database error", f"Login attempt for username: {user} failed due to database is offline.")
+            audit_logger.log_audit_event("Login failed - database error", f"Login attempt for username: {user} failed due to database is offline.")
             flash("Login temporarily unavailable (database offline).", "danger")
             return render_template("login.html", form=form)
 
         if ok:  # loginUser returns a tuple (boolean, message)
             session.permanent = True
             session["user_id"] = user_id# Assuming loginUser[1] contains the user_id
-            #audit_logger.log_audit_event("Login successful", f"Successful login for user: {user}")
+            audit_logger.log_audit_event("Login successful", f"Successful login for user: {user}")
             return redirect("/")
-        #audit_logger.log_audit_event("Login failed - invalid credentials", f"Failed login attempt for username: {user} with provided password.")
+        audit_logger.log_audit_event("Login failed - invalid credentials", f"Failed login attempt for username: {user} with provided password.")
         flash('Invalid username or password.', 'danger')
         current_app.logger.warning(f"Failed login attempt for username: {form.username.data}")
 
@@ -74,13 +74,13 @@ def logout():
     form = LogoutForm()  # create new logout form instance to validate CSRF token
     audit_logger = AuditLogger()
     if not form.validate_on_submit():
-        #audit_logger.log_audit_event("Logout failed - invalid CSRF token", "Invalid logout attempt due to failed CSRF validation.")
+        audit_logger.log_audit_event("Logout failed - invalid CSRF token", "Invalid logout attempt due to failed CSRF validation.")
         flash("Invalid logout request.", "danger")
         return redirect('/')
 
     user_id = session.get('user_id')
     session.clear()
-    #audit_logger.log_audit_event("Logout successful", f"User with ID {user_id} logged out successfully.")
+    audit_logger.log_audit_event("Logout successful", f"User with ID {user_id} logged out successfully.")
     flash('Logged out successfully.', 'success')
     current_app.logger.info(f"User {user_id} logged out")
     return redirect('/')

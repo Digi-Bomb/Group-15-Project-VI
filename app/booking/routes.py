@@ -31,19 +31,19 @@ def create_booking():
     date_qs = request.args.get("date", "").strip()  # "YYYY-MM-DD" from query string
 
     if not user_id:
-        #audit_logger.log_audit_event("Unauthorized booking creation attempt", "Attempt to access booking creation without being logged in.")
+        audit_logger.log_audit_event("Unauthorized booking creation attempt", "Attempt to access booking creation without being logged in.")
         flash("Please log in to create a booking.", "warning")
         return redirect("/login")
 
     if not room_number:
-        #audit_logger.log_audit_event("Booking creation failed - no room selected", f"User ID {user_id} attempted to create a booking without selecting a room first.")
+        audit_logger.log_audit_event("Booking creation failed - no room selected", f"User ID {user_id} attempted to create a booking without selecting a room first.")
         flash("No room selected.", "error")
         return redirect("/")
 
     form = BookingForm()
     room = reader.get_room_data_given_room_number(room_number)
     if not room:
-        #audit_logger.log_audit_event("Booking creation failed - invalid room", f"User ID {user_id} attempted to create a booking with invalid room number: {room_number}.")
+        audit_logger.log_audit_event("Booking creation failed - invalid room", f"User ID {user_id} attempted to create a booking with invalid room number: {room_number}.")
         flash("Invalid room selected.", "error")
         return redirect("/")
 
@@ -54,7 +54,7 @@ def create_booking():
                 date_qs, "%Y-%m-%d"
             ).date()  # swap to date format for form field
         except ValueError:
-            #audit_logger.log_audit_event("Booking creation - invalid date format in query string", f"User ID {user_id} provided invalid date format in query string: {date_qs}.")
+            audit_logger.log_audit_event("Booking creation - invalid date format in query string", f"User ID {user_id} provided invalid date format in query string: {date_qs}.")
             flash("Invalid date format in URL. Use YYYY-MM-DD.", "error")
 
     # POST
@@ -87,13 +87,13 @@ def create_booking():
 
         if not create_booking[0]:
             if create_booking[1] == "Room is NOT Available":
-                #audit_logger.log_audit_event("Booking creation failed - time slot unavailable", f"User ID {user_id} attempted to create a booking for room {room_number} on {meeting_date} at {start_time_str} for 2 hr, but the time slot was already booked.")
+                audit_logger.log_audit_event("Booking creation failed - time slot unavailable", f"User ID {user_id} attempted to create a booking for room {room_number} on {meeting_date} at {start_time_str} for 2 hr, but the time slot was already booked.")
                 flash(
                     "The selected time slot is already booked. Please choose a different time.",
                     "error",
                 )
             else:
-                #audit_logger.log_audit_event("Booking creation failed - database error", f"User ID {user_id} attempted to create a booking but encountered a database error: {create_booking[1]}")
+                audit_logger.log_audit_event("Booking creation failed - database error", f"User ID {user_id} attempted to create a booking but encountered a database error: {create_booking[1]}")
                 flash("Failed to create booking.", "error")
 
             # keep user on same room/date page instead of losing query params

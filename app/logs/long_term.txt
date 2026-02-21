@@ -84,3 +84,11 @@
 [2026-02-21 14:43:17.952262] Sent email notification to brookecronin123@gmail.com with subject 'New Booking RSVP'.: 
 [2026-02-21 14:43:17.955225] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1108 due to new RSVP confirmation from qwsadcsa.: 
 [2026-02-21 14:43:18.088107] Received new RSVP for booking ID 1108 from qwsadcsa ().: 
+[2026-02-21 15:00:34.489588] started long log.: 
+[2026-02-21 15:00:42.342394] started long log.: 
+[2026-02-21 15:01:25.890072] started long log.: 
+[2026-02-21 15:01:54.641805] Login successful: Successful login for user: brookec
+[2026-02-21 15:02:18.688383] Booking created: User ID 1010 created a booking for room 2D06 on 2026-02-21 at 15:33:00 for 2 hr with booking ID 1109.
+[2026-02-21 15:02:45.032930] Sent email notification to brookecronin123@gmail.com with subject 'New Booking RSVP'.: 
+[2026-02-21 15:02:45.037254] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1109 due to new RSVP confirmation from test.: 
+[2026-02-21 15:02:45.170175] Received new RSVP for booking ID 1109 from test ().: 
