@@ -141,7 +141,7 @@ def view_booking(booking_id):
         ('20:00', '20:00'),
     ]
     attendees = reader.get_list_of_registered_and_unregistered_attendees_with_user_info(booking_id)
-    booked_times = reader.get_booking_start_and_end_times_for_specific_room_include_date_with_meeting_owner(booking[0])
+    booked_times = reader.get_booking_start_and_end_times_for_specific_room_include_date_with_BID(booking[0])
 
     if not booking[0]:
         # audit_logger.log_audit_event("View booking failed - booking not found", f"User attempted to view booking with ID {booking_id} but it was not found in the database.")
