@@ -126,6 +126,8 @@ def create_booking():
 def view_booking(booking_id):
     db = DatabaseConnection()
     reader = DatabaseReadingServices(db)
+    
+    audit_logger = AuditLogger()
 
     booking = reader.get_booking_information_of_specific_booking(booking_id)
     room = reader.get_room_data_given_room_number(
