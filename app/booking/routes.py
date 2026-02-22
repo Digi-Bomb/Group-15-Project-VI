@@ -373,7 +373,7 @@ def rsvp(link_id):
         if current_confirmations is not None and booking_info[9] is not None and current_confirmations >= booking_info[9]:
             audit_logger.log_audit_event(f"Failed RSVP attempt for booking ID {booking_id} with name {name} and email {email} due to capacity limit reached.")
             flash("Sorry, this meeting has reached its capacity limit.", 'error')
-            return redirect(f'/rsvp/{link_id}')
+            return redirect(f'/')
 
         add_attendee = writer.create_new_unregistered_user(booking_id, name, email)
         if not add_attendee[0]:

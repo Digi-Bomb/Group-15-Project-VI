@@ -314,3 +314,23 @@ TEST[2026-02-22 14:35:30.995558] started long log.:
 [2026-02-22 20:04:49.010710] started long log.: 
 [2026-02-22 20:05:05.349512] started long log.: 
 [2026-02-22 20:05:49.529067] started long log.: 
+[2026-02-22 22:04:08.743343] started long log.: 
+[2026-02-22 22:04:50.227341] started long log.: 
+[2026-02-22 22:04:56.400038] Failed RSVP attempt with invalid link_id: b7049b44-f929-4e3a-9fe1-63f0fccdc386: 
+[2026-02-22 22:04:59.596699] Failed RSVP attempt with invalid link_id: 999: 
+[2026-02-22 22:05:27.376787] started long log.: 
+[2026-02-22 22:05:52.007063] started long log.: 
+[2026-02-22 22:06:19.102027] started long log.: 
+[2026-02-22 22:06:59.215230] started long log.: 
+[2026-02-22 22:06:59.879410] started long log.: 
+[2026-02-22 22:07:14.902570] started long log.: 
+[2026-02-22 22:07:41.171177] Unauthorized booking creation attempt: Attempt to access booking creation without being logged in.
+[2026-02-22 22:07:49.945114] Failed RSVP attempt with invalid link_id: 999: 
+[2026-02-22 22:12:43.276874] Failed RSVP attempt for booking ID 1102 with name Late User and email  due to capacity limit reached.: 
+[2026-02-22 22:16:54.541947] started long log.: 
+[2026-02-22 22:17:16.288480] Failed RSVP attempt for booking ID 1102 with name uibh and email  due to capacity limit reached.: 
+[2026-02-22 22:35:55.727230] started long log.: 
+[2026-02-22 22:36:14.176034] started long log.: 
+[2026-02-22 22:36:38.124632] started long log.: 
+[2026-02-22 22:36:54.298712] started long log.: 
+[2026-02-22 22:37:11.676719] started long log.: 

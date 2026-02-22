@@ -12,3 +12,85 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/smtplib.py", line 901, in sendmail
     raise SMTPRecipientsRefused(senderrs)
 smtplib.SMTPRecipientsRefused: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb2b0be6c9sm1996536685a.1 - gsmtp')}
+2026-02-19 01:26:25,908 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:27:10,024 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:27:13,859 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:27:13,859 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:27:15,839 ERROR: Mail send failed: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb44d74048sm1371960485a.38 - gsmtp')} [in /app/notifications/email_notification_service.py:38]
+Traceback (most recent call last):
+  File "/app/notifications/email_notification_service.py", line 34, in send_email_notification
+    mail.send(msg)  # send using the instance imported from app.py
+    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 188, in send
+    self.host.sendmail(sanitize_address(envelope_from or message.sender),
+  File "/usr/local/lib/python3.11/smtplib.py", line 901, in sendmail
+    raise SMTPRecipientsRefused(senderrs)
+smtplib.SMTPRecipientsRefused: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb44d74048sm1371960485a.38 - gsmtp')}
+2026-02-19 01:27:15,839 ERROR: Mail send failed: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb44d74048sm1371960485a.38 - gsmtp')} [in /app/notifications/email_notification_service.py:38]
+Traceback (most recent call last):
+  File "/app/notifications/email_notification_service.py", line 34, in send_email_notification
+    mail.send(msg)  # send using the instance imported from app.py
+    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 188, in send
+    self.host.sendmail(sanitize_address(envelope_from or message.sender),
+  File "/usr/local/lib/python3.11/smtplib.py", line 901, in sendmail
+    raise SMTPRecipientsRefused(senderrs)
+smtplib.SMTPRecipientsRefused: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb44d74048sm1371960485a.38 - gsmtp')}
+2026-02-19 01:27:29,034 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:28:42,879 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:28:56,677 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:28:56,677 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:28:58,707 ERROR: Mail send failed: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb2b0bc16dsm2041274985a.4 - gsmtp')} [in /app/notifications/email_notification_service.py:36]
+Traceback (most recent call last):
+  File "/app/notifications/email_notification_service.py", line 32, in send_email_notification
+    mail.send(msg)  # send using the instance imported from app.py
+    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 188, in send
+    self.host.sendmail(sanitize_address(envelope_from or message.sender),
+  File "/usr/local/lib/python3.11/smtplib.py", line 901, in sendmail
+    raise SMTPRecipientsRefused(senderrs)
+smtplib.SMTPRecipientsRefused: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb2b0bc16dsm2041274985a.4 - gsmtp')}
+2026-02-19 01:28:58,707 ERROR: Mail send failed: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb2b0bc16dsm2041274985a.4 - gsmtp')} [in /app/notifications/email_notification_service.py:36]
+Traceback (most recent call last):
+  File "/app/notifications/email_notification_service.py", line 32, in send_email_notification
+    mail.send(msg)  # send using the instance imported from app.py
+    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 188, in send
+    self.host.sendmail(sanitize_address(envelope_from or message.sender),
+  File "/usr/local/lib/python3.11/smtplib.py", line 901, in sendmail
+    raise SMTPRecipientsRefused(senderrs)
+smtplib.SMTPRecipientsRefused: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb2b0bc16dsm2041274985a.4 - gsmtp')}
+2026-02-19 01:30:13,012 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:31:38,269 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:31:47,814 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:31:47,814 INFO: Flask app startup [in /app/app.py:95]
+2026-02-19 01:31:49,765 ERROR: Mail send failed: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb2b1c7d7csm1966291185a.27 - gsmtp')} [in /app/notifications/email_notification_service.py:36]
+Traceback (most recent call last):
+  File "/app/notifications/email_notification_service.py", line 32, in send_email_notification
+    mail.send(msg)  # send using the instance imported from app.py
+    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
+    message.send(connection)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
+    connection.send(self)
+  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 188, in send
+    self.host.sendmail(sanitize_address(envelope_from or message.sender),
+  File "/usr/local/lib/python3.11/smtplib.py", line 901, in sendmail
+    raise SMTPRecipientsRefused(senderrs)
+smtplib.SMTPRecipientsRefused: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb2b1c7d7csm1966291185a.27 - gsmtp')}
