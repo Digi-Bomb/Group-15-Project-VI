@@ -361,7 +361,7 @@ def rsvp(link_id):
         current_confirmations = reader.get_number_of_confirmations_for_booking(booking_id)
         #if valid return from both calls and confirmations greater than or equal to capacity, reject RSVP and flash message about capacity limit
         if current_confirmations is not None and booking_info[9] is not None and current_confirmations >= booking_info[9]:
-            audit_logger.log_audit_term(f"Failed RSVP attempt for booking ID {booking_id} with name {name} and email {email} due to capacity limit reached.")
+            audit_logger.log_audit_event(f"Failed RSVP attempt for booking ID {booking_id} with name {name} and email {email} due to capacity limit reached.")
             flash("Sorry, this meeting has reached its capacity limit.", 'error')
             return redirect(f'/rsvp/{link_id}')
 

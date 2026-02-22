@@ -93,3 +93,6 @@
 [2026-02-21 15:02:45.037254] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1109 due to new RSVP confirmation from test.: 
 [2026-02-21 15:02:45.170175] Received new RSVP for booking ID 1109 from test ().: 
 [2026-02-22 05:11:35.410412] started long log.: 
+[2026-02-22 05:30:02.210596] started long log.: 
+[2026-02-22 05:30:02.935897] started long log.: 
+[2026-02-22 05:31:10.754764] Failed RSVP attempt for booking ID 1099 with name test and email  due to capacity limit reached.: 
