@@ -69,6 +69,9 @@ def create_booking():
         # WTForms TimeField gives datetime.time, convert to "HH:MM:SS" required by DB logic
         start_time_str = form.start_time.data.strftime("%H:%M") + ":00"
         meeting_date = form.meeting_date.data.strftime("%Y-%m-%d")
+        end_time_str = form.end_time.data.strftime("%H:%M") + ":00"
+        # calculate duration from start & end time
+        duration = TimeManager.calculate_duration(start_time_str, end_time_str)
 
         # debugging print data that prints ONLY after ctrl+C
         # print(
@@ -85,7 +88,7 @@ def create_booking():
         create_booking = writer.create_new_booking(
             meeting_date,
             start_time=start_time_str,
-            duration="02:00:00",  
+            duration=duration,  
             meeting_owner=user_id,
             meeting_room=room_number,
             meeting_capacity=form.meeting_capacity.data,
