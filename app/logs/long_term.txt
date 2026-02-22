@@ -278,3 +278,9 @@ TEST[2026-02-22 14:35:30.995558] started long log.:
 [2026-02-22 19:28:45.585093] Unauthorized booking creation attempt: Attempt to access booking creation without being logged in.
 [2026-02-22 19:28:53.444359] Login successful: Successful login for user: brookec
 [2026-02-22 19:30:15.951339] started long log.: 
+[2026-02-22 19:31:32.925080] Attempting to send email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 19:31:34.172221] Sent email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 19:31:34.177381] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1109 due to new RSVP confirmation from wdasdsa.: 
+[2026-02-22 19:31:34.318727] Received new RSVP for booking ID 1109 from wdasdsa ().: 
+[2026-02-22 19:33:23.025900] started long log.: 
+[2026-02-22 19:33:40.710249] started long log.: 

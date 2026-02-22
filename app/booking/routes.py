@@ -153,7 +153,7 @@ def view_booking(booking_id):
     booked_times = reader.get_booking_start_and_end_times_for_specific_room_include_date_with_BID(booking[0])
 
     if not booking[0]:
-        # audit_logger.log_audit_event("View booking failed - booking not found", f"User attempted to view booking with ID {booking_id} but it was not found in the database.")
+        audit_logger.log_audit_event("View booking failed - booking not found", f"User attempted to view booking with ID {booking_id} but it was not found in the database.")
         abort(404, description="Booking not found")
 
     return render_template("meeting.html", room=room, booking=booking, attendees=attendees, booked_times=booked_times, time_slots=time_slots, user=user_id)
@@ -166,21 +166,22 @@ def edit_booking(booking_id):
     db = DatabaseConnection()
     reader = DatabaseReadingServices(db)
     writer = DatabaseWritingServices(db, reader)
+    audit_logger = AuditLogger()
 
     user_id = session.get("user_id")
     if not user_id:
-        # audit_logger.log_audit_event("Unauthorized booking edit attempt", f"Attempt to access booking edit for booking ID {booking_id} without being logged in.")
+        audit_logger.log_audit_event("Unauthorized booking edit attempt", f"Attempt to access booking edit for booking ID {booking_id} without being logged in.")
         flash("Please log in to edit the booking.", "warning")
         return redirect("/login")
 
     booking = reader.get_booking_information_of_specific_booking(booking_id)
 
     if not booking[0]:
-        # audit_logger.log_audit_event("View booking failed - booking not found", f"User attempted to view booking with ID {booking_id} but it was not found in the database.")
+        audit_logger.log_audit_event("View booking failed - booking not found", f"User attempted to view booking with ID {booking_id} but it was not found in the database.")
         abort(404, description="Booking not found")
 
     if booking[5] != user_id:
-        # audit_logger.log_audit_event("Unauthorized booking edit attempt", f"User ID {user_id} attempted to edit booking ID {booking_id} but is not the booking owner.")
+        audit_logger.log_audit_event("Unauthorized booking edit attempt", f"User ID {user_id} attempted to edit booking ID {booking_id} but is not the booking owner.")
         abort(403, description="You do not have permission to edit this booking")
     # GET: render edit form pre-filled
     if request.method == "GET":
