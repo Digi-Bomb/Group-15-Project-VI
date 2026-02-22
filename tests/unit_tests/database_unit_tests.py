@@ -528,7 +528,7 @@ def test_update_number_of_confirmations_success():
 
     writer = load_writer()
 
-    updated = writer.update_number_of_confirmations(1087)
+    updated = writer.increase_number_of_confirmations(1087)
     assert updated
 
 
@@ -536,7 +536,7 @@ def test_update_meeting_capacity_failure_invalid_bid():
 
     writer = load_writer()
 
-    updated = writer.update_number_of_confirmations(1000)
+    updated = writer.increase_number_of_confirmations(1000)
     assert not updated[0]
     # Maybe poll for the updated number of confirmations too
 

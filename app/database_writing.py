@@ -50,7 +50,8 @@ class DatabaseWritingServices:
 
             except Exception as e:
                 self.conn.rollback()
-                print("UPDATE ERROR: ", e)
+                # print("UPDATE ERROR: ", e)
+                return False, str(e)
 
         return False, "User already registered"
 
@@ -103,7 +104,7 @@ class DatabaseWritingServices:
 
             except Exception as e:
                 self.conn.rollback()
-                print("CREATE ERROR: ", e)
+                # print("CREATE ERROR: ", e)
                 return False, str(e)
         else:
             return False, "Nickname provided is already taken for this meeting"
@@ -200,7 +201,7 @@ class DatabaseWritingServices:
 
         except Exception as e:
             self.conn.rollback()
-            print("INSERT ERROR: ", e)
+            # print("INSERT ERROR: ", e)
             return False, str(e)
 
     def associate_registered_user_with_booking(self, BID: int, RUID: str):
@@ -251,8 +252,8 @@ class DatabaseWritingServices:
             attempt_delete_association = self.delete_association(BID=BID)
             attempt_free_room = self.update_room_as_available(BID=BID)
 
-            print(attempt_delete_association)
-            print(attempt_free_room)
+            # print(attempt_delete_association)
+            # print(attempt_free_room)
 
             if attempt_delete_association and attempt_free_room:
                 self.cursor.execute("DELETE FROM Booking WHERE BID = %s", (BID,))
@@ -262,7 +263,7 @@ class DatabaseWritingServices:
 
         except Exception as e:
             self.conn.rollback()
-            print("DELETE ERROR: ", e)
+            # print("DELETE ERROR: ", e)
             return False, str(e)
 
     def delete_association(self, BID: int):
@@ -286,9 +287,42 @@ class DatabaseWritingServices:
 
         except Exception as e:
             self.conn.rollback()
-            print("DELETE ERROR: ", e)
+            # print("DELETE ERROR: ", e)
             return False, str(e)
+    
+    def reset_confirmed_attendees(self, BID: int):
+        """Generic function to reset all RSVPs for a booking when the meeting time, date, duration, or room is updated \n
+        NOTE: CALLED WHEN UPDATING A BOOKING'S TIME, DATE, DURATION, OR ROOM \n
+        TRUE == RSVPS RESET \n
+        FALSE == RSVPS NOT RESET"""
+        
+        booking_info = self.reader.get_booking_information_of_specific_booking(BID)
+        meeting_owner = booking_info[5]
+        
+        try:
+            self.cursor.execute(
+                "DELETE FROM RegisteredBookingAttendees WHERE BID = %s AND registeredAttendee != %s", (BID, meeting_owner)
+            )
+            self.conn.commit()
 
+            self.cursor.execute(
+                "DELETE FROM UnregisteredBookingAttendees WHERE BID = %s", (BID,)
+            )
+            
+            self.cursor.execute(
+                "UPDATE Booking SET numberOfConfirmations = %s WHERE BID = %s",
+                (1, BID),
+            )
+
+            self.conn.commit()
+            return True
+
+        except Exception as e:
+            self.conn.rollback()
+            # print("DELETE ERROR: ", e)
+            return False, str(e)
+        
+    
     def update_room_as_available(self, BID: int):
         """Generic function to update the database that a room is now available when deleting a booking \n
         NOTE: CALLED WHEN DELETING A BOOKING \n
@@ -305,7 +339,8 @@ class DatabaseWritingServices:
 
         except Exception as e:
             self.conn.rollback()
-            print("UPDATE ERROR: ", e)
+            # print("UPDATE ERROR: ", e)
+            return False, str(e)
 
     def update_meeting_time(self, BID: int, new_start_time: str):
         """Generic function to update a booking's meeting time, given a Booking ID, and a new meeting time \n
@@ -328,7 +363,7 @@ class DatabaseWritingServices:
 
         except Exception as e:
             self.conn.rollback()
-            print("UPDATE ERROR: ", e)
+            # print("UPDATE ERROR: ", e)
             return False, str(e)
 
         if check:
@@ -343,7 +378,7 @@ class DatabaseWritingServices:
 
             except Exception as e:
                 self.conn.rollback()
-                print("UPDATE ERROR: ", e)
+                # print("UPDATE ERROR: ", e)
                 return False, str(e)
 
         return False, "New Meeting Time specified unavailable"
@@ -370,7 +405,7 @@ class DatabaseWritingServices:
 
         except Exception as e:
             self.conn.rollback()
-            print("UPDATE ERROR: ", e)
+            # print("UPDATE ERROR: ", e)
             return False, str(e)
 
         if check:
@@ -385,7 +420,7 @@ class DatabaseWritingServices:
 
             except Exception as e:
                 self.conn.rollback()
-                print("UPDATE ERROR: ", e)
+                # print("UPDATE ERROR: ", e)
                 return False, str(e)
 
         return False, "New Meeting Date specified unavailable"
@@ -412,7 +447,7 @@ class DatabaseWritingServices:
 
         except Exception as e:
             self.conn.rollback()
-            print("UPDATE ERROR: ", e)
+            # print("UPDATE ERROR: ", e)
             return False, str(e)
 
         if check:
@@ -427,7 +462,7 @@ class DatabaseWritingServices:
 
             except Exception as e:
                 self.conn.rollback()
-                print("UPDATE ERROR: ", e)
+                # print("UPDATE ERROR: ", e)
                 return False, str(e)
 
         return False, "New Meeting Duration specified unavailable"
@@ -454,7 +489,7 @@ class DatabaseWritingServices:
 
         except Exception as e:
             self.conn.rollback()
-            print("UPDATE ERROR: ", e)
+            # print("UPDATE ERROR: ", e)
             return False, str(e)
 
         if check:
@@ -475,7 +510,7 @@ class DatabaseWritingServices:
 
             except Exception as e:
                 self.conn.rollback()
-                print("UPDATE ERROR: ", e)
+                # print("UPDATE ERROR: ", e)
                 return False, str(e)
 
         return False, "New Meeting Room specified is unavailable"
@@ -505,7 +540,7 @@ class DatabaseWritingServices:
 
             except Exception as e:
                 self.conn.rollback()
-                print("UPDATE ERROR: ", e)
+                # print("UPDATE ERROR: ", e)
                 return False, str(e)
 
         return (
@@ -513,7 +548,7 @@ class DatabaseWritingServices:
             "New Meeting Capacity specified is too large for the room of the booking",
         )
 
-    def update_number_of_confirmations(self, BID: int):
+    def increase_number_of_confirmations(self, BID: int):
         """Generic function to update a booking's number of confirmed attendees by 1 \n
         TRUE == BOOKING UPDATED \n
         FALSE == BOOKING NOT UPDATED"""
@@ -537,7 +572,7 @@ class DatabaseWritingServices:
 
         except Exception as e:
             self.conn.rollback()
-            print("UPDATE ERROR: ", e)
+            # print("UPDATE ERROR: ", e)
             return False, str(e)
 
     def update_booking_reminder_sent(self, BID: int):
@@ -557,7 +592,7 @@ class DatabaseWritingServices:
 
         except Exception as e:
             self.conn.rollback()
-            print("UPDATE ERROR: ", e)
+            # print("UPDATE ERROR: ", e)
             return False, str(e)
 
     def update_bookings_shareable_link(self, shareable_link: str, BID: int):
@@ -577,5 +612,5 @@ class DatabaseWritingServices:
 
         except Exception as e:
             self.conn.rollback()
-            print("UPDATE ERROR: ", e)
+            # print("UPDATE ERROR: ", e)
             return False, str(e)

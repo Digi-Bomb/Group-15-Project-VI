@@ -138,12 +138,10 @@ testpass = generate_password_hash("PassW0rd")
 #     database_connection.DatabaseConnection()
 # ).get_username_via_RUID("1000")
 # print(test)
-# whoever left this here, i will fire you!!!!!!!!! -dina
-
 # -- ROUTES --
 from account.routes import account_bp
 from booking.routes import booking_bp
-from notifications.routes import notifications_bp, send_booking_notification_emails
+from notifications.routes import notifications_bp
 from audit_logging.audit_logger import AuditLogger
 
 # register blueprints
@@ -175,9 +173,9 @@ def index():
 
 if __name__ == "__main__":
     audit_logger = AuditLogger()
-    scheduler = APScheduler()
-    scheduler.add_job(func=send_booking_notification_emails, trigger='interval', id='job', seconds=5)
-    scheduler.start()
-    audit_logger.log_audit_term("started long log.")
+    # scheduler = APScheduler()
+    # scheduler.add_job(func=send_booking_notification_emails, trigger='interval', id='job', seconds=5)
+    # scheduler.start()
+    audit_logger.log_audit_event("started long log.")
     audit_logger.log_short_term("started short log.")
     app.run(debug=True, host="0.0.0.0", port=5000)
