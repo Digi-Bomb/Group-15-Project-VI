@@ -110,6 +110,9 @@ class EmailNotificationService:
                 
         booking_info = self.database_reading_services.get_booking_information_of_specific_booking(booking_id)
         
+        if booking_info[4] <= 1:
+            return
+        
         for unregistered_user in self.database_reading_services.get_unregistered_users_associated_with_booking_ID(booking_id):
             email = self.database_reading_services.get_unregistered_user_email_from_URUID(unregistered_user[0])
             pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
@@ -127,6 +130,9 @@ class EmailNotificationService:
         recipent_list = []
                 
         booking_info = self.database_reading_services.get_booking_information_of_specific_booking(booking_id)
+        
+        if booking_info[4] <= 1:
+            return
         
         for unregistered_user in self.database_reading_services.get_unregistered_users_associated_with_booking_ID(booking_id):
             email = self.database_reading_services.get_unregistered_user_email_from_URUID(unregistered_user[0])
