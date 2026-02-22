@@ -340,6 +340,7 @@ def rsvp(link_id):
     writer = DatabaseWritingServices(db, reader)    
     result = reader.get_booking_by_link_id(link_id)
     tm = TimeManager()
+    audit_logger = AuditLogger()
     
     if isinstance(result, str) or (isinstance(result, tuple) and result[0] == 'N'):
         audit_logger.log_audit_event(f"Failed RSVP attempt with invalid link_id: {link_id}")
