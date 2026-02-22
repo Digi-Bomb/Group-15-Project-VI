@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit a meeting{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-5 d-flex flex-wrap">
+    <p class="text-dark fw-bold fs-6 mb-2 w-100 ms-4">Edit a meeting</p>
+    <a class="text-dark fs-6 text-decoration-underline ms-3">
+        <i class="bi bi-geo-alt-fill me-1"></i>
+        Conestoga College, Waterloo
+    </a>
+    <a class="text-dark fs-6 text-decoration-underline ms-auto">
+        <i class="bi bi-calendar-week me-1"></i>
+        {{ booking[1] }} <!-- vanilla datepicker bullshit -->
+    </a>
+</div>
+
+<div class="container-fluid px-5 d-flex flex-wrap mt-5">
+    <p class="text-dark fw-bold fs-5 mb-2 ms-4">{{ booking[0] }} - Meeting Room</p> <!-- passed param, hard coded for now -->
+    <p class="text-muted fs-5 me-3 ms-3 mb-0">
+        <i class="bi bi-people-fill text-muted"></i>
+        {{ booking[4] }}
+    </p>
+    <p class="text-dark fw-bold fs-5 mb-2 ms-4 ms-auto w-50">
+        {{ booking[2] }} - {{ end_time }}
+    </p> <!-- passed param, hard coded for now -->
+</div>
+
+<div class="container-fluid px-5 d-flex flex-wrap">
+    <p class="text-muted fs-6 mb-2 ms-4">Meeting with {{ booking[5] }}</p>
+    <!-- passed param, hard coded for now -->
+</div>
+
+
+<div class="container-fluid px-5 d-flex flex-wrap">
+    <div class="card px-3 mt-3" style="width: 53rem;">
+        <form id="edit-booking-form">
+            {{ form.hidden_tag() }}
+            <input type="hidden" name="meeting_room" value="{{ booking[0] }}">
+            <div class="card-body">
+                <div class="mb-3 w-10">
+                    <input type="hidden" name="meeting_date" value="{{form.meeting_date.data}}">
+                    <label for="numParticipants" class="form-label">Change the participant count</label>
+                    <select class="form-select" id="numParticipants" name="meeting_capacity">
+                        {% for i in range(1, room[6] + 1) %}
+                        <option value="{{ i }}" {% if form.meeting_capacity.data==i %}selected{% endif %}>
+                            {{ i }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="row d-flex">
+                    <div class="col mt-2">
+                        <label for="startTime" class="form-label">Start Time</label>
+                        {{
+                        form.start_time(
+                        class="form-control",
+                        id="startTime",
+                        )
+                        }}
+                    </div>
+                    <div class="col mt-2">
+                        <label for="startTime" class="form-label ms-5">End Time</label>
+                        {{
+                        form.end_time(
+                        class="form-control",
+                        id="endTime",
+                        )
+                        }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary ms-auto mt-3" name="{{ form.submit.name }}">
+                            Create meeting
+                        <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="col me-auto">
+                        <button type="button" id="delete-booking" class="btn btn-danger ms-auto mt-3" name="delete-booking">
+                            Delete
+                        <i class="bi bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+// PATCH (form submit)
+document.getElementById("edit-booking-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const start = document.getElementById("startTime").value;
+    const end = document.getElementById("endTime").value;
+
+    let duration = null;
+
+    if (start && end) {
+        const startDate = new Date(`1970-01-01T${start}:00`);
+        const endDate = new Date(`1970-01-01T${end}:00`);
+        const diffMs = endDate - startDate;
+
+        if (diffMs > 0) {
+            const totalMinutes = diffMs / 60000;
+            const hours = Math.floor(totalMinutes / 60);
+            const minutes = totalMinutes % 60;
+            duration = `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:00`;
+        }
+    }
+
+    const data = {
+        meeting_date: document.querySelector('[name="meeting_date"]').value,
+        start_time: start,
+        duration: duration,
+        meeting_capacity: document.querySelector('[name="meeting_capacity"]').value,
+        meeting_room: document.querySelector('[name="meeting_room"]').value
+    };
+
+    Object.keys(data).forEach(key => {
+        if (!data[key]) delete data[key];
+    });
+
+    const response = await fetch("{{ url_for('booking.edit_booking', booking_id=booking[8]) }}", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    if (response.redirected) {
+        window.location.href = response.url;
+    }
+});
+
+
+// DELETE (separate listener)
+document.getElementById("delete-booking").addEventListener("click", async function() {
+
+    if (!confirm("Are you sure you want to delete this meeting?")) return;
+
+    const response = await fetch("{{ url_for('booking.edit_booking', booking_id=booking[8]) }}", {
+        method: "DELETE"
+    });
+
+    if (response.redirected) {
+        window.location.href = response.url;
+    }
+});
+
+</script>
+
+{% endblock %}
