@@ -15,9 +15,9 @@ notifications_bp = Blueprint('notifications', __name__)
 #     all_bookings = DatabaseReadingServices(DatabaseConnection()).get_all_bookings()
 #     # print(all_bookings)
 #     audit_logger = AuditLogger()
-    
+
 #     for booking_id in all_bookings:
-        
+
 #         booking_info = DatabaseReadingServices(DatabaseConnection()).get_booking_information_of_specific_booking(booking_id)
 #         audit_logger.log_audit_event(booking_info)
 #         if not booking_info[6]:

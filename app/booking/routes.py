@@ -32,7 +32,7 @@ def create_booking():
     db.connect()
     reader = DatabaseReadingServices(db)
     writer = DatabaseWritingServices(db, reader)
-    
+
     audit_logger = AuditLogger()
 
     user_id = session.get("user_id")
@@ -90,7 +90,7 @@ def create_booking():
         create_booking = writer.create_new_booking(
             meeting_date,
             start_time=start_time_str,
-            duration=duration,  
+            duration=duration,
             meeting_owner=user_id,
             meeting_room=room_number,
             meeting_capacity=form.meeting_capacity.data,
@@ -129,7 +129,7 @@ def create_booking():
 def view_booking(booking_id):
     db = DatabaseConnection()
     reader = DatabaseReadingServices(db)
-    
+
     audit_logger = AuditLogger()
 
     booking = reader.get_booking_information_of_specific_booking(booking_id)
@@ -321,7 +321,7 @@ def edit_booking(booking_id):
             return redirect(f"/booking/{booking_id}")
 
         EmailNotificationService(DatabaseConnection()).send_booking_update_notification_email(booking_id)
-        
+
         if writer.reset_confirmed_attendees(booking_id):
             flash("Booking updated successfully.", "success")
         else:
@@ -344,19 +344,19 @@ def rsvp(link_id):
     db = DatabaseConnection()
     db.connect()
     reader = DatabaseReadingServices(db)
-    writer = DatabaseWritingServices(db, reader)    
+    writer = DatabaseWritingServices(db, reader)
     result = reader.get_booking_by_link_id(link_id)
     tm = TimeManager()
     audit_logger = AuditLogger()
-    
+
     if isinstance(result, str) or (isinstance(result, tuple) and result[0] == 'N'):
         audit_logger.log_audit_event(f"Failed RSVP attempt with invalid link_id: {link_id}")
         flash("No booking found for that shareable link ID.", 'error')
         return redirect('/')
 
     booking_id = result
-    
-    # [0] room, [1] date, [2] start time, [3] duration, [4] "confirmed", 
+
+    # [0] room, [1] date, [2] start time, [3] duration, [4] "confirmed",
     # [5] owner ID, [6] reminder sent flag, [7]shareable link, [8]booking ID, [9] booking 'size'
     booking_info = reader.get_booking_information_of_specific_booking(booking_id)
     room = reader.get_room_data_given_room_number(booking_info[0])
@@ -395,4 +395,3 @@ def rsvp(link_id):
         return redirect('/')
 
     return render_template('rsvp.html', room=room, booking=booking_info, end_time=end_time, start_time=start_str, meeting_owner=meeting_owner)
-

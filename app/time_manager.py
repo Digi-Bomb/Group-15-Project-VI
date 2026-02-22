@@ -18,7 +18,7 @@ class TimeManager:
         m = total_minutes % 60
 
         return f"{h:02}:{m:02}"
-    
+
     def get_end_time_from_start_time_and_duration(ts, ds):
 
         start_td = TimeManager.time_to_timedelta(ts)

@@ -160,7 +160,7 @@ def index():
         selected_date = date.today().isoformat()
 
     rooms = reader.get_rooms()
-    
+
     user_id = session.get("user_id")
 
     # if a user is logged in, display their bookings at the top

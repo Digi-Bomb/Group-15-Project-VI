@@ -72,7 +72,7 @@ class DatabaseReadingServices:
 
     def get_specific_meeting_owner_for_booking(self, BID: int):
         """Function that returns the sole meeting owner (via RID) of a particular booking (specified by BID)"""
-        
+
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute("SELECT meetingOwner from Booking WHERE BID = %s", (BID,))
@@ -102,7 +102,7 @@ class DatabaseReadingServices:
 
     def get_meetings_owned_by_registered_user(self, RUID: int):
         """Function that returns a TUPLE object of the meetings that a specific user has created"""
-        
+
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute(
@@ -139,7 +139,7 @@ class DatabaseReadingServices:
 
     def get_unregistered_users_associated_with_booking_ID(self, BUID: int):
         """Function that returns a TUPLE (list) of all unregistered attendees for a specific meeting"""
-        
+
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute(
@@ -428,7 +428,7 @@ class DatabaseReadingServices:
             booked_times.append(tupleOfInfo)
 
         return booked_times
-    
+
     def get_booking_start_and_end_times_for_specific_room_include_date_with_meeting_owner(
         self, room_number: str
     ):
@@ -482,7 +482,7 @@ class DatabaseReadingServices:
             booked_times.append(tupleOfInfo)
 
         return booked_times
-    
+
     def get_booking_start_and_end_times_for_specific_room_include_date_with_BID(
         self, room_number: str
     ):
@@ -621,7 +621,7 @@ class DatabaseReadingServices:
             return result
         else:
             return False, "Unable to find any users for the booking"
-        
+
     def return_all_bookings_with_info_for_a_user(self, RUID: int):
         """
         Returns all bookings owned by a registered user along with full info.
@@ -635,7 +635,7 @@ class DatabaseReadingServices:
             "SELECT meetingRoom, meetingDate, startTime, duration, numberOfConfirmations, meetingOwner, reminderSent, shareableLink, BID, ADDTIME(startTime, duration) AS endTime FROM Booking WHERE meetingOwner = %s",
             (RUID,),
         )
-    
+
         bookings = self.cursor.fetchall()
         self.cursor.close()
 
@@ -771,9 +771,9 @@ class DatabaseReadingServices:
                 return "Unable to find any users associated with the meeting"
         except TypeError:
             return "Unable to find any users associated with the meeting"
-        
+
     def get_list_of_registered_and_unregistered_attendees_with_user_info(self, BID: int):
-        
+
         self.cursor = self.conn.cursor()
 
         # Registered attendees
@@ -783,7 +783,7 @@ class DatabaseReadingServices:
             JOIN RegisteredUser RU ON RBA.RegisteredAttendee = RU.RUID
             WHERE RBA.BID = %s
         """, (BID,))
-    
+
         registered = self.cursor.fetchall()
 
         # Unregistered attendees
@@ -793,7 +793,7 @@ class DatabaseReadingServices:
             JOIN UnregisteredUser URU ON UBA.unregisteredAttendee = URU.URUID
             WHERE UBA.BID = %s
         """, (BID,))
-    
+
         unregistered = self.cursor.fetchall()
         self.cursor.close()
 

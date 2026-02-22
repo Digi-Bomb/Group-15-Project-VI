@@ -43,21 +43,21 @@ class EmailNotificationService:
     #         audit_logger.log_audit_event(f"Failed to send email notification to {recipient_email} due to error: {e}")
     #         flash("Failed to send email.", "error")
     #         return False
-    
+
     def send_email_notification(self, recipient_email: str | list, subject: str, body: str) -> bool:
         #to avoid circular import, import mail here, when we need it
         from app import mail
         sender_email = current_app.config.get('MAIL_DEFAULT_SENDER')
         audit_logger = AuditLogger()
-        
+
         # Convert string to list if needed
         if isinstance(recipient_email, str):
             recipients = [recipient_email]
         else:
             recipients = recipient_email
-        
+
         audit_logger.log_audit_event(f"Attempting to send email notification to {recipients} with subject '{subject}'.")
-        
+
         if not recipients or not sender_email:
             current_app.logger.error("Recipient or sender email not configured")
             audit_logger.log_audit_event(f"Failed to send email notification to {recipients} due to missing email configuration.")
@@ -84,13 +84,13 @@ class EmailNotificationService:
         audit_logger = AuditLogger()
         meeting_owner_email = self.database_reading_services.get_registered_user_email_from_RUID(booking_owner_id)
         self.send_email_notification(meeting_owner_email, "New Booking RSVP", f"{attendee_name} has RSVP'd to your booking: '{booking_id}'.")
-        
+
         audit_logger.log_audit_event(f"Sent new RSVP confirmation notification email to {meeting_owner_email} for booking ID {booking_id} due to new RSVP confirmation from {attendee_name}.")
-    
+
     def send_booking_notification_email(self, booking: Booking):
         recipent_list = []
         audit_logger = AuditLogger()
-                
+
         for unregistered_user in self.database_reading_services.get_unregistered_users_associated_with_booking_ID(booking.booking_id):
             recipent_list.append(self.database_reading_services.get_unregistered_user_email_from_URUID(unregistered_user.URUID))
 
@@ -98,50 +98,50 @@ class EmailNotificationService:
             recipent_list.append(self.database_reading_services.get_registered_user_email_from_RUID(registered_user.RUID))
 
         self.send_email_notification(recipent_list, "Reminder: Upcoming Booking", f"Your booking is scheduled for {booking.start_time} - {booking.end_time} at {booking.location}.")
-        
+
         audit_logger.log_audit_event(f"Sent booking reminder notification email to {recipent_list} for booking ID {booking.booking_id}.")
-        
+
         booking.reminder_sent = True
         self.database_writing_services.update_booking_reminder_sent(booking.booking_id)
 
     def send_booking_update_notification_email(self, booking_id: int):
         audit_logger = AuditLogger()
         recipent_list = []
-                
+
         booking_info = self.database_reading_services.get_booking_information_of_specific_booking(booking_id)
-        
+
         if booking_info[4] <= 1:
             return
-        
+
         for unregistered_user in self.database_reading_services.get_unregistered_users_associated_with_booking_ID(booking_id):
             email = self.database_reading_services.get_unregistered_user_email_from_URUID(unregistered_user[0])
             pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
             if re.match(pattern, email) and email not in recipent_list:
                 recipent_list.append(email)
-                    
+
         end_time = TimeManager.get_end_time_from_start_time_and_duration(booking_info[2], booking_info[3])
         end_time = TimeManager.timedelta_to_time(end_time)
-        
+
         self.send_email_notification(recipent_list, "Booking Updated", f"Your booking has been updated. Date: {booking_info[1]} Time: {booking_info[2]} - End Time: {end_time} Room: {booking_info[0]}. Please RSVP again if you are still attending at this link: http://localhost:5000/rsvp/{booking_info[7]}")
         audit_logger.log_audit_event(f"Sent booking update notification email to {recipent_list} for booking ID {booking_id}.")
-    
+
     def send_booking_delete_notification_email(self, booking_id: int):
         audit_logger = AuditLogger()
         recipent_list = []
-                
+
         booking_info = self.database_reading_services.get_booking_information_of_specific_booking(booking_id)
-        
+
         if booking_info[4] <= 1:
             return
-        
+
         for unregistered_user in self.database_reading_services.get_unregistered_users_associated_with_booking_ID(booking_id):
             email = self.database_reading_services.get_unregistered_user_email_from_URUID(unregistered_user[0])
             pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
             if re.match(pattern, email) and email not in recipent_list:
                 recipent_list.append(email)
-                    
+
         end_time = TimeManager.get_end_time_from_start_time_and_duration(booking_info[2], booking_info[3])
         end_time = TimeManager.timedelta_to_time(end_time)
-        
+
         self.send_email_notification(recipent_list, "Booking Deleted", f"Your booking has been deleted. Date: {booking_info[1]} Time: {booking_info[2]} - End Time: {end_time} Room: {booking_info[0]}.")
         audit_logger.log_audit_event(f"Sent booking delete notification email to {recipent_list} for booking ID {booking_id}.")
