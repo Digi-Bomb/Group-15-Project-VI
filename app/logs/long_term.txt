@@ -96,3 +96,159 @@
 [2026-02-22 05:30:02.210596] started long log.: 
 [2026-02-22 05:30:02.935897] started long log.: 
 [2026-02-22 05:31:10.754764] Failed RSVP attempt for booking ID 1099 with name test and email  due to capacity limit reached.: 
+[2026-02-22 14:02:26.604604] started long log.: 
+[2026-02-22 14:02:27.386129] started long log.: 
+[2026-02-22 14:03:28.310260] Booking created: User ID 1010 created a booking for room 1F05 on 2026-02-22 at 08:00:00 for 2 hr with booking ID 1111.
+[2026-02-22 14:04:09.913703] Sent email notification to brookecronin123@gmail.com with subject 'New Booking RSVP'.: 
+[2026-02-22 14:04:09.916803] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1111 due to new RSVP confirmation from bookez.: 
+[2026-02-22 14:04:10.048815] Received new RSVP for booking ID 1111 from bookez (bookez2354@gmail.com).: 
+[2026-02-22 14:04:36.600529] Failed RSVP attempt for booking ID 1111 with name goober and email gooberbackups@gmail.com due to capacity limit reached.: 
+[2026-02-22 14:06:13.065949] started long log.: 
+[2026-02-22 14:08:16.790665] started long log.: 
+[2026-02-22 14:08:20.312132] Adding unregistered user with URUID N to booking update notification email recipient list for booking ID 1111.: 
+[2026-02-22 14:10:26.276040] started long log.: 
+[2026-02-22 14:10:31.664563] No unregistered users found for that booking ID.Adding unregistered user with URUID N to booking update notification email recipient list for booking ID 1111.: 
+[2026-02-22 14:11:59.815926] started long log.: 
+[2026-02-22 14:12:02.363953] started long log.: 
+[2026-02-22 14:12:24.964993] started long log.: 
+[2026-02-22 14:13:32.660663] started long log.: 
+[2026-02-22 14:14:05.895910] started long log.: 
+[2026-02-22 14:16:48.882827] started long log.: 
+[2026-02-22 14:17:34.308777] [(1002,), (1003,), (1013,), (1014,)]Adding unregistered user with URUID (1002,) to booking update notification email recipient list for booking ID 1102.: 
+[2026-02-22 14:17:36.995879] [(1002,), (1003,), (1013,), (1014,)]Adding unregistered user with URUID (1002,) to booking update notification email recipient list for booking ID 1102.: 
+[2026-02-22 14:18:57.773913] Booking created: User ID 1010 created a booking for room 1F05 on 2026-02-22 at 08:00:00 for 2 hr with booking ID 1112.
+[2026-02-22 14:19:22.810890] Sent email notification to brookecronin123@gmail.com with subject 'New Booking RSVP'.: 
+[2026-02-22 14:19:22.831444] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1112 due to new RSVP confirmation from bookez.: 
+[2026-02-22 14:19:22.968486] Received new RSVP for booking ID 1112 from bookez (bookez2354@gmail.com).: 
+[2026-02-22 14:20:10.703181] [(1017,)]Adding unregistered user with URUID (1017,) to booking update notification email recipient list for booking ID 1112.: 
+[2026-02-22 14:21:44.573567] started long log.: 
+[2026-02-22 14:22:01.458414] [(1017,)]Adding unregistered user with URUID (1017,) to booking update notification email recipient list for booking ID 1112.: 
+[2026-02-22 14:22:19.875043] [(1017,)]Adding unregistered user with URUID (1017,) to booking update notification email recipient list for booking ID 1112.: 
+[2026-02-22 14:23:16.451586] started long log.: 
+[2026-02-22 14:23:20.510661] [(1017,)]Adding unregistered user with URUID (1017,) to booking update notification email recipient list for booking ID 1112.: 
+[2026-02-22 14:23:57.203796] [(1017,)]Adding unregistered user with URUID (1017,) to booking update notification email recipient list for booking ID 1112.: 
+[2026-02-22 14:26:28.305329] started long log.: 
+[2026-02-22 14:27:23.306677] started long log.: 
+[2026-02-22 14:27:47.852471] [(1017,)]Adding unregistered user with URUID (1017,) to booking update notification email recipient list [] for booking ID 1112.: 
+[2026-02-22 14:28:15.928356] started long log.: 
+[2026-02-22 14:29:16.318407] started long log.: 
+[2026-02-22 14:30:21.534917] started long log.: 
+[2026-02-22 14:30:36.038469] Adding unregistered user with URUID 1017 to booking update notification email recipient list ['bookez2354@gmail.com'] for booking ID 1112.: 
+[2026-02-22 14:34:08.416068] started long log.: 
+[2026-02-22 14:34:16.200360] Adding unregistered user with URUID 1017 to booking update notification email recipient list ['bookez2354@gmail.com'] for booking ID 1112.: 
+[2026-02-22 14:34:43.311427] Adding unregistered user with URUID 1017 to booking update notification email recipient list ['bookez2354@gmail.com'] for booking ID 1112.: 
+TEST[2026-02-22 14:35:30.995558] started long log.: 
+[2026-02-22 14:35:46.174610] Adding unregistered user with URUID 1017 to booking update notification email recipient list ['bookez2354@gmail.com'] for booking ID 1112.: 
+[2026-02-22 14:36:29.057175] Adding unregistered user with URUID 1017 to booking update notification email recipient list ['bookez2354@gmail.com'] for booking ID 1112.: 
+[2026-02-22 14:36:35.331982] started long log.: 
+[2026-02-22 14:36:38.605758] DEBUG: Starting email notification for booking 1112: 
+[2026-02-22 14:36:38.686423] DEBUG: Got booking info: ('1F05', '2026-02-22', '09:00:00', '05:00:00', 2, 1010, False, '59cd595b-6396-40dd-b037-16b3471836ca', 1112, 1): 
+[2026-02-22 14:36:38.831455] Adding unregistered user with URUID 1017 to booking update notification email recipient list ['bookez2354@gmail.com'] for booking ID 1112.: 
+[2026-02-22 14:36:38.843491] DEBUG: Recipient list built: ['bookez2354@gmail.com']: 
+[2026-02-22 14:37:22.274802] started long log.: 
+[2026-02-22 14:38:03.241452] started long log.: 
+[2026-02-22 14:38:06.824264] DEBUG: Starting email notification for booking 1112: 
+[2026-02-22 14:38:06.909755] DEBUG: Got booking info: ('1F05', '2026-02-22', '09:00:00', '05:00:00', 2, 1010, False, '59cd595b-6396-40dd-b037-16b3471836ca', 1112, 1): 
+[2026-02-22 14:38:07.081982] Adding unregistered user with URUID 1017 to booking update notification email recipient list ['bookez2354@gmail.com'] for booking ID 1112.: 
+[2026-02-22 14:38:07.086236] DEBUG: Recipient list built: ['bookez2354@gmail.com']: 
+[2026-02-22 14:38:07.089637] DEBUG: About to send email to ['bookez2354@gmail.com']: 
+[2026-02-22 14:38:07.093399] Sending booking update notification email to ['bookez2354@gmail.com']: 
+[2026-02-22 14:40:17.480961] started long log.: 
+[2026-02-22 14:40:25.022658] DEBUG: Starting email notification for booking 1112: 
+[2026-02-22 14:40:25.117865] DEBUG: Got booking info: ('1F05', '2026-02-22', '09:00:00', '05:00:00', 2, 1010, False, '59cd595b-6396-40dd-b037-16b3471836ca', 1112, 1): 
+[2026-02-22 14:40:25.277052] Adding unregistered user with URUID 1017 to booking update notification email recipient list ['bookez2354@gmail.com'] for booking ID 1112.: 
+[2026-02-22 14:40:25.282365] DEBUG: Recipient list built: ['bookez2354@gmail.com']: 
+[2026-02-22 14:40:25.287524] DEBUG: About to send email to ['bookez2354@gmail.com']: 
+[2026-02-22 14:40:25.296455] Sending booking update notification email to ['bookez2354@gmail.com']: 
+[2026-02-22 14:40:25.458154] Attempting to send email notification to ['bookez2354@gmail.com'] with subject 'Booking Updated'.: 
+[2026-02-22 14:41:25.757574] started long log.: 
+[2026-02-22 14:42:09.536928] started long log.: 
+[2026-02-22 14:42:10.449495] started long log.: 
+[2026-02-22 14:42:18.693740] Adding unregistered user with URUID 1017 to booking update notification email recipient list ['bookez2354@gmail.com'] for booking ID 1112.: 
+[2026-02-22 14:42:42.092724] started long log.: 
+[2026-02-22 14:43:48.920194] started long log.: 
+[2026-02-22 14:43:49.793836] started long log.: 
+[2026-02-22 14:44:11.874924] DEBUG: Starting email notification for booking 1112: 
+[2026-02-22 14:44:11.960517] DEBUG: Got booking info: ('1F05', '2026-02-22', '14:00:00', '01:00:00', 2, 1010, False, '59cd595b-6396-40dd-b037-16b3471836ca', 1112, 1): 
+[2026-02-22 14:44:12.115407] Adding unregistered user with URUID 1017 to booking update notification email recipient list ['bookez2354@gmail.com'] for booking ID 1112.: 
+[2026-02-22 14:44:12.118317] DEBUG: Recipient list built: ['bookez2354@gmail.com']: 
+[2026-02-22 14:44:12.122410] DEBUG: About to send email to ['bookez2354@gmail.com']: 
+[2026-02-22 14:44:12.126821] Sending booking update notification email to ['bookez2354@gmail.com']: 
+[2026-02-22 14:44:12.267692] Attempting to send email notification to ['bookez2354@gmail.com'] with subject 'Booking Updated'.: 
+[2026-02-22 14:44:13.398624] Sent email notification to ['bookez2354@gmail.com'] with subject 'Booking Updated'.: 
+[2026-02-22 14:44:13.400991] DEBUG: Email sent: 
+[2026-02-22 14:44:13.403155] Sent booking update notification email to ['bookez2354@gmail.com'] for booking ID 1112.: 
+[2026-02-22 14:45:20.676498] DEBUG: Starting email notification for booking 1112: 
+[2026-02-22 14:45:20.765743] DEBUG: Got booking info: ('1F05', '2026-02-22', '09:00:00', '01:00:00', 2, 1010, False, '59cd595b-6396-40dd-b037-16b3471836ca', 1112, 5): 
+[2026-02-22 14:46:29.948680] started long log.: 
+[2026-02-22 14:47:36.501170] started long log.: 
+[2026-02-22 14:47:48.872739] started long log.: 
+[2026-02-22 14:48:16.328325] Attempting to send email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 14:48:17.426003] Sent email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 14:48:17.431746] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1112 due to new RSVP confirmation from test2.: 
+[2026-02-22 14:48:17.563232] Received new RSVP for booking ID 1112 from test2 (gooberbackups@gmail.com).: 
+[2026-02-22 14:48:38.184930] DEBUG: Starting email notification for booking 1112: 
+[2026-02-22 14:48:38.274982] DEBUG: Got booking info: ('1F05', '2026-02-22', '09:00:00', '10:00:00', 3, 1010, False, '59cd595b-6396-40dd-b037-16b3471836ca', 1112, 7): 
+[2026-02-22 14:48:38.423273] Adding unregistered user with URUID 1018 to booking update notification email recipient list ['gooberbackups@gmail.com'] for booking ID 1112.: 
+[2026-02-22 14:48:38.426219] DEBUG: Recipient list built: ['gooberbackups@gmail.com']: 
+[2026-02-22 14:48:38.440511] DEBUG: About to send email to ['gooberbackups@gmail.com']: 
+[2026-02-22 14:48:38.454441] Sending booking update notification email to ['gooberbackups@gmail.com']: 
+[2026-02-22 14:48:38.456514] Attempting to send email notification to ['gooberbackups@gmail.com'] with subject 'Booking Updated'.: 
+[2026-02-22 14:48:39.583139] Sent email notification to ['gooberbackups@gmail.com'] with subject 'Booking Updated'.: 
+[2026-02-22 14:48:39.594083] DEBUG: Email sent: 
+[2026-02-22 14:48:39.599418] Sent booking update notification email to ['gooberbackups@gmail.com'] for booking ID 1112.: 
+[2026-02-22 14:51:22.357249] started long log.: 
+[2026-02-22 14:51:34.006607] started long log.: 
+[2026-02-22 14:52:32.263893] started long log.: 
+[2026-02-22 14:52:49.899411] Attempting to send email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 14:52:51.136893] Sent email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 14:52:51.150090] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1112 due to new RSVP confirmation from 213edwr4fdg.: 
+[2026-02-22 14:52:51.284781] Received new RSVP for booking ID 1112 from 213edwr4fdg (gooberbackups@gmail.com).: 
+[2026-02-22 14:54:40.267299] Attempting to send email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 14:54:41.500452] Sent email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 14:54:41.513506] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1100 due to new RSVP confirmation from test1.: 
+[2026-02-22 14:54:41.644292] Received new RSVP for booking ID 1100 from test1 (bookez2354@gmail.com).: 
+[2026-02-22 14:55:29.114088] started long log.: 
+[2026-02-22 14:56:59.455410] started long log.: 
+[2026-02-22 14:57:24.571332] DEBUG: Starting email notification for booking 1100: 
+[2026-02-22 14:57:24.670971] DEBUG: Got booking info: ('2G28', '2026-02-18', '15:00:00', '01:00:00', 2, 1010, False, 'b7049b44-f929-4e3a-9fe1-63f0fccdc386', 1100, 12): 
+[2026-02-22 14:57:24.833205] Adding unregistered user with URUID 1020 to booking update notification email recipient list ['bookez2354@gmail.com'] for booking ID 1100.: 
+[2026-02-22 14:57:24.848663] DEBUG: Recipient list built: ['bookez2354@gmail.com']: 
+[2026-02-22 14:58:52.601544] started long log.: 
+[2026-02-22 14:59:04.555432] DEBUG: Starting email notification for booking 1100: 
+[2026-02-22 14:59:04.632983] DEBUG: Got booking info: ('2G28', '2026-02-18', '15:00:00', '01:00:00', 2, 1010, False, 'b7049b44-f929-4e3a-9fe1-63f0fccdc386', 1100, 12): 
+[2026-02-22 14:59:04.778756] Adding unregistered user with URUID 1020 to booking update notification email recipient list ['bookez2354@gmail.com'] for booking ID 1100.: 
+[2026-02-22 14:59:04.782749] DEBUG: Recipient list built: ['bookez2354@gmail.com']: 
+[2026-02-22 14:59:04.786676] DEBUG: About to send email to ['bookez2354@gmail.com']: 
+[2026-02-22 14:59:04.791913] Sending booking update notification email to ['bookez2354@gmail.com']: 
+[2026-02-22 14:59:04.958990] Attempting to send email notification to ['bookez2354@gmail.com'] with subject 'Booking Updated'.: 
+[2026-02-22 14:59:06.202695] Sent email notification to ['bookez2354@gmail.com'] with subject 'Booking Updated'.: 
+[2026-02-22 14:59:06.218713] Sent booking update notification email to ['bookez2354@gmail.com'] for booking ID 1100.: 
+[2026-02-22 14:59:22.515218] Attempting to send email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 14:59:23.939343] Sent email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 14:59:23.947649] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1100 due to new RSVP confirmation from ewewdsw.: 
+[2026-02-22 14:59:24.079675] Received new RSVP for booking ID 1100 from ewewdsw (gooberbackups@gmail.com).: 
+[2026-02-22 14:59:53.222947] DEBUG: Starting email notification for booking 1100: 
+[2026-02-22 14:59:53.306105] DEBUG: Got booking info: ('2G28', '2026-02-18', '10:00:00', '01:00:00', 2, 1010, False, 'b7049b44-f929-4e3a-9fe1-63f0fccdc386', 1100, 11): 
+[2026-02-22 14:59:53.456203] Adding unregistered user with URUID 1021 to booking update notification email recipient list ['gooberbackups@gmail.com'] for booking ID 1100.: 
+[2026-02-22 14:59:53.469694] DEBUG: Recipient list built: ['gooberbackups@gmail.com']: 
+[2026-02-22 14:59:53.483492] DEBUG: About to send email to ['gooberbackups@gmail.com']: 
+[2026-02-22 14:59:53.498193] Sending booking update notification email to ['gooberbackups@gmail.com']: 
+[2026-02-22 14:59:53.502720] Attempting to send email notification to ['gooberbackups@gmail.com'] with subject 'Booking Updated'.: 
+[2026-02-22 14:59:54.520458] Sent email notification to ['gooberbackups@gmail.com'] with subject 'Booking Updated'.: 
+[2026-02-22 14:59:54.523721] Sent booking update notification email to ['gooberbackups@gmail.com'] for booking ID 1100.: 
+[2026-02-22 15:00:29.181290] Attempting to send email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 15:00:30.611404] Sent email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 15:00:30.619589] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1100 due to new RSVP confirmation from WDWSX.: 
+[2026-02-22 15:00:30.753284] Received new RSVP for booking ID 1100 from WDWSX (gooberbackups@gmail.com).: 
+[2026-02-22 15:01:16.941411] started long log.: 
+[2026-02-22 15:01:56.072659] started long log.: 
+[2026-02-22 15:03:15.561864] started long log.: 
+[2026-02-22 15:03:27.740131] Failed RSVP attempt for booking ID 1099 with name dwsax and email gooberbackups@gmail.com due to capacity limit reached.: 
+[2026-02-22 15:04:49.943557] Attempting to send email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 15:04:51.165223] Sent email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 15:04:51.181692] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1099 due to new RSVP confirmation from vcx.: 
+[2026-02-22 15:04:51.323521] Received new RSVP for booking ID 1099 from vcx (gooberbackups@gmail.com).: 
+[2026-02-22 15:05:00.663189] Attempting to send email notification to ['gooberbackups@gmail.com'] with subject 'Booking Deleted'.: 
+[2026-02-22 15:05:01.676006] Sent email notification to ['gooberbackups@gmail.com'] with subject 'Booking Deleted'.: 
+[2026-02-22 15:05:01.678211] Sent booking delete notification email to ['gooberbackups@gmail.com'] for booking ID 1099.: 

@@ -311,11 +311,17 @@ def edit_booking(booking_id):
             flash(error_msg or "Failed to update booking.", "error")
             return redirect(f"/booking/{booking_id}")
 
-        flash("Booking updated successfully.", "success")
+        EmailNotificationService(DatabaseConnection()).send_booking_update_notification_email(booking_id)
+        
+        if writer.reset_confirmed_attendees(booking_id):
+            flash("Booking updated successfully.", "success")
+        else:
+            flash("Booking updated, but failed to reset RSVPs and send notifications.", "warning")
         return redirect(f"/booking/{booking_id}")
 
     # DELETE: remove booking
     if request.method == "DELETE":
+        EmailNotificationService(DatabaseConnection()).send_booking_delete_notification_email(booking_id)
         deleted = writer.delete_booking(booking_id)
         if deleted:
             flash("Booking deleted.", "success")
@@ -373,7 +379,7 @@ def rsvp(link_id):
 
         EmailNotificationService(DatabaseConnection()).send_new_rsvp_notification_email(booking_info[5], name, booking_id)
         # +1 to number of confirmations after successful create
-        writer.update_number_of_confirmations(booking_id)
+        writer.increase_number_of_confirmations(booking_id)
         audit_logger.log_audit_event(f"Received new RSVP for booking ID {booking_id} from {name} ({email}).")
         flash('RSVP received. Thank you!', 'success')
         return redirect('/')

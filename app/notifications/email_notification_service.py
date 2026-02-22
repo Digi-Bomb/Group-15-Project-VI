@@ -6,6 +6,7 @@ from database_writing import DatabaseWritingServices
 from flask import redirect, flash, current_app
 from flask_mail import Message
 from audit_logging.audit_logger import AuditLogger
+from time_manager import TimeManager
 
 class EmailNotificationService:
     def __init__(self, database: DatabaseConnection):
@@ -13,15 +14,51 @@ class EmailNotificationService:
         self.database_reading_services = DatabaseReadingServices(database)
         self.database_writing_services = DatabaseWritingServices(database, self.database_reading_services)
 
-    def send_email_notification(self, recipient_email: str, subject: str, body: str) -> bool:
+    # def send_email_notification(self, recipient_email: str, subject: str, body: str) -> bool:
+    #     #to avoid circular import, import mail here, when we need it
+    #     from app import mail
+    #     sender_email = current_app.config.get('MAIL_DEFAULT_SENDER')
+    #     audit_logger = AuditLogger()
+    #     audit_logger.log_audit_event(f"Attempting to send email notification to {recipient_email} with subject '{subject}'.")
+    #     if not recipient_email or not sender_email:
+    #         current_app.logger.error("Recipient or sender email not configured")
+    #         audit_logger.log_audit_event(f"Failed to send email notification to {recipient_email} due to missing email configuration.")
+    #         flash("Email configuration missing.", "error")
+    #         return False
+
+    #     try:
+    #         msg = Message(
+    #             subject=subject,
+    #             sender=sender_email,
+    #             recipients=[recipient_email],
+    #             body=body
+    #         )
+    #         mail.send(msg)  # send using the instance imported from app.py
+    #         audit_logger.log_audit_event(f"Sent email notification to {recipient_email} with subject '{subject}'.")
+    #         return True
+    #     except (ConnectionError, TimeoutError, OSError) as e:
+    #         current_app.logger.error(f"Mail send failed: {e}", exc_info=True)
+    #         audit_logger.log_audit_event(f"Failed to send email notification to {recipient_email} due to error: {e}")
+    #         flash("Failed to send email.", "error")
+    #         return False
+    
+    def send_email_notification(self, recipient_email: str | list, subject: str, body: str) -> bool:
         #to avoid circular import, import mail here, when we need it
         from app import mail
         sender_email = current_app.config.get('MAIL_DEFAULT_SENDER')
         audit_logger = AuditLogger()
-
-        if not recipient_email or not sender_email:
+        
+        # Convert string to list if needed
+        if isinstance(recipient_email, str):
+            recipients = [recipient_email]
+        else:
+            recipients = recipient_email
+        
+        audit_logger.log_audit_event(f"Attempting to send email notification to {recipients} with subject '{subject}'.")
+        
+        if not recipients or not sender_email:
             current_app.logger.error("Recipient or sender email not configured")
-            audit_logger.log_audit_event(f"Failed to send email notification to {recipient_email} due to missing email configuration.")
+            audit_logger.log_audit_event(f"Failed to send email notification to {recipients} due to missing email configuration.")
             flash("Email configuration missing.", "error")
             return False
 
@@ -29,15 +66,15 @@ class EmailNotificationService:
             msg = Message(
                 subject=subject,
                 sender=sender_email,
-                recipients=[recipient_email],
+                recipients=recipients,
                 body=body
             )
-            mail.send(msg)  # send using the instance imported from app.py
-            audit_logger.log_audit_event(f"Sent email notification to {recipient_email} with subject '{subject}'.")
+            mail.send(msg)
+            audit_logger.log_audit_event(f"Sent email notification to {recipients} with subject '{subject}'.")
             return True
         except (ConnectionError, TimeoutError, OSError) as e:
             current_app.logger.error(f"Mail send failed: {e}", exc_info=True)
-            audit_logger.log_audit_event(f"Failed to send email notification to {recipient_email} due to error: {e}")
+            audit_logger.log_audit_event(f"Failed to send email notification to {recipients} due to error: {e}")
             flash("Failed to send email.", "error")
             return False
 
@@ -64,3 +101,33 @@ class EmailNotificationService:
         
         booking.reminder_sent = True
         self.database_writing_services.update_booking_reminder_sent(booking.booking_id)
+
+    def send_booking_update_notification_email(self, booking_id: int):
+        audit_logger = AuditLogger()
+        recipent_list = []
+                
+        booking_info = self.database_reading_services.get_booking_information_of_specific_booking(booking_id)
+        
+        for unregistered_user in self.database_reading_services.get_unregistered_users_associated_with_booking_ID(booking_id):
+            recipent_list.append(self.database_reading_services.get_unregistered_user_email_from_URUID(unregistered_user[0]))
+                    
+        end_time = TimeManager.get_end_time_from_start_time_and_duration(booking_info[2], booking_info[3])
+        end_time = TimeManager.timedelta_to_time(end_time)
+        
+        self.send_email_notification(recipent_list, "Booking Updated", f"Your booking has been updated. Date: {booking_info[1]} Time: {booking_info[2]} - End Time: {end_time} Room: {booking_info[0]}. Please RSVP again if you are still attending at this link: http://localhost:5000/rsvp/{booking_info[7]}")
+        audit_logger.log_audit_event(f"Sent booking update notification email to {recipent_list} for booking ID {booking_id}.")
+    
+    def send_booking_delete_notification_email(self, booking_id: int):
+        audit_logger = AuditLogger()
+        recipent_list = []
+                
+        booking_info = self.database_reading_services.get_booking_information_of_specific_booking(booking_id)
+        
+        for unregistered_user in self.database_reading_services.get_unregistered_users_associated_with_booking_ID(booking_id):
+            recipent_list.append(self.database_reading_services.get_unregistered_user_email_from_URUID(unregistered_user[0]))
+                    
+        end_time = TimeManager.get_end_time_from_start_time_and_duration(booking_info[2], booking_info[3])
+        end_time = TimeManager.timedelta_to_time(end_time)
+        
+        self.send_email_notification(recipent_list, "Booking Deleted", f"Your booking has been deleted. Date: {booking_info[1]} Time: {booking_info[2]} - End Time: {end_time} Room: {booking_info[0]}.")
+        audit_logger.log_audit_event(f"Sent booking delete notification email to {recipent_list} for booking ID {booking_id}.")

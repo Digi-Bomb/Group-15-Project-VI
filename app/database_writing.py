@@ -289,7 +289,40 @@ class DatabaseWritingServices:
             self.conn.rollback()
             # print("DELETE ERROR: ", e)
             return False, str(e)
+    
+    def reset_confirmed_attendees(self, BID: int):
+        """Generic function to reset all RSVPs for a booking when the meeting time, date, duration, or room is updated \n
+        NOTE: CALLED WHEN UPDATING A BOOKING'S TIME, DATE, DURATION, OR ROOM \n
+        TRUE == RSVPS RESET \n
+        FALSE == RSVPS NOT RESET"""
+        
+        booking_info = self.reader.get_booking_information_of_specific_booking(BID)
+        meeting_owner = booking_info[5]
+        
+        try:
+            self.cursor.execute(
+                "DELETE FROM RegisteredBookingAttendees WHERE BID = %s AND registeredAttendee != %s", (BID, meeting_owner)
+            )
+            self.conn.commit()
 
+            self.cursor.execute(
+                "DELETE FROM UnregisteredBookingAttendees WHERE BID = %s", (BID,)
+            )
+            
+            self.cursor.execute(
+                "UPDATE Booking SET numberOfConfirmations = %s WHERE BID = %s",
+                (1, BID),
+            )
+
+            self.conn.commit()
+            return True
+
+        except Exception as e:
+            self.conn.rollback()
+            # print("DELETE ERROR: ", e)
+            return False, str(e)
+        
+    
     def update_room_as_available(self, BID: int):
         """Generic function to update the database that a room is now available when deleting a booking \n
         NOTE: CALLED WHEN DELETING A BOOKING \n
@@ -515,7 +548,7 @@ class DatabaseWritingServices:
             "New Meeting Capacity specified is too large for the room of the booking",
         )
 
-    def update_number_of_confirmations(self, BID: int):
+    def increase_number_of_confirmations(self, BID: int):
         """Generic function to update a booking's number of confirmed attendees by 1 \n
         TRUE == BOOKING UPDATED \n
         FALSE == BOOKING NOT UPDATED"""
