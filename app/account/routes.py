@@ -62,7 +62,8 @@ def login():
             session.permanent = True
             session["user_id"] = user_id# Assuming loginUser[1] contains the user_id
             #audit_logger.log_audit_event("Login successful", f"Successful login for user: {user}")
-            return redirect("/")
+            
+            return redirect("/") #,200 <- can specify status code if needed
         #audit_logger.log_audit_event("Login failed - invalid credentials", f"Failed login attempt for username: {user} with provided password.")
         flash('Invalid username or password.', 'danger')
         current_app.logger.warning(f"Failed login attempt for username: {form.username.data}")
