@@ -14,3 +14,6 @@
 - docker run -d --name planner_app -p 5000:5000 planner_flask
 - docker compose down
 - docker compose up -d --build
+
+- to demo OPTIONS, use curl -i -X OPTIONS http://localhost:5000/booking
+- -X OPTIONS forces http request type, -i includes http response headers in output

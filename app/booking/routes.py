@@ -1,5 +1,5 @@
 import random
-from flask import Blueprint, render_template, request, redirect, flash, session, abort
+from flask import Blueprint, render_template, request, redirect, flash, session, abort, make_response
 from datetime import datetime, timedelta
 import uuid
 
@@ -19,8 +19,15 @@ booking_bp = Blueprint("booking", __name__)
 audit_logger = AuditLogger()
 
 
-@booking_bp.route("/booking", methods=["GET", "POST"])
+@booking_bp.route("/booking", methods=["GET", "POST", "OPTIONS"])
 def create_booking():
+
+    # OPTIONS
+    if request.method == "OPTIONS":
+        response = make_response("", 204) #no content, just headers no body
+        response.headers["Allow"] = "GET, POST, OPTIONS"
+        return response
+
     db = DatabaseConnection()
     db.connect()
     reader = DatabaseReadingServices(db)
