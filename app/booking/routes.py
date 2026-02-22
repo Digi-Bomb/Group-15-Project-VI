@@ -216,17 +216,18 @@ def edit_booking(booking_id):
         except Exception:
             pass
 
-        room = reader.get_room_data_given_room_number(
+        current_room = reader.get_room_data_given_room_number(
             (booking[0])
         )
 
+        rooms = reader.get_rooms()
+
         start_str = booking[2]
         duration_str = booking[3]
-
         end_time = TimeManager.get_end_time_from_start_time_and_duration(start_str, duration_str)
 
         return render_template(
-            "editbooking.html", form=form, booking=booking, room=room, end_time=end_time
+            "editbooking.html", form=form, booking=booking, current_room=current_room, end_time=end_time, rooms=rooms
         )
 
     # PATCH: accept JSON payload to update one or more fields
