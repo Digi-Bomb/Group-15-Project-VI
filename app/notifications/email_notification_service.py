@@ -1,3 +1,5 @@
+import re
+
 from booking.booking import Booking
 from database_connection import DatabaseConnection
 from database_reading import DatabaseReadingServices
@@ -109,7 +111,10 @@ class EmailNotificationService:
         booking_info = self.database_reading_services.get_booking_information_of_specific_booking(booking_id)
         
         for unregistered_user in self.database_reading_services.get_unregistered_users_associated_with_booking_ID(booking_id):
-            recipent_list.append(self.database_reading_services.get_unregistered_user_email_from_URUID(unregistered_user[0]))
+            email = self.database_reading_services.get_unregistered_user_email_from_URUID(unregistered_user[0])
+            pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
+            if re.match(pattern, email) and email not in recipent_list:
+                recipent_list.append(email)
                     
         end_time = TimeManager.get_end_time_from_start_time_and_duration(booking_info[2], booking_info[3])
         end_time = TimeManager.timedelta_to_time(end_time)
@@ -124,7 +129,10 @@ class EmailNotificationService:
         booking_info = self.database_reading_services.get_booking_information_of_specific_booking(booking_id)
         
         for unregistered_user in self.database_reading_services.get_unregistered_users_associated_with_booking_ID(booking_id):
-            recipent_list.append(self.database_reading_services.get_unregistered_user_email_from_URUID(unregistered_user[0]))
+            email = self.database_reading_services.get_unregistered_user_email_from_URUID(unregistered_user[0])
+            pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
+            if re.match(pattern, email) and email not in recipent_list:
+                recipent_list.append(email)
                     
         end_time = TimeManager.get_end_time_from_start_time_and_duration(booking_info[2], booking_info[3])
         end_time = TimeManager.timedelta_to_time(end_time)

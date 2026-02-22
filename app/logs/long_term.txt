@@ -284,3 +284,26 @@ TEST[2026-02-22 14:35:30.995558] started long log.:
 [2026-02-22 19:31:34.318727] Received new RSVP for booking ID 1109 from wdasdsa ().: 
 [2026-02-22 19:33:23.025900] started long log.: 
 [2026-02-22 19:33:40.710249] started long log.: 
+[2026-02-22 19:39:56.154387] Attempting to send email notification to ['No unregistered user found for that URUID.', 'gooberbackups@gmail.com', 'brookecronin123@gmail.com', 'No unregistered user found for that URUID.'] with subject 'Booking Updated'.: 
+[2026-02-22 19:39:57.473404] Sent email notification to ['No unregistered user found for that URUID.', 'gooberbackups@gmail.com', 'brookecronin123@gmail.com', 'No unregistered user found for that URUID.'] with subject 'Booking Updated'.: 
+[2026-02-22 19:39:57.478847] Sent booking update notification email to ['No unregistered user found for that URUID.', 'gooberbackups@gmail.com', 'brookecronin123@gmail.com', 'No unregistered user found for that URUID.'] for booking ID 1102.: 
+[2026-02-22 19:44:04.716389] started long log.: 
+[2026-02-22 19:44:05.605751] started long log.: 
+[2026-02-22 19:44:12.148227] started long log.: 
+[2026-02-22 19:44:43.344647] Attempting to send email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 19:44:44.480332] Sent email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 19:44:44.499493] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1098 due to new RSVP confirmation from wqdsaxz.: 
+[2026-02-22 19:44:44.664116] Received new RSVP for booking ID 1098 from wqdsaxz (gooberbackups@gmail.com).: 
+[2026-02-22 19:45:12.231822] Attempting to send email notification to ['gooberbackups@gmail.com'] with subject 'Booking Updated'.: 
+[2026-02-22 19:45:13.362948] Sent email notification to ['gooberbackups@gmail.com'] with subject 'Booking Updated'.: 
+[2026-02-22 19:45:13.367780] Sent booking update notification email to ['gooberbackups@gmail.com'] for booking ID 1098.: 
+[2026-02-22 19:46:03.265773] started long log.: 
+[2026-02-22 19:50:10.438138] started long log.: 
+[2026-02-22 19:50:24.258355] started long log.: 
+[2026-02-22 19:50:53.177316] Attempting to send email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 19:50:54.531167] Sent email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 19:50:54.536306] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1098 due to new RSVP confirmation from qwrfetgh.: 
+[2026-02-22 19:50:54.663932] Received new RSVP for booking ID 1098 from qwrfetgh (gooberbackups@gmail.com).: 
+[2026-02-22 19:51:08.569437] Attempting to send email notification to ['gooberbackups@gmail.com'] with subject 'Booking Updated'.: 
+[2026-02-22 19:51:09.646442] Sent email notification to ['gooberbackups@gmail.com'] with subject 'Booking Updated'.: 
+[2026-02-22 19:51:09.650425] Sent booking update notification email to ['gooberbackups@gmail.com'] for booking ID 1098.: 
