@@ -1,0 +1,6 @@
+body {
+    background-image: url('/static/images/bg.png');
+    background-size: cover;      /* Make it cover the whole viewport */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+}
