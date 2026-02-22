@@ -252,3 +252,26 @@ TEST[2026-02-22 14:35:30.995558] started long log.:
 [2026-02-22 15:05:00.663189] Attempting to send email notification to ['gooberbackups@gmail.com'] with subject 'Booking Deleted'.: 
 [2026-02-22 15:05:01.676006] Sent email notification to ['gooberbackups@gmail.com'] with subject 'Booking Deleted'.: 
 [2026-02-22 15:05:01.678211] Sent booking delete notification email to ['gooberbackups@gmail.com'] for booking ID 1099.: 
+[2026-02-22 17:51:50.910413] Attempting to send email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 17:51:52.318035] Sent email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 17:51:52.322527] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1109 due to new RSVP confirmation from Brooke C.: 
+[2026-02-22 17:51:52.447148] Received new RSVP for booking ID 1109 from Brooke C (brookecronin123@gmail.com).: 
+[2026-02-22 17:52:00.787827] Failed RSVP attempt for booking ID 1109 with name Brooke C and email brookecronin123@gmail.com due to database error: Nickname provided is already taken for this meeting: 
+[2026-02-22 17:56:24.387340] Attempting to send email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 17:56:25.460556] Sent email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 17:56:25.463760] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1109 due to new RSVP confirmation from Brooke.: 
+[2026-02-22 17:56:25.582574] Received new RSVP for booking ID 1109 from Brooke (brookecronin123@gmail.com).: 
+[2026-02-22 18:01:41.544669] Attempting to send email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 18:01:42.578264] Sent email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-22 18:01:42.597640] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1109 due to new RSVP confirmation from Brooke Cronin.: 
+[2026-02-22 18:01:42.745999] Received new RSVP for booking ID 1109 from Brooke Cronin ().: 
+[2026-02-22 19:04:05.810077] started long log.: 
+[2026-02-22 19:04:06.611339] started long log.: 
+[2026-02-22 19:05:35.576901] started long log.: 
+[2026-02-22 19:05:36.334204] started long log.: 
+[2026-02-22 19:17:14.729984] started long log.: 
+[2026-02-22 19:17:15.689358] started long log.: 
+[2026-02-22 19:18:06.030401] started long log.: 
+[2026-02-22 19:18:36.886994] started long log.: 
+[2026-02-22 19:19:13.334014] started long log.: 
+[2026-02-22 19:19:14.033871] started long log.: 
