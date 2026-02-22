@@ -121,23 +121,11 @@ def inject_user():
 # once config is loaded, initialize mail extension
 mail.init_app(app)
 
-database_read_servicer = database_reading.DatabaseReadingServices(
-    database_connection.DatabaseConnection()
-)
-
-databaseConn = database_connection.DatabaseConnection()
-database_reader = database_reading.DatabaseReadingServices(databaseConn)
-
 testpass = generate_password_hash("PassW0rd")
 # test = database_reader.return_all_bookings_for_a_user(1005)
 # createBooking = database_writing.DatabaseWritingServices(
 #     databaseConn, database_reader
 # ).create_new_user('test2', 'test2','','',testpass)
-
-
-createBooking = database_writing.DatabaseWritingServices(
-    databaseConn, database_reader
-).delete_booking(1078)
 
 
 # testAddBID = testAddBID[1]
@@ -149,13 +137,11 @@ createBooking = database_writing.DatabaseWritingServices(
 # test = database_reading.DatabaseReadingServices(
 #     database_connection.DatabaseConnection()
 # ).get_username_via_RUID("1000")
-
-test = database_reader.get_booking_by_link_id("b7049b44-f929-4e3a-9fe1-63f0fccdc386")
-print(test)
+# print(test)
 # -- ROUTES --
 from account.routes import account_bp
 from booking.routes import booking_bp
-from notifications.routes import notifications_bp, send_booking_notification_emails
+from notifications.routes import notifications_bp
 from audit_logging.audit_logger import AuditLogger
 
 # register blueprints
@@ -166,20 +152,30 @@ app.register_blueprint(notifications_bp)
 
 @app.route("/", methods=["GET"])
 def index():
+    db = database_connection.DatabaseConnection()
+    reader = database_reading.DatabaseReadingServices(db)
+
     selected_date = request.args.get("date")
     if not selected_date:
         selected_date = date.today().isoformat()
 
-    rooms = database_reader.get_rooms()
+    rooms = reader.get_rooms()
+    
+    user_id = session.get("user_id")
+
+    # if a user is logged in, display their bookings at the top
+    if user_id:
+        my_bookings = reader.return_all_bookings_with_info_for_a_user(user_id)
+        return render_template("index.html", rooms=rooms, selected_date=selected_date, bookings=my_bookings, user=user_id)
 
     return render_template("index.html", rooms=rooms, selected_date=selected_date)
 
 
 if __name__ == "__main__":
     audit_logger = AuditLogger()
-    scheduler = APScheduler()
-    scheduler.add_job(func=send_booking_notification_emails, trigger='interval', id='job', seconds=5)
-    scheduler.start()
-    audit_logger.log_audit_term("started long log.")
+    # scheduler = APScheduler()
+    # scheduler.add_job(func=send_booking_notification_emails, trigger='interval', id='job', seconds=5)
+    # scheduler.start()
+    audit_logger.log_audit_event("started long log.")
     audit_logger.log_short_term("started short log.")
     app.run(debug=True, host="0.0.0.0", port=5000)

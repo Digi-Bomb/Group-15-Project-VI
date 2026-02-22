@@ -12,3 +12,5 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/smtplib.py", line 901, in sendmail
     raise SMTPRecipientsRefused(senderrs)
 smtplib.SMTPRecipientsRefused: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. d75a77b69052e-506bab11e14sm135690471cf.0 - gsmtp')}
+2026-02-22 20:01:45,140 ERROR: Recipient or sender email not configured [in /app/notifications/email_notification_service.py:62]
+2026-02-22 20:01:45,140 ERROR: Recipient or sender email not configured [in /app/notifications/email_notification_service.py:62]

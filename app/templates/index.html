@@ -32,12 +32,69 @@
 </div>
 {% endif %}
 
+
+
 <!-- room bookings -->
 <div class="container-fluid px-4 gap-5 mt-5">
-    <div class="row row-cols-3 px-3">
-        {% for room in rooms %}
+    <!-- user owned bookings -->
+    {% if user %}
+    <div class="px-4 gap-5 mt-5 d-flex justify-content-center align-items-center">
+                <h5 class="fw-bold me-auto">Your bookings</h5>
+                
+    </div>
+    <div class="px-4 gap-5 mt-2 d-flex justify-content-center align-items-center">
+        {% if not bookings %}
+                <p class="text-muted fst-italic mx-auto mt-5">
+                   You don't have any bookings yet!
+                </p>
+        {% endif %}
+    </div>
+      <div class="row row-cols-3 px-3">
+        
+        {% for booking in bookings %}
         <div class="col mb-4 d-flex flex-column justify-content-center align-items-center">
 
+            <a href="/booking/{{ booking[8] }}" class="card stretched-link text-decoration-none shadow-sm border-primary"
+                title="Book Room {{ booking[0] }}">
+
+                <div class="container-fluid px-4 flex-wrap gap-0 d-flex flex-column justify-content-center align-items-center"
+                    id="roomcontainer">
+
+                    <img src="https://s3.amazonaws.com/libapps/accounts/54372/images/Work4.jpg"
+                        class="rounded float-auto mb-3 shadow border mt-3" width="400" height="auto">
+
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <div class="d-flex align-items-center gap-2">
+                            <p class="text-muted fs-6 mb-0 text-decoration-none">
+                                <i class="bi bi-person-fill-check"></i>
+                                {{ booking[4] }}
+                            </p>
+                            <p class="text-dark fs-6 mb-0 text-decoration-underline">
+                                {{ booking[0] }} - Meeting Room
+                            </p>
+                        </div>
+                        <p class="text-dark fs-6 mb-0">
+                            {{ booking[2] }} - {{ booking[9] }}
+                        </p>
+                    </div>
+
+                    <p class="text-muted fs-6 me-auto text-decoration-none">
+                        Click to view details
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!-- available rooms -->
+     <div class="px-4 gap-5 mt-5 d-flex justify-content-center align-items-center">
+                <h5 class="fw-bold me-auto">Available Rooms</h5>
+    </div>
+
+    <div class="row row-cols-3 px-3 mt-2">
+        {% for room in rooms %}
+        <div class="col mb-4 d-flex flex-column justify-content-center align-items-center">
             <a href="/booking?room_number={{ room.roomNumber }}&date={{ selected_date }}" class="card stretched-link text-decoration-none shadow-sm"
                 title="Book Room {{ room.roomNumber }}">
 
