@@ -26,7 +26,7 @@ class TimeManager:
 
         end_td = start_td + duration_td
         return end_td
-    
+
     def get_duration_from_start_time_and_end_time(start_time_str, end_time_str):
 
         start_td = TimeManager.time_to_timedelta(start_time_str)
