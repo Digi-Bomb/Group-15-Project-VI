@@ -383,3 +383,38 @@ TEST[2026-02-22 14:35:30.995558] started long log.:
 [2026-02-23 03:05:54.585970] started server.: 
 [2026-02-23 03:06:08.171598] started server.: 
 [2026-02-23 03:06:38.576173] started server.: 
+[2026-02-23 15:53:25.112135] Login successful: Successful login for user: brookec
+[2026-02-23 15:57:07.755842] Attempting to send email notification to [] with subject 'Booking Deleted'.: 
+[2026-02-23 15:57:07.783524] Failed to send email notification to [] due to missing email configuration.: 
+[2026-02-23 15:57:07.790082] Sent booking delete notification email to [] for booking ID 1108.: 
+[2026-02-23 15:57:46.120737] Attempting to send email notification to [] with subject 'Booking Deleted'.: 
+[2026-02-23 15:57:46.135661] Failed to send email notification to [] due to missing email configuration.: 
+[2026-02-23 15:57:46.140602] Sent booking delete notification email to [] for booking ID 1107.: 
+[2026-02-23 16:02:06.857345] started server.: 
+[2026-02-23 16:04:01.291454] started server.: 
+[2026-02-23 16:04:19.544338] started server.: 
+[2026-02-23 16:04:39.844610] started server.: 
+[2026-02-23 16:06:17.258275] started server.: 
+[2026-02-23 16:06:39.187221] started server.: 
+[2026-02-23 16:09:04.564786] started server.: 
+[2026-02-23 16:09:48.188729] started server.: 
+[2026-02-23 16:11:54.818030] started server.: 
+[2026-02-23 16:12:08.163885] 08:00:00 converted to 08:00:00 for database storage.: 
+[2026-02-23 16:12:46.986255] started server.: 
+[2026-02-23 16:12:51.081220] 08:00:00 converted to 08:00:00 for database storage.: 
+[2026-02-23 16:12:51.085391] Calculated duration 1:00:00 from start time 08:00:00 and end time 09:00:00.: 
+[2026-02-23 16:13:01.116396] started server.: 
+[2026-02-23 16:13:29.370495] started server.: 
+[2026-02-23 16:13:33.641198] 08:00:00 converted to 08:00:00 for database storage.: 
+[2026-02-23 16:13:33.651059] Calculated duration 1:00:00 from start time 08:00:00 and end time 09:00:00. (<class 'datetime.timedelta'>, <class 'str'>, <class 'str'>): 
+[2026-02-23 16:14:04.102147] started server.: 
+[2026-02-23 16:14:10.490230] started server.: 
+[2026-02-23 16:14:14.608067] 08:00:00 converted to 08:00:00 for database storage.: 
+[2026-02-23 16:14:14.612334] Calculated duration 1:00:00 from start time 08:00:00 and end time 09:00:00. (<class 'datetime.timedelta'>, <class 'str'>, <class 'str'>): 
+[2026-02-23 16:14:36.742400] 08:00:00 converted to 08:00:00 for database storage.: 
+[2026-02-23 16:14:36.744912] Calculated duration 1:00:00 from start time 08:00:00 and end time 09:00:00. (<class 'datetime.timedelta'>, <class 'str'>, <class 'str'>): 
+[2026-02-23 16:15:11.927104] started server.: 
+[2026-02-23 16:15:15.880865] 08:00:00 converted to 08:00:00 for database storage.: 
+[2026-02-23 16:15:15.900530] Calculated duration 01:00:00 from start time 08:00:00 and end time 09:00:00. (<class 'str'>, <class 'str'>, <class 'str'>): 
+[2026-02-23 16:15:16.291109] Booking created: User ID 1010 created a booking for room 2B14 on 2026-02-23 at 08:00:00 for 2 hr with booking ID 1113.
+[2026-02-23 16:16:00.793376] started server.: 
