@@ -1,1 +1,5 @@
 *.pyc
+
+# Logs
+app/logs/*.log
+app/logs/*.txt
