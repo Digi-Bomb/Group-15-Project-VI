@@ -336,3 +336,50 @@ TEST[2026-02-22 14:35:30.995558] started long log.:
 [2026-02-22 22:37:11.676719] started long log.:
 [2026-02-22 22:41:51.254517] started long log.:
 [2026-02-22 22:41:54.938998] started long log.:
+[2026-02-23 00:36:43.252200] started long log.: 
+[2026-02-23 00:36:44.144616] started long log.: 
+[2026-02-23 00:41:16.032840] started long log.: 
+[2026-02-23 00:42:24.243391] started long log.: 
+[2026-02-23 00:42:26.301075] started long log.: 
+[2026-02-23 00:42:28.257802] started long log.: 
+[2026-02-23 00:42:30.385029] started long log.: 
+[2026-02-23 00:42:32.928869] started long log.: 
+[2026-02-23 00:42:36.194222] started long log.: 
+[2026-02-23 00:42:40.933428] started long log.: 
+[2026-02-23 00:42:49.039210] started long log.: 
+[2026-02-23 00:43:03.391510] started long log.: 
+[2026-02-23 00:43:31.090884] started long log.: 
+[2026-02-23 00:44:23.792750] started long log.: 
+[2026-02-23 00:45:13.405951] started long log.: 
+[2026-02-23 00:45:15.170143] started long log.: 
+[2026-02-23 00:45:16.945587] started long log.: 
+[2026-02-23 00:45:18.919084] started long log.: 
+[2026-02-23 00:45:21.344770] started long log.: 
+[2026-02-23 00:45:24.410940] started long log.: 
+[2026-02-23 00:45:29.240255] started long log.: 
+[2026-02-23 00:45:37.238085] started long log.: 
+[2026-02-23 00:45:51.851376] started long log.: 
+[2026-02-23 00:46:19.323543] started long log.: 
+[2026-02-23 00:47:12.312468] started long log.: 
+[2026-02-23 00:47:12.696190] 2B04, 2B14, 2B16, 2B19, 1C09, 1G09, 2D04, 2D06, 2D10, 2D14, 1F05, 2F04, 2F06, 2F08, 2F10, 1G05, 1G07, 1G10, 1G11, 1G24, 1G26, 1G28, 2G05, 2G07, 2G09, 2G11, 2G13, 2G15, 2G26, 2G28, 3G04, 3G05, 3G09, 3G11, 3G15, 3G17, 3G19, 3G21, 3G24, 4G05, 4G07, 4G09, 4G11, 4G13, 4G15, 4G17, 4G24, 4G28: 
+[2026-02-23 00:47:13.764901] started long log.: 
+[2026-02-23 00:47:14.168947] 2B04, 2B14, 2B16, 2B19, 1C09, 1G09, 2D04, 2D06, 2D10, 2D14, 1F05, 2F04, 2F06, 2F08, 2F10, 1G05, 1G07, 1G10, 1G11, 1G24, 1G26, 1G28, 2G05, 2G07, 2G09, 2G11, 2G13, 2G15, 2G26, 2G28, 3G04, 3G05, 3G09, 3G11, 3G15, 3G17, 3G19, 3G21, 3G24, 4G05, 4G07, 4G09, 4G11, 4G13, 4G15, 4G17, 4G24, 4G28: 
+[2026-02-23 00:47:28.156700] started long log.: 
+[2026-02-23 01:31:12.123064] Login successful: Successful login for user: brookec
+[2026-02-23 01:31:27.333701] Failed RSVP attempt with invalid link_id: 80a63964-b523-4a83-adbd-0dd8c09754a3: 
+[2026-02-23 01:35:36.958970] Failed RSVP attempt with invalid link_id: 80a63964-b523-4a83-adbd-0dd8c09754a3: 
+[2026-02-23 01:35:46.446847] Attempting to send email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-23 01:35:47.689624] Sent email notification to ['brookecronin123@gmail.com'] with subject 'New Booking RSVP'.: 
+[2026-02-23 01:35:47.693921] Sent new RSVP confirmation notification email to brookecronin123@gmail.com for booking ID 1107 due to new RSVP confirmation from wer.: 
+[2026-02-23 01:35:47.820892] Received new RSVP for booking ID 1107 from wer ().: 
+[2026-02-23 01:35:54.788253] Failed RSVP attempt with invalid link_id: 80a63964-b523-4a83-adbd-0dd8c09754a3: 
+[2026-02-23 01:36:28.448717] Logout successful: User with ID 1010 logged out successfully.
+[2026-02-23 01:36:38.588685] Failed RSVP attempt with invalid link_id: 495637: 
+[2026-02-23 01:37:46.272744] Failed RSVP attempt with invalid link_id: 495637: 
+[2026-02-23 02:35:25.046656] Login successful: Successful login for user: brookec
+[2026-02-23 03:05:10.190237] started server.: 
+[2026-02-23 03:05:13.805819] started server.: 
+[2026-02-23 03:05:52.165857] started server.: 
+[2026-02-23 03:05:54.585970] started server.: 
+[2026-02-23 03:06:08.171598] started server.: 
+[2026-02-23 03:06:38.576173] started server.: 
