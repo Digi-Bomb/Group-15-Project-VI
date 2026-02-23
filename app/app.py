@@ -58,11 +58,11 @@ else:
     # only use if env var fails, non persistent sessions if app restarts
 
 # rate limiter - global default
-limiter = Limiter(
-    key_func=get_remote_address,  # client IP
-    app=app,
-    default_limits=["100 per hour"],  # global limit
-)
+# limiter = Limiter(
+#     key_func=get_remote_address,  # client IP
+#     app=app,
+#     default_limits=["100 per hour"],  # global limit
+# )
 
 # logging setup
 if not os.path.exists("logs"):
