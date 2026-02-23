@@ -1,41 +1,4 @@
-2026-02-18 05:21:55,330 ERROR: Exception on /booking/1095 [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/booking/routes.py", line 105, in view_booking
-    getattr(booking[1], "meetingRoom", None)
-            ~~~~~~~^^^
-KeyError: 1
-2026-02-18 05:23:08,286 ERROR: Exception on /booking/1095 [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/app/booking/routes.py", line 104, in view_booking
-    room = reader.get_room_data_given_room_number(booking["meetingRoom"])
-                                                  ~~~~~~~^^^^^^^^^^^^^^^
-KeyError: 'meetingRoom'
-2026-02-18 18:51:16,464 WARNING: Failed login attempt for username: brookec [in /app/account/routes.py:61]
-2026-02-19 01:23:48,251 ERROR: Mail send failed: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb3916f4d7sm1925547985a.6 - gsmtp')} [in /app/notifications/email_notification_service.py:36]
+2026-02-19 01:32:32,712 ERROR: Mail send failed: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. d75a77b69052e-506bab11e14sm135690471cf.0 - gsmtp')} [in /app/notifications/email_notification_service.py:36]
 Traceback (most recent call last):
   File "/app/notifications/email_notification_service.py", line 32, in send_email_notification
     mail.send(msg)  # send using the instance imported from app.py
@@ -48,60 +11,86 @@ Traceback (most recent call last):
     self.host.sendmail(sanitize_address(envelope_from or message.sender),
   File "/usr/local/lib/python3.11/smtplib.py", line 901, in sendmail
     raise SMTPRecipientsRefused(senderrs)
-smtplib.SMTPRecipientsRefused: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb3916f4d7sm1925547985a.6 - gsmtp')}
-2026-02-19 01:23:48,251 ERROR: Mail send failed: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb3916f4d7sm1925547985a.6 - gsmtp')} [in /app/notifications/email_notification_service.py:36]
-Traceback (most recent call last):
-  File "/app/notifications/email_notification_service.py", line 32, in send_email_notification
-    mail.send(msg)  # send using the instance imported from app.py
-    ^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
-    message.send(connection)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
-    connection.send(self)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 188, in send
-    self.host.sendmail(sanitize_address(envelope_from or message.sender),
-  File "/usr/local/lib/python3.11/smtplib.py", line 901, in sendmail
-    raise SMTPRecipientsRefused(senderrs)
-smtplib.SMTPRecipientsRefused: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb3916f4d7sm1925547985a.6 - gsmtp')}
-2026-02-19 01:24:45,807 ERROR: Mail send failed: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. 6a1803df08f44-8971cc7f82csm204481076d6.4 - gsmtp')} [in /app/notifications/email_notification_service.py:36]
-Traceback (most recent call last):
-  File "/app/notifications/email_notification_service.py", line 32, in send_email_notification
-    mail.send(msg)  # send using the instance imported from app.py
-    ^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
-    message.send(connection)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
-    connection.send(self)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 188, in send
-    self.host.sendmail(sanitize_address(envelope_from or message.sender),
-  File "/usr/local/lib/python3.11/smtplib.py", line 901, in sendmail
-    raise SMTPRecipientsRefused(senderrs)
-smtplib.SMTPRecipientsRefused: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. 6a1803df08f44-8971cc7f82csm204481076d6.4 - gsmtp')}
-2026-02-19 01:24:45,807 ERROR: Mail send failed: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. 6a1803df08f44-8971cc7f82csm204481076d6.4 - gsmtp')} [in /app/notifications/email_notification_service.py:36]
-Traceback (most recent call last):
-  File "/app/notifications/email_notification_service.py", line 32, in send_email_notification
-    mail.send(msg)  # send using the instance imported from app.py
-    ^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
-    message.send(connection)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
-    connection.send(self)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 188, in send
-    self.host.sendmail(sanitize_address(envelope_from or message.sender),
-  File "/usr/local/lib/python3.11/smtplib.py", line 901, in sendmail
-    raise SMTPRecipientsRefused(senderrs)
-smtplib.SMTPRecipientsRefused: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. 6a1803df08f44-8971cc7f82csm204481076d6.4 - gsmtp')}
-2026-02-19 01:26:04,037 ERROR: Mail send failed: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb2b0be6c9sm1996536685a.1 - gsmtp')} [in /app/notifications/email_notification_service.py:36]
-Traceback (most recent call last):
-  File "/app/notifications/email_notification_service.py", line 32, in send_email_notification
-    mail.send(msg)  # send using the instance imported from app.py
-    ^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 492, in send
-    message.send(connection)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 427, in send
-    connection.send(self)
-  File "/usr/local/lib/python3.11/site-packages/flask_mail.py", line 188, in send
-    self.host.sendmail(sanitize_address(envelope_from or message.sender),
-  File "/usr/local/lib/python3.11/smtplib.py", line 901, in sendmail
-    raise SMTPRecipientsRefused(senderrs)
-smtplib.SMTPRecipientsRefused: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. af79cd13be357-8cb2b0be6c9sm1996536685a.1 - gsmtp')}
+smtplib.SMTPRecipientsRefused: {'No': (553, b'5.1.3 The recipient address <No> is not a valid RFC 5321 address. For more\n5.1.3 information, go to\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\n5.1.3 specifications. d75a77b69052e-506bab11e14sm135690471cf.0 - gsmtp')}
+2026-02-22 20:01:45,140 ERROR: Recipient or sender email not configured [in /app/notifications/email_notification_service.py:62]
+2026-02-22 20:01:45,140 ERROR: Recipient or sender email not configured [in /app/notifications/email_notification_service.py:62]
+2026-02-23 02:32:34,573 WARNING: Failed login attempt for username: username [in /app/account/routes.py:67]
+2026-02-23 02:32:34,800 WARNING: Failed login attempt for username: username [in /app/account/routes.py:67]
+2026-02-23 02:32:35,196 WARNING: Failed login attempt for username: username [in /app/account/routes.py:67]
+2026-02-23 02:32:36,950 WARNING: Failed login attempt for username: username [in /app/account/routes.py:67]
+2026-02-23 02:32:37,284 WARNING: Failed login attempt for username: username [in /app/account/routes.py:67]
+2026-02-23 02:32:37,466 WARNING: Failed login attempt for username: username [in /app/account/routes.py:67]
+2026-02-23 02:32:39,536 WARNING: Failed login attempt for username: username [in /app/account/routes.py:67]
+2026-02-23 02:32:39,689 WARNING: Failed login attempt for username: username [in /app/account/routes.py:67]
+2026-02-23 02:32:39,924 WARNING: Failed login attempt for username: username [in /app/account/routes.py:67]
+2026-02-23 02:32:41,927 WARNING: Failed login attempt for username: username [in /app/account/routes.py:67]
+2026-02-23 02:58:42,246 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 02:58:42,955 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 02:58:43,196 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 02:58:44,481 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 02:58:45,402 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 02:58:45,631 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 02:58:46,767 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 02:58:47,850 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:09:52,492 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:09:52,868 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:09:53,378 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:11:36,939 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:11:37,276 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:11:37,554 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:17:43,545 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:17:43,755 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:17:44,161 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:18:08,260 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:18:08,599 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:18:08,872 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:26,162 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:26,482 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:26,574 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:26,583 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:26,629 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:26,760 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:26,837 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:27,044 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:27,044 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:27,083 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:27,161 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:27,161 WARNING: Failed login attempt for username: user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:27,207 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:28,236 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:28,249 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:28,275 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:29,558 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:29,593 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:29,604 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:29,637 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:29,637 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:29,675 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:30,771 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:30,812 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:31,036 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:31,951 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:32,109 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:32,145 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:32,266 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:32,604 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:32,795 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:32,941 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:33,411 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:33,553 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:34,220 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:34,557 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:34,793 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:35,050 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:35,252 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:35,691 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:35,724 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:35,804 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:35,813 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:36,322 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:36,709 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:37,065 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:37,296 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:38,244 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:38,254 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
+2026-02-23 03:19:38,350 WARNING: Failed login attempt for username: u_user1 [in /app/account/routes.py:67]
