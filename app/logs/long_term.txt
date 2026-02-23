@@ -336,8 +336,8 @@ TEST[2026-02-22 14:35:30.995558] started long log.:
 [2026-02-22 22:37:11.676719] started long log.:
 [2026-02-22 22:41:51.254517] started long log.:
 [2026-02-22 22:41:54.938998] started long log.:
-[2026-02-23 02:25:19.113438] started long log.: 
-[2026-02-23 02:25:19.561999] started long log.: 
+[2026-02-23 02:25:19.113438] started long log.:
+[2026-02-23 02:25:19.561999] started long log.:
 [2026-02-23 02:25:45.162428] Unauthorized booking creation attempt: Attempt to access booking creation without being logged in.
 [2026-02-23 02:25:50.799054] Login successful: Successful login for user: admin
 [2026-02-23 02:32:34.572698] Login failed - invalid credentials: Failed login attempt for username: username with provided password.
@@ -449,10 +449,10 @@ TEST[2026-02-22 14:35:30.995558] started long log.:
 [2026-02-23 02:32:57.097607] Unauthorized booking creation attempt: Attempt to access booking creation without being logged in.
 [2026-02-23 02:32:57.097661] Unauthorized booking creation attempt: Attempt to access booking creation without being logged in.
 [2026-02-23 02:38:38.216792] Unauthorized booking creation attempt: Attempt to access booking creation without being logged in.
-[2026-02-23 02:50:26.878143] started long log.: 
-[2026-02-23 02:50:28.656030] started long log.: 
-[2026-02-23 02:50:39.018878] started long log.: 
-[2026-02-23 02:50:39.470821] started long log.: 
+[2026-02-23 02:50:26.878143] started long log.:
+[2026-02-23 02:50:28.656030] started long log.:
+[2026-02-23 02:50:39.018878] started long log.:
+[2026-02-23 02:50:39.470821] started long log.:
 [2026-02-23 02:56:24.772965] Unauthorized booking creation attempt: Attempt to access booking creation without being logged in.
 [2026-02-23 02:58:42.245600] Login failed - invalid credentials: Failed login attempt for username: u_user1 with provided password.
 [2026-02-23 02:58:42.955259] Login failed - invalid credentials: Failed login attempt for username: u_user1 with provided password.
@@ -525,9 +525,9 @@ TEST[2026-02-22 14:35:30.995558] started long log.:
 [2026-02-23 03:11:50.107985] Unauthorized booking creation attempt: Attempt to access booking creation without being logged in.
 [2026-02-23 03:11:51.004151] Unauthorized booking creation attempt: Attempt to access booking creation without being logged in.
 [2026-02-23 03:11:51.725336] Unauthorized booking creation attempt: Attempt to access booking creation without being logged in.
-[2026-02-23 03:16:28.342968] started long log.: 
-[2026-02-23 03:16:45.337903] started long log.: 
-[2026-02-23 03:16:45.777301] started long log.: 
+[2026-02-23 03:16:28.342968] started long log.:
+[2026-02-23 03:16:45.337903] started long log.:
+[2026-02-23 03:16:45.777301] started long log.:
 [2026-02-23 03:17:29.010741] Unauthorized booking creation attempt: Attempt to access booking creation without being logged in.
 [2026-02-23 03:17:43.544992] Login failed - invalid credentials: Failed login attempt for username: user1 with provided password.
 [2026-02-23 03:17:43.755088] Login failed - invalid credentials: Failed login attempt for username: user1 with provided password.
