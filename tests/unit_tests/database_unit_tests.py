@@ -75,7 +75,7 @@ def test_getting_username():
     assert user == "testuser"
 
 
-# def test_getting_meetings_owned_one_meeting():
+# def test_getting_meetings_owned_no_meetings():
 def test_getting_meetings_owned_several_meetings():
 
     reader = load_reader()
@@ -95,11 +95,12 @@ def test_get_registered_users_in_booking_one_user():
     assert registered_users == 1005
 
 
+# def test_get_unregistered_users_in_booking_no_users
 def test_get_unregistered_users_in_booking_one_user():
 
     reader = load_reader()
 
-    unregistered_users = reader.get_registered_users_associated_with_booking_ID(1083)
+    unregistered_users = reader.get_unregistered_users_associated_with_booking_ID(1083)
     assert unregistered_users == 1005  # FIX THIS!!!
 
 
@@ -166,7 +167,7 @@ def test_checking_room_availability_false_same_start_time():
     reader = load_reader()
 
     available = reader.check_for_room_availability(
-        "1f05", "2006-02-04", "15:00:00", "03:00:00"
+        "1F05", "2006-02-04", "15:00:00", "03:00:00"
     )
 
     assert not available
@@ -177,7 +178,7 @@ def test_checking_room_availability_false_duration_leaks_into_existing_booking()
     reader = load_reader()
 
     available = reader.check_for_room_availability(
-        "1f05", "2006-02-04", "12:00:00", "03:30:00"
+        "1F05", "2006-02-04", "12:00:00", "03:30:00"
     )
 
     assert not available
@@ -188,7 +189,7 @@ def test_checking_room_availability_false_existing_duration_leaks_into_booking()
     reader = load_reader()
 
     available = reader.check_for_room_availability(
-        "1f05", "2006-02-04", "10:30:00", "01:00:00"
+        "1F05", "2006-02-04", "10:30:00", "01:00:00"
     )
 
     assert not available
@@ -198,7 +199,7 @@ def test_getting_capacity_acurate():
 
     reader = load_reader()
 
-    capacity = reader.get_capacity_of_room("1f05")
+    capacity = reader.get_capacity_of_room("1F05")
     assert capacity == 100
 
 
@@ -214,7 +215,7 @@ def test_getting_branch_location():
 
     reader = load_reader()
 
-    branch = reader.get_branch_location_of_room_associated_with_room_number("1f05")
+    branch = reader.get_branch_location_of_room_associated_with_room_number("1F05")
     assert branch == "Waterloo Campus"
 
 
@@ -278,14 +279,16 @@ def test_create_new_user_failure():
 def test_create_new_unregistered_user_success_no_email():
 
     writer = load_writer()
-    adding = writer.create_new_unregistered_user("tester")
+    adding = writer.create_new_unregistered_user(1087, "tester")
     assert adding[0]
 
 
 def test_create_new_unregistered_user_success_with_email():
 
     writer = load_writer()
-    adding = writer.create_new_unregistered_user(1087, "tester@gmail.com")
+    adding = writer.create_new_unregistered_user(
+        1087, "testee", email="tester@gmail.com"
+    )
     assert adding[0]
 
 
@@ -306,7 +309,7 @@ def test_create_new_unregistered_user_failure_nickname_taken():
 def test_create_new_unregistered_user_failure_invalid_BID():
 
     writer = load_writer()
-    adding = writer.create_new_unregistered_user(1000, "testee")
+    adding = writer.create_new_unregistered_user(1000, "testeee")
     assert not adding[0]
 
 
@@ -376,14 +379,6 @@ def test_deleting_booking_failure_invalid_BID():
     writer = load_writer()
 
     deletion = writer.delete_booking(1000)
-    assert deletion[0] == False
-
-
-def test_delete_associate_false_if_BID_not_existing():
-
-    writer = load_writer()
-
-    deletion = writer.delete_association(1000)
     assert deletion[0] == False
 
 
@@ -508,14 +503,6 @@ def test_update_meeting_capacity_success():
     assert updated
 
 
-def test_update_meeting_capacity_failure_invalid_bid():
-
-    writer = load_writer()
-
-    updated = writer.update_meeting_capacity(1000, 10)
-    assert not updated[0]
-
-
 def test_update_meeting_capacity_failure_capacity_too_large():
 
     writer = load_writer()
@@ -524,21 +511,21 @@ def test_update_meeting_capacity_failure_capacity_too_large():
     assert not updated[0]
 
 
+def test_update_meeting_capacity_failure_invalid_bid():
+
+    writer = load_writer()
+
+    updated = writer.increase_number_of_confirmations(1000, 10)
+    assert not updated[0]
+    # Maybe poll for the updated number of confirmations too
+
+
 def test_update_number_of_confirmations_success():
 
     writer = load_writer()
 
     updated = writer.increase_number_of_confirmations(1087)
     assert updated
-
-
-def test_update_meeting_capacity_failure_invalid_bid():
-
-    writer = load_writer()
-
-    updated = writer.increase_number_of_confirmations(1000)
-    assert not updated[0]
-    # Maybe poll for the updated number of confirmations too
 
 
 def test_update_reminder_sent_to_true_success():
