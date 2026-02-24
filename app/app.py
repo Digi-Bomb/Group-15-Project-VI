@@ -37,6 +37,16 @@ app.config.update(
     # but prevents some CSRF attacks by limiting how other sites can use session cookie
 )
 
+# --- DB CONNECTION POOL ---
+# Initialize once at startup; subsequent DatabaseConnection() instances will reuse it.
+try:
+    database_connection.DatabaseConnection().init_pool(
+        pool_size=int(os.environ.get("DB_POOL_SIZE", "10"))
+    )
+except Exception as exc:
+    # Keep existing behavior (app can still fall back to non-pooled connections via .connect()).
+    app.logger.warning(f"DB pool init failed; falling back to direct connections: {exc}")
+
 # mail setup - using Gmail SMTP for demo, change for prod
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587

@@ -614,3 +614,29 @@ class DatabaseWritingServices:
             self.conn.rollback()
             # print("UPDATE ERROR: ", e)
             return False, str(e)
+    
+    def close(self):
+        """Release DB resources.
+
+        With connection pooling, closing the connection returns it to the pool.
+        """
+        try:
+            cur = getattr(self, "cursor", None)
+            if cur is not None:
+                try:
+                    cur.close()
+                except Exception:
+                    pass
+        finally:
+            try:
+                if getattr(self, "conn", None) is not None:
+                    self.conn.close()
+            except Exception:
+                pass
+
+    def __del__(self):
+        # Best-effort safety net (routes/services can also call .close() explicitly).
+        try:
+            self.close()
+        except Exception:
+            pass
