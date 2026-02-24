@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['nickname_0',['nickname',['../classapp_1_1account_1_1unregistered__user_1_1UnregisteredUser.html#a34685a85bf731440862ed57701cb47e1',1,'app::account::unregistered_user::UnregisteredUser']]],
-  ['note_1',['note',['../classapp_1_1forms_1_1NoteForm.html#a501e0980b37d283b9a866e40e091558d',1,'app::forms::NoteForm']]],
-  ['notification_5fservice_2',['notification_service',['../classapp_1_1booking_1_1rsvp__service_1_1AccountService.html#a3c7b2f13d2e6505d225a34057e58f9fd',1,'app::booking::rsvp_service::AccountService']]],
-  ['notifications_5fbp_3',['notifications_bp',['../namespaceapp_1_1notifications_1_1routes.html#ac52153e9707622d7c57925bda10ab559',1,'app::notifications::routes']]],
-  ['num_5fconfirmed_4',['num_confirmed',['../classapp_1_1booking_1_1booking_1_1Booking.html#ad1eae3c20f1dd8828f4f9085a423e3f9',1,'app::booking::booking::Booking']]]
+  ['mail_0',['mail',['../namespaceapp_1_1app.html#a3bb954096229f7bdb0f40bf8789c437f',1,'app::app']]],
+  ['max_5fcapacity_1',['max_capacity',['../classapp_1_1booking_1_1room_1_1Room.html#a4d9aaed2fb112a2464c047f75e81a97c',1,'app::booking::room::Room']]],
+  ['meeting_5fcapacity_2',['meeting_capacity',['../classapp_1_1booking_1_1booking_1_1Booking.html#a5c0222a9000112d272363c95c193c867',1,'app.booking.booking.Booking.meeting_capacity'],['../classapp_1_1forms_1_1BookingForm.html#ab9ec57aaafbb0b73baa079aa45eab0a5',1,'app.forms.BookingForm.meeting_capacity']]],
+  ['meeting_5fdate_3',['meeting_date',['../classapp_1_1forms_1_1BookingForm.html#a40fb8c2d6a0ee18e63aa2a22c9a31c5a',1,'app::forms::BookingForm']]],
+  ['minutes_4',['minutes',['../namespaceapp_1_1app.html#a0a8e1e3da13b01e3522f03039cbcac36',1,'app::app']]]
 ];

@@ -82,6 +82,9 @@ $(function() {
   <div class="headertitle"><div class="title">routes.py File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Booking blueprint routes for creating, viewing, editing, and RSVPing to bookings.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -95,20 +98,45 @@ Namespaces</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:adb04bd3890f00389a7072ab442910456" id="r_adb04bd3890f00389a7072ab442910456"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#adb04bd3890f00389a7072ab442910456">app.booking.routes.create_booking</a> ()</td></tr>
+<tr class="memdesc:adb04bd3890f00389a7072ab442910456"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new booking or render the booking creation form.  <br /></td></tr>
 <tr class="separator:adb04bd3890f00389a7072ab442910456"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50fb27d8542544e731923c791aad7c1a" id="r_a50fb27d8542544e731923c791aad7c1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#a50fb27d8542544e731923c791aad7c1a">app.booking.routes.view_booking</a> (booking_id)</td></tr>
+<tr class="memdesc:a50fb27d8542544e731923c791aad7c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display a booking (meeting) detail page.  <br /></td></tr>
 <tr class="separator:a50fb27d8542544e731923c791aad7c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba0b69e34ac02c14ffab5ef0d05b196a" id="r_aba0b69e34ac02c14ffab5ef0d05b196a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#aba0b69e34ac02c14ffab5ef0d05b196a">app.booking.routes.edit_booking</a> (booking_id)</td></tr>
+<tr class="memdesc:aba0b69e34ac02c14ffab5ef0d05b196a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Edit or delete an existing booking.  <br /></td></tr>
 <tr class="separator:aba0b69e34ac02c14ffab5ef0d05b196a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b8516acf1ba1dd0e349a134e3c8d031" id="r_a1b8516acf1ba1dd0e349a134e3c8d031"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#a1b8516acf1ba1dd0e349a134e3c8d031">app.booking.routes.rsvp</a> (link_id=None)</td></tr>
-<tr class="separator:a1b8516acf1ba1dd0e349a134e3c8d031"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3464bd0d5aaaae6fd6d7330a1a90fd81" id="r_a3464bd0d5aaaae6fd6d7330a1a90fd81"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#a3464bd0d5aaaae6fd6d7330a1a90fd81">app.booking.routes.rsvp</a> (link_id)</td></tr>
+<tr class="memdesc:a3464bd0d5aaaae6fd6d7330a1a90fd81"><td class="mdescLeft">&#160;</td><td class="mdescRight">RSVP to a booking using a shareable RSVP link.  <br /></td></tr>
+<tr class="separator:a3464bd0d5aaaae6fd6d7330a1a90fd81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a48c8eb9786778fa4fbf0170e32b5fbae" id="r_a48c8eb9786778fa4fbf0170e32b5fbae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#a48c8eb9786778fa4fbf0170e32b5fbae">app.booking.routes.booking_bp</a> = Blueprint('booking', __name__)</td></tr>
+<tr class="memitem:a48c8eb9786778fa4fbf0170e32b5fbae" id="r_a48c8eb9786778fa4fbf0170e32b5fbae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#a48c8eb9786778fa4fbf0170e32b5fbae">app.booking.routes.booking_bp</a> = Blueprint(&quot;booking&quot;, __name__)</td></tr>
+<tr class="memdesc:a48c8eb9786778fa4fbf0170e32b5fbae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blueprint for booking-related routes.  <br /></td></tr>
 <tr class="separator:a48c8eb9786778fa4fbf0170e32b5fbae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Booking blueprint routes for creating, viewing, editing, and RSVPing to bookings. </p>
+<p>This module defines the Flask Blueprint responsible for booking-related HTTP endpoints:</p><ul>
+<li>Create booking (GET/POST/OPTIONS)</li>
+<li>View booking details (GET)</li>
+<li>Edit booking (GET/PATCH/DELETE)</li>
+<li>RSVP via shareable link (GET/POST)</li>
+</ul>
+<p>The routes rely on the application's database service layer:</p><ul>
+<li>DatabaseConnection</li>
+<li>DatabaseReadingServices</li>
+<li>DatabaseWritingServices</li>
+</ul>
+<p>And utilize:</p><ul>
+<li>WTForms BookingForm for input validation</li>
+<li>TimeManager for time calculations</li>
+<li>AuditLogger for security/audit event logging</li>
+<li>EmailNotificationService for notification emails</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>These routes use session-based authentication for registered-user flows. Some endpoints use redirects and flash messages rather than JSON responses. </dd></dl>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8

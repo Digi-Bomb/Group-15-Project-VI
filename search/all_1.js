@@ -2,7 +2,7 @@ var searchData=
 [
   ['account_5fbp_0',['account_bp',['../namespaceapp_1_1account_1_1routes.html#ace7654fd92328c46011ee87c6794c591',1,'app::account::routes']]],
   ['account_5fservice_2epy_1',['account_service.py',['../account__service_8py.html',1,'']]],
-  ['accountservice_2',['accountservice',['../classapp_1_1booking_1_1rsvp__service_1_1AccountService.html',1,'app.booking.rsvp_service.AccountService'],['../classapp_1_1account_1_1account__service_1_1AccountService.html',1,'app.account.account_service.AccountService']]],
+  ['accountservice_2',['AccountService',['../classapp_1_1account_1_1account__service_1_1AccountService.html',1,'app::account::account_service']]],
   ['add_5flogout_5fform_3',['add_logout_form',['../namespaceapp_1_1app.html#a998027f6f42d0ae59c6eaadadee739ee',1,'app::app']]],
   ['app_4',['app',['../namespaceapp_1_1app.html#a6411d76077449e2bb7ff8451fbf7f14a',1,'app.app.app'],['../namespaceapp.html',1,'app']]],
   ['app_2epy_5',['app.py',['../app_8py.html',1,'']]],
@@ -34,6 +34,7 @@ var searchData=
   ['app_3a_3atime_5fmanager_31',['time_manager',['../namespaceapp_1_1time__manager.html',1,'app']]],
   ['associate_5fregistered_5fuser_5fwith_5fbooking_32',['associate_registered_user_with_booking',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a4fcfd3e321e4cb68157e01b57a6dc92a',1,'app::database_writing::DatabaseWritingServices']]],
   ['associate_5funregistered_5fuser_5fwith_5fbooking_33',['associate_unregistered_user_with_booking',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#ab9ea92d941ed3f77a3fc14e600afc167',1,'app::database_writing::DatabaseWritingServices']]],
-  ['audit_5flogger_2epy_34',['audit_logger.py',['../audit__logger_8py.html',1,'']]],
-  ['auditlogger_35',['AuditLogger',['../classapp_1_1audit__logging_1_1audit__logger_1_1AuditLogger.html',1,'app::audit_logging::audit_logger']]]
+  ['audit_5flogger_34',['audit_logger',['../namespaceapp_1_1app.html#a934e44760eff3ead191a952201e54c5c',1,'app::app']]],
+  ['audit_5flogger_2epy_35',['audit_logger.py',['../audit__logger_8py.html',1,'']]],
+  ['auditlogger_36',['AuditLogger',['../classapp_1_1audit__logging_1_1audit__logger_1_1AuditLogger.html',1,'app::audit_logging::audit_logger']]]
 ];

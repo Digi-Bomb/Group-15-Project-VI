@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['file_5fhandler_0',['file_handler',['../namespaceapp_1_1app.html#a9b656a8c731f4f717ec6f278eb49c815',1,'app::app']]],
-  ['first_5fname_1',['first_name',['../classapp_1_1account_1_1registered__user_1_1RegisteredUser.html#acb48a0bfa9cb937113b20c6d30bd3849',1,'app::account::registered_user::RegisteredUser']]],
-  ['firstname_2',['firstName',['../classapp_1_1forms_1_1RegisterForm.html#a262b6dd49da6a3d2696d4e2b054ed3a4',1,'app::forms::RegisterForm']]]
+  ['email_0',['email',['../classapp_1_1account_1_1registered__user_1_1RegisteredUser.html#a46df6c36e0809f1a4e9c13683287b6ba',1,'app.account.registered_user.RegisteredUser.email'],['../classapp_1_1account_1_1unregistered__user_1_1UnregisteredUser.html#aef987f4e482eee37ec11426cf08bb6ad',1,'app.account.unregistered_user.UnregisteredUser.email'],['../classapp_1_1forms_1_1RegisterForm.html#a3baeda8341666b0a9d4b40df9a24d1f8',1,'app.forms.RegisterForm.email']]],
+  ['end_5ftime_1',['end_time',['../classapp_1_1forms_1_1BookingForm.html#ac0b321d76b775d574a89e63eab86f93b',1,'app::forms::BookingForm']]],
+  ['error_5fhandler_2',['error_handler',['../namespaceapp_1_1app.html#ae4b2594588390e4eab07db18354d8ef5',1,'app::app']]]
 ];

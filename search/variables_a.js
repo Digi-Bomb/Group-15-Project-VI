@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['password_0',['password',['../classapp_1_1account_1_1registered__user_1_1RegisteredUser.html#ac5ca13e85aeea9eece5059c9b4f5599e',1,'app.account.registered_user.RegisteredUser.password'],['../classapp_1_1database__connection_1_1DatabaseConnection.html#a6d3a9192a909fdcabdb6ed3e90ae7b31',1,'app.database_connection.DatabaseConnection.password'],['../classapp_1_1forms_1_1RegisterForm.html#ae0bc4f483d8c8444e28af87264d3dd29',1,'app.forms.RegisterForm.password'],['../classapp_1_1forms_1_1LoginForm.html#a53abb2f26f647359d44d7ef5fc2756d7',1,'app.forms.LoginForm.password']]],
-  ['permanent_5fsession_5flifetime_1',['permanent_session_lifetime',['../namespaceapp_1_1app.html#aaf9680a139f7953922e5475dd99ae381',1,'app::app']]],
-  ['port_2',['port',['../classapp_1_1database__connection_1_1DatabaseConnection.html#a0bfb680bf9f16e8cb4e1a037435111eb',1,'app.database_connection.DatabaseConnection.port'],['../namespaceapp_1_1app.html#a719300cdb3e57ac9ccb5279b9075848e',1,'app.app.port']]]
+  ['nickname_0',['nickname',['../classapp_1_1account_1_1unregistered__user_1_1UnregisteredUser.html#a34685a85bf731440862ed57701cb47e1',1,'app::account::unregistered_user::UnregisteredUser']]],
+  ['note_1',['note',['../classapp_1_1forms_1_1NoteForm.html#a501e0980b37d283b9a866e40e091558d',1,'app::forms::NoteForm']]],
+  ['notification_5fservice_2',['notification_service',['../classapp_1_1booking_1_1rsvp__service_1_1RsvpService.html#ac99b59e84ee7665f2be1840e83877985',1,'app::booking::rsvp_service::RsvpService']]],
+  ['notifications_5fbp_3',['notifications_bp',['../namespaceapp_1_1notifications_1_1routes.html#ac52153e9707622d7c57925bda10ab559',1,'app::notifications::routes']]],
+  ['num_5fconfirmed_4',['num_confirmed',['../classapp_1_1booking_1_1booking_1_1Booking.html#ad1eae3c20f1dd8828f4f9085a423e3f9',1,'app::booking::booking::Booking']]]
 ];
