@@ -8,6 +8,7 @@ class DatabaseReadingServices:
     def __init__(self, database: DatabaseConnection):
         self.database = database
         self.conn = self.database.connect()
+        self.room_capacity_cache = {}
         # self.cursor = self.conn.cursor()
 
     # def generic_registered_user_reads_gets_associated_fields(
