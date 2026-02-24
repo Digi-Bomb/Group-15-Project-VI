@@ -8,6 +8,7 @@ class DatabaseReadingServices:
     def __init__(self, database: DatabaseConnection):
         self.database = database
         self.conn = self.database.connect()
+        self.room_capacity_cache = {}
         # self.cursor = self.conn.cursor()
 
     # def generic_registered_user_reads_gets_associated_fields(
@@ -258,10 +259,13 @@ class DatabaseReadingServices:
         """Function that returns the INTEGER Capacity of the room (specified by room number)"""
 
         if room_number not in self.room_capacity_cache:
+            self.cursor = self.conn.cursor()
             self.cursor.execute(
                 "SELECT maximumCapacity FROM Room WHERE roomNumber = %s", (room_number,)
             )
-        self.room_capacity_cache[room_number] = self.cursor.fetchone()[0]
+            self.room_capacity_cache[room_number] = self.cursor.fetchone()[0]
+            self.cursor.close()
+
         return self.room_capacity_cache[room_number]
 
     def get_branch_location_of_room_associated_with_room_number(self, room_number: int):
