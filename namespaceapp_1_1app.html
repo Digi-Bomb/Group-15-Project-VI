@@ -85,14 +85,19 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a8af5313cd529e5f61a60f119db13e806" id="r_a8af5313cd529e5f61a60f119db13e806"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a8af5313cd529e5f61a60f119db13e806">close_db_connections</a> (_exc=None)</td></tr>
+<tr class="memdesc:a8af5313cd529e5f61a60f119db13e806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Teardown handler to close (or return) DB connections after each request.  <br /></td></tr>
 <tr class="separator:a8af5313cd529e5f61a60f119db13e806"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91accba869170261b4c2bf2849aac1a5" id="r_a91accba869170261b4c2bf2849aac1a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a91accba869170261b4c2bf2849aac1a5">make_session_permanent</a> ()</td></tr>
+<tr class="memdesc:a91accba869170261b4c2bf2849aac1a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensure sessions are treated as permanent so the configured lifetime applies.  <br /></td></tr>
 <tr class="separator:a91accba869170261b4c2bf2849aac1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a998027f6f42d0ae59c6eaadadee739ee" id="r_a998027f6f42d0ae59c6eaadadee739ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a998027f6f42d0ae59c6eaadadee739ee">add_logout_form</a> ()</td></tr>
+<tr class="memdesc:a998027f6f42d0ae59c6eaadadee739ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach a LogoutForm to Flask's <code>g</code> for easy navbar rendering.  <br /></td></tr>
 <tr class="separator:a998027f6f42d0ae59c6eaadadee739ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50ecb9f38bb522363ee1ae1798a840da" id="r_a50ecb9f38bb522363ee1ae1798a840da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a50ecb9f38bb522363ee1ae1798a840da">inject_user</a> ()</td></tr>
+<tr class="memdesc:a50ecb9f38bb522363ee1ae1798a840da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inject authentication state into all templates.  <br /></td></tr>
 <tr class="separator:a50ecb9f38bb522363ee1ae1798a840da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54c93b9697673e5749bb5fcc0bd8f9c8" id="r_a54c93b9697673e5749bb5fcc0bd8f9c8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a54c93b9697673e5749bb5fcc0bd8f9c8">index</a> ()</td></tr>
+<tr class="memdesc:a54c93b9697673e5749bb5fcc0bd8f9c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render the home page with room listings and (optionally) the user's bookings.  <br /></td></tr>
 <tr class="separator:a54c93b9697673e5749bb5fcc0bd8f9c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -150,6 +155,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Attach a LogoutForm to Flask's <code>g</code> for easy navbar rendering. </p>
+
 </div>
 </div>
 <a id="a8af5313cd529e5f61a60f119db13e806" name="a8af5313cd529e5f61a60f119db13e806"></a>
@@ -168,6 +175,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Teardown handler to close (or return) DB connections after each request. </p>
+<p>Connections are tracked on Flask's <code>g</code> object as <code>g._db_conns</code> and will be closed at the end of the request, returning pooled connections to the pool if enabled. </p>
+
 </div>
 </div>
 <a id="a54c93b9697673e5749bb5fcc0bd8f9c8" name="a54c93b9697673e5749bb5fcc0bd8f9c8"></a>
@@ -184,6 +194,12 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Render the home page with room listings and (optionally) the user's bookings. </p>
+<dl class="section return"><dt>Returns</dt><dd>Rendered HTML response.</dd></dl>
+<p>Query parameters:</p><ul>
+<li>date (YYYY-MM-DD): date to render availability for; defaults to today's date. </li>
+</ul>
 
 </div>
 </div>
@@ -202,6 +218,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Inject authentication state into all templates. </p>
+<dl class="section return"><dt>Returns</dt><dd>dict with <code>user_id</code> and <code>is_logged_in</code> keys. </dd></dl>
+
 </div>
 </div>
 <a id="a91accba869170261b4c2bf2849aac1a5" name="a91accba869170261b4c2bf2849aac1a5"></a>
@@ -218,6 +237,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Ensure sessions are treated as permanent so the configured lifetime applies. </p>
+<p>The actual timeout window is controlled by <code>app.permanent_session_lifetime</code>. </p>
 
 </div>
 </div>

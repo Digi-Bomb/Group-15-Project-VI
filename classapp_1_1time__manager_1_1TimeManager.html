@@ -81,21 +81,31 @@ $(function() {
   <div class="headertitle"><div class="title">app.time_manager.TimeManager Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Helper methods for time calculations in booking flows.  
+ <a href="classapp_1_1time__manager_1_1TimeManager.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2824a7105342c888b336b0035e3fd93a" id="r_a2824a7105342c888b336b0035e3fd93a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1time__manager_1_1TimeManager.html#a2824a7105342c888b336b0035e3fd93a">__init__</a> (self)</td></tr>
 <tr class="separator:a2824a7105342c888b336b0035e3fd93a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a88835158ec16f5af630893ec25fc0e" id="r_a0a88835158ec16f5af630893ec25fc0e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1time__manager_1_1TimeManager.html#a0a88835158ec16f5af630893ec25fc0e">time_to_timedelta</a> (time_str)</td></tr>
+<tr class="memdesc:a0a88835158ec16f5af630893ec25fc0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a time string into a timedelta.  <br /></td></tr>
 <tr class="separator:a0a88835158ec16f5af630893ec25fc0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aceef7c725ead1f915b476ea78ef94b36" id="r_aceef7c725ead1f915b476ea78ef94b36"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1time__manager_1_1TimeManager.html#aceef7c725ead1f915b476ea78ef94b36">timedelta_to_time</a> (td)</td></tr>
+<tr class="memdesc:aceef7c725ead1f915b476ea78ef94b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a timedelta into an "HH:MM" string (24-hour, minutes precision).  <br /></td></tr>
 <tr class="separator:aceef7c725ead1f915b476ea78ef94b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20995db5e289411da09e4e828c891ed8" id="r_a20995db5e289411da09e4e828c891ed8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1time__manager_1_1TimeManager.html#a20995db5e289411da09e4e828c891ed8">get_end_time_from_start_time_and_duration</a> (ts, ds)</td></tr>
+<tr class="memdesc:a20995db5e289411da09e4e828c891ed8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute an end time from a start time and duration.  <br /></td></tr>
 <tr class="separator:a20995db5e289411da09e4e828c891ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47c2676d0872dcaa1a42a13d7ab7c342" id="r_a47c2676d0872dcaa1a42a13d7ab7c342"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1time__manager_1_1TimeManager.html#a47c2676d0872dcaa1a42a13d7ab7c342">get_duration_from_start_time_and_end_time</a> (start_time_str, end_time_str)</td></tr>
+<tr class="memdesc:a47c2676d0872dcaa1a42a13d7ab7c342"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a duration from start and end times.  <br /></td></tr>
 <tr class="separator:a47c2676d0872dcaa1a42a13d7ab7c342"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Helper methods for time calculations in booking flows. </p>
+<dl class="section note"><dt>Note</dt><dd>Methods are implemented as static-style functions (no <code>self</code> usage). </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2824a7105342c888b336b0035e3fd93a" name="a2824a7105342c888b336b0035e3fd93a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2824a7105342c888b336b0035e3fd93a">&#9670;&#160;</a></span>__init__()</h2>
 
@@ -141,6 +151,16 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Compute a duration from start and end times. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start_time_str</td><td>Start time string in "HH:MM:SS".</td></tr>
+    <tr><td class="paramname">end_time_str</td><td>End time string in "HH:MM:SS".</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Duration string in "HH:MM:SS". </dd></dl>
+
 </div>
 </div>
 <a id="a20995db5e289411da09e4e828c891ed8" name="a20995db5e289411da09e4e828c891ed8"></a>
@@ -169,6 +189,16 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Compute an end time from a start time and duration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ts</td><td>Start time string in "HH:MM:SS".</td></tr>
+    <tr><td class="paramname">ds</td><td>Duration string in "HH:MM:SS".</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>timedelta representing the end time (start + duration). </dd></dl>
+
 </div>
 </div>
 <a id="a0a88835158ec16f5af630893ec25fc0e" name="a0a88835158ec16f5af630893ec25fc0e"></a>
@@ -187,6 +217,15 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Convert a time string into a timedelta. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time_str</td><td>Time in "HH:MM:SS" format.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>timedelta representing the given time offset. </dd></dl>
+
 </div>
 </div>
 <a id="aceef7c725ead1f915b476ea78ef94b36" name="aceef7c725ead1f915b476ea78ef94b36"></a>
@@ -204,6 +243,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Convert a timedelta into an "HH:MM" string (24-hour, minutes precision). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">td</td><td>Timedelta to format.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Formatted time string (HH:MM). </dd></dl>
 
 </div>
 </div>

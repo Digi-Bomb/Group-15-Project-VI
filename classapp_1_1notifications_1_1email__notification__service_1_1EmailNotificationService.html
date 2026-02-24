@@ -82,6 +82,9 @@ $(function() {
   <div class="headertitle"><div class="title">app.notifications.email_notification_service.EmailNotificationService Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Sends booking-related email notifications.  
+ <a href="classapp_1_1notifications_1_1email__notification__service_1_1EmailNotificationService.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -90,12 +93,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad0053fbb3688097bafa92fdd452f8abd" id="r_ad0053fbb3688097bafa92fdd452f8abd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1notifications_1_1email__notification__service_1_1EmailNotificationService.html#ad0053fbb3688097bafa92fdd452f8abd">send_email_notification</a> (self, str|list recipient_email, str subject, str body)</td></tr>
 <tr class="separator:ad0053fbb3688097bafa92fdd452f8abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ee27c9879667d618b654494ad4972b8" id="r_a7ee27c9879667d618b654494ad4972b8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1notifications_1_1email__notification__service_1_1EmailNotificationService.html#a7ee27c9879667d618b654494ad4972b8">send_new_rsvp_notification_email</a> (self, int booking_owner_id, str attendee_name, int booking_id)</td></tr>
+<tr class="memdesc:a7ee27c9879667d618b654494ad4972b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify the booking owner that a new attendee RSVP'd.  <br /></td></tr>
 <tr class="separator:a7ee27c9879667d618b654494ad4972b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e29b8e39c0cebba988d5251486570dd" id="r_a3e29b8e39c0cebba988d5251486570dd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1notifications_1_1email__notification__service_1_1EmailNotificationService.html#a3e29b8e39c0cebba988d5251486570dd">send_booking_notification_email</a> (self, <a class="el" href="classapp_1_1booking_1_1booking_1_1Booking.html">Booking</a> booking)</td></tr>
+<tr class="memdesc:a3e29b8e39c0cebba988d5251486570dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a reminder email to all attendees for an upcoming booking.  <br /></td></tr>
 <tr class="separator:a3e29b8e39c0cebba988d5251486570dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a144e3902fbaba4c90055c332a075df84" id="r_a144e3902fbaba4c90055c332a075df84"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1notifications_1_1email__notification__service_1_1EmailNotificationService.html#a144e3902fbaba4c90055c332a075df84">send_booking_update_notification_email</a> (self, int booking_id)</td></tr>
+<tr class="memdesc:a144e3902fbaba4c90055c332a075df84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify attendees that a booking was updated and prompt them to RSVP again.  <br /></td></tr>
 <tr class="separator:a144e3902fbaba4c90055c332a075df84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba3a8feed32219e57b71263dfb5d7f27" id="r_aba3a8feed32219e57b71263dfb5d7f27"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1notifications_1_1email__notification__service_1_1EmailNotificationService.html#aba3a8feed32219e57b71263dfb5d7f27">send_booking_delete_notification_email</a> (self, int booking_id)</td></tr>
+<tr class="memdesc:aba3a8feed32219e57b71263dfb5d7f27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify attendees that a booking was deleted.  <br /></td></tr>
 <tr class="separator:aba3a8feed32219e57b71263dfb5d7f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -107,7 +114,20 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a0b64f78308a92378b30ace531f54cdc9" id="r_a0b64f78308a92378b30ace531f54cdc9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1notifications_1_1email__notification__service_1_1EmailNotificationService.html#a0b64f78308a92378b30ace531f54cdc9">database_writing_services</a></td></tr>
 <tr class="separator:a0b64f78308a92378b30ace531f54cdc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Sends booking-related email notifications. </p>
+<p>The service wraps:</p><ul>
+<li>Recipient discovery (registered + unregistered attendees)</li>
+<li>Message composition for reminder/update/delete scenarios</li>
+<li>Audit logging for notification attempts and outcomes</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">database</td><td>DatabaseConnection used by reading/writing service layers. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab37ce35b2a10493f2deb755b56427fab" name="ab37ce35b2a10493f2deb755b56427fab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab37ce35b2a10493f2deb755b56427fab">&#9670;&#160;</a></span>__init__()</h2>
 
@@ -163,6 +183,15 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Notify attendees that a booking was deleted. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">booking_id</td><td>Booking identifier to fetch and notify for.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>If attendee count &lt;= 1, no notification is sent (owner-only booking). </dd></dl>
+
 </div>
 </div>
 <a id="a3e29b8e39c0cebba988d5251486570dd" name="a3e29b8e39c0cebba988d5251486570dd"></a>
@@ -191,6 +220,15 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Send a reminder email to all attendees for an upcoming booking. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">booking</td><td>Booking domain object containing schedule and location info.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Sets booking.reminder_sent = True and persists reminder state in the database. </dd></dl>
+
 </div>
 </div>
 <a id="a144e3902fbaba4c90055c332a075df84" name="a144e3902fbaba4c90055c332a075df84"></a>
@@ -218,6 +256,15 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Notify attendees that a booking was updated and prompt them to RSVP again. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">booking_id</td><td>Booking identifier to fetch and notify for.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>If attendee count &lt;= 1, no notification is sent (owner-only booking). </dd></dl>
 
 </div>
 </div>
@@ -298,6 +345,16 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Notify the booking owner that a new attendee RSVP'd. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">booking_owner_id</td><td>Registered user ID (RUID) of the booking owner.</td></tr>
+    <tr><td class="paramname">attendee_name</td><td>Display name of the attendee who RSVP'd.</td></tr>
+    <tr><td class="paramname">booking_id</td><td>Booking identifier that was RSVP'd to. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
