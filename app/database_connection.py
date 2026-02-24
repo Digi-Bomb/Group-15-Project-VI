@@ -1,3 +1,14 @@
+"""!
+@file database_connection.py
+@brief MySQL connection management with optional pooling.
+
+The DatabaseConnection class supports:
+- Initializing a shared MySQLConnectionPool at application startup
+- Borrowing pooled connections on demand
+- Falling back to direct mysql.connector connections if pooling is unavailable
+- Request-scoped tracking of connections via Flask's `g` for automatic teardown
+"""
+
 import os
 import time
 import mysql.connector
@@ -6,10 +17,30 @@ from flask import has_request_context, g
 
 
 class DatabaseConnection:
+    """!
+    @brief Provides MySQL connections (pooled when available).
+    
+    Usage patterns:
+    - Call init_pool() once at startup (recommended).
+    - Call connect() wherever a DB connection is needed.
+    
+    @warning Credentials are currently hard-coded for development/demo use.
+             For production, use environment variables or a secrets manager.
+    """
     # Shared pool across all DatabaseConnection instances.
     _pool: MySQLConnectionPool | None = None
 
     def __init__(self):
+
+        """!
+
+        @brief Construct a DatabaseConnection configuration wrapper.
+
+        
+
+        The actual pool is shared across all instances via the class variable `_pool`.
+
+        """
         self.host = "138.197.163.32"
         self.port = 3306
         self.user = "ezbooksserver"

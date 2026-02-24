@@ -1,3 +1,15 @@
+"""!
+@file app.py
+@brief Flask application entry point and core initialization.
+
+Responsibilities:
+- Flask app construction and configuration
+- Mail (Flask-Mail) initialization
+- Logging configuration (RotatingFileHandler)
+- Database connection pool initialization (DatabaseConnection.init_pool)
+- Blueprint registration (account, booking, notifications)
+"""
+
 from flask import Flask, render_template, request, redirect, session, g, flash
 from flask import request
 
@@ -52,6 +64,12 @@ except Exception as exc:
 
 @app.teardown_appcontext
 def close_db_connections(_exc=None):
+    """!
+    @brief Teardown handler to close (or return) DB connections after each request.
+    
+    Connections are tracked on Flask's `g` object as `g._db_conns` and will be closed
+    at the end of the request, returning pooled connections to the pool if enabled.
+    """
     conns = getattr(g, "_db_conns", None)
     if not conns:
         return
@@ -127,18 +145,30 @@ app.permanent_session_lifetime = timedelta(minutes=15)
 # refresh session timer with activity
 @app.before_request
 def make_session_permanent():
+    """!
+    @brief Ensure sessions are treated as permanent so the configured lifetime applies.
+    
+    The actual timeout window is controlled by `app.permanent_session_lifetime`.
+    """
     session.permanent = True
 
 
 # load logout form
 @app.before_request
 def add_logout_form():
+    """!
+    @brief Attach a LogoutForm to Flask's `g` for easy navbar rendering.
+    """
     g.logout_form = LogoutForm()
 
 
 # context processor for navbar
 @app.context_processor
 def inject_user():
+    """!
+    @brief Inject authentication state into all templates.
+    @return dict with `user_id` and `is_logged_in` keys.
+    """
     return dict(user_id=session.get("user_id"), is_logged_in=("user_id" in session))
 
 
@@ -178,6 +208,13 @@ app.register_blueprint(notifications_bp)
 
 @app.route("/", methods=["GET"])
 def index():
+    """!
+    @brief Render the home page with room listings and (optionally) the user's bookings.
+    @return Rendered HTML response.
+    
+    Query parameters:
+    - date (YYYY-MM-DD): date to render availability for; defaults to today's date.
+    """
     db = database_connection.DatabaseConnection()
     reader = database_reading.DatabaseReadingServices(db)
 

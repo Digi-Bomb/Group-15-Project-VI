@@ -1,9 +1,17 @@
+"""!
+@file forms.py
+@brief Flask-WTF form definitions for authentication and booking workflows.
+
+This module contains WTForms classes used by the Flask routes and templates.
+"""
+
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, TextAreaField, SubmitField, TimeField, DateField, SelectField
 from wtforms.validators import DataRequired, Length, ValidationError, EqualTo, Regexp
 
 
 class RegisterForm(FlaskForm):
+    """! @brief Registration form for new users. """
     username = StringField("Username", validators=[DataRequired(), Length(min=3, max=20), Regexp(r'^\w+$', message="Username must contain only letters, numbers, or underscores")])
     password = PasswordField("Password", validators=[DataRequired(), Length(min=6)])
     firstName = StringField("First Name", validators=[DataRequired(), Length(max=50)])
@@ -18,21 +26,25 @@ class RegisterForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
+    """! @brief Login form for returning users. """
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Login")
 
 
 class NoteForm(FlaskForm):
+    """! @brief Simple note form (demo/utility). """
     note = TextAreaField("Note", validators=[DataRequired(), Length(max=500)]) #max 500 characters for now
     submit = SubmitField("Add Note")
 
 
 class LogoutForm(FlaskForm):
+    """! @brief Logout form used for CSRF-safe logout actions. """
     submit = SubmitField("Logout")
 
 #create booking form
 class BookingForm(FlaskForm):
+    """! @brief Form for creating a room booking. """
     meeting_date = DateField("Meeting Date", validators=[DataRequired()])
     start_time = TimeField("Start Time", format="%H:%M", render_kw={
             "min": "08:00",

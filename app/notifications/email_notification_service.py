@@ -1,3 +1,15 @@
+"""!
+@file email_notification_service.py
+@brief Email notification utilities for booking events (reminders, updates, RSVP activity).
+
+This module centralizes all outgoing email behavior for the Room Booking Web Application.
+It relies on Flask-Mail for SMTP delivery and uses the database services to discover
+recipients associated with a booking.
+
+@note This service imports the Flask-Mail `mail` instance lazily inside
+      send_email_notification() to avoid circular imports with app.py.
+"""
+
 import re
 
 from booking.booking import Booking
@@ -11,6 +23,16 @@ from audit_logging.audit_logger import AuditLogger
 from time_manager import TimeManager
 
 class EmailNotificationService:
+    """!
+    @brief Sends booking-related email notifications.
+    
+    The service wraps:
+    - Recipient discovery (registered + unregistered attendees)
+    - Message composition for reminder/update/delete scenarios
+    - Audit logging for notification attempts and outcomes
+    
+    @param database DatabaseConnection used by reading/writing service layers.
+    """
     def __init__(self, database: DatabaseConnection):
         self.database = database
         self.database_reading_services = DatabaseReadingServices(database)
@@ -81,6 +103,18 @@ class EmailNotificationService:
             return False
 
     def send_new_rsvp_notification_email(self, booking_owner_id: int, attendee_name: str, booking_id: int):
+
+        """!
+
+        @brief Notify the booking owner that a new attendee RSVP'd.
+
+        @param booking_owner_id Registered user ID (RUID) of the booking owner.
+
+        @param attendee_name Display name of the attendee who RSVP'd.
+
+        @param booking_id Booking identifier that was RSVP'd to.
+
+        """
         audit_logger = AuditLogger()
         meeting_owner_email = self.database_reading_services.get_registered_user_email_from_RUID(booking_owner_id)
         self.send_email_notification(meeting_owner_email, "New Booking RSVP", f"{attendee_name} has RSVP'd to your booking: '{booking_id}'.")
@@ -88,6 +122,18 @@ class EmailNotificationService:
         audit_logger.log_audit_event(f"Sent new RSVP confirmation notification email to {meeting_owner_email} for booking ID {booking_id} due to new RSVP confirmation from {attendee_name}.")
 
     def send_booking_notification_email(self, booking: Booking):
+
+        """!
+
+        @brief Send a reminder email to all attendees for an upcoming booking.
+
+        @param booking Booking domain object containing schedule and location info.
+
+        
+
+        @post Sets booking.reminder_sent = True and persists reminder state in the database.
+
+        """
         recipent_list = []
         audit_logger = AuditLogger()
 
@@ -105,6 +151,18 @@ class EmailNotificationService:
         self.database_writing_services.update_booking_reminder_sent(booking.booking_id)
 
     def send_booking_update_notification_email(self, booking_id: int):
+
+        """!
+
+        @brief Notify attendees that a booking was updated and prompt them to RSVP again.
+
+        @param booking_id Booking identifier to fetch and notify for.
+
+        
+
+        @note If attendee count <= 1, no notification is sent (owner-only booking).
+
+        """
         audit_logger = AuditLogger()
         recipent_list = []
 
@@ -126,6 +184,18 @@ class EmailNotificationService:
         audit_logger.log_audit_event(f"Sent booking update notification email to {recipent_list} for booking ID {booking_id}.")
 
     def send_booking_delete_notification_email(self, booking_id: int):
+
+        """!
+
+        @brief Notify attendees that a booking was deleted.
+
+        @param booking_id Booking identifier to fetch and notify for.
+
+        
+
+        @note If attendee count <= 1, no notification is sent (owner-only booking).
+
+        """
         audit_logger = AuditLogger()
         recipent_list = []
 
