@@ -41,11 +41,14 @@ app.config.update(
 # Initialize once at startup; subsequent DatabaseConnection() instances will reuse it.
 try:
     database_connection.DatabaseConnection().init_pool(
-        pool_size=int(os.environ.get("DB_POOL_SIZE", "10"))
+        pool_size=int(os.environ.get("DB_POOL_SIZE", "1000"))
     )
 except Exception as exc:
     # Keep existing behavior (app can still fall back to non-pooled connections via .connect()).
-    app.logger.warning(f"DB pool init failed; falling back to direct connections: {exc}")
+    app.logger.warning(
+        f"DB pool init failed; falling back to direct connections: {exc}"
+    )
+
 
 @app.teardown_appcontext
 def close_db_connections(_exc=None):
@@ -58,6 +61,7 @@ def close_db_connections(_exc=None):
         except Exception:
             pass
     g._db_conns = []
+
 
 # mail setup - using Gmail SMTP for demo, change for prod
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
@@ -188,7 +192,13 @@ def index():
     # if a user is logged in, display their bookings at the top
     if user_id:
         my_bookings = reader.return_all_bookings_with_info_for_a_user(user_id)
-        return render_template("index.html", rooms=rooms, selected_date=selected_date, bookings=my_bookings, user=user_id)
+        return render_template(
+            "index.html",
+            rooms=rooms,
+            selected_date=selected_date,
+            bookings=my_bookings,
+            user=user_id,
+        )
 
     return render_template("index.html", rooms=rooms, selected_date=selected_date)
 

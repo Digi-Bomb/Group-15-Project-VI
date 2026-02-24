@@ -75,7 +75,9 @@ class DatabaseReadingServices:
 
         try:
             self.cursor = self.conn.cursor()
-            self.cursor.execute("SELECT meetingOwner from Booking WHERE BID = %s", (BID,))
+            self.cursor.execute(
+                "SELECT meetingOwner from Booking WHERE BID = %s", (BID,)
+            )
             result = self.cursor.fetchone()[0]
 
             if result:
@@ -225,91 +227,42 @@ class DatabaseReadingServices:
         duration: str,
         BID: int = None,
     ):
-        """Function that validates that a room is available for use \n
-        NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPDATE AN EXISTING BOOKING \n
-        TRUE == ROOM IS AVAILABLE \n
-        FALSE == ROOM TAKEN"""
         self.cursor = self.conn.cursor()
-        start_hours, start_minutes, start_seconds = map(int, start_time.split(":"))
-        start_time = timedelta(
-            hours=start_hours, minutes=start_minutes, seconds=start_seconds
-        )
+        """Function that validates that a room is available for use \n
+        NOTE: ONLY INCLUDE BID IF THIS IS AN ATTEMPT TO UPDATE AN EXISTING BOOKING
+        \n TRUE == ROOM IS AVAILABLE \n FALSE == ROOM TAKEN"""
 
-        duration_hours, duration_minutes, duration_seconds = map(
-            int, duration.split(":")
-        )
-        duration = timedelta(
-            hours=duration_hours, minutes=duration_minutes, seconds=duration_seconds
-        )
+        query = """
+        SELECT 1 FROM Booking b JOIN RoomsAssociatedWithBookings rwb ON b.BID = rwb.BID WHERE rwb.RID = %s AND b.meetingDate = %s AND b.startTime < ADDTIME(%s, %s) AND ADDTIME(b.startTime, b.duration) > %s
+        """
+        params = [
+            room_number,
+            meeting_date,
+            start_time,  # used to compute new_end
+            duration,
+            start_time,  # new_start
+        ]
 
-        end_time = duration + start_time
-        meeting_date = datetime.strptime(meeting_date, "%Y-%m-%d").date()
+        if BID is not None:
+            query += " AND b.BID != %s"
+            params.append(BID)
 
-        # if a BID is provided
-        if BID:
-            self.cursor.execute(
-                "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s AND BID != %s",
-                (room_number, BID),  # Returns ALL bookings for a Room
-            )
+        query += " LIMIT 1"
 
-        else:
-            # First check room id from associated table
-            self.cursor.execute(
-                "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s",
-                (room_number,),  # Returns ALL bookings for a Room
-            )
+        self.cursor.execute(query, params)
 
-        bookings = self.cursor.fetchall()
-
-        # Check the Booking times of each
-        for (booking_id,) in bookings:
-            self.cursor.execute(
-                "SELECT meetingDate, startTime, duration, ADDTIME(startTime, duration) AS endTime FROM Booking WHERE BID = %s",
-                (booking_id,),
-            )
-
-            row = self.cursor.fetchone()
-
-            curmeetingDate_db = row[0]
-            curstartTime_db = row[1]
-            curendTime_db = row[3]
-
-            # Case 1, start time and date of proposed booking is equal to existing booking
-            if meeting_date == curmeetingDate_db and start_time == curstartTime_db:
-                # print("error1create")
-                return False
-
-            # Case 2, an existing booking leaks into proposed booking start time
-            elif meeting_date == curmeetingDate_db and (
-                curstartTime_db < start_time and curendTime_db > start_time
-            ):
-                # print("error2create")
-
-                return False
-
-            # Case 3, the proposed booking leaks into a specific Booking's time
-            elif meeting_date == curmeetingDate_db and (
-                start_time < curstartTime_db and end_time > curstartTime_db
-            ):
-                # print("error3create")
-                return False
-
-        return True
+        # If we find ANY row, an overlap exists
+        return self.cursor.fetchone() is None
 
     def get_capacity_of_room(self, room_number: int):
         """Function that returns the INTEGER Capacity of the room (specified by room number)"""
 
-        self.cursor = self.conn.cursor()
-        self.cursor.execute(
-            "SELECT maximumCapacity FROM Room WHERE roomNumber = %s", (room_number,)
-        )
-        result = self.cursor.fetchone()[0]
-        self.cursor.close()  # Empty Cursor
-
-        if result:
-            return result
-        else:
-            return "No room found with that ID."
+        if room_number not in self.room_capacity_cache:
+            self.cursor.execute(
+                "SELECT maximumCapacity FROM Room WHERE roomNumber = %s", (room_number,)
+            )
+        self.room_capacity_cache[room_number] = self.cursor.fetchone()[0]
+        return self.room_capacity_cache[room_number]
 
     def get_branch_location_of_room_associated_with_room_number(self, room_number: int):
         """Returns the building for which the room exists within (specified by room number)"""
@@ -373,7 +326,7 @@ class DatabaseReadingServices:
             prev_reminder_sent,
             prev_shareable_link,
             prev_booking_id,
-            prev_booking_size
+            prev_booking_size,
         )
 
     def get_booking_start_and_end_times_for_specific_room_include_date(
@@ -423,7 +376,11 @@ class DatabaseReadingServices:
 
             curmeetingDate_db = curmeetingDate_db.strftime("%Y-%m-%d")
 
-            tupleOfInfo = (curmeetingDate_db, cur_meeting_time, curendTime_db, )
+            tupleOfInfo = (
+                curmeetingDate_db,
+                cur_meeting_time,
+                curendTime_db,
+            )
 
             booked_times.append(tupleOfInfo)
 
@@ -477,7 +434,12 @@ class DatabaseReadingServices:
 
             curmeetingDate_db = curmeetingDate_db.strftime("%Y-%m-%d")
 
-            tupleOfInfo = (curmeetingDate_db, cur_meeting_time, curendTime_db, curmeetingOwner_db)
+            tupleOfInfo = (
+                curmeetingDate_db,
+                cur_meeting_time,
+                curendTime_db,
+                curmeetingOwner_db,
+            )
 
             booked_times.append(tupleOfInfo)
 
@@ -531,7 +493,12 @@ class DatabaseReadingServices:
 
             curmeetingDate_db = curmeetingDate_db.strftime("%Y-%m-%d")
 
-            tupleOfInfo = (curmeetingDate_db, cur_meeting_time, curendTime_db, curmeetingOwner_db)
+            tupleOfInfo = (
+                curmeetingDate_db,
+                cur_meeting_time,
+                curendTime_db,
+                curmeetingOwner_db,
+            )
 
             booked_times.append(tupleOfInfo)
 
@@ -672,7 +639,6 @@ class DatabaseReadingServices:
         except TypeError:
             return "No booking found for that shareable link ID."
 
-
     def get_all_bookings(self):
         self.cursor = self.conn.cursor()
         self.cursor.execute("SELECT * FROM Booking")
@@ -772,27 +738,35 @@ class DatabaseReadingServices:
         except TypeError:
             return "Unable to find any users associated with the meeting"
 
-    def get_list_of_registered_and_unregistered_attendees_with_user_info(self, BID: int):
+    def get_list_of_registered_and_unregistered_attendees_with_user_info(
+        self, BID: int
+    ):
 
         self.cursor = self.conn.cursor()
 
         # Registered attendees
-        self.cursor.execute("""
+        self.cursor.execute(
+            """
             SELECT RU.*
             FROM RegisteredBookingAttendees RBA
             JOIN RegisteredUser RU ON RBA.RegisteredAttendee = RU.RUID
             WHERE RBA.BID = %s
-        """, (BID,))
+        """,
+            (BID,),
+        )
 
         registered = self.cursor.fetchall()
 
         # Unregistered attendees
-        self.cursor.execute("""
+        self.cursor.execute(
+            """
             SELECT URU.*
             FROM UnregisteredBookingAttendees UBA
             JOIN UnregisteredUser URU ON UBA.unregisteredAttendee = URU.URUID
             WHERE UBA.BID = %s
-        """, (BID,))
+        """,
+            (BID,),
+        )
 
         unregistered = self.cursor.fetchall()
         self.cursor.close()
@@ -815,7 +789,7 @@ class DatabaseReadingServices:
                 return "Unable to find the booking specified or no confirmations yet."
         except TypeError:
             return "Unable to find the booking specified or no confirmations yet."
-        
+
     def close(self):
         """Release DB resources.
 

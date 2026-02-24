@@ -81,9 +81,7 @@ class DatabaseWritingServices:
                     (nickname)
                     VALUES (%s)
                     """
-                    values = (
-                        nickname,
-                    )
+                    values = (nickname,)
 
                 self.cursor.execute(query, values)
                 self.conn.commit()
@@ -117,7 +115,7 @@ class DatabaseWritingServices:
         meeting_owner: str,
         meeting_room: str,
         meeting_capacity: int,
-        shareable_link: str
+        shareable_link: str,
     ):
         """Generic function for adding a booking to the Database \n
         NOTE: CHECKS FOR EXISTING BOOKED ROOMS AND ROOM CAPACITY \n
@@ -135,51 +133,61 @@ class DatabaseWritingServices:
 
         roomCapacity = self.reader.get_capacity_of_room(room_number=meeting_room)
 
-        if checkAvailable:
+        if not checkAvailable:
+            return False, "Room is NOT Available"
 
-            if meeting_capacity <= roomCapacity:
-                query = """
-                    INSERT INTO Booking
-                    (meetingDate, startTime, duration, meetingOwner, meetingRoom, meetingSize, shareableLink)
-                    VALUES ( %s, %s, %s, %s, %s, %s, %s)
+        if meeting_capacity > roomCapacity:
+            return (
+                False,
+                "Room IS Available, but the specified meetingSize is greater than the room's capacity",
+            )
+
+        try:
+            query = """
+                INSERT INTO Booking
+                (meetingDate, startTime, duration, meetingOwner, meetingRoom, meetingSize, shareableLink)
+                VALUES ( %s, %s, %s, %s, %s, %s, %s)
                 """
-                values = (
-                    meeting_date,
-                    start_time,
-                    duration,
-                    meeting_owner,
-                    meeting_room,
-                    meeting_capacity,
-                    shareable_link,
-                )
+            values = (
+                meeting_date,
+                start_time,
+                duration,
+                meeting_owner,
+                meeting_room,
+                meeting_capacity,
+                shareable_link,
+            )
 
-                self.cursor.execute(query, values)
-                self.conn.commit()
-                booking_id = (
-                    self.cursor.lastrowid
-                )  # POTENTIALLY unsafe for multiple users (?)
+            self.cursor.execute(query, values)
 
-                attempt_to_book_room = self.book_a_room_after_booking(
-                    booking_id, meeting_room
-                )
-                attempt_to_associate = self.associate_registered_user_with_booking(
-                    booking_id, meeting_owner
-                )
+            booking_id = (
+                self.cursor.lastrowid
+            )  # POTENTIALLY unsafe for multiple users (?)
 
-                if attempt_to_associate and attempt_to_book_room:
+            self.cursor.execute(
+                """
+                    INSERT INTO RoomsAssociatedWithBookings (BID, RID)
+                    VALUES (%s, %s)
+                    """,
+                (booking_id, meeting_room),
+            )
 
-                    #   self.cursor.close()
-                    return True, (booking_id)
-                else:
-                    return False, "Unable to associate"
+            self.cursor.execute(
+                """
+                    INSERT INTO RegisteredBookingAttendees (BID, RegisteredAttendee)
+                    VALUES (%s, %s)
+                    """,
+                (booking_id, meeting_owner),
+            )
 
-            else:
-                return (
-                    False,
-                    "Room IS Available, but the specified meetingSize is greater than the room's capacity",
-                )
-
-        return False, "Room is NOT Available"
+            self.conn.commit()
+            return True, booking_id
+            # attempt_to_associate = self.associate_registered_user_with_booking(
+            #     booking_id, meeting_owner
+            # )
+        except Exception as e:
+            self.conn.rollback()
+            return False, str(e)
 
     def book_a_room_after_booking(self, BID: int, meeting_room):
         """Generic function for assignment of a room to a particular booking \n
@@ -301,7 +309,8 @@ class DatabaseWritingServices:
 
         try:
             self.cursor.execute(
-                "DELETE FROM RegisteredBookingAttendees WHERE BID = %s AND registeredAttendee != %s", (BID, meeting_owner)
+                "DELETE FROM RegisteredBookingAttendees WHERE BID = %s AND registeredAttendee != %s",
+                (BID, meeting_owner),
             )
             self.conn.commit()
 
@@ -321,7 +330,6 @@ class DatabaseWritingServices:
             self.conn.rollback()
             # print("DELETE ERROR: ", e)
             return False, str(e)
-
 
     def update_room_as_available(self, BID: int):
         """Generic function to update the database that a room is now available when deleting a booking \n
@@ -614,7 +622,7 @@ class DatabaseWritingServices:
             self.conn.rollback()
             # print("UPDATE ERROR: ", e)
             return False, str(e)
-    
+
     def close(self):
         """Release DB resources.
 
