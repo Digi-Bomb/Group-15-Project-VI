@@ -47,6 +47,18 @@ except Exception as exc:
     # Keep existing behavior (app can still fall back to non-pooled connections via .connect()).
     app.logger.warning(f"DB pool init failed; falling back to direct connections: {exc}")
 
+@app.teardown_appcontext
+def close_db_connections(_exc=None):
+    conns = getattr(g, "_db_conns", None)
+    if not conns:
+        return
+    for cnx in conns:
+        try:
+            cnx.close()  # pooled connections return to pool here
+        except Exception:
+            pass
+    g._db_conns = []
+
 # mail setup - using Gmail SMTP for demo, change for prod
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587

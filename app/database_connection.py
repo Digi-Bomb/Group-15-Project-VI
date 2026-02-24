@@ -2,6 +2,7 @@ import os
 import time
 import mysql.connector
 from mysql.connector.pooling import MySQLConnectionPool
+from flask import has_request_context, g
 
 
 class DatabaseConnection:
@@ -61,24 +62,39 @@ class DatabaseConnection:
 
         If a pool is initialized, this borrows a connection from the pool.
         Otherwise, falls back to creating a direct connection (legacy behavior).
+
+        During a Flask request, the connection is registered for automatic cleanup
+        at request teardown (returning it to the pool).
         """
         if DatabaseConnection._pool is not None:
-            return self.get_connection()
+            cnx = self.get_connection()
+        else:
+            # Legacy fallback (your original behavior)
+            last_error = None
+            for _ in range(5):
+                try:
+                    cnx = mysql.connector.connect(
+                        host=self.host,
+                        port=self.port,
+                        user=self.user,
+                        password=self.password,
+                        database=self.database,
+                        ssl_verify_cert=False,
+                        ssl_disabled=False,
+                    )
+                    break
+                except mysql.connector.Error as exc:
+                    last_error = exc
+                    time.sleep(2)
+            else:
+                raise last_error
 
-        # Legacy fallback (your original behavior)
-        last_error = None
-        for _ in range(5):
-            try:
-                return mysql.connector.connect(
-                    host=self.host,
-                    port=self.port,
-                    user=self.user,
-                    password=self.password,
-                    database=self.database,
-                    ssl_verify_cert=False,
-                    ssl_disabled=False,
-                )
-            except mysql.connector.Error as exc:
-                last_error = exc
-                time.sleep(2)
-        raise last_error
+        # ---- NEW: request-scoped tracking so connections always get closed ----
+        if has_request_context():
+            conns = getattr(g, "_db_conns", None)
+            if conns is None:
+                g._db_conns = []
+                conns = g._db_conns
+            conns.append(cnx)
+
+        return cnx
