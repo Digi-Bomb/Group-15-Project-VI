@@ -71,7 +71,7 @@
                         }}
                     </div>
                     <div class="col mt-2">
-                        <label for="startTime" class="form-label ms-5">End Time</label>
+                        <label for="endTime" class="form-label ms-5">End Time</label>
                         {{
                         form.end_time(
                         class="form-control",
@@ -102,6 +102,9 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const capacityDropdown = document.getElementById("numParticipants");
+        const roomDropdown = document.getElementById("meeting_room");
+        const csrfTokenEl = document.querySelector('[name="csrf_token"]');
 
         document.getElementById("edit-booking-form").addEventListener("submit", async function (e) {
             e.preventDefault();
@@ -128,17 +131,22 @@
                 meeting_date: document.querySelector('[name="meeting_date"]').value,
                 start_time: start,
                 duration: duration,
-                meeting_capacity: capacityDropdown.value,
-                meeting_room: roomDropdown.value
+                meeting_capacity: capacityDropdown ? capacityDropdown.value : null,
+                meeting_room: roomDropdown ? roomDropdown.value : null
             };
 
             Object.keys(data).forEach(key => {
                 if (!data[key]) delete data[key];
             });
 
+            const headers = { "Content-Type": "application/json" };
+            if (csrfTokenEl && csrfTokenEl.value) {
+                headers['X-CSRFToken'] = csrfTokenEl.value;
+            }
+
             const response = await fetch("{{ url_for('booking.edit_booking', booking_id=booking[8]) }}", {
                 method: "PATCH",
-                headers: { "Content-Type": "application/json" },
+                headers: headers,
                 body: JSON.stringify(data)
             });
 

@@ -69,7 +69,7 @@ def create_booking():
     # POST
     if form.validate_on_submit():
         # WTForms TimeField gives datetime.time, convert to "HH:MM:SS" required by DB logic
-        
+
         start_time_str = form.start_time.data.strftime("%H:%M") + ":00"
         meeting_date = form.meeting_date.data.strftime("%Y-%m-%d")
         end_time_str = form.end_time.data.strftime("%H:%M") + ":00"
@@ -135,7 +135,7 @@ def view_booking(booking_id):
     booking = reader.get_booking_information_of_specific_booking(booking_id)
 
     # 1) FIRST validate booking exists and has expected shape
-    if not booking or isinstance(booking, bool):
+    if not booking:
         audit_logger.log_audit_event(
             "View booking failed - booking not found",
             f"User attempted to view booking with ID {booking_id} but it was not found in the database."
@@ -146,6 +146,12 @@ def view_booking(booking_id):
     room_number = booking[0]
 
     room = reader.get_room_data_given_room_number(room_number)
+    if not room:
+        audit_logger.log_audit_event(
+            "Get Room failed - couldn't get room data given room number",
+            f"User attempted to view room with ID {room_number} but it was not found in the database."
+        )
+        abort(404, description="Room not found")
 
     user_id = session.get("user_id")
 
@@ -166,7 +172,19 @@ def view_booking(booking_id):
     ]
 
     attendees = reader.get_list_of_registered_and_unregistered_attendees_with_user_info(booking_id)
+    if not attendees:
+        audit_logger.log_audit_event(
+            "Get attendees failed",
+            f"Get attendees failed for booking"
+        )
+        abort(404, description="Attendees not found")
     booked_times = reader.get_booking_start_and_end_times_for_specific_room_include_date_with_BID(room_number)
+    if not booked_times:
+        audit_logger.log_audit_event(
+            "Get booked_times failed",
+            f"Get booked_times failed for booking"
+        )
+        abort(404, description="booking_times not found")
 
     return render_template(
         "meeting.html",
@@ -196,8 +214,11 @@ def edit_booking(booking_id):
 
     booking = reader.get_booking_information_of_specific_booking(booking_id)
 
-    if not booking[0]:
-        audit_logger.log_audit_event("View booking failed - booking not found", f"User attempted to view booking with ID {booking_id} but it was not found in the database.")
+    if not booking:
+        audit_logger.log_audit_event(
+            "View booking failed - booking not found",
+            f"User attempted to view booking with ID {booking_id} but it was not found in the database."
+        )
         abort(404, description="Booking not found")
 
     if booking[5] != user_id:
