@@ -85,17 +85,22 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:adb04bd3890f00389a7072ab442910456" id="r_adb04bd3890f00389a7072ab442910456"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#adb04bd3890f00389a7072ab442910456">create_booking</a> ()</td></tr>
+<tr class="memdesc:adb04bd3890f00389a7072ab442910456"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new booking or render the booking creation form.  <br /></td></tr>
 <tr class="separator:adb04bd3890f00389a7072ab442910456"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50fb27d8542544e731923c791aad7c1a" id="r_a50fb27d8542544e731923c791aad7c1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#a50fb27d8542544e731923c791aad7c1a">view_booking</a> (booking_id)</td></tr>
+<tr class="memdesc:a50fb27d8542544e731923c791aad7c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display a booking (meeting) detail page.  <br /></td></tr>
 <tr class="separator:a50fb27d8542544e731923c791aad7c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba0b69e34ac02c14ffab5ef0d05b196a" id="r_aba0b69e34ac02c14ffab5ef0d05b196a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#aba0b69e34ac02c14ffab5ef0d05b196a">edit_booking</a> (booking_id)</td></tr>
+<tr class="memdesc:aba0b69e34ac02c14ffab5ef0d05b196a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Edit or delete an existing booking.  <br /></td></tr>
 <tr class="separator:aba0b69e34ac02c14ffab5ef0d05b196a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b8516acf1ba1dd0e349a134e3c8d031" id="r_a1b8516acf1ba1dd0e349a134e3c8d031"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#a1b8516acf1ba1dd0e349a134e3c8d031">rsvp</a> (link_id=None)</td></tr>
-<tr class="separator:a1b8516acf1ba1dd0e349a134e3c8d031"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3464bd0d5aaaae6fd6d7330a1a90fd81" id="r_a3464bd0d5aaaae6fd6d7330a1a90fd81"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#a3464bd0d5aaaae6fd6d7330a1a90fd81">rsvp</a> (link_id)</td></tr>
+<tr class="memdesc:a3464bd0d5aaaae6fd6d7330a1a90fd81"><td class="mdescLeft">&#160;</td><td class="mdescRight">RSVP to a booking using a shareable RSVP link.  <br /></td></tr>
+<tr class="separator:a3464bd0d5aaaae6fd6d7330a1a90fd81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a48c8eb9786778fa4fbf0170e32b5fbae" id="r_a48c8eb9786778fa4fbf0170e32b5fbae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#a48c8eb9786778fa4fbf0170e32b5fbae">booking_bp</a> = Blueprint('booking', __name__)</td></tr>
+<tr class="memitem:a48c8eb9786778fa4fbf0170e32b5fbae" id="r_a48c8eb9786778fa4fbf0170e32b5fbae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1booking_1_1routes.html#a48c8eb9786778fa4fbf0170e32b5fbae">booking_bp</a> = Blueprint(&quot;booking&quot;, __name__)</td></tr>
+<tr class="memdesc:a48c8eb9786778fa4fbf0170e32b5fbae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blueprint for booking-related routes.  <br /></td></tr>
 <tr class="separator:a48c8eb9786778fa4fbf0170e32b5fbae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -113,6 +118,52 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Create a new booking or render the booking creation form. </p>
+<ul>
+<li>OPTIONS: Returns allowed methods with HTTP 204 and no body.</li>
+<li>GET: Renders the booking creation page. If query string includes <code>date</code>, it attempts to prefill the form date.</li>
+<li>POST: Validates the submitted form and creates a booking if the room/time slot is available. On success redirects to the booking detail page.</li>
+</ul>
+<p>Authentication:</p><ul>
+<li>Requires a logged-in user (session["user_id"]).</li>
+</ul>
+<p>Query string parameters (GET): </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">room_number</td><td>str Room identifier to book (required for creation flow). </td></tr>
+    <tr><td class="paramname">date</td><td>str Optional date string in format "YYYY-MM-DD" to prefill form.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Form fields (POST):</p><ul>
+<li>meeting_date (date)</li>
+<li>start_time (time)</li>
+<li>end_time (time)</li>
+<li>meeting_capacity (int)</li>
+</ul>
+<p>Side effects:</p><ul>
+<li>Creates DB records via DatabaseWritingServices.create_new_booking().</li>
+<li>Writes audit events via AuditLogger.</li>
+<li>Uses flash messages for user feedback.</li>
+<li>Generates a UUID shareable_link.</li>
+</ul>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li>OPTIONS: Flask Response with status 204 and Allow header.</li>
+<li>GET: Rendered "booking.html".</li>
+<li>POST success: Redirect to "/booking/&lt;booking_id&gt;".</li>
+<li>POST failure: Redirect back to "/booking?room_number=...&amp;date=...".</li>
+<li>Auth failure: Redirect to "/login".</li>
+</ul>
+</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">abort</td><td><ul>
+<li>Does not directly abort, but may redirect on validation/auth problems. </li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -132,10 +183,60 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Edit or delete an existing booking. </p>
+<p>This endpoint supports three operations:</p><ul>
+<li>GET: Render a pre-filled edit form for the booking (owner-only).</li>
+<li>PATCH: Accept a JSON payload to update one or more booking fields (owner-only).</li>
+<li>DELETE: Delete the booking (owner-only).</li>
+</ul>
+<p>Authorization:</p><ul>
+<li>Requires session["user_id"] (logged in).</li>
+<li>Requires the logged-in user to be the booking owner (booking[5] == user_id).</li>
+</ul>
+<p>PATCH JSON fields supported: </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">meeting_date</td><td>str "YYYY-MM-DD" </td></tr>
+    <tr><td class="paramname">start_time</td><td>str "HH:MM" or "HH:MM:SS" (normalized to HH:MM:SS) </td></tr>
+    <tr><td class="paramname">duration</td><td>str Duration format expected by DB layer </td></tr>
+    <tr><td class="paramname">meeting_room</td><td>str Room identifier </td></tr>
+    <tr><td class="paramname">meeting_capacity</td><td>int Capacity (validated/coerced to int)</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Side effects:</p><ul>
+<li>Updates DB fields via DatabaseWritingServices update_* methods.</li>
+<li>Sends notification emails on PATCH/DELETE.</li>
+<li>Resets confirmed attendees on PATCH (writer.reset_confirmed_attendees()).</li>
+<li>Uses flash messages and redirects for outcome reporting.</li>
+<li>Writes audit events.</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">booking_id</td><td>int Booking identifier from the URL path.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li>GET: Rendered "editbooking.html".</li>
+<li>PATCH: Redirect to "/booking/&lt;booking_id&gt;" after update attempt.</li>
+<li>DELETE: Redirect to "/" on success, else redirect back to booking page.</li>
+</ul>
+</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">abort</td><td><ul>
+<li>404 if booking not found</li>
+<li>403 if not booking owner </li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
-<a id="a1b8516acf1ba1dd0e349a134e3c8d031" name="a1b8516acf1ba1dd0e349a134e3c8d031"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b8516acf1ba1dd0e349a134e3c8d031">&#9670;&#160;</a></span>rsvp()</h2>
+<a id="a3464bd0d5aaaae6fd6d7330a1a90fd81" name="a3464bd0d5aaaae6fd6d7330a1a90fd81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3464bd0d5aaaae6fd6d7330a1a90fd81">&#9670;&#160;</a></span>rsvp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,11 +245,47 @@ Variables</h2></td></tr>
           <td class="memname">app.booking.routes.rsvp </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>link_id</em> = <code>None</code></td><td>)</td>
+          <td class="paramname"><em>link_id</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>RSVP to a booking using a shareable RSVP link. </p>
+<ul>
+<li>GET: Render RSVP form (unregistered users allowed).</li>
+<li>POST: Validate capacity and insert an unregistered attendee record. If successful, sends an email notification to the meeting owner, increments confirmations, and redirects to home.</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">link_id</td><td>str Shareable link UUID/token used to look up the booking.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Capacity enforcement:</p><ul>
+<li>Reads current confirmations and compares against booking capacity.</li>
+<li>If capacity reached, RSVP is rejected.</li>
+</ul>
+<p>Side effects:</p><ul>
+<li>DB writes: create_new_unregistered_user(), increase_number_of_confirmations()</li>
+<li>Email: send_new_rsvp_notification_email()</li>
+<li>Audit logging and flash messages.</li>
+</ul>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li>GET: Rendered "rsvp.html"</li>
+<li>POST success: Redirect to "/"</li>
+<li>POST failure: Redirect back to RSVP page or home</li>
+</ul>
+</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">abort</td><td><ul>
+<li>This route does not abort; it redirects with flash messages on errors. </li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -168,6 +305,32 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Display a booking (meeting) detail page. </p>
+<p>Fetches booking information, room information, attendee list, and existing booked times for the room. Renders a meeting page including time slot display.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">booking_id</td><td>int Booking identifier from the URL path.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Side effects:</p><ul>
+<li>Writes audit events.</li>
+<li>Uses abort(404) if booking/room/attendee/times data is missing.</li>
+</ul>
+<dl class="section return"><dt>Returns</dt><dd>Rendered "meeting.html" template.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">abort</td><td><ul>
+<li>404 if booking not found</li>
+<li>404 if room not found</li>
+<li>404 if attendees not found</li>
+<li>404 if booked_times not found </li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -178,10 +341,13 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">app.booking.routes.booking_bp = Blueprint('booking', __name__)</td>
+          <td class="memname">app.booking.routes.booking_bp = Blueprint(&quot;booking&quot;, __name__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Blueprint for booking-related routes. </p>
+<p>All booking endpoints are registered under this blueprint. </p>
 
 </div>
 </div>

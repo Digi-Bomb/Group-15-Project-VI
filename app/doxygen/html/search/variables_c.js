@@ -1,12 +1,8 @@
 var searchData=
 [
-  ['secret_0',['secret',['../namespaceapp_1_1app.html#ad5d55aa0919079de4e9c7db1a45b62f6',1,'app::app']]],
-  ['secret_5fkey_1',['secret_key',['../namespaceapp_1_1app.html#a9abd61b1209d1ddde36b82a2cd7a3f9e',1,'app::app']]],
-  ['session_5fcookie_5fhttponly_2',['SESSION_COOKIE_HTTPONLY',['../namespaceapp_1_1app.html#ade9b976538885a266f158ef690e1cf6d',1,'app::app']]],
-  ['session_5fcookie_5fsamesite_3',['SESSION_COOKIE_SAMESITE',['../namespaceapp_1_1app.html#a1ad42a60c58d0a18d1795b8a562441f3',1,'app::app']]],
-  ['session_5fcookie_5fsecure_4',['SESSION_COOKIE_SECURE',['../namespaceapp_1_1app.html#a8653ea33a6534bbab88d5d7c1bda174f',1,'app::app']]],
-  ['short_5fterm_5ffile_5fpath_5',['short_term_file_path',['../classapp_1_1audit__logging_1_1audit__logger_1_1AuditLogger.html#a1fb6951973a08c336ec14338be85f2b6',1,'app::audit_logging::audit_logger::AuditLogger']]],
-  ['start_5ftime_6',['start_time',['../classapp_1_1booking_1_1booking_1_1Booking.html#af4bc224b99eee448183e51c5a95e63d7',1,'app.booking.booking.Booking.start_time'],['../classapp_1_1forms_1_1BookingForm.html#aa552a0fd96b21f9cd0ee900b91a8757d',1,'app.forms.BookingForm.start_time']]],
-  ['status_7',['status',['../classapp_1_1booking_1_1booking_1_1Booking.html#a3e0c93b6fd588e0640c613292b446582',1,'app::booking::booking::Booking']]],
-  ['submit_8',['submit',['../classapp_1_1forms_1_1RegisterForm.html#a68a1d0ffecb93b51d92311814e288b81',1,'app.forms.RegisterForm.submit'],['../classapp_1_1forms_1_1LoginForm.html#aeedc9621e8588a0fd186fefc813f2bda',1,'app.forms.LoginForm.submit'],['../classapp_1_1forms_1_1NoteForm.html#a610fc508494c5aed1dfe366c224b5a24',1,'app.forms.NoteForm.submit'],['../classapp_1_1forms_1_1LogoutForm.html#a67248a1bd72ca28f618c09d116217404',1,'app.forms.LogoutForm.submit'],['../classapp_1_1forms_1_1BookingForm.html#a3bef317362555a9948f0afe0af07c1b0',1,'app.forms.BookingForm.submit']]]
+  ['reader_0',['reader',['../classapp_1_1database__writing_1_1DatabaseWritingServices.html#a68703b04aa26c9a24bff0e3f6c6269d1',1,'app::database_writing::DatabaseWritingServices']]],
+  ['reminder_5fsent_1',['reminder_sent',['../classapp_1_1booking_1_1booking_1_1Booking.html#a96f820cff20159077405bc5d2928b1f0',1,'app::booking::booking::Booking']]],
+  ['room_5fcapacity_5fcache_2',['room_capacity_cache',['../classapp_1_1database__reading_1_1DatabaseReadingServices.html#a7d4f96e543a057d0f31eab32b7cbb87e',1,'app::database_reading::DatabaseReadingServices']]],
+  ['room_5fid_3',['room_id',['../classapp_1_1booking_1_1booking_1_1Booking.html#a2ab5ec389d0ccc7c3a9a12e4a4bdcb59',1,'app.booking.booking.Booking.room_id'],['../classapp_1_1booking_1_1room_1_1Room.html#a5c46cfd2cda548e16f4588f10a8e30f7',1,'app.booking.room.Room.room_id']]],
+  ['room_5fname_4',['room_name',['../classapp_1_1booking_1_1room_1_1Room.html#ae4df936b34984396c5ea8cf5f9e0330c',1,'app::booking::room::Room']]]
 ];

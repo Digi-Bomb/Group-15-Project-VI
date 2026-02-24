@@ -78,6 +78,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="classapp_1_1database__connection_1_1DatabaseConnection-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">app.database_connection.DatabaseConnection Class Reference</div></div>
 </div><!--header-->
@@ -87,6 +88,12 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1a7aca0c1657a4f963a396fc6fddad47" id="r_a1a7aca0c1657a4f963a396fc6fddad47"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__connection_1_1DatabaseConnection.html#a1a7aca0c1657a4f963a396fc6fddad47">__init__</a> (self)</td></tr>
 <tr class="separator:a1a7aca0c1657a4f963a396fc6fddad47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa354e44aa5098cb38d1ab74d8d23e18a" id="r_aa354e44aa5098cb38d1ab74d8d23e18a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__connection_1_1DatabaseConnection.html#aa354e44aa5098cb38d1ab74d8d23e18a">init_pool</a> (self, int pool_size=10)</td></tr>
+<tr class="memdesc:aa354e44aa5098cb38d1ab74d8d23e18a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the shared MySQL connection pool.  <br /></td></tr>
+<tr class="separator:aa354e44aa5098cb38d1ab74d8d23e18a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80a7476ad8776395fc0e05ee7f46b4e8" id="r_a80a7476ad8776395fc0e05ee7f46b4e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__connection_1_1DatabaseConnection.html#a80a7476ad8776395fc0e05ee7f46b4e8">get_connection</a> (self)</td></tr>
+<tr class="memdesc:a80a7476ad8776395fc0e05ee7f46b4e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Borrow a connection from the pool.  <br /></td></tr>
+<tr class="separator:a80a7476ad8776395fc0e05ee7f46b4e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58e7bb46d0b5559d0969f95a48e939ae" id="r_a58e7bb46d0b5559d0969f95a48e939ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__connection_1_1DatabaseConnection.html#a58e7bb46d0b5559d0969f95a48e939ae">connect</a> (self)</td></tr>
 <tr class="memdesc:a58e7bb46d0b5559d0969f95a48e939ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a MySQL connection.  <br /></td></tr>
 <tr class="separator:a58e7bb46d0b5559d0969f95a48e939ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -103,6 +110,13 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a6d3a9192a909fdcabdb6ed3e90ae7b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6756fd5ba85d4aa389bed5a4e68a057f" id="r_a6756fd5ba85d4aa389bed5a4e68a057f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__connection_1_1DatabaseConnection.html#a6756fd5ba85d4aa389bed5a4e68a057f">database</a></td></tr>
 <tr class="separator:a6756fd5ba85d4aa389bed5a4e68a057f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ff209ee3f581340f38ce4808cf171a2" id="r_a6ff209ee3f581340f38ce4808cf171a2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__connection_1_1DatabaseConnection.html#a6ff209ee3f581340f38ce4808cf171a2">pool</a></td></tr>
+<tr class="separator:a6ff209ee3f581340f38ce4808cf171a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a1ec8278be13b501f9581dec2c1b68e82" id="r_a1ec8278be13b501f9581dec2c1b68e82"><td class="memItemLeft" align="right" valign="top">MySQLConnectionPool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__connection_1_1DatabaseConnection.html#a1ec8278be13b501f9581dec2c1b68e82">_pool</a> = None</td></tr>
+<tr class="separator:a1ec8278be13b501f9581dec2c1b68e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1a7aca0c1657a4f963a396fc6fddad47" name="a1a7aca0c1657a4f963a396fc6fddad47"></a>
@@ -141,11 +155,85 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Return a MySQL connection. </p>
-<p>Retries a few times before raising the last error. </p>
+<p>If a pool is initialized, this borrows a connection from the pool. Otherwise, falls back to creating a direct connection (legacy behavior).</p>
+<p>During a Flask request, the connection is registered for automatic cleanup at request teardown (returning it to the pool). </p>
+
+</div>
+</div>
+<a id="a80a7476ad8776395fc0e05ee7f46b4e8" name="a80a7476ad8776395fc0e05ee7f46b4e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80a7476ad8776395fc0e05ee7f46b4e8">&#9670;&#160;</a></span>get_connection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_connection.DatabaseConnection.get_connection </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Borrow a connection from the pool. </p>
+
+</div>
+</div>
+<a id="aa354e44aa5098cb38d1ab74d8d23e18a" name="aa354e44aa5098cb38d1ab74d8d23e18a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa354e44aa5098cb38d1ab74d8d23e18a">&#9670;&#160;</a></span>init_pool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_connection.DatabaseConnection.init_pool </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &#160;</td>
+          <td class="paramname"><em>pool_size</em> = <code>10</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize the shared MySQL connection pool. </p>
+<p>Call this once at application startup. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1ec8278be13b501f9581dec2c1b68e82" name="a1ec8278be13b501f9581dec2c1b68e82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ec8278be13b501f9581dec2c1b68e82">&#9670;&#160;</a></span>_pool</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MySQLConnectionPool app.database_connection.DatabaseConnection._pool = None</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6756fd5ba85d4aa389bed5a4e68a057f" name="a6756fd5ba85d4aa389bed5a4e68a057f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6756fd5ba85d4aa389bed5a4e68a057f">&#9670;&#160;</a></span>database</h2>
 
@@ -182,6 +270,20 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">app.database_connection.DatabaseConnection.password</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ff209ee3f581340f38ce4808cf171a2" name="a6ff209ee3f581340f38ce4808cf171a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ff209ee3f581340f38ce4808cf171a2">&#9670;&#160;</a></span>pool</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">app.database_connection.DatabaseConnection.pool</td>
         </tr>
       </table>
 </div><div class="memdoc">

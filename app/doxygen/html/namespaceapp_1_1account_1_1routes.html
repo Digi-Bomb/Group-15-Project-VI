@@ -85,12 +85,16 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a5cb70dcccb72c3f8e2ef59cfcd37cdab" id="r_a5cb70dcccb72c3f8e2ef59cfcd37cdab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1account_1_1routes.html#a5cb70dcccb72c3f8e2ef59cfcd37cdab">register</a> ()</td></tr>
+<tr class="memdesc:a5cb70dcccb72c3f8e2ef59cfcd37cdab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a new user account.  <br /></td></tr>
 <tr class="separator:a5cb70dcccb72c3f8e2ef59cfcd37cdab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd6c1b7023be24b04df309a8cffd5d88" id="r_acd6c1b7023be24b04df309a8cffd5d88"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1account_1_1routes.html#acd6c1b7023be24b04df309a8cffd5d88">login</a> ()</td></tr>
+<tr class="memdesc:acd6c1b7023be24b04df309a8cffd5d88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Authenticate a user and begin a session.  <br /></td></tr>
 <tr class="separator:acd6c1b7023be24b04df309a8cffd5d88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71ecde56487f717c1b3f3beca9073070" id="r_a71ecde56487f717c1b3f3beca9073070"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1account_1_1routes.html#a71ecde56487f717c1b3f3beca9073070">logout</a> ()</td></tr>
+<tr class="memdesc:a71ecde56487f717c1b3f3beca9073070"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log the current user out and clear their session.  <br /></td></tr>
 <tr class="separator:a71ecde56487f717c1b3f3beca9073070"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90115fe5697b8864f88ce6d82e881912" id="r_a90115fe5697b8864f88ce6d82e881912"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1account_1_1routes.html#a90115fe5697b8864f88ce6d82e881912">profile</a> ()</td></tr>
+<tr class="memdesc:a90115fe5697b8864f88ce6d82e881912"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display the current user's profile page.  <br /></td></tr>
 <tr class="separator:a90115fe5697b8864f88ce6d82e881912"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -115,6 +119,26 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Authenticate a user and begin a session. </p>
+<ul>
+<li>GET: Render login form.</li>
+<li>POST: Validate form, verify credentials via reader.validate_user_information(). On success, sets session["user_id"] and redirects to home. On failure, flashes an error and re-renders login template.</li>
+</ul>
+<p>Error handling:</p><ul>
+<li>If reader.validate_user_information raises RuntimeError (e.g., DB offline), logs an audit event and renders login with a "temporarily unavailable" message.</li>
+</ul>
+<p>Side effects:</p><ul>
+<li>Sets session.permanent = True on successful login.</li>
+<li>Writes audit log events.</li>
+<li>Writes app log warnings for failed login.</li>
+</ul>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li>GET: Rendered "login.html"</li>
+<li>POST success: Redirect to "/"</li>
+<li>POST failure: Rendered "login.html" with flash message </li>
+</ul>
+</dd></dl>
+
 </div>
 </div>
 <a id="a71ecde56487f717c1b3f3beca9073070" name="a71ecde56487f717c1b3f3beca9073070"></a>
@@ -131,6 +155,18 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Log the current user out and clear their session. </p>
+<p>Validates CSRF via LogoutForm. If CSRF validation fails, logs an audit event, flashes an error, and redirects to home. On success, clears session and redirects.</p>
+<p>Security:</p><ul>
+<li>CSRF protection is enforced using LogoutForm.validate_on_submit().</li>
+</ul>
+<p>Side effects:</p><ul>
+<li>Clears session state (session.clear()).</li>
+<li>Writes audit log events.</li>
+<li>Writes app logs.</li>
+</ul>
+<dl class="section return"><dt>Returns</dt><dd>Redirect to "/". </dd></dl>
 
 </div>
 </div>
@@ -149,6 +185,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Display the current user's profile page. </p>
+<p>Requires the user to be logged in (session["user_id"]). Fetches basic user details from the database and renders profile template.</p>
+<dl class="section note"><dt>Note</dt><dd>The query is executed directly via reader.conn.cursor(dictionary=True). Consider centralizing this in DatabaseReadingServices for consistency and testability.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li>If not logged in: redirect to "/login" with flash message.</li>
+<li>If user not found: redirect to "/login" with flash message.</li>
+<li>Otherwise: render "profile.html" with user context. </li>
+</ul>
+</dd></dl>
+
 </div>
 </div>
 <a id="a5cb70dcccb72c3f8e2ef59cfcd37cdab" name="a5cb70dcccb72c3f8e2ef59cfcd37cdab"></a>
@@ -166,6 +212,29 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Register a new user account. </p>
+<ul>
+<li>GET: Render the registration form.</li>
+<li>POST: Validate submitted form, hash password, and attempt to create the user. On success, redirects to login. On failure (e.g., duplicate username/email), flashes an error and redirects to login.</li>
+</ul>
+<p>Form fields:</p><ul>
+<li>username</li>
+<li>password (hashed before storing)</li>
+<li>firstName</li>
+<li>lastName</li>
+<li>email</li>
+</ul>
+<p>Side effects:</p><ul>
+<li>Inserts new user in DB via writer.create_new_user().</li>
+<li>Writes audit log events.</li>
+<li>Uses flash messages and redirect for flow control.</li>
+</ul>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li>GET: Rendered "register.html"</li>
+<li>POST: Redirect to "/login" (with success/failure flash message) </li>
+</ul>
+</dd></dl>
+
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -182,6 +251,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Blueprint for account-related routes. </p>
+<p>All account/auth endpoints are registered under this blueprint. </p>
 
 </div>
 </div>
