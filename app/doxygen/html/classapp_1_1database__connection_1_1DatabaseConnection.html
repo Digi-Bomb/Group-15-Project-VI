@@ -83,10 +83,14 @@ $(function() {
   <div class="headertitle"><div class="title">app.database_connection.DatabaseConnection Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Provides MySQL connections (pooled when available).  
+ <a href="classapp_1_1database__connection_1_1DatabaseConnection.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1a7aca0c1657a4f963a396fc6fddad47" id="r_a1a7aca0c1657a4f963a396fc6fddad47"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__connection_1_1DatabaseConnection.html#a1a7aca0c1657a4f963a396fc6fddad47">__init__</a> (self)</td></tr>
+<tr class="memdesc:a1a7aca0c1657a4f963a396fc6fddad47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a DatabaseConnection configuration wrapper.  <br /></td></tr>
 <tr class="separator:a1a7aca0c1657a4f963a396fc6fddad47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa354e44aa5098cb38d1ab74d8d23e18a" id="r_aa354e44aa5098cb38d1ab74d8d23e18a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__connection_1_1DatabaseConnection.html#aa354e44aa5098cb38d1ab74d8d23e18a">init_pool</a> (self, int pool_size=10)</td></tr>
 <tr class="memdesc:aa354e44aa5098cb38d1ab74d8d23e18a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the shared MySQL connection pool.  <br /></td></tr>
@@ -118,7 +122,14 @@ Static Protected Attributes</h2></td></tr>
 <tr class="memitem:a1ec8278be13b501f9581dec2c1b68e82" id="r_a1ec8278be13b501f9581dec2c1b68e82"><td class="memItemLeft" align="right" valign="top">MySQLConnectionPool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classapp_1_1database__connection_1_1DatabaseConnection.html#a1ec8278be13b501f9581dec2c1b68e82">_pool</a> = None</td></tr>
 <tr class="separator:a1ec8278be13b501f9581dec2c1b68e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Provides MySQL connections (pooled when available). </p>
+<p>Usage patterns:</p><ul>
+<li>Call init_pool() once at startup (recommended).</li>
+<li>Call connect() wherever a DB connection is needed.</li>
+</ul>
+<dl class="section warning"><dt>Warning</dt><dd>Credentials are currently hard-coded for development/demo use. For production, use environment variables or a secrets manager. </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1a7aca0c1657a4f963a396fc6fddad47" name="a1a7aca0c1657a4f963a396fc6fddad47"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1a7aca0c1657a4f963a396fc6fddad47">&#9670;&#160;</a></span>__init__()</h2>
 
@@ -134,6 +145,9 @@ Static Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Construct a DatabaseConnection configuration wrapper. </p>
+<p>The actual pool is shared across all instances via the class variable <code>_pool</code>. </p>
 
 </div>
 </div>

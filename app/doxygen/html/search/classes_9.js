@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['timemanager_0',['TimeManager',['../classapp_1_1time__manager_1_1TimeManager.html',1,'app::time_manager']]]
+  ['unregistereduser_0',['UnregisteredUser',['../classapp_1_1account_1_1unregistered__user_1_1UnregisteredUser.html',1,'app::account::unregistered_user']]]
 ];

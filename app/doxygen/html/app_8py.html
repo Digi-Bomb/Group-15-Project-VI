@@ -82,6 +82,9 @@ $(function() {
   <div class="headertitle"><div class="title">app.py File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Flask application entry point and core initialization.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -93,14 +96,19 @@ Namespaces</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a8af5313cd529e5f61a60f119db13e806" id="r_a8af5313cd529e5f61a60f119db13e806"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a8af5313cd529e5f61a60f119db13e806">app.app.close_db_connections</a> (_exc=None)</td></tr>
+<tr class="memdesc:a8af5313cd529e5f61a60f119db13e806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Teardown handler to close (or return) DB connections after each request.  <br /></td></tr>
 <tr class="separator:a8af5313cd529e5f61a60f119db13e806"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91accba869170261b4c2bf2849aac1a5" id="r_a91accba869170261b4c2bf2849aac1a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a91accba869170261b4c2bf2849aac1a5">app.app.make_session_permanent</a> ()</td></tr>
+<tr class="memdesc:a91accba869170261b4c2bf2849aac1a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensure sessions are treated as permanent so the configured lifetime applies.  <br /></td></tr>
 <tr class="separator:a91accba869170261b4c2bf2849aac1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a998027f6f42d0ae59c6eaadadee739ee" id="r_a998027f6f42d0ae59c6eaadadee739ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a998027f6f42d0ae59c6eaadadee739ee">app.app.add_logout_form</a> ()</td></tr>
+<tr class="memdesc:a998027f6f42d0ae59c6eaadadee739ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach a LogoutForm to Flask's <code>g</code> for easy navbar rendering.  <br /></td></tr>
 <tr class="separator:a998027f6f42d0ae59c6eaadadee739ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50ecb9f38bb522363ee1ae1798a840da" id="r_a50ecb9f38bb522363ee1ae1798a840da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a50ecb9f38bb522363ee1ae1798a840da">app.app.inject_user</a> ()</td></tr>
+<tr class="memdesc:a50ecb9f38bb522363ee1ae1798a840da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inject authentication state into all templates.  <br /></td></tr>
 <tr class="separator:a50ecb9f38bb522363ee1ae1798a840da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54c93b9697673e5749bb5fcc0bd8f9c8" id="r_a54c93b9697673e5749bb5fcc0bd8f9c8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a54c93b9697673e5749bb5fcc0bd8f9c8">app.app.index</a> ()</td></tr>
+<tr class="memdesc:a54c93b9697673e5749bb5fcc0bd8f9c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render the home page with room listings and (optionally) the user's bookings.  <br /></td></tr>
 <tr class="separator:a54c93b9697673e5749bb5fcc0bd8f9c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -142,7 +150,16 @@ Variables</h2></td></tr>
 <tr class="memitem:a719300cdb3e57ac9ccb5279b9075848e" id="r_a719300cdb3e57ac9ccb5279b9075848e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceapp_1_1app.html#a719300cdb3e57ac9ccb5279b9075848e">app.app.port</a></td></tr>
 <tr class="separator:a719300cdb3e57ac9ccb5279b9075848e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Flask application entry point and core initialization. </p>
+<p>Responsibilities:</p><ul>
+<li>Flask app construction and configuration</li>
+<li>Mail (Flask-Mail) initialization</li>
+<li>Logging configuration (RotatingFileHandler)</li>
+<li>Database connection pool initialization (DatabaseConnection.init_pool)</li>
+<li>Blueprint registration (account, booking, notifications) </li>
+</ul>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
