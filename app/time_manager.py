@@ -9,7 +9,7 @@ from datetime import timedelta
 class TimeManager:
     """!
     @brief Helper methods for time calculations in booking flows.
-    
+
     @note Methods are implemented as static-style functions (no `self` usage).
     """
     def __init__(self):

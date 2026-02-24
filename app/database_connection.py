@@ -19,11 +19,11 @@ from flask import has_request_context, g
 class DatabaseConnection:
     """!
     @brief Provides MySQL connections (pooled when available).
-    
+
     Usage patterns:
     - Call init_pool() once at startup (recommended).
     - Call connect() wherever a DB connection is needed.
-    
+
     @warning Credentials are currently hard-coded for development/demo use.
              For production, use environment variables or a secrets manager.
     """
@@ -36,7 +36,7 @@ class DatabaseConnection:
 
         @brief Construct a DatabaseConnection configuration wrapper.
 
-        
+
 
         The actual pool is shared across all instances via the class variable `_pool`.
 

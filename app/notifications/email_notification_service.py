@@ -25,12 +25,12 @@ from time_manager import TimeManager
 class EmailNotificationService:
     """!
     @brief Sends booking-related email notifications.
-    
+
     The service wraps:
     - Recipient discovery (registered + unregistered attendees)
     - Message composition for reminder/update/delete scenarios
     - Audit logging for notification attempts and outcomes
-    
+
     @param database DatabaseConnection used by reading/writing service layers.
     """
     def __init__(self, database: DatabaseConnection):
@@ -129,7 +129,7 @@ class EmailNotificationService:
 
         @param booking Booking domain object containing schedule and location info.
 
-        
+
 
         @post Sets booking.reminder_sent = True and persists reminder state in the database.
 
@@ -158,7 +158,7 @@ class EmailNotificationService:
 
         @param booking_id Booking identifier to fetch and notify for.
 
-        
+
 
         @note If attendee count <= 1, no notification is sent (owner-only booking).
 
@@ -191,7 +191,7 @@ class EmailNotificationService:
 
         @param booking_id Booking identifier to fetch and notify for.
 
-        
+
 
         @note If attendee count <= 1, no notification is sent (owner-only booking).
 

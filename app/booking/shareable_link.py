@@ -12,7 +12,7 @@ class ShareableLink:
     """!
     @brief Model for a shareable RSVP link.
     @param booking_id Booking ID the link refers to.
-    
+
     @var link_id Unique UUIDv4 identifier for the link.
     @var booking_id Booking identifier associated with the link.
     """

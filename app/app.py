@@ -66,7 +66,7 @@ except Exception as exc:
 def close_db_connections(_exc=None):
     """!
     @brief Teardown handler to close (or return) DB connections after each request.
-    
+
     Connections are tracked on Flask's `g` object as `g._db_conns` and will be closed
     at the end of the request, returning pooled connections to the pool if enabled.
     """
@@ -147,7 +147,7 @@ app.permanent_session_lifetime = timedelta(minutes=15)
 def make_session_permanent():
     """!
     @brief Ensure sessions are treated as permanent so the configured lifetime applies.
-    
+
     The actual timeout window is controlled by `app.permanent_session_lifetime`.
     """
     session.permanent = True
@@ -211,7 +211,7 @@ def index():
     """!
     @brief Render the home page with room listings and (optionally) the user's bookings.
     @return Rendered HTML response.
-    
+
     Query parameters:
     - date (YYYY-MM-DD): date to render availability for; defaults to today's date.
     """
