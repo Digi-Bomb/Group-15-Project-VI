@@ -183,7 +183,7 @@ def create_booking():
         audit_logger.log_audit_event(
             "Booking created",
             f"User ID {user_id} created a booking for room {room_number} on {meeting_date} at {start_time_str} "
-            f"for 2 hr with booking ID {create_booking[1]}.",
+            f"for {duration} hours with booking ID {create_booking[1]}.",
         )
         flash("Booking created!", "success")
         return redirect(f"/booking/{create_booking[1]}")
