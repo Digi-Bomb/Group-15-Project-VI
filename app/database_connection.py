@@ -41,11 +41,11 @@ class DatabaseConnection:
         The actual pool is shared across all instances via the class variable `_pool`.
 
         """
-        self.host = "138.197.163.32"
-        self.port = 3306
-        self.user = "ezbooksserver"
-        self.password = "BookEZDatabaseAccess0rz!"
-        self.database = "BookEZDatabase"
+        self.host = os.environ.get("MYSQL_HOST", "localhost")
+        self.port = int(os.environ.get("MYSQL_PORT", 3306))
+        self.user = os.environ.get("MYSQL_USER", "root")
+        self.password = os.environ.get("MYSQL_PASSWORD", "")
+        self.database = os.environ.get("MYSQL_DATABASE", "test")
 
         # Instance view of the shared pool (kept for compatibility/debugging)
         self.pool = DatabaseConnection._pool

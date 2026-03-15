@@ -11,4 +11,24 @@ services:
       - FLASK_ENV=development
     volumes:
       - ./app:/app
+    depends_on:
+      - mysql
     restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    container_name: planner_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: BookEZDatabase
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_pass
+    ports:
+      - 3307:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
