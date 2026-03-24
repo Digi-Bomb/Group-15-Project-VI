@@ -53,7 +53,7 @@ app.config.update(
 # Initialize once at startup; subsequent DatabaseConnection() instances will reuse it.
 try:
     database_connection.DatabaseConnection().init_pool(
-        pool_size=int(os.environ.get("DB_POOL_SIZE", "1000"))
+        pool_size=int(os.environ.get("DB_POOL_SIZE", "20"))
     )
 except Exception as exc:
     # Keep existing behavior (app can still fall back to non-pooled connections via .connect()).

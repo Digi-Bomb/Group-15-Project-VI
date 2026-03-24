@@ -42,7 +42,7 @@ class DatabaseConnection:
 
         """
         self.host = os.environ.get("MYSQL_HOST", "localhost")
-        self.port = int(os.environ.get("MYSQL_PORT", 3306))
+        self.port = int(os.environ.get("MYSQL_PORT", 3308))
         self.user = os.environ.get("MYSQL_USER", "root")
         self.password = os.environ.get("MYSQL_PASSWORD", "")
         self.database = os.environ.get("MYSQL_DATABASE", "test")
@@ -50,7 +50,7 @@ class DatabaseConnection:
         # Instance view of the shared pool (kept for compatibility/debugging)
         self.pool = DatabaseConnection._pool
 
-    def init_pool(self, pool_size: int = 10):
+    def init_pool(self, pool_size: int = 20):
         """Initialize the shared MySQL connection pool.
 
         Call this once at application startup.
