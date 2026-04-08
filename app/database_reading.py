@@ -7,7 +7,7 @@ from datetime import time, datetime, timedelta, date
 class DatabaseReadingServices:
     def __init__(self, database: DatabaseConnection):
         self.database = database
-        self.conn = self.database.connect()
+        # self.conn = self.database.connect()
         self.room_capacity_cache = {}
         # self.cursor = self.conn.cursor()
 
@@ -674,16 +674,19 @@ class DatabaseReadingServices:
         Returns a list of rooms.
         If building is provided, filters by companyBuilding.
         """
+        # print("[DB] get rooms called")
+
+        conn = self.database
         sql = """
-                SELECT
-                    roomNumber,
-                    companyBuilding,
-                    wheelchairAccessible,
-                    projectorAccess,
-                    whiteboardAccess,
-                    maximumCapacity
-                FROM Room
-            """
+                    SELECT
+                        roomNumber,
+                        companyBuilding,
+                        wheelchairAccessible,
+                        projectorAccess,
+                        whiteboardAccess,
+                        maximumCapacity
+                    FROM Room
+                """
         params = []
 
         if building:
@@ -692,11 +695,15 @@ class DatabaseReadingServices:
 
         sql += " ORDER BY companyBuilding, wing, roomNumber"
 
-        cursor = self.conn.cursor(dictionary=True)
-        cursor.execute(sql, params)  # <-- execute the query
-        results = cursor.fetchall()  # <-- fetch all rows as a list of dicts
-        cursor.close()
-        return results
+        cursor = None
+        try:
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute(sql, params)
+            results = cursor.fetchall()
+            return results
+        finally:
+            if cursor is not None:
+                cursor.close()
 
     def get_room_data_given_room_number(self, room_number: str):
         self.cursor = self.conn.cursor()

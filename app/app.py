@@ -53,7 +53,7 @@ app.config.update(
 # Initialize once at startup; subsequent DatabaseConnection() instances will reuse it.
 try:
     database_connection.DatabaseConnection().init_pool(
-        pool_size=int(os.environ.get("DB_POOL_SIZE", "20"))
+        pool_size=int(os.environ.get("DB_POOL_SIZE", 1000))
     )
 except Exception as exc:
     # Keep existing behavior (app can still fall back to non-pooled connections via .connect()).
@@ -62,7 +62,7 @@ except Exception as exc:
     )
 
 
-@app.teardown_appcontext
+@app.teardown_request
 def close_db_connections(_exc=None):
     """!
     @brief Teardown handler to close (or return) DB connections after each request.
@@ -70,14 +70,22 @@ def close_db_connections(_exc=None):
     Connections are tracked on Flask's `g` object as `g._db_conns` and will be closed
     at the end of the request, returning pooled connections to the pool if enabled.
     """
-    conns = getattr(g, "_db_conns", None)
-    if not conns:
-        return
-    for cnx in conns:
+    # print(f"[TEARDOWN] {request.path}")
+    conns = getattr(g, "_db_conns", [])
+    for conn in conns:
         try:
-            cnx.close()  # pooled connections return to pool here
-        except Exception:
-            pass
+            conn.close()
+        except Exception as e:
+            print("[DB] Error closing connection:", e)
+
+    if conns:
+        # print(f"[DB] Released {len(conns)} connection(s) back to pool")
+
+        with database_connection.DatabaseConnection._lock:
+            database_connection.DatabaseConnection._active_connections -= len(conns)
+            # print(
+            #     f"[POOL] Active connections after release: {database_connection.DatabaseConnection._active_connections}"
+            # )
     g._db_conns = []
 
 
@@ -153,6 +161,12 @@ def make_session_permanent():
     session.permanent = True
 
 
+@app.before_request
+def open_db():
+    # conn =
+    g.db = database_connection.DatabaseConnection().connect()
+
+
 # load logout form
 @app.before_request
 def add_logout_form():
@@ -216,7 +230,7 @@ def index():
     - date (YYYY-MM-DD): date to render availability for; defaults to today's date.
     """
     db = database_connection.DatabaseConnection()
-    reader = database_reading.DatabaseReadingServices(db)
+    reader = database_reading.DatabaseReadingServices(g.db)
 
     selected_date = request.args.get("date")
     if not selected_date:
@@ -245,5 +259,6 @@ if __name__ == "__main__":
     # scheduler = APScheduler()
     # scheduler.add_job(func=send_booking_notification_emails, trigger='interval', id='job', seconds=5)
     # scheduler.start()
+
     audit_logger.log_audit_event("started server.")
     app.run(debug=True, host="0.0.0.0", port=5000)

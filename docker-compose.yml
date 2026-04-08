@@ -17,6 +17,7 @@ services:
 
   mysql:
     image: mysql:8.0
+    command: --max_connections=1000
     container_name: planner_mysql
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
