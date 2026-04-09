@@ -17,12 +17,21 @@ Authentication model:
 - Session-based login using session["user_id"].
 """
 
-from flask import Blueprint, render_template, request, redirect, session, g, flash, current_app
+from flask import (
+    Blueprint,
+    render_template,
+    request,
+    redirect,
+    session,
+    g,
+    flash,
+    current_app,
+)
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from forms import RegisterForm, LoginForm, LogoutForm
 from database_connection import DatabaseConnection
-from database_reading import DatabaseReadingServices
+import database_reading
 from database_writing import DatabaseWritingServices
 from audit_logging.audit_logger import AuditLogger
 from time_manager import TimeManager
@@ -58,8 +67,8 @@ def register():
     - GET: Rendered "register.html"
     - POST: Redirect to "/login" (with success/failure flash message)
     """
-    db = DatabaseConnection()
-    reader = DatabaseReadingServices(db)
+    db = g.db
+    reader = database_reading.DatabaseReadingServices(db)
     writer = DatabaseWritingServices(db, reader)
     form = RegisterForm()
     audit_logger = AuditLogger()
@@ -71,7 +80,9 @@ def register():
         lastName = form.lastName.data
         email = form.email.data
 
-        createUser = writer.create_new_user(username, email, firstName, lastName, password)
+        createUser = writer.create_new_user(
+            username, email, firstName, lastName, password
+        )
 
         if createUser[0]:
             audit_logger.log_audit_event(
@@ -115,8 +126,8 @@ def login():
     - POST success: Redirect to "/"
     - POST failure: Rendered "login.html" with flash message
     """
-    db = DatabaseConnection()
-    reader = DatabaseReadingServices(db)
+    db = g.db
+    reader = database_reading.DatabaseReadingServices(db)
     form = LoginForm()
     audit_logger = AuditLogger()
 
@@ -125,7 +136,9 @@ def login():
         password = form.password.data
 
         try:
-            ok, msg, user_id = reader.validate_user_information(username=user, password=password)
+            ok, msg, user_id = reader.validate_user_information(
+                username=user, password=password
+            )
         except RuntimeError:
             audit_logger.log_audit_event(
                 "Login failed - database error",
@@ -137,7 +150,9 @@ def login():
         if ok:
             session.permanent = True
             session["user_id"] = user_id
-            audit_logger.log_audit_event("Login successful", f"Successful login for user: {user}")
+            audit_logger.log_audit_event(
+                "Login successful", f"Successful login for user: {user}"
+            )
             return redirect("/")
 
         audit_logger.log_audit_event(
@@ -145,7 +160,9 @@ def login():
             f"Failed login attempt for username: {user} with provided password.",
         )
         flash("Invalid username or password.", "danger")
-        current_app.logger.warning(f"Failed login attempt for username: {form.username.data}")
+        current_app.logger.warning(
+            f"Failed login attempt for username: {form.username.data}"
+        )
 
     return render_template("login.html", form=form)
 
@@ -181,7 +198,9 @@ def logout():
 
     user_id = session.get("user_id")
     session.clear()
-    audit_logger.log_audit_event("Logout successful", f"User with ID {user_id} logged out successfully.")
+    audit_logger.log_audit_event(
+        "Logout successful", f"User with ID {user_id} logged out successfully."
+    )
     flash("Logged out successfully.", "success")
     current_app.logger.info(f"User {user_id} logged out")
     return redirect("/")
@@ -204,15 +223,18 @@ def profile():
     - If user not found: redirect to "/login" with flash message.
     - Otherwise: render "profile.html" with user context.
     """
-    db = DatabaseConnection()
-    reader = DatabaseReadingServices(db)
+    db = g.db
+    reader = database_reading.DatabaseReadingServices(db)
 
     user_id = session.get("user_id")
     if not user_id:
         flash("You must log in to view your profile.", "warning")
         return redirect("/login")
 
-    cursor = reader.conn.cursor(dictionary=True)
+    conn = db
+    cursor = None
+    cursor = conn.cursor(dictionary=True)
+
     cursor.execute(
         "SELECT username, email FROM RegisteredUser WHERE RUID = %s",
         (user_id,),

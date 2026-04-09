@@ -5,8 +5,8 @@ from database_reading import DatabaseReadingServices
 class DatabaseWritingServices:
     def __init__(self, database: DatabaseConnection, reader: DatabaseReadingServices):
         self.database = database
-        self.conn = self.database.connect()
-        self.cursor = self.conn.cursor()
+        # conn = self.database.connect()
+        # cursor = conn.cursor()
         self.reader = reader
 
     def create_new_user(
@@ -26,6 +26,7 @@ class DatabaseWritingServices:
             username=username, email=email
         )
 
+        conn = self.database
         if not checkExists:
 
             try:
@@ -43,14 +44,15 @@ class DatabaseWritingServices:
                 #         VALUES ( %s, %s, %s, %s, %s)
                 #     """
                 #     values = (username, email, password, first_name, last_name)
-
-                self.cursor.execute(query, values)
-                self.conn.commit()
+                cursor = None
+                cursor = conn.cursor(())
+                cursor.execute(query, values)
+                conn.commit()
                 return True, "Register successful"
 
             except Exception as e:
-                self.conn.rollback()
-                # print("UPDATE ERROR: ", e)
+                # conn.rollback()
+                print("UPDATE ERROR: ", e)
                 return False, str(e)
 
         return False, "User already registered"
@@ -64,7 +66,7 @@ class DatabaseWritingServices:
         nickname_available = self.reader.check_if_unregistered_user_nickname_is_taken_for_specific_meeting(
             BID, nickname
         )
-
+        conn = self.database
         if nickname_available[0]:
 
             try:
@@ -82,12 +84,11 @@ class DatabaseWritingServices:
                     VALUES (%s)
                     """
                     values = (nickname,)
-
-                self.cursor.execute(query, values)
-                self.conn.commit()
-                URUID = (
-                    self.cursor.lastrowid
-                )  # POTENTIALLY unsafe for multiple users (?)
+                cursor = None
+                cursor = conn.cursor(())
+                cursor.execute(query, values)
+                conn.commit()
+                URUID = cursor.lastrowid  # POTENTIALLY unsafe for multiple users (?)
 
                 attempt_to_associate = self.associate_unregistered_user_with_booking(
                     BID, URUID
@@ -101,7 +102,7 @@ class DatabaseWritingServices:
                     )
 
             except Exception as e:
-                self.conn.rollback()
+                conn.rollback()
                 # print("CREATE ERROR: ", e)
                 return False, str(e)
         else:
@@ -128,7 +129,7 @@ class DatabaseWritingServices:
             start_time=start_time,
             duration=duration,
         )
-
+        conn = self.database
         # print("chck available: ", checkAvailable)
 
         roomCapacity = self.reader.get_capacity_of_room(room_number=meeting_room)
@@ -157,14 +158,13 @@ class DatabaseWritingServices:
                 meeting_capacity,
                 shareable_link,
             )
+            cursor = None
+            cursor = conn.cursor(())
+            cursor.execute(query, values)
 
-            self.cursor.execute(query, values)
+            booking_id = cursor.lastrowid  # POTENTIALLY unsafe for multiple users (?)
 
-            booking_id = (
-                self.cursor.lastrowid
-            )  # POTENTIALLY unsafe for multiple users (?)
-
-            self.cursor.execute(
+            cursor.execute(
                 """
                     INSERT INTO RoomsAssociatedWithBookings (BID, RID)
                     VALUES (%s, %s)
@@ -172,7 +172,7 @@ class DatabaseWritingServices:
                 (booking_id, meeting_room),
             )
 
-            self.cursor.execute(
+            cursor.execute(
                 """
                     INSERT INTO RegisteredBookingAttendees (BID, RegisteredAttendee)
                     VALUES (%s, %s)
@@ -180,20 +180,20 @@ class DatabaseWritingServices:
                 (booking_id, meeting_owner),
             )
 
-            self.conn.commit()
+            conn.commit()
             return True, booking_id
             # attempt_to_associate = self.associate_registered_user_with_booking(
             #     booking_id, meeting_owner
             # )
         except Exception as e:
-            self.conn.rollback()
+            conn.rollback()
             return False, str(e)
 
     def book_a_room_after_booking(self, BID: int, meeting_room):
         """Generic function for assignment of a room to a particular booking \n
         TRUE == ABLE TO BOOK ROOM \n
         FALSE == ROOM ALREADY BOOKED"""
-
+        conn = self.database
         try:
             query = """
                 INSERT INTO RoomsAssociatedWithBookings(BID, RID)
@@ -201,14 +201,15 @@ class DatabaseWritingServices:
             """
 
             values = (BID, meeting_room)
-
-            self.cursor.execute(query, values)
-            self.conn.commit()
+            cursor = None
+            cursor = conn.cursor(())
+            cursor.execute(query, values)
+            conn.commit()
 
             return True
 
         except Exception as e:
-            self.conn.rollback()
+            conn.rollback()
             # print("INSERT ERROR: ", e)
             return False, str(e)
 
@@ -219,7 +220,9 @@ class DatabaseWritingServices:
         FALSE == ASSOCIATION RECORD FAILED"""
 
         # isBookingExists = self.reader.check_booking_still_active(BID=BID)
-
+        conn = self.database
+        cursor = None
+        cursor = conn.cursor(())
         query = """
             INSERT INTO RegisteredBookingAttendees
             (BID, RegisteredAttendee)
@@ -228,16 +231,16 @@ class DatabaseWritingServices:
 
         values = (BID, RUID)
 
-        self.cursor.execute(query, values)
-        self.conn.commit()
-        # self.cursor.close()
+        cursor.execute(query, values)
+        conn.commit()
+        # cursor.close()
         return True
 
     def associate_unregistered_user_with_booking(self, BID: int, URUID: str):
         """Generic function for associating a booking to Registered Users \n
         TRUE == ASSOCIATION RECORD ADDED \n
         FALSE == ASSOCIATION RECORD FAILED"""
-
+        conn = self.database
         query = """
             INSERT INTO UnregisteredBookingAttendees
             (BID, unregisteredAttendee)
@@ -245,9 +248,10 @@ class DatabaseWritingServices:
         """
 
         values = (BID, URUID)
-
-        self.cursor.execute(query, values)
-        self.conn.commit()
+        cursor = None
+        cursor = conn.cursor(())
+        cursor.execute(query, values)
+        conn.commit()
         return True
 
     def delete_booking(self, BID: int):
@@ -255,8 +259,10 @@ class DatabaseWritingServices:
         NOTE: REMOVES MEETING OWNER AND ATTENDEES ASSOCIATED WITH BOOKING FROM THE RELATION TABLE \n
         TRUE == BOOKING DELETED \n
         FALSE == BOOKING DIDNT EXIST OR OTHER FAILURE"""
-
+        conn = self.database
         try:
+            cursor = None
+            cursor = conn.cursor(())
             attempt_delete_association = self.delete_association(BID=BID)
             attempt_free_room = self.update_room_as_available(BID=BID)
 
@@ -264,13 +270,13 @@ class DatabaseWritingServices:
             # print(attempt_free_room)
 
             if attempt_delete_association and attempt_free_room:
-                self.cursor.execute("DELETE FROM Booking WHERE BID = %s", (BID,))
-                self.conn.commit()
+                cursor.execute("DELETE FROM Booking WHERE BID = %s", (BID,))
+                conn.commit()
 
                 return True
 
         except Exception as e:
-            self.conn.rollback()
+            conn.rollback()
             # print("DELETE ERROR: ", e)
             return False, str(e)
 
@@ -279,22 +285,24 @@ class DatabaseWritingServices:
         NOTE: ASSOCIATION BETWEEN BOOKING AND ALL RELATED ATTENDEES MUST BE DELETED BEFORE A BOOKING IS DELETED
         TRUE == ASSOCIATION DELETED \n
         FALSE == ASSOCIATION DELETION ERROR + ERROR MSG"""
-
+        conn = self.database
         try:
-            self.cursor.execute(
+            cursor = None
+            cursor = conn.cursor(())
+            cursor.execute(
                 "DELETE FROM RegisteredBookingAttendees WHERE BID = %s", (BID,)
             )
-            self.conn.commit()
+            conn.commit()
 
-            self.cursor.execute(
+            cursor.execute(
                 "DELETE FROM UnregisteredBookingAttendees WHERE BID = %s", (BID,)
             )
 
-            self.conn.commit()
+            conn.commit()
             return True
 
         except Exception as e:
-            self.conn.rollback()
+            conn.rollback()
             # print("DELETE ERROR: ", e)
             return False, str(e)
 
@@ -303,31 +311,33 @@ class DatabaseWritingServices:
         NOTE: CALLED WHEN UPDATING A BOOKING'S TIME, DATE, DURATION, OR ROOM \n
         TRUE == RSVPS RESET \n
         FALSE == RSVPS NOT RESET"""
-
+        conn = self.database
         booking_info = self.reader.get_booking_information_of_specific_booking(BID)
         meeting_owner = booking_info[5]
 
         try:
-            self.cursor.execute(
+            cursor = None
+            cursor = conn.cursor(())
+            cursor.execute(
                 "DELETE FROM RegisteredBookingAttendees WHERE BID = %s AND registeredAttendee != %s",
                 (BID, meeting_owner),
             )
-            self.conn.commit()
+            conn.commit()
 
-            self.cursor.execute(
+            cursor.execute(
                 "DELETE FROM UnregisteredBookingAttendees WHERE BID = %s", (BID,)
             )
 
-            self.cursor.execute(
+            cursor.execute(
                 "UPDATE Booking SET numberOfConfirmations = %s WHERE BID = %s",
                 (1, BID),
             )
 
-            self.conn.commit()
+            conn.commit()
             return True
 
         except Exception as e:
-            self.conn.rollback()
+            conn.rollback()
             # print("DELETE ERROR: ", e)
             return False, str(e)
 
@@ -336,17 +346,19 @@ class DatabaseWritingServices:
         NOTE: CALLED WHEN DELETING A BOOKING \n
         TRUE == ROOM UPDATED AS AVAILABLE \n
         FALSE == ROOM NOT UPDATED"""
-
+        conn = self.database
         try:
-            self.cursor.execute(
+            cursor = None
+            cursor = conn.cursor(())
+            cursor.execute(
                 "DELETE FROM RoomsAssociatedWithBookings WHERE BID = %s", (BID,)
             )
-            self.conn.commit()
+            conn.commit()
 
             return True
 
         except Exception as e:
-            self.conn.rollback()
+            conn.rollback()
             # print("UPDATE ERROR: ", e)
             return False, str(e)
 
@@ -354,7 +366,7 @@ class DatabaseWritingServices:
         """Generic function to update a booking's meeting time, given a Booking ID, and a new meeting time \n
         TRUE == BOOKING UPDATED AS AVAILABLE \n
         FALSE == BOOKING NOT UPDATED"""
-
+        conn = self.database
         # First check if new start time is valid:
         try:
             previous_booking = self.reader.get_booking_information_of_specific_booking(
@@ -370,22 +382,24 @@ class DatabaseWritingServices:
             )
 
         except Exception as e:
-            self.conn.rollback()
+            conn.rollback()
             # print("UPDATE ERROR: ", e)
             return False, str(e)
 
         if check:
             try:
-                self.cursor.execute(
+                cursor = None
+                cursor = conn.cursor(())
+                cursor.execute(
                     "UPDATE Booking SET startTime = %s  WHERE BID = %s",
                     (new_start_time, BID),
                 )
-                self.conn.commit()
+                conn.commit()
 
                 return True
 
             except Exception as e:
-                self.conn.rollback()
+                conn.rollback()
                 # print("UPDATE ERROR: ", e)
                 return False, str(e)
 
@@ -396,7 +410,7 @@ class DatabaseWritingServices:
         NOTE: CHECKS FOR OVERLAP WHEN UPDATING \n
         TRUE == BOOKING UPDATED \n
         FALSE == BOOKING NOT UPDATED"""
-
+        conn = self.database
         # First check if new date is valid:
         try:
             previous_booking = self.reader.get_booking_information_of_specific_booking(
@@ -412,22 +426,24 @@ class DatabaseWritingServices:
             )
 
         except Exception as e:
-            self.conn.rollback()
+            conn.rollback()
             # print("UPDATE ERROR: ", e)
             return False, str(e)
 
         if check:
             try:
-                self.cursor.execute(
+                cursor = None
+                cursor = conn.cursor(())
+                cursor.execute(
                     "UPDATE Booking SET meetingDate = %s  WHERE BID = %s",
                     (new_date, BID),
                 )
-                self.conn.commit()
+                conn.commit()
 
                 return True
 
             except Exception as e:
-                self.conn.rollback()
+                conn.rollback()
                 # print("UPDATE ERROR: ", e)
                 return False, str(e)
 
@@ -438,7 +454,7 @@ class DatabaseWritingServices:
         NOTE: CHECKS FOR OVERLAP WHEN UPDATING \n
         TRUE == BOOKING UPDATED \n
         FALSE == BOOKING NOT UPDATED"""
-
+        conn = self.database
         # First check if new duration is valid:
         try:
             previous_booking = self.reader.get_booking_information_of_specific_booking(
@@ -454,22 +470,24 @@ class DatabaseWritingServices:
             )
 
         except Exception as e:
-            self.conn.rollback()
+            conn.rollback()
             # print("UPDATE ERROR: ", e)
             return False, str(e)
 
         if check:
             try:
-                self.cursor.execute(
+                cursor = None
+                cursor = conn.cursor(())
+                cursor.execute(
                     "UPDATE Booking SET duration = %s  WHERE BID = %s",
                     (new_duration, BID),
                 )
-                self.conn.commit()
+                conn.commit()
 
                 return True
 
             except Exception as e:
-                self.conn.rollback()
+                conn.rollback()
                 # print("UPDATE ERROR: ", e)
                 return False, str(e)
 
@@ -480,7 +498,7 @@ class DatabaseWritingServices:
         NOTE: CHECKS FOR OVERLAP WHEN UPDATING \n
         TRUE == BOOKING UPDATED \n
         FALSE == BOOKING NOT UPDATED"""
-
+        conn = self.database
         # First check if new room is available:
         try:
             previous_booking = self.reader.get_booking_information_of_specific_booking(
@@ -496,28 +514,30 @@ class DatabaseWritingServices:
             )
 
         except Exception as e:
-            self.conn.rollback()
+            conn.rollback()
             # print("UPDATE ERROR: ", e)
             return False, str(e)
 
         if check:
             try:
-                self.cursor.execute(
+                cursor = None
+                cursor = conn.cursor(())
+                cursor.execute(
                     "UPDATE Booking SET meetingRoom = %s  WHERE BID = %s",
                     (new_room, BID),
                 )
-                self.conn.commit()
+                conn.commit()
 
-                self.cursor.execute(
+                cursor.execute(
                     "UPDATE RoomsAssociatedWithBookings SET RID = %s  WHERE BID = %s",
                     (new_room, BID),
                 )
 
-                self.conn.commit()
+                conn.commit()
                 return True
 
             except Exception as e:
-                self.conn.rollback()
+                conn.rollback()
                 # print("UPDATE ERROR: ", e)
                 return False, str(e)
 
@@ -528,26 +548,28 @@ class DatabaseWritingServices:
         NOTE: CHECKS FOR VALID CAPACITY SPECIFIED WHEN UPDATING \n
         TRUE == BOOKING UPDATED \n
         FALSE == BOOKING NOT UPDATED"""
-
-        self.cursor.execute(
+        conn = self.database
+        cursor = None
+        cursor = conn.cursor(())
+        cursor.execute(
             "SELECT RID FROM RoomsAssociatedWithBookings WHERE BID = %s", (BID,)
         )
-        RID = self.cursor.fetchone()[0]
+        RID = cursor.fetchone()[0]
 
         capcity_of_room_for_this_booking = self.reader.get_capacity_of_room(RID)
 
         if new_capacity <= capcity_of_room_for_this_booking:
             try:
-                self.cursor.execute(
+                cursor.execute(
                     "UPDATE Booking SET meetingSize = %s  WHERE BID = %s",
                     (new_capacity, BID),
                 )
-                self.conn.commit()
+                conn.commit()
 
                 return True
 
             except Exception as e:
-                self.conn.rollback()
+                conn.rollback()
                 # print("UPDATE ERROR: ", e)
                 return False, str(e)
 
@@ -560,26 +582,29 @@ class DatabaseWritingServices:
         """Generic function to update a booking's number of confirmed attendees by 1 \n
         TRUE == BOOKING UPDATED \n
         FALSE == BOOKING NOT UPDATED"""
-
-        self.cursor.execute(
+        conn = self.database
+        cursor = None
+        cursor = conn.cursor(())
+        cursor.execute(
             "SELECT numberOfConfirmations FROM Booking WHERE BID = %s",
             (BID,),
         )
 
-        curNumberOfCons = self.cursor.fetchone()[0]
+        curNumberOfCons = cursor.fetchone()[0]
         curNumberOfCons += 1
         try:
-            self.cursor.execute(
+
+            cursor.execute(
                 "UPDATE Booking SET numberOfConfirmations = %s WHERE BID = %s",
                 (curNumberOfCons, BID),
             )
 
-            self.conn.commit()
+            conn.commit()
 
             return True
 
         except Exception as e:
-            self.conn.rollback()
+            conn.rollback()
             # print("UPDATE ERROR: ", e)
             return False, str(e)
 
@@ -587,19 +612,21 @@ class DatabaseWritingServices:
         """Generic function to update a booking's number of confirmed attendees by 1 \n
         TRUE == BOOKING UPDATED \n
         FALSE == BOOKING NOT UPDATED"""
-
+        conn = self.database
         try:
-            self.cursor.execute(
+            cursor = None
+            cursor = conn.cursor(())
+            cursor.execute(
                 "UPDATE Booking SET reminderSent = %s WHERE BID = %s",
                 (1, BID),
             )
 
-            self.conn.commit()
+            conn.commit()
 
             return True
 
         except Exception as e:
-            self.conn.rollback()
+            conn.rollback()
             # print("UPDATE ERROR: ", e)
             return False, str(e)
 
@@ -607,44 +634,46 @@ class DatabaseWritingServices:
         """Generic function to update a booking's shareable link \n
         TRUE == BOOKING UPDATED \n
         FALSE == BOOKING NOT UPDATED"""
-
+        conn = self.database
         try:
-            self.cursor.execute(
+            cursor = None
+            cursor = conn.cursor(())
+            cursor.execute(
                 "UPDATE Booking SET shareableLink = %s WHERE BID = %s",
                 (shareable_link, BID),
             )
 
-            self.conn.commit()
+            conn.commit()
 
             return True
 
         except Exception as e:
-            self.conn.rollback()
+            conn.rollback()
             # print("UPDATE ERROR: ", e)
             return False, str(e)
 
-    def close(self):
-        """Release DB resources.
+    # def close(self):
+    #     """Release DB resources.
 
-        With connection pooling, closing the connection returns it to the pool.
-        """
-        try:
-            cur = getattr(self, "cursor", None)
-            if cur is not None:
-                try:
-                    cur.close()
-                except Exception:
-                    pass
-        finally:
-            try:
-                if getattr(self, "conn", None) is not None:
-                    self.conn.close()
-            except Exception:
-                pass
+    #     With connection pooling, closing the connection returns it to the pool.
+    #     """
+    #     try:
+    #         cur = getattr(self, "cursor", None)
+    #         if cur is not None:
+    #             try:
+    #                 cur.close()
+    #             except Exception:
+    #                 pass
+    #     finally:
+    #         try:
+    #             if getattr(self, "conn", None) is not None:
+    #                 conn.close()
+    #         except Exception:
+    #             pass
 
-    def __del__(self):
-        # Best-effort safety net (routes/services can also call .close() explicitly).
-        try:
-            self.close()
-        except Exception:
-            pass
+    # def __del__(self):
+    #     # Best-effort safety net (routes/services can also call .close() explicitly).
+    #     try:
+    #         self.close()
+    #     except Exception:
+    #         pass
