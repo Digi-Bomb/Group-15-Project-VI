@@ -251,6 +251,7 @@ def index():
             user=user_id,
         )
 
+    # print(rooms)
     return render_template("index.html", rooms=rooms, selected_date=selected_date)
 
 
