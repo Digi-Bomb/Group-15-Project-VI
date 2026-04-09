@@ -229,7 +229,7 @@ def index():
     Query parameters:
     - date (YYYY-MM-DD): date to render availability for; defaults to today's date.
     """
-    db = database_connection.DatabaseConnection()
+    # db = database_connection.DatabaseConnection()
     reader = database_reading.DatabaseReadingServices(g.db)
 
     selected_date = request.args.get("date")

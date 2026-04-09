@@ -105,7 +105,7 @@ class DatabaseConnection:
         if has_request_context():
             # Return existing connection for this request if already created
             if hasattr(g, "_db_conns"):
-                return g._db_conn
+                return g._db_conns
 
         # Create new connection
         if DatabaseConnection._pool is not None:
