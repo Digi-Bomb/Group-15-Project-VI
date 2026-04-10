@@ -117,7 +117,16 @@ INSERT INTO Room (
 ('2B05', 'TechCentre', 'B', 0, 1, 1, 14),
 
 ('3B22', 'WestWing', 'B', 1, 1, 1, 8),
-('3B23', 'WestWing', 'B', 0, 1, 1, 10);
+('3B23', 'WestWing', 'B', 0, 1, 1, 10)
+('3B24', 'WestWing', 'B', 1, 0, 1, 6),
+('3B25', 'WestWing', 'B', 1, 1, 0, 12),
+('3B26', 'WestWing', 'B', 0, 1, 1, 14),
+
+('3C01', 'WestWing', 'C', 1, 1, 1, 8),
+('3C02', 'WestWing', 'C', 0, 1, 1, 10),
+('3C03', 'WestWing', 'C', 1, 0, 1, 6),
+('3C04', 'WestWing', 'C', 1, 1, 0, 12),
+('3C05', 'WestWing', 'C', 0, 1, 1, 14);
 
 -- Registered users
 -- Passwords here are just placeholder test strings
