@@ -31,7 +31,7 @@ class BookEZUser(HttpUser):
         end_time_obj = self.current_booking_time + timedelta(minutes=1)
         end_str = end_time_obj.strftime("%H:%M")
         self.client.post("/booking?room_number=2A11", data={
-            "meeting_date": "2026-04-14",
+            "meeting_date": "2026-04-16",
             "start_time": start_str,
             "end_time": end_str,
             "meeting_capacity": "3",

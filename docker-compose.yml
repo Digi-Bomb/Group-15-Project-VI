@@ -28,7 +28,7 @@ services:
       - 3308:3308
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - "./init - 100 rooms.sql:/docker-entrypoint-initdb.d/init.sql"
       # swap init.sql to init - 100 rooms.sql for testing req 12
     restart: unless-stopped
 

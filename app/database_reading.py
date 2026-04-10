@@ -22,7 +22,7 @@ class DatabaseReadingServices:
         """Function that returns the username associated with an email (for users who forget)"""
         conn = self.database
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute(
             "SELECT email FROM RegisteredUser WHERE username = %s",
             (username,),
@@ -49,7 +49,7 @@ class DatabaseReadingServices:
         """
         conn = self.database
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         if email:
             cursor.execute(
                 "SELECT RUID, pass FROM RegisteredUser WHERE email = %s", (email,)
@@ -81,7 +81,7 @@ class DatabaseReadingServices:
         try:
             conn = self.database
             cursor = None
-            cursor = conn.cursor()
+            cursor = conn.cursor(())
             cursor.execute("SELECT meetingOwner from Booking WHERE BID = %s", (BID,))
             result = cursor.fetchone()[0]
 
@@ -97,7 +97,7 @@ class DatabaseReadingServices:
         try:
             conn = self.database
             cursor = None
-            cursor = conn.cursor()
+            cursor = conn.cursor(())
             cursor.execute(
                 "SELECT username FROM RegisteredUser WHERE RUID = %s", (RUID,)
             )
@@ -115,7 +115,7 @@ class DatabaseReadingServices:
         try:
             conn = self.database
             cursor = None
-            cursor = conn.cursor()
+            cursor = conn.cursor(())
             cursor.execute(
                 "SELECT BID FROM Booking WHERE meetingOwner = %s",
                 (RUID,),
@@ -135,7 +135,7 @@ class DatabaseReadingServices:
         try:
             conn = self.database
             cursor = None
-            cursor = conn.cursor()
+            cursor = conn.cursor(())
             cursor.execute(
                 "SELECT RegisteredAttendee FROM RegisteredBookingAttendees WHERE BID = %s",
                 (BID,),
@@ -156,7 +156,7 @@ class DatabaseReadingServices:
         try:
             conn = self.database
             cursor = None
-            cursor = conn.cursor()
+            cursor = conn.cursor(())
             cursor.execute(
                 "SELECT unregisteredAttendee FROM UnregisteredBookingAttendees WHERE BID = %s",
                 (BUID,),
@@ -178,7 +178,7 @@ class DatabaseReadingServices:
         FALSE == UNREGISTERED"""
         conn = self.database
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute(
             "SELECT RUID FROM RegisteredUser WHERE username = %s OR email = %s",
             (username, email),
@@ -200,7 +200,7 @@ class DatabaseReadingServices:
         FALSE == Nickname Taken"""
         conn = self.database
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute(
             "SELECT unregisteredAttendee FROM UnregisteredBookingAttendees WHERE BID = %s",
             (BID,),
@@ -267,7 +267,7 @@ class DatabaseReadingServices:
         query += " LIMIT 1"
 
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute(query, params)
 
         # If we find ANY row, an overlap exists
@@ -279,7 +279,7 @@ class DatabaseReadingServices:
         if room_number not in self.room_capacity_cache:
             conn = self.database
             cursor = None
-            cursor = conn.cursor()
+            cursor = conn.cursor(())
             cursor.execute(
                 "SELECT maximumCapacity FROM Room WHERE roomNumber = %s", (room_number,)
             )
@@ -292,7 +292,7 @@ class DatabaseReadingServices:
         """Returns the building for which the room exists within (specified by room number)"""
         conn = self.database
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute(
             "SELECT companyBuilding FROM Room WHERE roomNumber = %s", (room_number,)
         )
@@ -306,7 +306,7 @@ class DatabaseReadingServices:
         """Returns the meeting date, time, duration, and room of a particular booking"""
         conn = self.database
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute(
             "SELECT meetingDate, startTime, duration, meetingRoom, numberOfConfirmations, meetingOwner, reminderSent, shareableLink, BID, meetingSize FROM Booking WHERE BID = %s",
             (BID,),
@@ -366,7 +366,7 @@ class DatabaseReadingServices:
 
         # First check room id from associated table
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute(
             "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s",
             (room_number,),  # Returns ALL bookings for a Room
@@ -425,7 +425,7 @@ class DatabaseReadingServices:
 
         # First check room id from associated table
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute(
             "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s",
             (room_number,),  # Returns ALL bookings for a Room
@@ -486,7 +486,7 @@ class DatabaseReadingServices:
 
         # First check room id from associated table
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute(
             "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s",
             (room_number,),  # Returns ALL bookings for a Room
@@ -564,7 +564,7 @@ class DatabaseReadingServices:
 
         # First check room id from associated table
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute(
             "SELECT BID FROM RoomsAssociatedWithBookings WHERE RID = %s",
             (room_number,),  # Returns ALL bookings for a Room
@@ -617,7 +617,7 @@ class DatabaseReadingServices:
         conn = self.database
 
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute("SELECT BID FROM Booking WHERE meetingOwner = %s", (RUID,))
 
         result = cursor.fetchall()
@@ -637,7 +637,7 @@ class DatabaseReadingServices:
 
         # Select the relevant booking info
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute(
             "SELECT meetingRoom, meetingDate, startTime, duration, numberOfConfirmations, meetingOwner, reminderSent, shareableLink, BID, ADDTIME(startTime, duration) AS endTime FROM Booking WHERE meetingOwner = %s",
             (RUID,),
@@ -653,7 +653,7 @@ class DatabaseReadingServices:
         try:
             conn = self.database
             cursor = None
-            cursor = conn.cursor()
+            cursor = conn.cursor(())
             result = cursor.execute(
                 "SELECT email FROM RegisteredUser WHERE RUID = %s", (RUID,)
             )
@@ -670,7 +670,7 @@ class DatabaseReadingServices:
         try:
             conn = self.database
             cursor = None
-            cursor = conn.cursor()
+            cursor = conn.cursor(())
             cursor.execute("SELECT * FROM Booking WHERE shareableLink = %s", (link_id,))
             result = cursor.fetchone()[0]
 
@@ -684,7 +684,7 @@ class DatabaseReadingServices:
     def get_all_bookings(self):
         conn = self.database
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute("SELECT * FROM Booking")
         result = cursor.fetchall()
 
@@ -698,7 +698,7 @@ class DatabaseReadingServices:
         try:
             conn = self.database
             cursor = None
-            cursor = conn.cursor()
+            cursor = conn.cursor(())
             cursor.execute(
                 "SELECT email FROM UnregisteredUser WHERE URUID = %s", (URUID,)
             )
@@ -739,7 +739,7 @@ class DatabaseReadingServices:
 
         cursor = None
         try:
-            cursor = conn.cursor(dictionary=True)
+            cursor = conn.cursor(())
             cursor.execute(sql, params)
             results = cursor.fetchall()
             return results
@@ -750,7 +750,7 @@ class DatabaseReadingServices:
     def get_room_data_given_room_number(self, room_number: str):
         conn = self.database
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute(
             "SELECT roomNumber, companyBuilding, wing, wheelchairAccessible, projectorAccess, whiteboardAccess, maximumCapacity FROM Room WHERE roomNumber = %s",
             (room_number,),
@@ -772,7 +772,7 @@ class DatabaseReadingServices:
         conn = self.database
         try:
             cursor = None
-            cursor = conn.cursor()
+            cursor = conn.cursor(())
             cursor.execute(
                 "SELECT RUID FROM RegisteredBookingAttendees WHERE BID = %s", (BID,)
             )
@@ -804,7 +804,7 @@ class DatabaseReadingServices:
 
         # Registered attendees
         cursor = None
-        cursor = conn.cursor()
+        cursor = conn.cursor(())
         cursor.execute(
             """
             SELECT RU.*
@@ -838,7 +838,7 @@ class DatabaseReadingServices:
         try:
             conn = self.database
             cursor = None
-            cursor = conn.cursor()
+            cursor = conn.cursor(())
             cursor.execute(
                 "SELECT numberOfConfirmations FROM Booking WHERE BID = %s", (BID,)
             )
