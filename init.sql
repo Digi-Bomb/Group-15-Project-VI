@@ -1,3 +1,4 @@
+Create database BookEZDatabase;
 USE BookEZDatabase;
 
 CREATE TABLE Building(
