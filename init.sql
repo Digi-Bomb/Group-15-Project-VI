@@ -1,4 +1,4 @@
-Create database BookEZDatabase;
+CREATE DATABASE IF NOT EXISTS BookEZDatabase;
 USE BookEZDatabase;
 
 CREATE TABLE Building(
@@ -84,6 +84,7 @@ INSERT INTO Building (buildingName, location, hoursOfOperation) VALUES
 ('WestWing', 'Cambridge', '09:00-18:00');
 
 -- Rooms
+-- Includes all rooms referenced later by Booking and RoomsAssociatedWithBookings
 INSERT INTO Room (
     roomNumber,
     companyBuilding,
@@ -93,6 +94,8 @@ INSERT INTO Room (
     whiteboardAccess,
     maximumCapacity
 ) VALUES
+('1F05', 'NorthHall', 'East', 1, 1, 1, 8),
+('1F06', 'NorthHall', 'East', 1, 0, 1, 6),
 ('1F07', 'NorthHall', 'East', 1, 1, 1, 8),
 ('1F08', 'NorthHall', 'East', 0, 1, 1, 10),
 ('1F09', 'NorthHall', 'East', 1, 0, 1, 6),
@@ -105,6 +108,8 @@ INSERT INTO Room (
 ('1W04', 'NorthHall', 'West', 1, 1, 0, 12),
 ('1W05', 'NorthHall', 'West', 0, 1, 1, 14),
 
+('2A10', 'TechCentre', 'A', 1, 1, 1, 12),
+('2A11', 'TechCentre', 'A', 0, 1, 0, 10),
 ('2A12', 'TechCentre', 'A', 1, 1, 1, 8),
 ('2A13', 'TechCentre', 'A', 0, 1, 1, 10),
 ('2A14', 'TechCentre', 'A', 1, 0, 1, 6),
@@ -117,8 +122,9 @@ INSERT INTO Room (
 ('2B04', 'TechCentre', 'B', 1, 1, 0, 12),
 ('2B05', 'TechCentre', 'B', 0, 1, 1, 14),
 
+('3B21', 'WestWing', 'B', 0, 1, 1, 20),
 ('3B22', 'WestWing', 'B', 1, 1, 1, 8),
-('3B23', 'WestWing', 'B', 0, 1, 1, 10)
+('3B23', 'WestWing', 'B', 0, 1, 1, 10),
 ('3B24', 'WestWing', 'B', 1, 0, 1, 6),
 ('3B25', 'WestWing', 'B', 1, 1, 0, 12),
 ('3B26', 'WestWing', 'B', 0, 1, 1, 14),
@@ -127,7 +133,10 @@ INSERT INTO Room (
 ('3C02', 'WestWing', 'C', 0, 1, 1, 10),
 ('3C03', 'WestWing', 'C', 1, 0, 1, 6),
 ('3C04', 'WestWing', 'C', 1, 1, 0, 12),
-('3C05', 'WestWing', 'C', 0, 1, 1, 14);
+('3C05', 'WestWing', 'C', 0, 1, 1, 14),
+
+('4C01', 'NorthHall', 'West', 1, 1, 0, 15),
+('4C02', 'TechCentre', 'West', 1, 0, 1, 25);
 
 -- Registered users
 -- Passwords here are just placeholder test strings

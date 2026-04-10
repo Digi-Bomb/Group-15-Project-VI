@@ -17,7 +17,7 @@ services:
 
   mysql:
     image: mysql:8.0
-    command: --max_connections=1000
+    command: --max_connections=100
     container_name: planner_mysql
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
@@ -25,11 +25,10 @@ services:
       MYSQL_USER: app_user
       MYSQL_PASSWORD: app_pass
     ports:
-      - 3308:3308
+      - 3308:3306
     volumes:
       - mysql_data:/var/lib/mysql
-      - "./init - 100 rooms.sql:/docker-entrypoint-initdb.d/init.sql"
-      # swap init.sql to init - 100 rooms.sql for testing req 12
+      - "./init.sql:/docker-entrypoint-initdb.d/init.sql"
     restart: unless-stopped
 
 volumes:
