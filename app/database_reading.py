@@ -739,7 +739,7 @@ class DatabaseReadingServices:
 
         cursor = None
         try:
-            cursor = conn.cursor(())
+            cursor = conn.cursor(dictionary=True)
             cursor.execute(sql, params)
             results = cursor.fetchall()
             return results
