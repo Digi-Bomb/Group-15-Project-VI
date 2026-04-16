@@ -55,7 +55,7 @@
         <stringProp name="TestPlan.comments">Checking concurrent connections and hope that they remain above 50.</stringProp>
       </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
       <hashTree/>
-      <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseCodesPerSecondGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="[Req 11] jp@gc - Response Codes per Second">
+      <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseCodesPerSecondGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="[Req 11] jp@gc - Response Codes per Second" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -101,8 +101,8 @@
         <stringProp name="TestPlan.comments">Checking for any 503s to ensure the requirement is met.</stringProp>
       </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[Req 3] - Creating Bookings (peak load)" enabled="false">
-        <intProp name="ThreadGroup.num_threads">150</intProp>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[Req 3] - Creating Bookings (peak load)" enabled="true">
+        <intProp name="ThreadGroup.num_threads">50</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <longProp name="ThreadGroup.duration">1800</longProp>
         <longProp name="ThreadGroup.delay">1</longProp>
@@ -485,7 +485,7 @@
         </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[Req 3] - Creating Bookings (normal load)">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[Req 3] - Creating Bookings (normal load)" enabled="false">
         <intProp name="ThreadGroup.num_threads">13</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <longProp name="ThreadGroup.duration">3600</longProp>
@@ -869,7 +869,7 @@
         </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Req 1 - respond to GET / - Normal Load">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Req 1 - respond to GET / - Normal Load" enabled="false">
         <stringProp name="TestPlan.comments">log in once, then get / for 1 hour</stringProp>
         <intProp name="ThreadGroup.num_threads">12</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
@@ -1152,9 +1152,9 @@
           </hashTree>
         </hashTree>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Req 1 - respond to GET / - Peak Load" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Req 1 - respond to GET / - Peak Load" enabled="true">
         <stringProp name="TestPlan.comments">log in once, then get / for 1 hour</stringProp>
-        <intProp name="ThreadGroup.num_threads">150</intProp>
+        <intProp name="ThreadGroup.num_threads">50</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <longProp name="ThreadGroup.duration">3600</longProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -1435,7 +1435,7 @@
           </hashTree>
         </hashTree>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Req 2 - respond to login - Normal Load">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Req 2 - respond to login - Normal Load" enabled="false">
         <stringProp name="TestPlan.comments">log in once, then get / for 1 hour</stringProp>
         <intProp name="ThreadGroup.num_threads">12</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
@@ -1769,9 +1769,9 @@
           </hashTree>
         </hashTree>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Req 2 - respond to login - Peak Load" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Req 2 - respond to login - Peak Load" enabled="true">
         <stringProp name="TestPlan.comments">log in once, then get / for 1 hour</stringProp>
-        <intProp name="ThreadGroup.num_threads">150</intProp>
+        <intProp name="ThreadGroup.num_threads">50</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <longProp name="ThreadGroup.duration">3600</longProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -2103,11 +2103,13 @@
           </hashTree>
         </hashTree>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Req 12 - time to GET / - Normal Load - test 30, then 100">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Req 12 - time to GET / - Normal Load - test 30, then 100" enabled="false">
         <stringProp name="TestPlan.comments">to test this, swap to other database in docker-compose file</stringProp>
         <intProp name="ThreadGroup.num_threads">13</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <longProp name="ThreadGroup.duration">3600</longProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
           <stringProp name="LoopController.loops">1</stringProp>
@@ -2361,7 +2363,7 @@
           <stringProp name="RandomTimer.range">15000</stringProp>
         </GaussianRandomTimer>
         <hashTree/>
-        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller - login" enabled="true"/>
+        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller - login"/>
         <hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Login" enabled="true">
             <stringProp name="HTTPSampler.path">/login</stringProp>
@@ -2432,7 +2434,7 @@
             <hashTree/>
           </hashTree>
         </hashTree>
-        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller - GET /" enabled="true">
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller - GET /">
           <intProp name="LoopController.loops">-1</intProp>
         </LoopController>
         <hashTree>
